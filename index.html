@@ -1,305 +1,662 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre Plateforme IPTV - Revendeurs</title>
+    <title>Shop 4 Panel - Panel IPTV</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #5726d4;
-            --secondary-color: #6c757d;
+            --secondary-color: #8a63d2;
+            --accent-color: #ff6b35;
             --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #8a63d2 100%);
-            color: white;
-            padding: 100px 0;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
         
-        .package-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: 90vh;
         }
         
-        .package-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .package-card.featured {
-            border: 2px solid var(--primary-color);
-            position: relative;
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
+        .header-bar {
             background: var(--primary-color);
             color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 15px 25px;
+            border-bottom: 3px solid var(--accent-color);
         }
         
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+        .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
-        .channel-count {
-            background: #f8f9fa;
-            padding: 20px;
+        .user-info {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .alert-warning {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
             border-radius: 10px;
+            font-weight: 600;
             text-align: center;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .stats-label {
+            color: #666;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .product-card.featured {
+            border-color: var(--accent-color);
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--success-color);
+            margin: 10px 0;
+        }
+        
+        .product-stock {
+            background: var(--success-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .btn-buy {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(87,38,212,0.4);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 800;
+            margin: 30px 15px 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            text-align: center;
+        }
+        
+        .marquee-ar {
+            background: linear-gradient(45deg, var(--danger-color), #e83e8c);
+            color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 10px;
+            margin: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(220,53,69,0.3);
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0;
+        }
+        
+        .transaction-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-right: 4px solid var(--primary-color);
+        }
+        
+        .transaction-negative {
+            border-right-color: var(--danger-color);
+        }
+        
+        .transaction-positive {
+            border-right-color: var(--success-color);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="logo.png" alt="Logo" height="40">
-                IPTV Pro
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#panels">Panels</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tarifs">Tarifs Revendeurs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#support">Support</a></li>
-                </ul>
-                <div class="navbar-nav">
-                    <a class="nav-link" href="#login"><i class="fas fa-user"></i> Connexion</a>
-                    <a class="nav-link" href="#register"><i class="fas fa-user-plus"></i> Inscription</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Section Hero -->
-    <section id="accueil" class="hero-section">
-        <div class="container">
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header-bar">
             <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold">Devenez Revendeur IPTV</h1>
-                    <p class="lead">Plateforme professionnelle pour revendeurs IPTV avec les meilleurs prix et un support 24/7</p>
-                    <div class="mt-4">
-                        <a href="#register" class="btn btn-light btn-lg me-3">Commencer Maintenant</a>
-                        <a href="#packages" class="btn btn-outline-light btn-lg">Voir les Packages</a>
+                <div class="col-md-6">
+                    <div class="logo">
+                        <i class="fas fa-tv me-2"></i>SHOP 4 PANEL
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://via.placeholder.com/500x300" alt="IPTV Service" class="img-fluid rounded">
+                <div class="col-md-6 text-md-end">
+                    <div class="user-info">
+                        <i class="fas fa-user me-2"></i>Vendeur: Admin Panel
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Statistiques -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-3">
-                    <h3 class="text-primary fw-bold">5000+</h3>
-                    <p>Revendeurs Actifs</p>
+        <!-- Alert Messages -->
+        <div class="alert-warning">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+    
+        </div>
+        
+        <div class="alert-warning" style="background: linear-gradient(45deg, #28a745, #20c997);">
+            <i class="fas fa-wallet me-2"></i>
+            درهم 500 اقل رصيد
+        </div>
+
+        <!-- Stats Section -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Clients Actifs</p>
+                    <p class="stats-number">68</p>
                 </div>
-                <div class="col-md-3">
-                    <h3 class="text-primary fw-bold">50K+</h3>
-                    <p>Abonnés Satisfaits</p>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Produits Vendus</p>
+                    <p class="stats-number">156</p>
                 </div>
-                <div class="col-md-3">
-                    <h3 class="text-primary fw-bold">99.9%</h3>
-                    <p>Uptime Garanti</p>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Revenu Total</p>
+                    <p class="stats-number">2,580€</p>
                 </div>
-                <div class="col-md-3">
-                    <h3 class="text-primary fw-bold">24/7</h3>
-                    <p>Support Technique</p>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Tickets Ouverts</p>
+                    <p class="stats-number">3</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Packages IPTV -->
-    <section id="packages" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Nos Packages IPTV</h2>
-                <p class="text-muted">Choisissez le package qui correspond à vos besoins</p>
+        <!-- Products Grid -->
+        <h3 class="section-title">SHOP 4 PANEL - PRODUITS IPTV</h3>
+        
+        <div class="row">
+            <!-- Product 1 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card featured">
+                    <div class="product-badge">POPULAIRE</div>
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">12 Mois</div>
+                    <div class="product-stock">68 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 12 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">12 Mois</div>
+                    <div class="product-stock">75 Produits</div>
+                    <div class="product-description">
+                        M3U 12MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">6 Mois</div>
+                    <div class="product-stock">39 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 6 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">6 Mois</div>
+                    <div class="product-stock">66 Produits</div>
+                    <div class="product-description">
+                        M3U 6 MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">3 Mois</div>
+                    <div class="product-stock">36 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 3 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">3 Mois</div>
+                    <div class="product-stock">64 Produits</div>
+                    <div class="product-description">
+                        M3U 3 MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">1 Mois</div>
+                    <div class="product-stock">34 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 1 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">1 Mois</div>
+                    <div class="product-stock">12 Produits</div>
+                    <div class="product-description">
+                        M3U 1 MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Offers Section -->
+        <h3 class="section-title">كيفيظات و عروض استثنائية</h3>
+        
+        <div class="row">
+            <!-- Special Offer 1 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card" style="border-color: var(--accent-color);">
+                    <div class="product-badge" style="background: var(--danger-color);">عرض خاص</div>
+                    <div class="product-title">عرض استثنائية</div>
+                    <div class="product-stock">41 Produits</div>
+                    <button class="btn-buy" style="background: linear-gradient(45deg, #e83e8c, #fd7e14);">
+                        <i class="fas fa-gift me-2"></i>عرض خاص
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 2 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">Bein sport تجديد</div>
+                    <div class="product-stock">7 Produits</div>
+                    <div class="product-description">
+                        Bein sport تجديد اشتراكات
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-sync-alt me-2"></i>تجديد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 3 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">PANEL RECHARGE</div>
+                    <div class="product-stock">83 Produits</div>
+                    <div class="product-description">
+                        PANEL RECHARGE IPTV
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-bolt me-2"></i>RECHARGER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 4 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">SHARING MANGO</div>
+                    <div class="product-stock">10 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-share-alt me-2"></i>PARTAGER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 5 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">ACTIVATION MAC TV</div>
+                    <div class="product-stock">74 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-play-circle me-2"></i>ACTIVER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 6 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">SHARING</div>
+                    <div class="product-stock">13 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-users me-2"></i>PARTAGER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 7 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">Prince TV PRO</div>
+                    <div class="product-stock">7 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-crown me-2"></i>PRO
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 8 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">Shahid 12 MOIS</div>
+                    <div class="product-stock">3 Produits</div>
+                    <div class="product-description">
+                        Shahid 12 MOIS واحد 5...
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-star me-2"></i>SHAHID
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Balance and Transactions -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="balance-card">
+                    <h5 class="text-white-50">Solde Disponible</h5>
+                    <p class="balance-amount">2,580 MAD</p>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <small>Solde Reçu</small>
+                            <p class="mb-0">560 MAD</p>
+                        </div>
+                        <div>
+                            <small>Solde Envoyé</small>
+                            <p class="mb-0">0 MAD</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="row">
-                <!-- Package Standard -->
-                <div class="col-md-4 mb-4">
-                    <div class="card package-card h-100">
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title">Standard</h5>
-                            <div class="price">29€</div>
-                            <small class="text-muted">/mois</small>
-                            
-                            <ul class="list-unstyled mt-4">
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 1000+ Chaînes</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 300+ VOD</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Full HD</li>
-                                <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> 4K Ultra HD</li>
-                                <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Support Multi-écran</li>
-                            </ul>
-                            
-                            <button class="btn btn-primary w-100 mt-3">Acheter Maintenant</button>
+            <div class="col-md-6">
+                <div class="stats-card">
+                    <h5 class="text-center mb-3">Dernières Transactions</h5>
+                    <div class="transaction-item transaction-negative">
+                        <div class="d-flex justify-content-between">
+                            <span>Achat Produit</span>
+                            <strong>-210.000 MAD</strong>
                         </div>
+                        <small class="text-muted">KING 365 M3U 12 MOIS</small>
                     </div>
-                </div>
-                
-                <!-- Package Premium -->
-                <div class="col-md-4 mb-4">
-                    <div class="card package-card featured h-100">
-                        <div class="featured-badge">Populaire</div>
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title">Premium</h5>
-                            <div class="price">49€</div>
-                            <small class="text-muted">/mois</small>
-                            
-                            <ul class="list-unstyled mt-4">
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 3000+ Chaînes</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 1000+ VOD</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Full HD & 4K</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Support Multi-écran</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> EPG Complet</li>
-                            </ul>
-                            
-                            <button class="btn btn-primary w-100 mt-3">Acheter Maintenant</button>
+                    <div class="transaction-item transaction-negative">
+                        <div class="d-flex justify-content-between">
+                            <span>Achat Produit</span>
+                            <strong>-65.000 MAD</strong>
                         </div>
+                        <small class="text-muted">SMART+ SMART X2 12MOIS</small>
                     </div>
-                </div>
-                
-                <!-- Package Enterprise -->
-                <div class="col-md-4 mb-4">
-                    <div class="card package-card h-100">
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title">Enterprise</h5>
-                            <div class="price">79€</div>
-                            <small class="text-muted">/mois</small>
-                            
-                            <ul class="list-unstyled mt-4">
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 5000+ Chaînes</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 2000+ VOD</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Tout en 4K</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 5 Écrans Simultanés</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Support Prioritaire</li>
-                            </ul>
-                            
-                            <button class="btn btn-primary w-100 mt-3">Acheter Maintenant</button>
+                    <div class="transaction-item transaction-positive">
+                        <div class="d-flex justify-content-between">
+                            <span>Recharge</span>
+                            <strong>+560.000 MAD</strong>
                         </div>
+                        <small class="text-muted">Reçu de l'administrateur</small>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Section Revendeurs -->
-    <section id="tarifs" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Tarifs Revendeurs</h2>
-                <p class="text-muted">Des prix compétitifs pour maximiser vos profits</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Quantité</th>
-                                    <th>Prix Unitaire</th>
-                                    <th>Économie</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1-10 abonnements</td>
-                                    <td>25€/mois</td>
-                                    <td>-</td>
-                                    <td><button class="btn btn-sm btn-primary">Commander</button></td>
-                                </tr>
-                                <tr>
-                                    <td>11-50 abonnements</td>
-                                    <td>22€/mois</td>
-                                    <td>12%</td>
-                                    <td><button class="btn btn-sm btn-primary">Commander</button></td>
-                                </tr>
-                                <tr>
-                                    <td>51-100 abonnements</td>
-                                    <td>19€/mois</td>
-                                    <td>24%</td>
-                                    <td><button class="btn btn-sm btn-primary">Commander</button></td>
-                                </tr>
-                                <tr>
-                                    <td>100+ abonnements</td>
-                                    <td>Contactez-nous</td>
-                                    <td>Jusqu'à 40%</td>
-                                    <td><button class="btn btn-sm btn-success">Contact</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <!-- Footer -->
+        <div class="text-center mt-4 p-3 text-muted">
+            <small>© 2024 Shop4Panel - Tous droits réservés | Panel IPTV Professionnel</small>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>IPTV Pro</h5>
-                    <p>Votre partenaire de confiance pour les services IPTV professionnels.</p>
+    <!-- Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Acheter Produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="col-md-4">
-                    <h5>Liens Rapides</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#accueil" class="text-white">Accueil</a></li>
-                        <li><a href="#packages" class="text-white">Packages</a></li>
-                        <li><a href="#support" class="text-white">Support</a></li>
-                    </ul>
+                <div class="modal-body">
+                    <form id="purchaseForm">
+                        <div class="mb-3">
+                            <label class="form-label">Produit</label>
+                            <input type="text" class="form-control" id="productName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantité</label>
+                            <input type="number" class="form-control" id="quantity" value="1" min="1">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Total</label>
+                            <input type="text" class="form-control" id="totalPrice" readonly>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-4">
-                    <h5>Contact</h5>
-                    <p><i class="fas fa-envelope me-2"></i> support@iptvpro.com</p>
-                    <p><i class="fas fa-phone me-2"></i> +33 1 23 45 67 89</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary">Confirmer l'achat</button>
                 </div>
-            </div>
-            <hr>
-            <div class="text-center">
-                <p>&copy; 2024 IPTV Pro. Tous droits réservés.</p>
             </div>
         </div>
-    </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Script pour le compte à rebours (exemple)
-        function startCountdown() {
-            // Implémentation du compte à rebours
-            console.log("Countdown started");
-        }
-        
-        // Initialisation
+        // Animation pour les cartes
         document.addEventListener('DOMContentLoaded', function() {
-            startCountdown();
+            // Animation d'entrée des cartes
+            const cards = document.querySelectorAll('.product-card, .stats-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Gestion des achats
+            document.querySelectorAll('.btn-buy').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-title').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+                    
+                    document.getElementById('productName').value = productName + ' - ' + productPrice;
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                    modal.show();
+                });
+            });
+
+            // Calcul du prix total
+            document.getElementById('quantity').addEventListener('input', function() {
+                // Logique de calcul du prix total
+                const quantity = this.value;
+                // Ajouter la logique de calcul selon le produit
+            });
         });
+
+        // Marquee animation
+        function createMarquee() {
+            const messages = [
+                "🔥 عروض خاصة على جميع الباقات - تخفيضات تصل إلى 50% 🔥",
+                "🚀 خدمة عملاء متاحة 24/7 لدعمكم المستمر 🚀",
+                "⭐ جودة عالية واستقرار في البث بدون انقطاع ⭐"
+            ];
+            
+            let currentMessage = 0;
+            const marqueeElement = document.createElement('div');
+            marqueeElement.className = 'marquee-ar';
+            marqueeElement.textContent = messages[currentMessage];
+            document.querySelector('.dashboard-container').insertBefore(marqueeElement, document.querySelector('.alert-warning'));
+            
+            setInterval(() => {
+                currentMessage = (currentMessage + 1) % messages.length;
+                marqueeElement.style.opacity = '0';
+                setTimeout(() => {
+                    marqueeElement.textContent = messages[currentMessage];
+                    marqueeElement.style.opacity = '1';
+                }, 500);
+            }, 5000);
+        }
+
+        createMarquee();
     </script>
 </body>
 </html>
