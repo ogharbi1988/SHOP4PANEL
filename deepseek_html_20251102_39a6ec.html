@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop4Panel - Panel IPTV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5726d4;
+            --secondary-color: #8a63d2;
+            --accent-color: #ff6b35;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: 90vh;
+        }
+        
+        .header-bar {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .user-info {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .alert-warning {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .stats-label {
+            color: #666;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .product-card.featured {
+            border-color: var(--accent-color);
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--success-color);
+            margin: 10px 0;
+        }
+        
+        .product-stock {
+            background: var(--success-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .btn-buy {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(87,38,212,0.4);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 800;
+            margin: 30px 15px 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            text-align: center;
+        }
+        
+        .marquee-ar {
+            background: linear-gradient(45deg, var(--danger-color), #e83e8c);
+            color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 10px;
+            margin: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(220,53,69,0.3);
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0;
+        }
+        
+        .transaction-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-right: 4px solid var(--primary-color);
+        }
+        
+        .transaction-negative {
+            border-right-color: var(--danger-color);
+        }
+        
+        .transaction-positive {
+            border-right-color: var(--success-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header-bar">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="logo">
+                        <i class="fas fa-tv me-2"></i>SHOP4PANEL
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="user-info">
+                        <i class="fas fa-user me-2"></i>Vendeur: Admin Panel
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div class="alert-warning">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            اجباري اجباري لا تحمل مسؤولية أي
+        </div>
+        
+        <div class="alert-warning" style="background: linear-gradient(45deg, #28a745, #20c997);">
+            <i class="fas fa-wallet me-2"></i>
+            درهم 1000 اقل رصيد
+        </div>
+
+        <!-- Stats Section -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Clients Actifs</p>
+                    <p class="stats-number">68</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Produits Vendus</p>
+                    <p class="stats-number">156</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Revenu Total</p>
+                    <p class="stats-number">2,580€</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <p class="stats-label">Tickets Ouverts</p>
+                    <p class="stats-number">3</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <h3 class="section-title">LINK 4 PANEL - PRODUITS IPTV</h3>
+        
+        <div class="row">
+            <!-- Product 1 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card featured">
+                    <div class="product-badge">POPULAIRE</div>
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">12 Mois</div>
+                    <div class="product-stock">68 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 12 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">12 Mois</div>
+                    <div class="product-stock">75 Produits</div>
+                    <div class="product-description">
+                        M3U 12MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">6 Mois</div>
+                    <div class="product-stock">39 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 6 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">6 Mois</div>
+                    <div class="product-stock">66 Produits</div>
+                    <div class="product-description">
+                        M3U 6 MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">3 Mois</div>
+                    <div class="product-stock">36 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 3 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">3 Mois</div>
+                    <div class="product-stock">64 Produits</div>
+                    <div class="product-description">
+                        M3U 3 MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V Active Code</div>
+                    <div class="product-price">1 Mois</div>
+                    <div class="product-stock">34 Produits</div>
+                    <div class="product-description">
+                        CODE IPTV 1 MOIS
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">L.P.T.V M3U</div>
+                    <div class="product-price">1 Mois</div>
+                    <div class="product-stock">12 Produits</div>
+                    <div class="product-description">
+                        M3U 1 MOIS ON DEMANDE
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-shopping-cart me-2"></i>ACHETER
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Offers Section -->
+        <h3 class="section-title">كيفيظات و عروض استثنائية</h3>
+        
+        <div class="row">
+            <!-- Special Offer 1 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card" style="border-color: var(--accent-color);">
+                    <div class="product-badge" style="background: var(--danger-color);">عرض خاص</div>
+                    <div class="product-title">عرض استثنائية</div>
+                    <div class="product-stock">41 Produits</div>
+                    <button class="btn-buy" style="background: linear-gradient(45deg, #e83e8c, #fd7e14);">
+                        <i class="fas fa-gift me-2"></i>عرض خاص
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 2 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">Bein sport تجديد</div>
+                    <div class="product-stock">7 Produits</div>
+                    <div class="product-description">
+                        Bein sport تجديد اشتراكات
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-sync-alt me-2"></i>تجديد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 3 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">PANEL RECHARGE</div>
+                    <div class="product-stock">83 Produits</div>
+                    <div class="product-description">
+                        PANEL RECHARGE IPTV
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-bolt me-2"></i>RECHARGER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 4 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">SHARING MANGO</div>
+                    <div class="product-stock">10 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-share-alt me-2"></i>PARTAGER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 5 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">ACTIVATION MAC TV</div>
+                    <div class="product-stock">74 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-play-circle me-2"></i>ACTIVER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 6 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">SHARING</div>
+                    <div class="product-stock">13 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-users me-2"></i>PARTAGER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 7 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">Prince TV PRO</div>
+                    <div class="product-stock">7 Produits</div>
+                    <button class="btn-buy">
+                        <i class="fas fa-crown me-2"></i>PRO
+                    </button>
+                </div>
+            </div>
+
+            <!-- Special Offer 8 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card">
+                    <div class="product-title">Shahid 12 MOIS</div>
+                    <div class="product-stock">3 Produits</div>
+                    <div class="product-description">
+                        Shahid 12 MOIS واحد 5...
+                    </div>
+                    <button class="btn-buy">
+                        <i class="fas fa-star me-2"></i>SHAHID
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Balance and Transactions -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="balance-card">
+                    <h5 class="text-white-50">Solde Disponible</h5>
+                    <p class="balance-amount">2,580 MAD</p>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <small>Solde Reçu</small>
+                            <p class="mb-0">560 MAD</p>
+                        </div>
+                        <div>
+                            <small>Solde Envoyé</small>
+                            <p class="mb-0">0 MAD</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="stats-card">
+                    <h5 class="text-center mb-3">Dernières Transactions</h5>
+                    <div class="transaction-item transaction-negative">
+                        <div class="d-flex justify-content-between">
+                            <span>Achat Produit</span>
+                            <strong>-210.000 MAD</strong>
+                        </div>
+                        <small class="text-muted">KING 365 M3U 12 MOIS</small>
+                    </div>
+                    <div class="transaction-item transaction-negative">
+                        <div class="d-flex justify-content-between">
+                            <span>Achat Produit</span>
+                            <strong>-65.000 MAD</strong>
+                        </div>
+                        <small class="text-muted">SMART+ SMART X2 12MOIS</small>
+                    </div>
+                    <div class="transaction-item transaction-positive">
+                        <div class="d-flex justify-content-between">
+                            <span>Recharge</span>
+                            <strong>+560.000 MAD</strong>
+                        </div>
+                        <small class="text-muted">Reçu de l'administrateur</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-4 p-3 text-muted">
+            <small>© 2024 Shop4Panel - Tous droits réservés | Panel IPTV Professionnel</small>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Acheter Produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="purchaseForm">
+                        <div class="mb-3">
+                            <label class="form-label">Produit</label>
+                            <input type="text" class="form-control" id="productName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantité</label>
+                            <input type="number" class="form-control" id="quantity" value="1" min="1">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Total</label>
+                            <input type="text" class="form-control" id="totalPrice" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary">Confirmer l'achat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animation pour les cartes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation d'entrée des cartes
+            const cards = document.querySelectorAll('.product-card, .stats-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Gestion des achats
+            document.querySelectorAll('.btn-buy').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-title').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+                    
+                    document.getElementById('productName').value = productName + ' - ' + productPrice;
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                    modal.show();
+                });
+            });
+
+            // Calcul du prix total
+            document.getElementById('quantity').addEventListener('input', function() {
+                // Logique de calcul du prix total
+                const quantity = this.value;
+                // Ajouter la logique de calcul selon le produit
+            });
+        });
+
+        // Marquee animation
+        function createMarquee() {
+            const messages = [
+                "🔥 عروض خاصة على جميع الباقات - تخفيضات تصل إلى 50% 🔥",
+                "🚀 خدمة عملاء متاحة 24/7 لدعمكم المستمر 🚀",
+                "⭐ جودة عالية واستقرار في البث بدون انقطاع ⭐"
+            ];
+            
+            let currentMessage = 0;
+            const marqueeElement = document.createElement('div');
+            marqueeElement.className = 'marquee-ar';
+            marqueeElement.textContent = messages[currentMessage];
+            document.querySelector('.dashboard-container').insertBefore(marqueeElement, document.querySelector('.alert-warning'));
+            
+            setInterval(() => {
+                currentMessage = (currentMessage + 1) % messages.length;
+                marqueeElement.style.opacity = '0';
+                setTimeout(() => {
+                    marqueeElement.textContent = messages[currentMessage];
+                    marqueeElement.style.opacity = '1';
+                }, 500);
+            }, 5000);
+        }
+
+        createMarquee();
+    </script>
+</body>
+</html>

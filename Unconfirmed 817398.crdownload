@@ -1,0 +1,271 @@
+class Dashboard {
+    constructor() {
+        this.apiUrl = 'api/';
+        this.currentUser = null;
+        this.init();
+    }
+
+    init() {
+        this.loadUserData();
+        this.setupEventListeners();
+        this.loadDashboardData();
+        this.loadTickets();
+        this.loadClients();
+    }
+
+    loadUserData() {
+        const userData = localStorage.getItem('user_data');
+        if (userData) {
+            this.currentUser = JSON.parse(userData);
+            document.getElementById('userName').textContent = this.currentUser.name;
+        }
+    }
+
+    setupEventListeners() {
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+        
+        // New ticket
+        document.getElementById('submitTicketBtn').addEventListener('click', () => this.createTicket());
+        
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => this.handleNavigation(e));
+        });
+    }
+
+    async loadDashboardData() {
+        try {
+            const response = await this.makeRequest('dashboard.php?action=stats');
+            
+            if (response.success) {
+                this.updateStats(response.data);
+            }
+        } catch (error) {
+            console.error('Error loading dashboard data:', error);
+        }
+    }
+
+    async loadTickets() {
+        try {
+            const response = await this.makeRequest('tickets.php?action=list');
+            
+            if (response.success) {
+                this.displayTickets(response.tickets);
+            }
+        } catch (error) {
+            console.error('Error loading tickets:', error);
+        }
+    }
+
+    async loadClients() {
+        try {
+            const response = await this.makeRequest('dashboard.php?action=clients');
+            
+            if (response.success) {
+                this.displayClients(response.clients);
+            }
+        } catch (error) {
+            console.error('Error loading clients:', error);
+        }
+    }
+
+    displayTickets(tickets) {
+        const tbody = document.getElementById('ticketsList');
+        tbody.innerHTML = '';
+
+        tickets.forEach(ticket => {
+            const row = document.createElement('tr');
+            row.className = `priority-${ticket.priority}`;
+            
+            const statusBadge = this.getStatusBadge(ticket.status);
+            const priorityBadge = this.getPriorityBadge(ticket.priority);
+            
+            row.innerHTML = `
+                <td>#${ticket.id}</td>
+                <td>${ticket.subject}</td>
+                <td>${statusBadge}</td>
+                <td>${priorityBadge}</td>
+                <td>${this.formatDate(ticket.created_at)}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary view-ticket" data-id="${ticket.id}">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </td>
+            `;
+            
+            tbody.appendChild(row);
+        });
+
+        // Add event listeners to view buttons
+        document.querySelectorAll('.view-ticket').forEach(btn => {
+            btn.addEventListener('click', (e) => this.viewTicket(e.target.closest('button').dataset.id));
+        });
+    }
+
+    displayClients(clients) {
+        const tbody = document.getElementById('clientsList');
+        tbody.innerHTML = '';
+
+        clients.forEach(client => {
+            const statusBadge = client.status === 'active' 
+                ? '<span class="badge bg-success">Actif</span>'
+                : '<span class="badge bg-danger">Inactif</span>';
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${client.name}</td>
+                <td>${client.email}</td>
+                <td>${client.subscription}</td>
+                <td>${this.formatDate(client.expiry_date)}</td>
+                <td>${statusBadge}</td>
+            `;
+            
+            tbody.appendChild(row);
+        });
+    }
+
+    async createTicket() {
+        const subject = document.getElementById('ticketSubject').value;
+        const priority = document.getElementById('ticketPriority').value;
+        const message = document.getElementById('ticketMessage').value;
+
+        if (!subject || !message) {
+            alert('Veuillez remplir tous les champs obligatoires.');
+            return;
+        }
+
+        try {
+            const response = await this.makeRequest('tickets.php?action=create', 'POST', {
+                subject: subject,
+                priority: priority,
+                message: message
+            });
+
+            if (response.success) {
+                // Close modal and refresh tickets
+                bootstrap.Modal.getInstance(document.getElementById('newTicketModal')).hide();
+                document.getElementById('newTicketForm').reset();
+                this.loadTickets();
+                this.loadDashboardData();
+            } else {
+                alert('Erreur: ' + response.message);
+            }
+        } catch (error) {
+            console.error('Error creating ticket:', error);
+            alert('Erreur lors de la création du ticket.');
+        }
+    }
+
+    async viewTicket(ticketId) {
+        try {
+            const response = await this.makeRequest(`tickets.php?action=view&id=${ticketId}`);
+            
+            if (response.success) {
+                this.displayTicketModal(response.ticket);
+            }
+        } catch (error) {
+            console.error('Error viewing ticket:', error);
+        }
+    }
+
+    displayTicketModal(ticket) {
+        document.getElementById('viewTicketTitle').textContent = ticket.subject;
+        
+        const content = document.getElementById('viewTicketContent');
+        content.innerHTML = `
+            <div class="mb-3">
+                <strong>Statut:</strong> ${this.getStatusBadge(ticket.status)}
+            </div>
+            <div class="mb-3">
+                <strong>Priorité:</strong> ${this.getPriorityBadge(ticket.priority)}
+            </div>
+            <div class="mb-3">
+                <strong>Date de création:</strong> ${this.formatDate(ticket.created_at)}
+            </div>
+            <div class="mb-3">
+                <strong>Message:</strong>
+                <div class="border p-3 mt-2 bg-light">${ticket.message}</div>
+            </div>
+            ${ticket.reply ? `
+            <div class="mb-3">
+                <strong>Réponse du support:</strong>
+                <div class="border p-3 mt-2 bg-light">${ticket.reply}</div>
+            </div>
+            ` : '<p class="text-muted">En attente de réponse du support.</p>'}
+        `;
+        
+        new bootstrap.Modal(document.getElementById('viewTicketModal')).show();
+    }
+
+    getStatusBadge(status) {
+        const statusMap = {
+            'open': ['bg-warning', 'Ouvert'],
+            'in_progress': ['bg-info', 'En cours'],
+            'resolved': ['bg-success', 'Résolu'],
+            'closed': ['bg-secondary', 'Fermé']
+        };
+        
+        const [badgeClass, text] = statusMap[status] || ['bg-secondary', status];
+        return `<span class="badge ${badgeClass}">${text}</span>`;
+    }
+
+    getPriorityBadge(priority) {
+        const priorityMap = {
+            'low': ['bg-success', 'Basse'],
+            'medium': ['bg-warning', 'Moyenne'],
+            'high': ['bg-danger', 'Haute'],
+            'urgent': ['bg-danger', 'Urgente']
+        };
+        
+        const [badgeClass, text] = priorityMap[priority] || ['bg-secondary', priority];
+        return `<span class="badge ${badgeClass}">${text}</span>`;
+    }
+
+    formatDate(dateString) {
+        return new Date(dateString).toLocaleDateString('fr-FR');
+    }
+
+    updateStats(stats) {
+        document.getElementById('activeClients').textContent = stats.active_clients;
+        document.getElementById('monthlyRevenue').textContent = stats.monthly_revenue + '€';
+        document.getElementById('openTickets').textContent = stats.open_tickets;
+        document.getElementById('availableBalance').textContent = stats.available_balance + '€';
+        document.getElementById('ticketCount').textContent = stats.open_tickets;
+    }
+
+    logout() {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('user_data');
+        window.location.href = 'login.html';
+    }
+
+    async makeRequest(endpoint, method = 'GET', data = null) {
+        const options = {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+            }
+        };
+
+        if (data) {
+            options.body = JSON.stringify(data);
+        }
+
+        const response = await fetch(this.apiUrl + endpoint, options);
+        return await response.json();
+    }
+
+    handleNavigation(e) {
+        e.preventDefault();
+        const target = e.target.getAttribute('href').substring(1);
+        // Implementation for navigation between sections
+        console.log('Navigating to:', target);
+    }
+}
+
+// Initialize dashboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new Dashboard();
+});

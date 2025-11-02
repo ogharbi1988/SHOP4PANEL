@@ -1,0 +1,17 @@
+shop4panel/
+├── index.html
+├── dashboard.html
+├── login.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── main.js
+│   ├── dashboard.js
+│   └── auth.js
+├── api/
+│   ├── auth.php
+│   ├── dashboard.php
+│   ├── tickets.php
+│   └── payments.php
+└── config/
+    └── database.php
