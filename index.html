@@ -481,6 +481,35 @@
             font-size: 10px;
             margin-left: 5px;
         }
+        
+        /* Marquee Style */
+        .marquee-container {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .marquee {
+            white-space: nowrap;
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .marquee i {
+            margin-right: 10px;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -564,6 +593,14 @@
                             <div class="small text-muted" id="user-role">Administrateur</div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Marquee Message -->
+            <div class="marquee-container">
+                <div class="marquee">
+                    <i class="fas fa-exclamation-circle"></i>
+                    IMPORTANT : Le montant minimum de recharge est de 500 DH. Veuillez vous assurer d'avoir un solde suffisant avant de faire un achat.
                 </div>
             </div>
 
@@ -739,7 +776,7 @@
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> +15,000 Chaînes</span>
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
                                         </div>
-                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                        <button class="btn btn-primary w-100 buy-btn" data-product="King 365 M3U 12 MOIS" data-price="210">Acheter maintenant</button>
                                     </div>
                                 </div>
                             </div>
@@ -755,7 +792,7 @@
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> +10,000 Chaînes</span>
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
                                         </div>
-                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                        <button class="btn btn-primary w-100 buy-btn" data-product="SMART+ M3U 12 MOIS" data-price="65">Acheter maintenant</button>
                                     </div>
                                 </div>
                             </div>
@@ -771,7 +808,7 @@
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> +20,000 Chaînes</span>
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> 4K Ultra HD</span>
                                         </div>
-                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                        <button class="btn btn-primary w-100 buy-btn" data-product="4K OTT/COBRA/PROMAX 12 MOIS" data-price="160">Acheter maintenant</button>
                                     </div>
                                 </div>
                             </div>
@@ -787,7 +824,7 @@
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> +12,000 Chaînes</span>
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
                                         </div>
-                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                        <button class="btn btn-primary w-100 buy-btn" data-product="DREAMTV M3U 12 MOIS" data-price="80">Acheter maintenant</button>
                                     </div>
                                 </div>
                             </div>
@@ -803,7 +840,7 @@
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> +8,000 Chaînes</span>
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
                                         </div>
-                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                        <button class="btn btn-primary w-100 buy-btn" data-product="PYTHON M3U 12 MOIS" data-price="60">Acheter maintenant</button>
                                     </div>
                                 </div>
                             </div>
@@ -819,7 +856,7 @@
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> +18,000 Chaînes</span>
                                             <span class="product-feature"><i class="fas fa-check text-success"></i> 4K Ultra HD</span>
                                         </div>
-                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                        <button class="btn btn-primary w-100 buy-btn" data-product="ATLAS (TIGER) M3U 12 MOIS" data-price="145">Acheter maintenant</button>
                                     </div>
                                 </div>
                             </div>
@@ -906,7 +943,7 @@
                                 </div>
                                 <div class="alert alert-warning">
                                     <i class="fas fa-exclamation-triangle me-2"></i>
-                                    <strong>Important:</strong> Le solde minimum de recharge est de 50 MAD.
+                                    <strong>Important:</strong> Le solde minimum de recharge est de 500 MAD.
                                 </div>
                             </div>
                         </div>
@@ -1283,7 +1320,8 @@
                     <form id="recharge-form">
                         <div class="mb-3">
                             <label for="recharge-amount" class="form-label">Montant (MAD)</label>
-                            <input type="number" class="form-control" id="recharge-amount" min="50" required>
+                            <input type="number" class="form-control" id="recharge-amount" min="500" required>
+                            <div class="form-text">Le montant minimum de recharge est de 500 MAD</div>
                         </div>
                         <div class="mb-3">
                             <label for="recharge-method" class="form-label">Méthode de paiement</label>
@@ -1373,6 +1411,10 @@
                             <label for="purchase-total" class="form-label">Total</label>
                             <input type="text" class="form-control" id="purchase-total" readonly>
                         </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Le montant sera automatiquement déduit de votre solde actuel.
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -1414,7 +1456,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="new-user-balance" class="form-label">Solde initial (MAD)</label>
-                            <input type="number" class="form-control" id="new-user-balance" min="0" value="0" required>
+                            <input type="number" class="form-control" id="new-user-balance" min="500" value="500" required>
+                            <div class="form-text">Le solde initial minimum est de 500 MAD</div>
                         </div>
                     </form>
                 </div>
@@ -1495,7 +1538,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit-user-balance" class="form-label">Solde (MAD)</label>
-                            <input type="number" class="form-control" id="edit-user-balance" min="0" required>
+                            <input type="number" class="form-control" id="edit-user-balance" min="500" required>
+                            <div class="form-text">Le solde minimum est de 500 MAD</div>
                         </div>
                     </form>
                 </div>
@@ -1512,8 +1556,8 @@
         // Stockage des données utilisateurs et produits
         let users = JSON.parse(localStorage.getItem('shop4panel_users')) || [
             { id: 1, name: "Admin User", email: "admin@shop4panel.com", password: "admin123", role: "admin", balance: 500, registrationDate: "2023-01-15" },
-            { id: 2, name: "John Doe", email: "user@shop4panel.com", password: "user123", role: "user", balance: 150, registrationDate: "2023-03-20" },
-            { id: 3, name: "Jane Smith", email: "jane@shop4panel.com", password: "jane123", role: "user", balance: 75, registrationDate: "2023-05-10" }
+            { id: 2, name: "John Doe", email: "user@shop4panel.com", password: "user123", role: "user", balance: 500, registrationDate: "2023-03-20" },
+            { id: 3, name: "Jane Smith", email: "jane@shop4panel.com", password: "jane123", role: "user", balance: 500, registrationDate: "2023-05-10" }
         ];
 
         let products = JSON.parse(localStorage.getItem('shop4panel_products')) || [
@@ -1532,6 +1576,20 @@
             { id: 4, userId: 3, amount: 100, admin: "Admin User", date: "2023-10-10" }
         ];
 
+        // Ajout de l'historique des achats
+        let purchaseHistory = JSON.parse(localStorage.getItem('shop4panel_purchase_history')) || [
+            { id: 1, userId: 2, productId: 1, productName: "King 365 M3U 12 MOIS", price: 210, quantity: 1, total: 210, date: "2023-10-15" },
+            { id: 2, userId: 2, productId: 2, productName: "SMART+ M3U 12 MOIS", price: 65, quantity: 2, total: 130, date: "2023-10-12" },
+            { id: 3, userId: 2, productId: 3, productName: "4K OTT/COBRA/PROMAX 12 MOIS", price: 160, quantity: 1, total: 160, date: "2023-10-10" },
+            { id: 4, userId: 3, productId: 4, productName: "DREAMTV M3U 12 MOIS", price: 80, quantity: 1, total: 80, date: "2023-10-05" }
+        ];
+
+        // Ajout des statistiques de vente mensuelles
+        let monthlyStats = JSON.parse(localStorage.getItem('shop4panel_monthly_stats')) || [
+            { userId: 2, month: "2023-10", salesCount: 4, salesAmount: 500, rechargeAmount: 450 },
+            { userId: 3, month: "2023-10", salesCount: 1, salesAmount: 80, rechargeAmount: 100 }
+        ];
+
         let currentUser = null;
 
         // Sauvegarder les données dans le localStorage
@@ -1539,6 +1597,8 @@
             localStorage.setItem('shop4panel_users', JSON.stringify(users));
             localStorage.setItem('shop4panel_products', JSON.stringify(products));
             localStorage.setItem('shop4panel_recharge_history', JSON.stringify(rechargeHistory));
+            localStorage.setItem('shop4panel_purchase_history', JSON.stringify(purchaseHistory));
+            localStorage.setItem('shop4panel_monthly_stats', JSON.stringify(monthlyStats));
         }
 
         // Initialiser l'interface
@@ -1548,11 +1608,140 @@
             updateProductsTable();
             updateRechargeHistory();
             updateUserSelect();
+            updatePurchaseHistory();
+            updateMonthlyStats();
+            
+            // Afficher le tableau de bord par défaut
+            showDashboard();
+        }
+
+        // Afficher le tableau de bord
+        function showDashboard() {
+            // Hide all page contents
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show dashboard page
+            document.getElementById('dashboard-home').style.display = 'block';
+            
+            // Update page title
+            document.getElementById('page-title').textContent = "Tableau de bord";
+            
+            // Set active menu item
+            document.querySelectorAll('.sidebar-menu a').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-page="dashboard-home"]').classList.add('active');
+        }
+
+        // Mettre à jour l'historique des achats
+        function updatePurchaseHistory() {
+            const tableBody = document.querySelector('#history tbody');
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = '';
+            
+            // Filtrer les achats de l'utilisateur courant
+            const userPurchases = purchaseHistory.filter(purchase => purchase.userId === currentUser.id);
+            
+            userPurchases.forEach(purchase => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${purchase.date}</td>
+                    <td>${purchase.productName}</td>
+                    <td>${purchase.price} MAD</td>
+                    <td>${purchase.quantity}</td>
+                    <td>${purchase.total} MAD</td>
+                    <td><span class="badge bg-success">Livré</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">Détails</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour les statistiques mensuelles
+        function updateMonthlyStats() {
+            const statsContainer = document.getElementById('monthly-stats-container');
+            if (!statsContainer) {
+                // Créer le conteneur s'il n'existe pas
+                const dashboardHome = document.getElementById('dashboard-home');
+                const existingRow = dashboardHome.querySelector('.row.mt-4');
+                
+                if (existingRow) {
+                    const newRow = document.createElement('div');
+                    newRow.className = 'row mt-4';
+                    newRow.innerHTML = `
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Statistiques Mensuelles</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mois</th>
+                                                    <th>Nombre de ventes</th>
+                                                    <th>Montant des ventes (MAD)</th>
+                                                    <th>Montant rechargé (MAD)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="monthly-stats-container">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    existingRow.parentNode.insertBefore(newRow, existingRow.nextSibling);
+                }
+            }
+            
+            const statsBody = document.getElementById('monthly-stats-container');
+            if (!statsBody) return;
+            
+            statsBody.innerHTML = '';
+            
+            // Obtenir les stats de l'utilisateur courant
+            const userStats = monthlyStats.filter(stat => stat.userId === currentUser.id);
+            
+            if (userStats.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="4" class="text-center">Aucune statistique disponible</td>
+                `;
+                statsBody.appendChild(row);
+            } else {
+                userStats.forEach(stat => {
+                    const row = document.createElement('tr');
+                    const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+                    
+                    const dateParts = stat.month.split('-');
+                    const monthName = monthNames[parseInt(dateParts[1]) - 1];
+                    const year = dateParts[0];
+                    
+                    row.innerHTML = `
+                        <td>${monthName} ${year}</td>
+                        <td>${stat.salesCount}</td>
+                        <td>${stat.salesAmount} MAD</td>
+                        <td>${stat.rechargeAmount} MAD</td>
+                    `;
+                    statsBody.appendChild(row);
+                });
+            }
         }
 
         // Mettre à jour le tableau des utilisateurs
         function updateUsersTable() {
             const tableBody = document.getElementById('users-table-body');
+            if (!tableBody) return;
+            
             tableBody.innerHTML = '';
 
             users.forEach(user => {
@@ -1591,6 +1780,8 @@
         // Mettre à jour le tableau des produits
         function updateProductsTable() {
             const tableBody = document.getElementById('products-table-body');
+            if (!tableBody) return;
+            
             tableBody.innerHTML = '';
 
             products.forEach(product => {
@@ -1613,6 +1804,8 @@
         // Mettre à jour l'historique des rechargements
         function updateRechargeHistory() {
             const tableBody = document.getElementById('recharge-history-body');
+            if (!tableBody) return;
+            
             tableBody.innerHTML = '';
 
             rechargeHistory.forEach(record => {
@@ -1631,6 +1824,8 @@
         // Mettre à jour la liste déroulante des utilisateurs
         function updateUserSelect() {
             const userSelect = document.getElementById('user-select');
+            if (!userSelect) return;
+            
             userSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un utilisateur</option>';
 
             users.forEach(user => {
@@ -1727,7 +1922,7 @@
                     document.getElementById('admin-menu-item').style.display = 'none';
                 }
                 
-                // Initialize UI
+                // Initialize UI and show dashboard
                 initUI();
                 
                 // Show success message
@@ -1755,14 +1950,14 @@
         });
 
         // Purchase functionality
-        document.querySelectorAll('.product-card .btn').forEach(button => {
+        document.querySelectorAll('.buy-btn').forEach(button => {
             button.addEventListener('click', function() {
-                const card = this.closest('.product-card');
-                const productName = card.querySelector('.product-title').textContent;
-                const productPrice = card.querySelector('.product-price').textContent;
+                const productName = this.getAttribute('data-product');
+                const price = this.getAttribute('data-price');
                 
                 document.getElementById('purchase-product').value = productName;
-                document.getElementById('purchase-price').value = productPrice;
+                document.getElementById('purchase-price').value = price + ' MAD';
+                document.getElementById('purchase-quantity').value = 1;
                 updatePurchaseTotal();
                 
                 const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
@@ -1784,16 +1979,92 @@
 
         // Confirm purchase
         document.getElementById('confirm-purchase').addEventListener('click', function() {
-            const product = document.getElementById('purchase-product').value;
-            const total = document.getElementById('purchase-total').value;
+            const productName = document.getElementById('purchase-product').value;
+            const priceText = document.getElementById('purchase-price').value;
+            const price = parseFloat(priceText.replace(' MAD', ''));
+            const quantity = parseInt(document.getElementById('purchase-quantity').value);
+            const total = price * quantity;
+            
+            // Vérifier si le solde est suffisant
+            if (currentUser.balance < total) {
+                showAlert('Solde insuffisant pour effectuer cet achat!', 'danger');
+                return;
+            }
+            
+            // Vérifier le solde minimum après achat (500 MAD)
+            if ((currentUser.balance - total) < 500) {
+                showAlert('Le solde après achat doit être d\'au moins 500 MAD!', 'danger');
+                return;
+            }
+            
+            // Trouver le produit
+            const product = products.find(p => p.name === productName);
+            if (!product) {
+                showAlert('Produit non trouvé!', 'danger');
+                return;
+            }
+            
+            // Déduire le montant du solde
+            currentUser.balance -= total;
+            
+            // Enregistrer l'achat
+            const newPurchase = {
+                id: purchaseHistory.length + 1,
+                userId: currentUser.id,
+                productId: product.id,
+                productName: productName,
+                price: price,
+                quantity: quantity,
+                total: total,
+                date: new Date().toISOString().split('T')[0]
+            };
+            purchaseHistory.push(newPurchase);
+            
+            // Mettre à jour les statistiques mensuelles
+            updateMonthlyStatsForUser(currentUser.id, total);
+            
+            // Sauvegarder les données
+            saveData();
+            
+            // Mettre à jour l'interface
+            document.getElementById('user-balance').textContent = currentUser.balance.toFixed(2) + ' MAD';
+            document.getElementById('current-balance').textContent = currentUser.balance.toFixed(2) + ' MAD';
+            updatePurchaseHistory();
             
             // Close modal
             const purchaseModal = bootstrap.Modal.getInstance(document.getElementById('purchaseModal'));
             purchaseModal.hide();
             
             // Show success message
-            showAlert(`Achat de ${product} pour ${total} effectué avec succès!`, 'success');
+            showAlert(`Achat de ${productName} pour ${total.toFixed(2)} MAD effectué avec succès!`, 'success');
         });
+
+        // Mettre à jour les statistiques mensuelles pour un utilisateur
+        function updateMonthlyStatsForUser(userId, purchaseAmount) {
+            const now = new Date();
+            const currentMonth = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}`;
+            
+            // Trouver les statistiques existantes pour ce mois
+            let userStats = monthlyStats.find(stat => 
+                stat.userId === userId && stat.month === currentMonth
+            );
+            
+            if (userStats) {
+                // Mettre à jour les statistiques existantes
+                userStats.salesCount += 1;
+                userStats.salesAmount += purchaseAmount;
+            } else {
+                // Créer de nouvelles statistiques
+                userStats = {
+                    userId: userId,
+                    month: currentMonth,
+                    salesCount: 1,
+                    salesAmount: purchaseAmount,
+                    rechargeAmount: 0
+                };
+                monthlyStats.push(userStats);
+            }
+        }
 
         // Generator functionality
         document.getElementById('generator-form').addEventListener('submit', function(e) {
@@ -1836,8 +2107,14 @@
 
         // Submit recharge request
         document.getElementById('submit-recharge').addEventListener('click', function() {
-            const amount = document.getElementById('recharge-amount').value;
+            const amount = parseFloat(document.getElementById('recharge-amount').value);
             const method = document.getElementById('recharge-method').value;
+            
+            // Vérifier le montant minimum (500 MAD)
+            if (amount < 500) {
+                showAlert('Le montant minimum de recharge est de 500 MAD!', 'danger');
+                return;
+            }
             
             // Close modal
             const rechargeModal = bootstrap.Modal.getInstance(document.getElementById('rechargeModal'));
@@ -1889,6 +2166,9 @@
                 };
                 rechargeHistory.push(newRecord);
                 
+                // Mettre à jour les statistiques mensuelles
+                updateMonthlyRechargeStats(userId, amount);
+                
                 // Save data
                 saveData();
                 
@@ -1905,6 +2185,32 @@
             }
         });
 
+        // Mettre à jour les statistiques de recharge mensuelles
+        function updateMonthlyRechargeStats(userId, rechargeAmount) {
+            const now = new Date();
+            const currentMonth = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}`;
+            
+            // Trouver les statistiques existantes pour ce mois
+            let userStats = monthlyStats.find(stat => 
+                stat.userId === userId && stat.month === currentMonth
+            );
+            
+            if (userStats) {
+                // Mettre à jour les statistiques existantes
+                userStats.rechargeAmount += rechargeAmount;
+            } else {
+                // Créer de nouvelles statistiques
+                userStats = {
+                    userId: userId,
+                    month: currentMonth,
+                    salesCount: 0,
+                    salesAmount: 0,
+                    rechargeAmount: rechargeAmount
+                };
+                monthlyStats.push(userStats);
+            }
+        }
+
         // Add new user
         document.getElementById('submit-new-user').addEventListener('click', function() {
             const name = document.getElementById('new-user-name').value;
@@ -1912,6 +2218,12 @@
             const password = document.getElementById('new-user-password').value;
             const role = document.getElementById('new-user-role').value;
             const balance = parseFloat(document.getElementById('new-user-balance').value);
+            
+            // Vérifier le solde minimum (500 MAD)
+            if (balance < 500) {
+                showAlert('Le solde initial doit être d\'au moins 500 MAD!', 'danger');
+                return;
+            }
             
             // Check if email already exists
             if (users.find(u => u.email === email)) {
@@ -1990,6 +2302,12 @@
             const role = document.getElementById('edit-user-role').value;
             const balance = parseFloat(document.getElementById('edit-user-balance').value);
             
+            // Vérifier le solde minimum (500 MAD)
+            if (balance < 500) {
+                showAlert('Le solde doit être d\'au moins 500 MAD!', 'danger');
+                return;
+            }
+            
             // Find user and update
             const user = users.find(u => u.id === userId);
             if (user) {
@@ -2009,8 +2327,8 @@
                     document.getElementById('user-name').textContent = user.name;
                     document.getElementById('user-role').textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
                     document.getElementById('user-avatar').textContent = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                    document.getElementById('user-balance').textContent = user.balance + '.00 MAD';
-                    document.getElementById('current-balance').textContent = user.balance + '.00 MAD';
+                    document.getElementById('user-balance').textContent = user.balance.toFixed(2) + ' MAD';
+                    document.getElementById('current-balance').textContent = user.balance.toFixed(2) + ' MAD';
                     
                     // Show admin menu if user is admin
                     if (user.role === 'admin') {
