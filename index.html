@@ -1609,12 +1609,6 @@
             { id: 4, userId: 3, productId: 4, productName: "DREAMTV M3U 12 MOIS", price: 80, quantity: 1, total: 80, date: "2023-10-05", codes: ["DREAMTV-1234ABCD5678"] }
         ];
 
-        // Ajout des statistiques de vente mensuelles
-        let monthlyStats = JSON.parse(localStorage.getItem('shop4panel_monthly_stats')) || [
-            { userId: 2, month: "2023-10", salesCount: 4, salesAmount: 500, rechargeAmount: 450 },
-            { userId: 3, month: "2023-10", salesCount: 1, salesAmount: 80, rechargeAmount: 100 }
-        ];
-
         let currentUser = null;
 
         // Sauvegarder les données dans le localStorage
@@ -1623,7 +1617,6 @@
             localStorage.setItem('shop4panel_products', JSON.stringify(products));
             localStorage.setItem('shop4panel_recharge_history', JSON.stringify(rechargeHistory));
             localStorage.setItem('shop4panel_purchase_history', JSON.stringify(purchaseHistory));
-            localStorage.setItem('shop4panel_monthly_stats', JSON.stringify(monthlyStats));
         }
 
         // Initialiser l'interface
