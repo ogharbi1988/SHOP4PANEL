@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP 4 PANEL - Vente IPTV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5726d4;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --sidebar-width: 260px;
+            --header-height: 70px;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(180deg, var(--primary-color) 0%, #3a1b8f 100%);
+            color: white;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid white;
+        }
+        
+        .sidebar-menu i {
+            margin-right: 10px;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        /* Header */
+        .header {
+            height: var(--header-height);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        
+        .header-left h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a1b8f 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(87, 38, 212, 0.3);
+        }
+        
+        .balance-card h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .balance-card p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+        
+        /* Card Styles */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Product Card */
+        .product-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card .card-body {
+            padding: 15px;
+        }
+        
+        .product-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .product-price {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .product-duration {
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .product-features {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .product-feature {
+            margin-right: 10px;
+            font-size: 12px;
+            color: var(--secondary-color);
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a1b8f;
+            border-color: #3a1b8f;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 500;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+            border-color: var(--warning-color);
+            color: #212529;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-weight: 500;
+        }
+        
+        /* Badges */
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        /* Table */
+        .table th {
+            border-top: none;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        /* Login Page */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a1b8f 100%);
+        }
+        
+        .login-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a1b8f 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .login-body {
+            padding: 30px;
+        }
+        
+        .form-control {
+            border-radius: 6px;
+            padding: 10px 15px;
+            border: 1px solid #e1e5eb;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(87, 38, 212, 0.25);
+        }
+        
+        /* Tabs */
+        .nav-tabs {
+            border-bottom: 1px solid #e1e5eb;
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            padding: 10px 20px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            background-color: transparent;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar-header h3, .sidebar-menu span {
+                display: none;
+            }
+            
+            .sidebar-menu a {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .sidebar-menu i {
+                margin-right: 0;
+                font-size: 20px;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+        
+        /* Notification Bell */
+        .notification-bell {
+            position: relative;
+            margin-right: 20px;
+            font-size: 20px;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Search Box */
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            padding-left: 40px;
+            border-radius: 30px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            color: var(--secondary-color);
+        }
+        
+        /* Ticket Status */
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-open {
+            background-color: rgba(25, 135, 84, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #856404;
+        }
+        
+        .status-closed {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: var(--secondary-color);
+        }
+        
+        /* Admin Badge */
+        .admin-badge {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="login-container">
+        <div class="login-card fade-in">
+            <div class="login-header">
+                <h2><i class="fas fa-tv me-2"></i>SHOP 4 PANEL</h2>
+                <p class="mb-0">Connexion à votre compte</p>
+            </div>
+            <div class="login-body">
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" placeholder="Votre email" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="Votre mot de passe" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember">
+                        <label class="form-check-label" for="remember">Se souvenir de moi</label>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <p class="mb-0">Compte de démonstration:</p>
+                        <p class="mb-0"><strong>Admin:</strong> admin@shop4panel.com / admin123</p>
+                        <p class="mb-0"><strong>Utilisateur:</strong> user@shop4panel.com / user123</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-tv me-2"></i>SHOP 4 PANEL</h3>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="#" class="active" data-page="dashboard-home"><i class="fas fa-home"></i> <span>Tableau de bord</span></a></li>
+                    <li><a href="#" data-page="products"><i class="fas fa-box"></i> <span>Produits IPTV</span></a></li>
+                    <li><a href="#" data-page="balance"><i class="fas fa-wallet"></i> <span>Mon solde</span></a></li>
+                    <li><a href="#" data-page="tickets"><i class="fas fa-ticket-alt"></i> <span>Tickets</span></a></li>
+                    <li><a href="#" data-page="history"><i class="fas fa-history"></i> <span>Historique</span></a></li>
+                    <li><a href="#" data-page="generator"><i class="fas fa-key"></i> <span>Générateur</span></a></li>
+                    <li id="admin-menu-item" style="display: none;"><a href="#" data-page="admin"><i class="fas fa-cogs"></i> <span>Administration</span></a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> <span>Déconnexion</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1 id="page-title">Tableau de bord</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">AB</div>
+                        <div>
+                            <div class="fw-bold" id="user-name">Admin User</div>
+                            <div class="small text-muted" id="user-role">Administrateur</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Home -->
+            <div id="dashboard-home" class="page-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="balance-card">
+                            <h3 id="user-balance">150.00 MAD</h3>
+                            <p>Solde actuel</p>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-box fa-2x text-primary mb-3"></i>
+                                        <h4>45</h4>
+                                        <p class="text-muted">Produits disponibles</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-shopping-cart fa-2x text-success mb-3"></i>
+                                        <h4>128</h4>
+                                        <p class="text-muted">Ventes ce mois</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-ticket-alt fa-2x text-warning mb-3"></i>
+                                        <h4>5</h4>
+                                        <p class="text-muted">Tickets ouverts</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Produits populaires</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Produit</th>
+                                                <th>Prix</th>
+                                                <th>Ventes</th>
+                                                <th>Statut</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>King 365 M3U 12 MOIS</td>
+                                                <td>210 MAD</td>
+                                                <td>45</td>
+                                                <td><span class="badge bg-success">Disponible</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>SMART+ M3U 12 MOIS</td>
+                                                <td>65 MAD</td>
+                                                <td>38</td>
+                                                <td><span class="badge bg-success">Disponible</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4K OTT/COBRA/PROMAX 12 MOIS</td>
+                                                <td>160 MAD</td>
+                                                <td>32</td>
+                                                <td><span class="badge bg-success">Disponible</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DREAMTV M3U 12 MOIS</td>
+                                                <td>80 MAD</td>
+                                                <td>28</td>
+                                                <td><span class="badge bg-warning">Stock limité</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Dernières activités</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item mb-3">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-shopping-cart text-success"></i>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-0">Achat de King 365 M3U 12 MOIS</p>
+                                                <small class="text-muted">Il y a 2 minutes</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item mb-3">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-ticket-alt text-warning"></i>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-0">Nouveau ticket créé</p>
+                                                <small class="text-muted">Il y a 15 minutes</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item mb-3">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-key text-primary"></i>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-0">Code généré pour SMART+</p>
+                                                <small class="text-muted">Il y a 1 heure</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-wallet text-info"></i>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <p class="mb-0">Rechargement de 200 MAD</p>
+                                                <small class="text-muted">Il y a 3 heures</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Page -->
+            <div id="products" class="page-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Catalogue des produits IPTV</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="form-control" placeholder="Rechercher un produit...">
+                        </div>
+                        <div class="row">
+                            <!-- Product 1 -->
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <div class="card-body">
+                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/5726d4/ffffff?text=KING+365')"></div>
+                                        <div class="product-price">210 MAD</div>
+                                        <h5 class="product-title">King 365 M3U 12 MOIS</h5>
+                                        <p class="product-duration">Durée: 12 mois</p>
+                                        <div class="product-features">
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +15,000 Chaînes</span>
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
+                                        </div>
+                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 2 -->
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <div class="card-body">
+                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/198754/ffffff?text=SMART+')"></div>
+                                        <div class="product-price">65 MAD</div>
+                                        <h5 class="product-title">SMART+ M3U 12 MOIS</h5>
+                                        <p class="product-duration">Durée: 12 mois</p>
+                                        <div class="product-features">
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +10,000 Chaînes</span>
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
+                                        </div>
+                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 3 -->
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <div class="card-body">
+                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/dc3545/ffffff?text=4K+OTT')"></div>
+                                        <div class="product-price">160 MAD</div>
+                                        <h5 class="product-title">4K OTT/COBRA/PROMAX 12 MOIS</h5>
+                                        <p class="product-duration">Durée: 12 mois</p>
+                                        <div class="product-features">
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +20,000 Chaînes</span>
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> 4K Ultra HD</span>
+                                        </div>
+                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 4 -->
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <div class="card-body">
+                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/ffc107/000000?text=DREAMTV')"></div>
+                                        <div class="product-price">80 MAD</div>
+                                        <h5 class="product-title">DREAMTV M3U 12 MOIS</h5>
+                                        <p class="product-duration">Durée: 12 mois</p>
+                                        <div class="product-features">
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +12,000 Chaînes</span>
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
+                                        </div>
+                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 5 -->
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <div class="card-body">
+                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/6f42c1/ffffff?text=PYTHON')"></div>
+                                        <div class="product-price">60 MAD</div>
+                                        <h5 class="product-title">PYTHON M3U 12 MOIS</h5>
+                                        <p class="product-duration">Durée: 12 mois</p>
+                                        <div class="product-features">
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +8,000 Chaînes</span>
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
+                                        </div>
+                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 6 -->
+                            <div class="col-md-4">
+                                <div class="card product-card">
+                                    <div class="card-body">
+                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/20c997/ffffff?text=ATLAS')"></div>
+                                        <div class="product-price">145 MAD</div>
+                                        <h5 class="product-title">ATLAS (TIGER) M3U 12 MOIS</h5>
+                                        <p class="product-duration">Durée: 12 mois</p>
+                                        <div class="product-features">
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +18,000 Chaînes</span>
+                                            <span class="product-feature"><i class="fas fa-check text-success"></i> 4K Ultra HD</span>
+                                        </div>
+                                        <button class="btn btn-primary w-100">Acheter maintenant</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance Page -->
+            <div id="balance" class="page-content" style="display: none;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Mon solde</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="balance-card">
+                                            <h3 id="current-balance">150.00 MAD</h3>
+                                            <p>Solde actuel</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-plus-circle fa-3x text-primary mb-3"></i>
+                                                <h5>Recharger mon solde</h5>
+                                                <p class="text-muted">Contactez l'administrateur pour recharger votre compte</p>
+                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rechargeModal">Demander une recharge</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h5>Historique des rechargements</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Montant</th>
+                                                    <th>Méthode</th>
+                                                    <th>Statut</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>15/10/2023</td>
+                                                    <td>200.00 MAD</td>
+                                                    <td>Admin</td>
+                                                    <td><span class="badge bg-success">Complétée</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>05/10/2023</td>
+                                                    <td>100.00 MAD</td>
+                                                    <td>Admin</td>
+                                                    <td><span class="badge bg-success">Complétée</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>25/09/2023</td>
+                                                    <td>150.00 MAD</td>
+                                                    <td>Admin</td>
+                                                    <td><span class="badge bg-success">Complétée</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Informations de recharge</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Pour recharger votre compte, veuillez contacter l'administrateur via le système de tickets.</p>
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Note:</strong> Les rechargements sont traités manuellement par l'administrateur.
+                                </div>
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Important:</strong> Le solde minimum de recharge est de 50 MAD.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tickets Page -->
+            <div id="tickets" class="page-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Système de tickets</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-4">
+                            <div>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newTicketModal">
+                                    <i class="fas fa-plus me-2"></i>Nouveau ticket
+                                </button>
+                            </div>
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#" data-tab="all-tickets">Tous</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-tab="open-tickets">Ouverts</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-tab="closed-tickets">Fermés</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Sujet</th>
+                                        <th>Catégorie</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#1254</td>
+                                        <td>Problème avec l'activation King 365</td>
+                                        <td>Activation</td>
+                                        <td>15/10/2023</td>
+                                        <td><span class="status-badge status-open">Ouvert</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1248</td>
+                                        <td>Demande de recharge de compte</td>
+                                        <td>Compte</td>
+                                        <td>12/10/2023</td>
+                                        <td><span class="status-badge status-closed">Fermé</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1239</td>
+                                        <td>Problème de lecture des chaînes</td>
+                                        <td>Technique</td>
+                                        <td>10/10/2023</td>
+                                        <td><span class="status-badge status-pending">En attente</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1225</td>
+                                        <td>Question sur les produits disponibles</td>
+                                        <td>Information</td>
+                                        <td>05/10/2023</td>
+                                        <td><span class="status-badge status-closed">Fermé</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Page -->
+            <div id="history" class="page-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Historique des achats</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Quantité</th>
+                                        <th>Total</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15/10/2023 14:30</td>
+                                        <td>King 365 M3U 12 MOIS</td>
+                                        <td>210 MAD</td>
+                                        <td>1</td>
+                                        <td>210 MAD</td>
+                                        <td><span class="badge bg-success">Livré</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>12/10/2023 10:15</td>
+                                        <td>SMART+ M3U 12 MOIS</td>
+                                        <td>65 MAD</td>
+                                        <td>2</td>
+                                        <td>130 MAD</td>
+                                        <td><span class="badge bg-success">Livré</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10/10/2023 16:45</td>
+                                        <td>4K OTT/COBRA/PROMAX 12 MOIS</td>
+                                        <td>160 MAD</td>
+                                        <td>1</td>
+                                        <td>160 MAD</td>
+                                        <td><span class="badge bg-success">Livré</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>05/10/2023 09:20</td>
+                                        <td>DREAMTV M3U 12 MOIS</td>
+                                        <td>80 MAD</td>
+                                        <td>1</td>
+                                        <td>80 MAD</td>
+                                        <td><span class="badge bg-success">Livré</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generator Page -->
+            <div id="generator" class="page-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Générateur de codes</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Générer un code d'abonnement</h5>
+                                        <form id="generator-form">
+                                            <div class="mb-3">
+                                                <label for="product-select" class="form-label">Produit</label>
+                                                <select class="form-select" id="product-select" required>
+                                                    <option value="" selected disabled>Sélectionnez un produit</option>
+                                                    <option value="king365">King 365 M3U 12 MOIS</option>
+                                                    <option value="smartplus">SMART+ M3U 12 MOIS</option>
+                                                    <option value="4kott">4K OTT/COBRA/PROMAX 12 MOIS</option>
+                                                    <option value="dreamtv">DREAMTV M3U 12 MOIS</option>
+                                                    <option value="python">PYTHON M3U 12 MOIS</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="quantity" class="form-label">Quantité</label>
+                                                <input type="number" class="form-control" id="quantity" min="1" max="10" value="1" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="duration" class="form-label">Durée</label>
+                                                <select class="form-select" id="duration" required>
+                                                    <option value="1">1 mois</option>
+                                                    <option value="3">3 mois</option>
+                                                    <option value="6">6 mois</option>
+                                                    <option value="12" selected>12 mois</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100">Générer le code</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Codes générés</h5>
+                                        <div id="generated-codes">
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                Aucun code généré pour le moment.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Page -->
+            <div id="admin" class="page-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Panneau d'administration</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#users-tab">Gestion des utilisateurs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#balance-tab">Gestion des soldes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#products-tab">Gestion des produits</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- Users Tab -->
+                            <div class="tab-pane fade show active" id="users-tab">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5>Liste des utilisateurs</h5>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                        <i class="fas fa-plus me-2"></i>Ajouter un utilisateur
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nom</th>
+                                                <th>Email</th>
+                                                <th>Rôle</th>
+                                                <th>Solde</th>
+                                                <th>Date d'inscription</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="users-table-body">
+                                            <!-- Users will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Balance Tab -->
+                            <div class="tab-pane fade" id="balance-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Recharger un compte</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <form id="admin-recharge-form">
+                                                    <div class="mb-3">
+                                                        <label for="user-select" class="form-label">Utilisateur</label>
+                                                        <select class="form-select" id="user-select" required>
+                                                            <option value="" selected disabled>Sélectionnez un utilisateur</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="recharge-amount-admin" class="form-label">Montant (MAD)</label>
+                                                        <input type="number" class="form-control" id="recharge-amount-admin" min="1" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="recharge-note-admin" class="form-label">Note (optionnel)</label>
+                                                        <textarea class="form-control" id="recharge-note-admin" rows="3"></textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary w-100">Recharger le compte</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Historique des rechargements</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Utilisateur</th>
+                                                                <th>Montant</th>
+                                                                <th>Admin</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="recharge-history-body">
+                                                            <!-- Recharge history will be populated by JavaScript -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Products Tab -->
+                            <div class="tab-pane fade" id="products-tab">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5>Gestion des produits IPTV</h5>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                        <i class="fas fa-plus me-2"></i>Ajouter un produit
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nom</th>
+                                                <th>Prix</th>
+                                                <th>Durée</th>
+                                                <th>Statut</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="products-table-body">
+                                            <!-- Products will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Recharge Modal -->
+    <div class="modal fade" id="rechargeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Demande de recharge</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="recharge-form">
+                        <div class="mb-3">
+                            <label for="recharge-amount" class="form-label">Montant (MAD)</label>
+                            <input type="number" class="form-control" id="recharge-amount" min="50" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recharge-method" class="form-label">Méthode de paiement</label>
+                            <select class="form-select" id="recharge-method" required>
+                                <option value="" selected disabled>Sélectionnez une méthode</option>
+                                <option value="cash">Espèces</option>
+                                <option value="transfer">Virement bancaire</option>
+                                <option value="mobile">Paiement mobile</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recharge-note" class="form-label">Note (optionnel)</label>
+                            <textarea class="form-control" id="recharge-note" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submit-recharge">Soumettre la demande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Ticket Modal -->
+    <div class="modal fade" id="newTicketModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouveau ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="ticket-form">
+                        <div class="mb-3">
+                            <label for="ticket-subject" class="form-label">Sujet</label>
+                            <input type="text" class="form-control" id="ticket-subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticket-category" class="form-label">Catégorie</label>
+                            <select class="form-select" id="ticket-category" required>
+                                <option value="" selected disabled>Sélectionnez une catégorie</option>
+                                <option value="technical">Problème technique</option>
+                                <option value="activation">Activation de compte</option>
+                                <option value="billing">Facturation</option>
+                                <option value="product">Produit</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticket-message" class="form-label">Message</label>
+                            <textarea class="form-control" id="ticket-message" rows="5" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submit-ticket">Créer le ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Acheter un produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="purchase-form">
+                        <div class="mb-3">
+                            <label for="purchase-product" class="form-label">Produit</label>
+                            <input type="text" class="form-control" id="purchase-product" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchase-price" class="form-label">Prix unitaire</label>
+                            <input type="text" class="form-control" id="purchase-price" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchase-quantity" class="form-label">Quantité</label>
+                            <input type="number" class="form-control" id="purchase-quantity" min="1" max="10" value="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchase-total" class="form-label">Total</label>
+                            <input type="text" class="form-control" id="purchase-total" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirm-purchase">Confirmer l'achat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-user-form">
+                        <div class="mb-3">
+                            <label for="new-user-name" class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" id="new-user-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-user-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="new-user-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-user-password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="new-user-password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-user-role" class="form-label">Rôle</label>
+                            <select class="form-select" id="new-user-role" required>
+                                <option value="user">Utilisateur</option>
+                                <option value="admin">Administrateur</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-user-balance" class="form-label">Solde initial (MAD)</label>
+                            <input type="number" class="form-control" id="new-user-balance" min="0" value="0" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submit-new-user">Créer l'utilisateur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-product-form">
+                        <div class="mb-3">
+                            <label for="new-product-name" class="form-label">Nom du produit</label>
+                            <input type="text" class="form-control" id="new-product-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-product-price" class="form-label">Prix (MAD)</label>
+                            <input type="number" class="form-control" id="new-product-price" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-product-duration" class="form-label">Durée</label>
+                            <select class="form-select" id="new-product-duration" required>
+                                <option value="1">1 mois</option>
+                                <option value="3">3 mois</option>
+                                <option value="6">6 mois</option>
+                                <option value="12" selected>12 mois</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-product-description" class="form-label">Description</label>
+                            <textarea class="form-control" id="new-product-description" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submit-new-product">Créer le produit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier l'utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-user-form">
+                        <input type="hidden" id="edit-user-id">
+                        <div class="mb-3">
+                            <label for="edit-user-name" class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" id="edit-user-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-user-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="edit-user-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-user-role" class="form-label">Rôle</label>
+                            <select class="form-select" id="edit-user-role" required>
+                                <option value="user">Utilisateur</option>
+                                <option value="admin">Administrateur</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-user-balance" class="form-label">Solde (MAD)</label>
+                            <input type="number" class="form-control" id="edit-user-balance" min="0" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submit-edit-user">Enregistrer les modifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Stockage des données utilisateurs et produits
+        let users = JSON.parse(localStorage.getItem('shop4panel_users')) || [
+            { id: 1, name: "Admin User", email: "admin@shop4panel.com", password: "admin123", role: "admin", balance: 500, registrationDate: "2023-01-15" },
+            { id: 2, name: "John Doe", email: "user@shop4panel.com", password: "user123", role: "user", balance: 150, registrationDate: "2023-03-20" },
+            { id: 3, name: "Jane Smith", email: "jane@shop4panel.com", password: "jane123", role: "user", balance: 75, registrationDate: "2023-05-10" }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('shop4panel_products')) || [
+            { id: 1, name: "King 365 M3U 12 MOIS", price: 210, duration: "12 mois", status: "active" },
+            { id: 2, name: "SMART+ M3U 12 MOIS", price: 65, duration: "12 mois", status: "active" },
+            { id: 3, name: "4K OTT/COBRA/PROMAX 12 MOIS", price: 160, duration: "12 mois", status: "active" },
+            { id: 4, name: "DREAMTV M3U 12 MOIS", price: 80, duration: "12 mois", status: "active" },
+            { id: 5, name: "PYTHON M3U 12 MOIS", price: 60, duration: "12 mois", status: "active" },
+            { id: 6, name: "ATLAS (TIGER) M3U 12 MOIS", price: 145, duration: "12 mois", status: "active" }
+        ];
+
+        let rechargeHistory = JSON.parse(localStorage.getItem('shop4panel_recharge_history')) || [
+            { id: 1, userId: 2, amount: 200, admin: "Admin User", date: "2023-10-15" },
+            { id: 2, userId: 2, amount: 100, admin: "Admin User", date: "2023-10-05" },
+            { id: 3, userId: 2, amount: 150, admin: "Admin User", date: "2023-09-25" },
+            { id: 4, userId: 3, amount: 100, admin: "Admin User", date: "2023-10-10" }
+        ];
+
+        let currentUser = null;
+
+        // Sauvegarder les données dans le localStorage
+        function saveData() {
+            localStorage.setItem('shop4panel_users', JSON.stringify(users));
+            localStorage.setItem('shop4panel_products', JSON.stringify(products));
+            localStorage.setItem('shop4panel_recharge_history', JSON.stringify(rechargeHistory));
+        }
+
+        // Initialiser l'interface
+        function initUI() {
+            // Mettre à jour les tableaux de données
+            updateUsersTable();
+            updateProductsTable();
+            updateRechargeHistory();
+            updateUserSelect();
+        }
+
+        // Mettre à jour le tableau des utilisateurs
+        function updateUsersTable() {
+            const tableBody = document.getElementById('users-table-body');
+            tableBody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name} ${user.role === 'admin' ? '<span class="admin-badge">ADMIN</span>' : ''}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role === 'admin' ? 'Administrateur' : 'Utilisateur'}</td>
+                    <td>${user.balance} MAD</td>
+                    <td>${user.registrationDate}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary edit-user" data-id="${user.id}">Modifier</button>
+                        ${user.id !== currentUser.id ? `<button class="btn btn-sm btn-outline-danger delete-user" data-id="${user.id}">Supprimer</button>` : ''}
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Ajouter les écouteurs d'événements pour les boutons
+            document.querySelectorAll('.edit-user').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = parseInt(this.getAttribute('data-id'));
+                    editUser(userId);
+                });
+            });
+
+            document.querySelectorAll('.delete-user').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = parseInt(this.getAttribute('data-id'));
+                    deleteUser(userId);
+                });
+            });
+        }
+
+        // Mettre à jour le tableau des produits
+        function updateProductsTable() {
+            const tableBody = document.getElementById('products-table-body');
+            tableBody.innerHTML = '';
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price} MAD</td>
+                    <td>${product.duration}</td>
+                    <td><span class="badge ${product.status === 'active' ? 'bg-success' : 'bg-secondary'}">${product.status === 'active' ? 'Actif' : 'Inactif'}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary edit-product" data-id="${product.id}">Modifier</button>
+                        <button class="btn btn-sm btn-outline-danger delete-product" data-id="${product.id}">Supprimer</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour l'historique des rechargements
+        function updateRechargeHistory() {
+            const tableBody = document.getElementById('recharge-history-body');
+            tableBody.innerHTML = '';
+
+            rechargeHistory.forEach(record => {
+                const user = users.find(u => u.id === record.userId);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.date}</td>
+                    <td>${user ? user.name : 'Utilisateur inconnu'}</td>
+                    <td>${record.amount} MAD</td>
+                    <td>${record.admin}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour la liste déroulante des utilisateurs
+        function updateUserSelect() {
+            const userSelect = document.getElementById('user-select');
+            userSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un utilisateur</option>';
+
+            users.forEach(user => {
+                if (user.role !== 'admin') {
+                    const option = document.createElement('option');
+                    option.value = user.id;
+                    option.textContent = `${user.name} (${user.balance} MAD)`;
+                    userSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Modifier un utilisateur
+        function editUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+
+            document.getElementById('edit-user-id').value = user.id;
+            document.getElementById('edit-user-name').value = user.name;
+            document.getElementById('edit-user-email').value = user.email;
+            document.getElementById('edit-user-role').value = user.role;
+            document.getElementById('edit-user-balance').value = user.balance;
+
+            const editUserModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+            editUserModal.show();
+        }
+
+        // Supprimer un utilisateur
+        function deleteUser(userId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+                users = users.filter(u => u.id !== userId);
+                saveData();
+                updateUsersTable();
+                updateUserSelect();
+                showAlert('Utilisateur supprimé avec succès!', 'success');
+            }
+        }
+
+        // Page navigation
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.sidebar-menu a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Hide all page contents
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Show selected page
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).style.display = 'block';
+                
+                // Update page title
+                document.getElementById('page-title').textContent = this.querySelector('span').textContent;
+            });
+        });
+
+        // Login functionality
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Find user
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                
+                // Hide login page and show dashboard
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                
+                // Update user info in header
+                document.getElementById('user-name').textContent = user.name;
+                document.getElementById('user-role').textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
+                document.getElementById('user-avatar').textContent = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                document.getElementById('user-balance').textContent = user.balance + '.00 MAD';
+                document.getElementById('current-balance').textContent = user.balance + '.00 MAD';
+                
+                // Show admin menu if user is admin
+                if (user.role === 'admin') {
+                    document.getElementById('admin-menu-item').style.display = 'block';
+                } else {
+                    document.getElementById('admin-menu-item').style.display = 'none';
+                }
+                
+                // Initialize UI
+                initUI();
+                
+                // Show success message
+                showAlert('Connexion réussie!', 'success');
+            } else {
+                showAlert('Email ou mot de passe incorrect.', 'danger');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Show login page and hide dashboard
+            document.getElementById('login-page').style.display = 'flex';
+            document.getElementById('dashboard').style.display = 'none';
+            
+            // Reset form
+            document.getElementById('login-form').reset();
+            
+            // Reset current user
+            currentUser = null;
+            
+            showAlert('Déconnexion réussie!', 'info');
+        });
+
+        // Purchase functionality
+        document.querySelectorAll('.product-card .btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.product-card');
+                const productName = card.querySelector('.product-title').textContent;
+                const productPrice = card.querySelector('.product-price').textContent;
+                
+                document.getElementById('purchase-product').value = productName;
+                document.getElementById('purchase-price').value = productPrice;
+                updatePurchaseTotal();
+                
+                const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                purchaseModal.show();
+            });
+        });
+
+        // Update purchase total
+        document.getElementById('purchase-quantity').addEventListener('input', updatePurchaseTotal);
+        
+        function updatePurchaseTotal() {
+            const priceText = document.getElementById('purchase-price').value;
+            const price = parseFloat(priceText.replace(' MAD', ''));
+            const quantity = parseInt(document.getElementById('purchase-quantity').value);
+            const total = price * quantity;
+            
+            document.getElementById('purchase-total').value = total.toFixed(2) + ' MAD';
+        }
+
+        // Confirm purchase
+        document.getElementById('confirm-purchase').addEventListener('click', function() {
+            const product = document.getElementById('purchase-product').value;
+            const total = document.getElementById('purchase-total').value;
+            
+            // Close modal
+            const purchaseModal = bootstrap.Modal.getInstance(document.getElementById('purchaseModal'));
+            purchaseModal.hide();
+            
+            // Show success message
+            showAlert(`Achat de ${product} pour ${total} effectué avec succès!`, 'success');
+        });
+
+        // Generator functionality
+        document.getElementById('generator-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const product = document.getElementById('product-select').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const duration = document.getElementById('duration').value;
+            
+            // Generate random codes
+            let codesHtml = '';
+            for (let i = 0; i < quantity; i++) {
+                const code = generateRandomCode(16);
+                codesHtml += `
+                    <div class="alert alert-success mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>${code}</span>
+                            <button class="btn btn-sm btn-outline-primary copy-code" data-code="${code}">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('generated-codes').innerHTML = codesHtml;
+            
+            // Add copy functionality to new buttons
+            document.querySelectorAll('.copy-code').forEach(button => {
+                button.addEventListener('click', function() {
+                    const code = this.getAttribute('data-code');
+                    navigator.clipboard.writeText(code).then(() => {
+                        showAlert('Code copié dans le presse-papier!', 'success');
+                    });
+                });
+            });
+            
+            showAlert(`${quantity} code(s) généré(s) avec succès!`, 'success');
+        });
+
+        // Submit recharge request
+        document.getElementById('submit-recharge').addEventListener('click', function() {
+            const amount = document.getElementById('recharge-amount').value;
+            const method = document.getElementById('recharge-method').value;
+            
+            // Close modal
+            const rechargeModal = bootstrap.Modal.getInstance(document.getElementById('rechargeModal'));
+            rechargeModal.hide();
+            
+            // Show success message
+            showAlert(`Demande de recharge de ${amount} MAD envoyée!`, 'success');
+            
+            // Reset form
+            document.getElementById('recharge-form').reset();
+        });
+
+        // Submit ticket
+        document.getElementById('submit-ticket').addEventListener('click', function() {
+            const subject = document.getElementById('ticket-subject').value;
+            const category = document.getElementById('ticket-category').value;
+            
+            // Close modal
+            const ticketModal = bootstrap.Modal.getInstance(document.getElementById('newTicketModal'));
+            ticketModal.hide();
+            
+            // Show success message
+            showAlert(`Ticket "${subject}" créé avec succès!`, 'success');
+            
+            // Reset form
+            document.getElementById('ticket-form').reset();
+        });
+
+        // Admin recharge form
+        document.getElementById('admin-recharge-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userId = parseInt(document.getElementById('user-select').value);
+            const amount = parseFloat(document.getElementById('recharge-amount-admin').value);
+            const note = document.getElementById('recharge-note-admin').value;
+            
+            // Find user and update balance
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                user.balance += amount;
+                
+                // Add to recharge history
+                const newRecord = {
+                    id: rechargeHistory.length + 1,
+                    userId: userId,
+                    amount: amount,
+                    admin: currentUser.name,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                rechargeHistory.push(newRecord);
+                
+                // Save data
+                saveData();
+                
+                // Update UI
+                updateUsersTable();
+                updateRechargeHistory();
+                updateUserSelect();
+                
+                // Reset form
+                document.getElementById('admin-recharge-form').reset();
+                
+                // Show success message
+                showAlert(`Solde de ${user.name} rechargé de ${amount} MAD!`, 'success');
+            }
+        });
+
+        // Add new user
+        document.getElementById('submit-new-user').addEventListener('click', function() {
+            const name = document.getElementById('new-user-name').value;
+            const email = document.getElementById('new-user-email').value;
+            const password = document.getElementById('new-user-password').value;
+            const role = document.getElementById('new-user-role').value;
+            const balance = parseFloat(document.getElementById('new-user-balance').value);
+            
+            // Check if email already exists
+            if (users.find(u => u.email === email)) {
+                showAlert('Un utilisateur avec cet email existe déjà!', 'danger');
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                name: name,
+                email: email,
+                password: password,
+                role: role,
+                balance: balance,
+                registrationDate: new Date().toISOString().split('T')[0]
+            };
+            
+            users.push(newUser);
+            saveData();
+            
+            // Update UI
+            updateUsersTable();
+            updateUserSelect();
+            
+            // Close modal
+            const addUserModal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
+            addUserModal.hide();
+            
+            // Reset form
+            document.getElementById('add-user-form').reset();
+            
+            // Show success message
+            showAlert('Utilisateur créé avec succès!', 'success');
+        });
+
+        // Add new product
+        document.getElementById('submit-new-product').addEventListener('click', function() {
+            const name = document.getElementById('new-product-name').value;
+            const price = parseFloat(document.getElementById('new-product-price').value);
+            const duration = document.getElementById('new-product-duration').value;
+            const description = document.getElementById('new-product-description').value;
+            
+            // Create new product
+            const newProduct = {
+                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                name: name,
+                price: price,
+                duration: duration + ' mois',
+                description: description,
+                status: 'active'
+            };
+            
+            products.push(newProduct);
+            saveData();
+            
+            // Update UI
+            updateProductsTable();
+            
+            // Close modal
+            const addProductModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+            addProductModal.hide();
+            
+            // Reset form
+            document.getElementById('add-product-form').reset();
+            
+            // Show success message
+            showAlert('Produit créé avec succès!', 'success');
+        });
+
+        // Edit user
+        document.getElementById('submit-edit-user').addEventListener('click', function() {
+            const userId = parseInt(document.getElementById('edit-user-id').value);
+            const name = document.getElementById('edit-user-name').value;
+            const email = document.getElementById('edit-user-email').value;
+            const role = document.getElementById('edit-user-role').value;
+            const balance = parseFloat(document.getElementById('edit-user-balance').value);
+            
+            // Find user and update
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                user.name = name;
+                user.email = email;
+                user.role = role;
+                user.balance = balance;
+                
+                saveData();
+                
+                // Update UI
+                updateUsersTable();
+                updateUserSelect();
+                
+                // If current user is being edited, update header
+                if (currentUser.id === userId) {
+                    document.getElementById('user-name').textContent = user.name;
+                    document.getElementById('user-role').textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
+                    document.getElementById('user-avatar').textContent = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                    document.getElementById('user-balance').textContent = user.balance + '.00 MAD';
+                    document.getElementById('current-balance').textContent = user.balance + '.00 MAD';
+                    
+                    // Show admin menu if user is admin
+                    if (user.role === 'admin') {
+                        document.getElementById('admin-menu-item').style.display = 'block';
+                    } else {
+                        document.getElementById('admin-menu-item').style.display = 'none';
+                    }
+                }
+                
+                // Close modal
+                const editUserModal = bootstrap.Modal.getInstance(document.getElementById('editUserModal'));
+                editUserModal.hide();
+                
+                // Show success message
+                showAlert('Utilisateur modifié avec succès!', 'success');
+            }
+        });
+
+        // Helper function to generate random code
+        function generateRandomCode(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Helper function to show alerts
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.querySelector('.main-content').insertBefore(alertDiv, document.querySelector('.main-content').firstChild);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentElement) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Tab functionality for tickets
+        document.querySelectorAll('[data-tab]').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs
+                document.querySelectorAll('[data-tab]').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Here you would filter the tickets table based on the selected tab
+                // For this demo, we'll just show a message
+                const tabType = this.getAttribute('data-tab');
+                showAlert(`Affichage des tickets: ${tabType.replace('-', ' ')}`, 'info');
+            });
+        });
+
+        // Initialize data on page load
+        saveData();
+    </script>
+</body>
+</html>
