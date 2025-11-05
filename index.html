@@ -510,6 +510,87 @@
             margin-right: 10px;
             color: #fff;
         }
+        
+        /* Logo Styles */
+        .logo {
+            font-weight: 800;
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa726, #5726d4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .logo:hover::before {
+            left: 100%;
+        }
+        
+        .logo-small {
+            font-size: 20px;
+            padding: 5px 10px;
+        }
+        
+        /* Product Management */
+        .product-management {
+            margin-bottom: 20px;
+        }
+        
+        .code-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .code-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .product-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+        
+        /* Purchase Success Modal */
+        .purchase-success {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .purchase-success i {
+            font-size: 60px;
+            color: var(--success-color);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -517,8 +598,8 @@
     <div id="login-page" class="login-container">
         <div class="login-card fade-in">
             <div class="login-header">
-                <h2><i class="fas fa-tv me-2"></i>SHOP 4 PANEL</h2>
-                <p class="mb-0">Connexion à votre compte</p>
+                <div class="logo">SHOP 4 PANEL</div>
+                <p class="mb-0 mt-2">Connexion à votre compte</p>
             </div>
             <div class="login-body">
                 <form id="login-form">
@@ -558,7 +639,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-tv me-2"></i>SHOP 4 PANEL</h3>
+                <div class="logo logo-small">SHOP 4 PANEL</div>
             </div>
             <div class="sidebar-menu">
                 <ul>
@@ -609,7 +690,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="balance-card">
-                            <h3 id="user-balance">150.00 MAD</h3>
+                            <h3 id="user-balance">1500.00 MAD</h3>
                             <p>Solde actuel</p>
                         </div>
                     </div>
@@ -619,7 +700,7 @@
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <i class="fas fa-box fa-2x text-primary mb-3"></i>
-                                        <h4>45</h4>
+                                        <h4 id="products-count">6</h4>
                                         <p class="text-muted">Produits disponibles</p>
                                     </div>
                                 </div>
@@ -628,7 +709,7 @@
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <i class="fas fa-shopping-cart fa-2x text-success mb-3"></i>
-                                        <h4>128</h4>
+                                        <h4>4</h4>
                                         <p class="text-muted">Ventes ce mois</p>
                                     </div>
                                 </div>
@@ -663,31 +744,8 @@
                                                 <th>Statut</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>King 365 M3U 12 MOIS</td>
-                                                <td>210 MAD</td>
-                                                <td>45</td>
-                                                <td><span class="badge bg-success">Disponible</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>SMART+ M3U 12 MOIS</td>
-                                                <td>65 MAD</td>
-                                                <td>38</td>
-                                                <td><span class="badge bg-success">Disponible</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4K OTT/COBRA/PROMAX 12 MOIS</td>
-                                                <td>160 MAD</td>
-                                                <td>32</td>
-                                                <td><span class="badge bg-success">Disponible</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>DREAMTV M3U 12 MOIS</td>
-                                                <td>80 MAD</td>
-                                                <td>28</td>
-                                                <td><span class="badge bg-warning">Stock limité</span></td>
-                                            </tr>
+                                        <tbody id="popular-products">
+                                            <!-- Products will be populated by JavaScript -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -761,105 +819,10 @@
                     <div class="card-body">
                         <div class="search-box">
                             <i class="fas fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Rechercher un produit...">
+                            <input type="text" class="form-control" id="product-search" placeholder="Rechercher un produit...">
                         </div>
-                        <div class="row">
-                            <!-- Product 1 -->
-                            <div class="col-md-4">
-                                <div class="card product-card">
-                                    <div class="card-body">
-                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/5726d4/ffffff?text=KING+365')"></div>
-                                        <div class="product-price">210 MAD</div>
-                                        <h5 class="product-title">King 365 M3U 12 MOIS</h5>
-                                        <p class="product-duration">Durée: 12 mois</p>
-                                        <div class="product-features">
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +15,000 Chaînes</span>
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
-                                        </div>
-                                        <button class="btn btn-primary w-100 buy-btn" data-product="King 365 M3U 12 MOIS" data-price="210">Acheter maintenant</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 2 -->
-                            <div class="col-md-4">
-                                <div class="card product-card">
-                                    <div class="card-body">
-                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/198754/ffffff?text=SMART+')"></div>
-                                        <div class="product-price">65 MAD</div>
-                                        <h5 class="product-title">SMART+ M3U 12 MOIS</h5>
-                                        <p class="product-duration">Durée: 12 mois</p>
-                                        <div class="product-features">
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +10,000 Chaînes</span>
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
-                                        </div>
-                                        <button class="btn btn-primary w-100 buy-btn" data-product="SMART+ M3U 12 MOIS" data-price="65">Acheter maintenant</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 3 -->
-                            <div class="col-md-4">
-                                <div class="card product-card">
-                                    <div class="card-body">
-                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/dc3545/ffffff?text=4K+OTT')"></div>
-                                        <div class="product-price">160 MAD</div>
-                                        <h5 class="product-title">4K OTT/COBRA/PROMAX 12 MOIS</h5>
-                                        <p class="product-duration">Durée: 12 mois</p>
-                                        <div class="product-features">
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +20,000 Chaînes</span>
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> 4K Ultra HD</span>
-                                        </div>
-                                        <button class="btn btn-primary w-100 buy-btn" data-product="4K OTT/COBRA/PROMAX 12 MOIS" data-price="160">Acheter maintenant</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 4 -->
-                            <div class="col-md-4">
-                                <div class="card product-card">
-                                    <div class="card-body">
-                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/ffc107/000000?text=DREAMTV')"></div>
-                                        <div class="product-price">80 MAD</div>
-                                        <h5 class="product-title">DREAMTV M3U 12 MOIS</h5>
-                                        <p class="product-duration">Durée: 12 mois</p>
-                                        <div class="product-features">
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +12,000 Chaînes</span>
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
-                                        </div>
-                                        <button class="btn btn-primary w-100 buy-btn" data-product="DREAMTV M3U 12 MOIS" data-price="80">Acheter maintenant</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 5 -->
-                            <div class="col-md-4">
-                                <div class="card product-card">
-                                    <div class="card-body">
-                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/6f42c1/ffffff?text=PYTHON')"></div>
-                                        <div class="product-price">60 MAD</div>
-                                        <h5 class="product-title">PYTHON M3U 12 MOIS</h5>
-                                        <p class="product-duration">Durée: 12 mois</p>
-                                        <div class="product-features">
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +8,000 Chaînes</span>
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
-                                        </div>
-                                        <button class="btn btn-primary w-100 buy-btn" data-product="PYTHON M3U 12 MOIS" data-price="60">Acheter maintenant</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 6 -->
-                            <div class="col-md-4">
-                                <div class="card product-card">
-                                    <div class="card-body">
-                                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/20c997/ffffff?text=ATLAS')"></div>
-                                        <div class="product-price">145 MAD</div>
-                                        <h5 class="product-title">ATLAS (TIGER) M3U 12 MOIS</h5>
-                                        <p class="product-duration">Durée: 12 mois</p>
-                                        <div class="product-features">
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> +18,000 Chaînes</span>
-                                            <span class="product-feature"><i class="fas fa-check text-success"></i> 4K Ultra HD</span>
-                                        </div>
-                                        <button class="btn btn-primary w-100 buy-btn" data-product="ATLAS (TIGER) M3U 12 MOIS" data-price="145">Acheter maintenant</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row" id="products-container">
+                            <!-- Products will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -877,7 +840,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="balance-card">
-                                            <h3 id="current-balance">150.00 MAD</h3>
+                                            <h3 id="current-balance">1500.00 MAD</h3>
                                             <p>Solde actuel</p>
                                         </div>
                                     </div>
@@ -1058,51 +1021,8 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>15/10/2023 14:30</td>
-                                        <td>King 365 M3U 12 MOIS</td>
-                                        <td>210 MAD</td>
-                                        <td>1</td>
-                                        <td>210 MAD</td>
-                                        <td><span class="badge bg-success">Livré</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>12/10/2023 10:15</td>
-                                        <td>SMART+ M3U 12 MOIS</td>
-                                        <td>65 MAD</td>
-                                        <td>2</td>
-                                        <td>130 MAD</td>
-                                        <td><span class="badge bg-success">Livré</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>10/10/2023 16:45</td>
-                                        <td>4K OTT/COBRA/PROMAX 12 MOIS</td>
-                                        <td>160 MAD</td>
-                                        <td>1</td>
-                                        <td>160 MAD</td>
-                                        <td><span class="badge bg-success">Livré</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>05/10/2023 09:20</td>
-                                        <td>DREAMTV M3U 12 MOIS</td>
-                                        <td>80 MAD</td>
-                                        <td>1</td>
-                                        <td>80 MAD</td>
-                                        <td><span class="badge bg-success">Livré</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Détails</button>
-                                        </td>
-                                    </tr>
+                                <tbody id="purchase-history-body">
+                                    <!-- Purchase history will be populated by JavaScript -->
                                 </tbody>
                             </table>
                         </div>
@@ -1127,11 +1047,7 @@
                                                 <label for="product-select" class="form-label">Produit</label>
                                                 <select class="form-select" id="product-select" required>
                                                     <option value="" selected disabled>Sélectionnez un produit</option>
-                                                    <option value="king365">King 365 M3U 12 MOIS</option>
-                                                    <option value="smartplus">SMART+ M3U 12 MOIS</option>
-                                                    <option value="4kott">4K OTT/COBRA/PROMAX 12 MOIS</option>
-                                                    <option value="dreamtv">DREAMTV M3U 12 MOIS</option>
-                                                    <option value="python">PYTHON M3U 12 MOIS</option>
+                                                    <!-- Products will be populated by JavaScript -->
                                                 </select>
                                             </div>
                                             <div class="mb-3">
@@ -1186,6 +1102,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#products-tab">Gestion des produits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#codes-tab">Gestion des codes</a>
                             </li>
                         </ul>
 
@@ -1298,6 +1217,44 @@
                                             <!-- Products will be populated by JavaScript -->
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Codes Tab -->
+                            <div class="tab-pane fade" id="codes-tab">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5>Gestion des codes IPTV</h5>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCodeModal">
+                                        <i class="fas fa-plus me-2"></i>Ajouter des codes
+                                    </button>
+                                </div>
+                                <div class="product-management">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6 class="card-title mb-0">Produits avec codes</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div id="products-with-codes">
+                                                        <!-- Products with codes will be populated by JavaScript -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6 class="card-title mb-0">Statistiques des codes</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div id="codes-stats">
+                                                        <!-- Codes statistics will be populated by JavaScript -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1425,6 +1382,24 @@
         </div>
     </div>
 
+    <!-- Purchase Success Modal -->
+    <div class="modal fade" id="purchaseSuccessModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body purchase-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Achat réussi!</h4>
+                    <p>Votre achat a été effectué avec succès.</p>
+                    <p id="purchase-details"></p>
+                    <div id="purchased-codes" class="mt-3">
+                        <!-- Purchased codes will be displayed here -->
+                    </div>
+                    <button type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add User Modal -->
     <div class="modal fade" id="addUserModal" tabindex="-1">
         <div class="modal-dialog">
@@ -1510,6 +1485,46 @@
         </div>
     </div>
 
+    <!-- Add Code Modal -->
+    <div class="modal fade" id="addCodeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter des codes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-code-form">
+                        <div class="mb-3">
+                            <label for="code-product" class="form-label">Produit</label>
+                            <select class="form-select" id="code-product" required>
+                                <option value="" selected disabled>Sélectionnez un produit</option>
+                                <!-- Products will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="code-duration" class="form-label">Durée</label>
+                            <select class="form-select" id="code-duration" required>
+                                <option value="1">1 mois</option>
+                                <option value="3">3 mois</option>
+                                <option value="6">6 mois</option>
+                                <option value="12" selected>12 mois</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="code-quantity" class="form-label">Nombre de codes à générer</label>
+                            <input type="number" class="form-control" id="code-quantity" min="1" max="100" value="10" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submit-new-codes">Générer les codes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Edit User Modal -->
     <div class="modal fade" id="editUserModal" tabindex="-1">
         <div class="modal-dialog">
@@ -1555,19 +1570,29 @@
     <script>
         // Stockage des données utilisateurs et produits
         let users = JSON.parse(localStorage.getItem('shop4panel_users')) || [
-            { id: 1, name: "Admin User", email: "admin@shop4panel.com", password: "admin123", role: "admin", balance: 500, registrationDate: "2023-01-15" },
+            { id: 1, name: "Admin User", email: "admin@shop4panel.com", password: "admin123", role: "admin", balance: 1500, registrationDate: "2023-01-15" },
             { id: 2, name: "John Doe", email: "user@shop4panel.com", password: "user123", role: "user", balance: 500, registrationDate: "2023-03-20" },
             { id: 3, name: "Jane Smith", email: "jane@shop4panel.com", password: "jane123", role: "user", balance: 500, registrationDate: "2023-05-10" }
         ];
 
         let products = JSON.parse(localStorage.getItem('shop4panel_products')) || [
-            { id: 1, name: "King 365 M3U 12 MOIS", price: 210, duration: "12 mois", status: "active" },
-            { id: 2, name: "SMART+ M3U 12 MOIS", price: 65, duration: "12 mois", status: "active" },
-            { id: 3, name: "4K OTT/COBRA/PROMAX 12 MOIS", price: 160, duration: "12 mois", status: "active" },
-            { id: 4, name: "DREAMTV M3U 12 MOIS", price: 80, duration: "12 mois", status: "active" },
-            { id: 5, name: "PYTHON M3U 12 MOIS", price: 60, duration: "12 mois", status: "active" },
-            { id: 6, name: "ATLAS (TIGER) M3U 12 MOIS", price: 145, duration: "12 mois", status: "active" }
+            { id: 1, name: "King 365 M3U 12 MOIS", price: 210, duration: "12 mois", status: "active", codes: [] },
+            { id: 2, name: "SMART+ M3U 12 MOIS", price: 65, duration: "12 mois", status: "active", codes: [] },
+            { id: 3, name: "4K OTT/COBRA/PROMAX 12 MOIS", price: 160, duration: "12 mois", status: "active", codes: [] },
+            { id: 4, name: "DREAMTV M3U 12 MOIS", price: 80, duration: "12 mois", status: "active", codes: [] },
+            { id: 5, name: "PYTHON M3U 12 MOIS", price: 60, duration: "12 mois", status: "active", codes: [] },
+            { id: 6, name: "ATLAS (TIGER) M3U 12 MOIS", price: 145, duration: "12 mois", status: "active", codes: [] }
         ];
+
+        // Ajouter quelques codes de démonstration
+        if (products[0].codes.length === 0) {
+            products[0].codes = ["KING365-ABC123DEF456", "KING365-GHI789JKL012"];
+            products[1].codes = ["SMART-1234567890ABCD", "SMART-EFGHIJKLMNOPQR"];
+            products[2].codes = ["4KOTT-9876543210XYZ", "4KOTT-ABCDEFGHIJKLM"];
+            products[3].codes = ["DREAMTV-1234ABCD5678"];
+            products[4].codes = ["PYTHON-ABCD1234EFGH56"];
+            products[5].codes = ["ATLAS-9876ZYXW5432"];
+        }
 
         let rechargeHistory = JSON.parse(localStorage.getItem('shop4panel_recharge_history')) || [
             { id: 1, userId: 2, amount: 200, admin: "Admin User", date: "2023-10-15" },
@@ -1578,10 +1603,10 @@
 
         // Ajout de l'historique des achats
         let purchaseHistory = JSON.parse(localStorage.getItem('shop4panel_purchase_history')) || [
-            { id: 1, userId: 2, productId: 1, productName: "King 365 M3U 12 MOIS", price: 210, quantity: 1, total: 210, date: "2023-10-15" },
-            { id: 2, userId: 2, productId: 2, productName: "SMART+ M3U 12 MOIS", price: 65, quantity: 2, total: 130, date: "2023-10-12" },
-            { id: 3, userId: 2, productId: 3, productName: "4K OTT/COBRA/PROMAX 12 MOIS", price: 160, quantity: 1, total: 160, date: "2023-10-10" },
-            { id: 4, userId: 3, productId: 4, productName: "DREAMTV M3U 12 MOIS", price: 80, quantity: 1, total: 80, date: "2023-10-05" }
+            { id: 1, userId: 2, productId: 1, productName: "King 365 M3U 12 MOIS", price: 210, quantity: 1, total: 210, date: "2023-10-15", codes: ["KING365-ABC123DEF456"] },
+            { id: 2, userId: 2, productId: 2, productName: "SMART+ M3U 12 MOIS", price: 65, quantity: 2, total: 130, date: "2023-10-12", codes: ["SMART-1234567890ABCD", "SMART-EFGHIJKLMNOPQR"] },
+            { id: 3, userId: 2, productId: 3, productName: "4K OTT/COBRA/PROMAX 12 MOIS", price: 160, quantity: 1, total: 160, date: "2023-10-10", codes: ["4KOTT-9876543210XYZ"] },
+            { id: 4, userId: 3, productId: 4, productName: "DREAMTV M3U 12 MOIS", price: 80, quantity: 1, total: 80, date: "2023-10-05", codes: ["DREAMTV-1234ABCD5678"] }
         ];
 
         // Ajout des statistiques de vente mensuelles
@@ -1609,7 +1634,14 @@
             updateRechargeHistory();
             updateUserSelect();
             updatePurchaseHistory();
-            updateMonthlyStats();
+            
+            // Mettre à jour les produits
+            updateProductsPage();
+            updateProductSelect();
+            updatePopularProducts();
+            updateProductsWithCodes();
+            updateCodeStats();
+            updateCodeProductSelect();
             
             // Afficher le tableau de bord par défaut
             showDashboard();
@@ -1635,9 +1667,277 @@
             document.querySelector('[data-page="dashboard-home"]').classList.add('active');
         }
 
+        // Mettre à jour la page des produits
+        function updateProductsPage() {
+            const productsContainer = document.getElementById('products-container');
+            if (!productsContainer) return;
+            
+            productsContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                if (product.status !== 'active') return;
+                
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-4';
+                
+                col.innerHTML = `
+                    <div class="card product-card">
+                        <div class="card-body">
+                            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x150/5726d4/ffffff?text=${encodeURIComponent(product.name)}')"></div>
+                            <div class="product-price">${product.price} MAD</div>
+                            <h5 class="product-title">${product.name}</h5>
+                            <p class="product-duration">Durée: ${product.duration}</p>
+                            <div class="product-features">
+                                <span class="product-feature"><i class="fas fa-check text-success"></i> +15,000 Chaînes</span>
+                                <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
+                            </div>
+                            <div class="product-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-key text-primary"></i>
+                                    <span>${product.codes ? product.codes.length : 0} codes</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-shopping-cart text-success"></i>
+                                    <span>${getProductSalesCount(product.id)} ventes</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100 buy-btn" data-product="${product.name}" data-price="${product.price}" data-id="${product.id}">Acheter maintenant</button>
+                        </div>
+                    </div>
+                `;
+                
+                productsContainer.appendChild(col);
+            });
+            
+            // Réattacher les événements aux boutons d'achat
+            attachBuyButtonEvents();
+        }
+
+        // Obtenir le nombre de ventes pour un produit
+        function getProductSalesCount(productId) {
+            return purchaseHistory.filter(purchase => purchase.productId === productId).length;
+        }
+
+        // Mettre à jour la liste déroulante des produits
+        function updateProductSelect() {
+            const productSelect = document.getElementById('product-select');
+            if (!productSelect) return;
+            
+            productSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un produit</option>';
+            
+            products.forEach(product => {
+                if (product.status === 'active') {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.name;
+                    productSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Mettre à jour la liste déroulante des produits pour les codes
+        function updateCodeProductSelect() {
+            const codeProduct = document.getElementById('code-product');
+            if (!codeProduct) return;
+            
+            codeProduct.innerHTML = '<option value="" selected disabled>Sélectionnez un produit</option>';
+            
+            products.forEach(product => {
+                if (product.status === 'active') {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.name;
+                    codeProduct.appendChild(option);
+                }
+            });
+        }
+
+        // Mettre à jour les produits populaires
+        function updatePopularProducts() {
+            const popularProducts = document.getElementById('popular-products');
+            if (!popularProducts) return;
+            
+            popularProducts.innerHTML = '';
+            
+            // Trier les produits par nombre de ventes
+            const sortedProducts = [...products].sort((a, b) => {
+                return getProductSalesCount(b.id) - getProductSalesCount(a.id);
+            }).slice(0, 4); // Prendre les 4 premiers
+            
+            sortedProducts.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${product.price} MAD</td>
+                    <td>${getProductSalesCount(product.id)}</td>
+                    <td><span class="badge ${product.codes && product.codes.length > 0 ? 'bg-success' : 'bg-danger'}">${product.codes && product.codes.length > 0 ? 'Disponible' : 'Rupture'}</span></td>
+                `;
+                popularProducts.appendChild(row);
+            });
+        }
+
+        // Mettre à jour les produits avec codes
+        function updateProductsWithCodes() {
+            const productsWithCodes = document.getElementById('products-with-codes');
+            if (!productsWithCodes) return;
+            
+            productsWithCodes.innerHTML = '';
+            
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'mb-4';
+                
+                productDiv.innerHTML = `
+                    <h6 class="fw-bold">${product.name}</h6>
+                    <div class="product-stats mb-2">
+                        <div class="stat-item">
+                            <i class="fas fa-key text-primary"></i>
+                            <span>${product.codes ? product.codes.length : 0} codes disponibles</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-shopping-cart text-success"></i>
+                            <span>${getProductSalesCount(product.id)} ventes</span>
+                        </div>
+                    </div>
+                    <div id="codes-${product.id}">
+                        <!-- Codes will be populated below -->
+                    </div>
+                `;
+                
+                productsWithCodes.appendChild(productDiv);
+                
+                // Ajouter les codes pour ce produit
+                const codesContainer = document.getElementById(`codes-${product.id}`);
+                if (product.codes && product.codes.length > 0) {
+                    product.codes.forEach((code, index) => {
+                        const codeItem = document.createElement('div');
+                        codeItem.className = 'code-item';
+                        codeItem.innerHTML = `
+                            <div>
+                                <strong>${code}</strong>
+                                <div class="small text-muted">${product.duration}</div>
+                            </div>
+                            <div class="code-actions">
+                                <button class="btn btn-sm btn-outline-primary copy-code" data-code="${code}">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger delete-code" data-product="${product.id}" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        codesContainer.appendChild(codeItem);
+                    });
+                } else {
+                    codesContainer.innerHTML = '<div class="alert alert-warning">Aucun code disponible</div>';
+                }
+            });
+            
+            // Ajouter les écouteurs d'événements pour les boutons de copie et suppression
+            attachCodeEvents();
+        }
+
+        // Mettre à jour les statistiques des codes
+        function updateCodeStats() {
+            const codesStats = document.getElementById('codes-stats');
+            if (!codesStats) return;
+            
+            let totalCodes = 0;
+            let usedCodes = 0;
+            let availableCodes = 0;
+            
+            products.forEach(product => {
+                if (product.codes) {
+                    totalCodes += product.codes.length;
+                }
+            });
+            
+            // Dans une implémentation réelle, vous auriez un moyen de suivre les codes utilisés
+            availableCodes = totalCodes;
+            
+            codesStats.innerHTML = `
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Total des codes:</span>
+                        <span class="fw-bold">${totalCodes}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Codes utilisés:</span>
+                        <span class="fw-bold text-danger">${usedCodes}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Codes disponibles:</span>
+                        <span class="fw-bold text-success">${availableCodes}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Produits avec codes:</span>
+                        <span class="fw-bold">${products.filter(p => p.codes && p.codes.length > 0).length}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Attacher les événements aux codes
+        function attachCodeEvents() {
+            document.querySelectorAll('.copy-code').forEach(button => {
+                button.addEventListener('click', function() {
+                    const code = this.getAttribute('data-code');
+                    navigator.clipboard.writeText(code).then(() => {
+                        showAlert('Code copié dans le presse-papier!', 'success');
+                    });
+                });
+            });
+            
+            document.querySelectorAll('.delete-code').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-product'));
+                    const codeIndex = parseInt(this.getAttribute('data-index'));
+                    
+                    if (confirm('Êtes-vous sûr de vouloir supprimer ce code ?')) {
+                        // Supprimer le code du produit
+                        const product = products.find(p => p.id === productId);
+                        if (product && product.codes) {
+                            product.codes.splice(codeIndex, 1);
+                            saveData();
+                            updateProductsWithCodes();
+                            updateCodeStats();
+                            updateProductsPage();
+                            showAlert('Code supprimé avec succès!', 'success');
+                        }
+                    }
+                });
+            });
+        }
+
+        // Attacher les événements aux boutons d'achat
+        function attachBuyButtonEvents() {
+            document.querySelectorAll('.buy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.getAttribute('data-product');
+                    const price = this.getAttribute('data-price');
+                    const productId = this.getAttribute('data-id');
+                    
+                    document.getElementById('purchase-product').value = productName;
+                    document.getElementById('purchase-price').value = price + ' MAD';
+                    document.getElementById('purchase-quantity').value = 1;
+                    document.getElementById('purchase-quantity').setAttribute('data-product-id', productId);
+                    updatePurchaseTotal();
+                    
+                    const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                    purchaseModal.show();
+                });
+            });
+        }
+
         // Mettre à jour l'historique des achats
         function updatePurchaseHistory() {
-            const tableBody = document.querySelector('#history tbody');
+            const tableBody = document.getElementById('purchase-history-body');
             if (!tableBody) return;
             
             tableBody.innerHTML = '';
@@ -1645,94 +1945,53 @@
             // Filtrer les achats de l'utilisateur courant
             const userPurchases = purchaseHistory.filter(purchase => purchase.userId === currentUser.id);
             
-            userPurchases.forEach(purchase => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${purchase.date}</td>
-                    <td>${purchase.productName}</td>
-                    <td>${purchase.price} MAD</td>
-                    <td>${purchase.quantity}</td>
-                    <td>${purchase.total} MAD</td>
-                    <td><span class="badge bg-success">Livré</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary">Détails</button>
-                    </td>
+            if (userPurchases.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center">Aucun achat effectué</td>
+                    </tr>
                 `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Mettre à jour les statistiques mensuelles
-        function updateMonthlyStats() {
-            const statsContainer = document.getElementById('monthly-stats-container');
-            if (!statsContainer) {
-                // Créer le conteneur s'il n'existe pas
-                const dashboardHome = document.getElementById('dashboard-home');
-                const existingRow = dashboardHome.querySelector('.row.mt-4');
-                
-                if (existingRow) {
-                    const newRow = document.createElement('div');
-                    newRow.className = 'row mt-4';
-                    newRow.innerHTML = `
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Statistiques Mensuelles</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mois</th>
-                                                    <th>Nombre de ventes</th>
-                                                    <th>Montant des ventes (MAD)</th>
-                                                    <th>Montant rechargé (MAD)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="monthly-stats-container">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    existingRow.parentNode.insertBefore(newRow, existingRow.nextSibling);
-                }
-            }
-            
-            const statsBody = document.getElementById('monthly-stats-container');
-            if (!statsBody) return;
-            
-            statsBody.innerHTML = '';
-            
-            // Obtenir les stats de l'utilisateur courant
-            const userStats = monthlyStats.filter(stat => stat.userId === currentUser.id);
-            
-            if (userStats.length === 0) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td colspan="4" class="text-center">Aucune statistique disponible</td>
-                `;
-                statsBody.appendChild(row);
             } else {
-                userStats.forEach(stat => {
+                userPurchases.forEach(purchase => {
                     const row = document.createElement('tr');
-                    const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-                        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-                    
-                    const dateParts = stat.month.split('-');
-                    const monthName = monthNames[parseInt(dateParts[1]) - 1];
-                    const year = dateParts[0];
-                    
                     row.innerHTML = `
-                        <td>${monthName} ${year}</td>
-                        <td>${stat.salesCount}</td>
-                        <td>${stat.salesAmount} MAD</td>
-                        <td>${stat.rechargeAmount} MAD</td>
+                        <td>${purchase.date}</td>
+                        <td>${purchase.productName}</td>
+                        <td>${purchase.price} MAD</td>
+                        <td>${purchase.quantity}</td>
+                        <td>${purchase.total} MAD</td>
+                        <td><span class="badge bg-success">Livré</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary view-codes" data-codes='${JSON.stringify(purchase.codes)}'>Voir codes</button>
+                        </td>
                     `;
-                    statsBody.appendChild(row);
+                    tableBody.appendChild(row);
+                });
+                
+                // Ajouter les événements pour voir les codes
+                document.querySelectorAll('.view-codes').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const codes = JSON.parse(this.getAttribute('data-codes'));
+                        let codesHtml = '<h6>Codes achetés:</h6>';
+                        codes.forEach(code => {
+                            codesHtml += `<div class="code-item mb-2"><span>${code}</span><button class="btn btn-sm btn-outline-primary copy-code ms-2" data-code="${code}"><i class="fas fa-copy"></i></button></div>`;
+                        });
+                        
+                        // Afficher les codes dans une alerte ou un modal
+                        showAlert(codesHtml, 'info', false);
+                        
+                        // Réattacher les événements de copie
+                        setTimeout(() => {
+                            document.querySelectorAll('.copy-code').forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    const code = this.getAttribute('data-code');
+                                    navigator.clipboard.writeText(code).then(() => {
+                                        showAlert('Code copié dans le presse-papier!', 'success');
+                                    });
+                                });
+                            });
+                        }, 100);
+                    });
                 });
             }
         }
@@ -1912,8 +2171,11 @@
                 document.getElementById('user-name').textContent = user.name;
                 document.getElementById('user-role').textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
                 document.getElementById('user-avatar').textContent = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                document.getElementById('user-balance').textContent = user.balance + '.00 MAD';
-                document.getElementById('current-balance').textContent = user.balance + '.00 MAD';
+                document.getElementById('user-balance').textContent = user.balance.toFixed(2) + ' MAD';
+                document.getElementById('current-balance').textContent = user.balance.toFixed(2) + ' MAD';
+                
+                // Mettre à jour le compteur de produits
+                document.getElementById('products-count').textContent = products.filter(p => p.status === 'active').length;
                 
                 // Show admin menu if user is admin
                 if (user.role === 'admin') {
@@ -1949,22 +2211,6 @@
             showAlert('Déconnexion réussie!', 'info');
         });
 
-        // Purchase functionality
-        document.querySelectorAll('.buy-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const productName = this.getAttribute('data-product');
-                const price = this.getAttribute('data-price');
-                
-                document.getElementById('purchase-product').value = productName;
-                document.getElementById('purchase-price').value = price + ' MAD';
-                document.getElementById('purchase-quantity').value = 1;
-                updatePurchaseTotal();
-                
-                const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
-                purchaseModal.show();
-            });
-        });
-
         // Update purchase total
         document.getElementById('purchase-quantity').addEventListener('input', updatePurchaseTotal);
         
@@ -1983,6 +2229,7 @@
             const priceText = document.getElementById('purchase-price').value;
             const price = parseFloat(priceText.replace(' MAD', ''));
             const quantity = parseInt(document.getElementById('purchase-quantity').value);
+            const productId = parseInt(document.getElementById('purchase-quantity').getAttribute('data-product-id'));
             const total = price * quantity;
             
             // Vérifier si le solde est suffisant
@@ -1998,14 +2245,23 @@
             }
             
             // Trouver le produit
-            const product = products.find(p => p.name === productName);
+            const product = products.find(p => p.id === productId);
             if (!product) {
                 showAlert('Produit non trouvé!', 'danger');
                 return;
             }
             
+            // Vérifier s'il y a des codes disponibles
+            if (!product.codes || product.codes.length < quantity) {
+                showAlert('Pas assez de codes disponibles pour ce produit!', 'danger');
+                return;
+            }
+            
             // Déduire le montant du solde
             currentUser.balance -= total;
+            
+            // Récupérer les codes
+            const purchasedCodes = product.codes.splice(0, quantity);
             
             // Enregistrer l'achat
             const newPurchase = {
@@ -2016,12 +2272,10 @@
                 price: price,
                 quantity: quantity,
                 total: total,
-                date: new Date().toISOString().split('T')[0]
+                date: new Date().toISOString().split('T')[0],
+                codes: purchasedCodes
             };
             purchaseHistory.push(newPurchase);
-            
-            // Mettre à jour les statistiques mensuelles
-            updateMonthlyStatsForUser(currentUser.id, total);
             
             // Sauvegarder les données
             saveData();
@@ -2030,49 +2284,56 @@
             document.getElementById('user-balance').textContent = currentUser.balance.toFixed(2) + ' MAD';
             document.getElementById('current-balance').textContent = currentUser.balance.toFixed(2) + ' MAD';
             updatePurchaseHistory();
+            updatePopularProducts();
+            updateProductsWithCodes();
+            updateCodeStats();
+            updateProductsPage();
             
             // Close modal
             const purchaseModal = bootstrap.Modal.getInstance(document.getElementById('purchaseModal'));
             purchaseModal.hide();
             
-            // Show success message
-            showAlert(`Achat de ${productName} pour ${total.toFixed(2)} MAD effectué avec succès!`, 'success');
+            // Afficher les détails de l'achat
+            document.getElementById('purchase-details').textContent = `${productName} - ${quantity} x ${price} MAD = ${total} MAD`;
+            
+            // Afficher les codes achetés
+            let codesHtml = '<h6>Codes achetés:</h6>';
+            purchasedCodes.forEach(code => {
+                codesHtml += `<div class="code-item mb-2"><span>${code}</span><button class="btn btn-sm btn-outline-primary copy-code ms-2" data-code="${code}"><i class="fas fa-copy"></i></button></div>`;
+            });
+            document.getElementById('purchased-codes').innerHTML = codesHtml;
+            
+            // Afficher le modal de succès
+            const successModal = new bootstrap.Modal(document.getElementById('purchaseSuccessModal'));
+            successModal.show();
+            
+            // Réattacher les événements de copie
+            setTimeout(() => {
+                document.querySelectorAll('.copy-code').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const code = this.getAttribute('data-code');
+                        navigator.clipboard.writeText(code).then(() => {
+                            showAlert('Code copié dans le presse-papier!', 'success');
+                        });
+                    });
+                });
+            }, 100);
         });
-
-        // Mettre à jour les statistiques mensuelles pour un utilisateur
-        function updateMonthlyStatsForUser(userId, purchaseAmount) {
-            const now = new Date();
-            const currentMonth = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}`;
-            
-            // Trouver les statistiques existantes pour ce mois
-            let userStats = monthlyStats.find(stat => 
-                stat.userId === userId && stat.month === currentMonth
-            );
-            
-            if (userStats) {
-                // Mettre à jour les statistiques existantes
-                userStats.salesCount += 1;
-                userStats.salesAmount += purchaseAmount;
-            } else {
-                // Créer de nouvelles statistiques
-                userStats = {
-                    userId: userId,
-                    month: currentMonth,
-                    salesCount: 1,
-                    salesAmount: purchaseAmount,
-                    rechargeAmount: 0
-                };
-                monthlyStats.push(userStats);
-            }
-        }
 
         // Generator functionality
         document.getElementById('generator-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const product = document.getElementById('product-select').value;
+            const productId = parseInt(document.getElementById('product-select').value);
             const quantity = parseInt(document.getElementById('quantity').value);
             const duration = document.getElementById('duration').value;
+            
+            // Trouver le produit
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Produit non trouvé!', 'danger');
+                return;
+            }
             
             // Generate random codes
             let codesHtml = '';
@@ -2166,9 +2427,6 @@
                 };
                 rechargeHistory.push(newRecord);
                 
-                // Mettre à jour les statistiques mensuelles
-                updateMonthlyRechargeStats(userId, amount);
-                
                 // Save data
                 saveData();
                 
@@ -2184,32 +2442,6 @@
                 showAlert(`Solde de ${user.name} rechargé de ${amount} MAD!`, 'success');
             }
         });
-
-        // Mettre à jour les statistiques de recharge mensuelles
-        function updateMonthlyRechargeStats(userId, rechargeAmount) {
-            const now = new Date();
-            const currentMonth = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}`;
-            
-            // Trouver les statistiques existantes pour ce mois
-            let userStats = monthlyStats.find(stat => 
-                stat.userId === userId && stat.month === currentMonth
-            );
-            
-            if (userStats) {
-                // Mettre à jour les statistiques existantes
-                userStats.rechargeAmount += rechargeAmount;
-            } else {
-                // Créer de nouvelles statistiques
-                userStats = {
-                    userId: userId,
-                    month: currentMonth,
-                    salesCount: 0,
-                    salesAmount: 0,
-                    rechargeAmount: rechargeAmount
-                };
-                monthlyStats.push(userStats);
-            }
-        }
 
         // Add new user
         document.getElementById('submit-new-user').addEventListener('click', function() {
@@ -2274,7 +2506,8 @@
                 price: price,
                 duration: duration + ' mois',
                 description: description,
-                status: 'active'
+                status: 'active',
+                codes: []
             };
             
             products.push(newProduct);
@@ -2282,6 +2515,10 @@
             
             // Update UI
             updateProductsTable();
+            updateProductsPage();
+            updateProductSelect();
+            updateCodeProductSelect();
+            updatePopularProducts();
             
             // Close modal
             const addProductModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
@@ -2292,6 +2529,47 @@
             
             // Show success message
             showAlert('Produit créé avec succès!', 'success');
+        });
+
+        // Add new codes
+        document.getElementById('submit-new-codes').addEventListener('click', function() {
+            const productId = parseInt(document.getElementById('code-product').value);
+            const duration = document.getElementById('code-duration').value;
+            const quantity = parseInt(document.getElementById('code-quantity').value);
+            
+            // Find product
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Produit non trouvé!', 'danger');
+                return;
+            }
+            
+            // Generate codes
+            for (let i = 0; i < quantity; i++) {
+                const code = generateRandomCode(16);
+                if (!product.codes) {
+                    product.codes = [];
+                }
+                product.codes.push(code);
+            }
+            
+            // Save data
+            saveData();
+            
+            // Update UI
+            updateProductsWithCodes();
+            updateCodeStats();
+            updateProductsPage();
+            
+            // Close modal
+            const addCodeModal = bootstrap.Modal.getInstance(document.getElementById('addCodeModal'));
+            addCodeModal.hide();
+            
+            // Reset form
+            document.getElementById('add-code-form').reset();
+            
+            // Show success message
+            showAlert(`${quantity} code(s) ajouté(s) avec succès!`, 'success');
         });
 
         // Edit user
@@ -2358,7 +2636,7 @@
         }
 
         // Helper function to show alerts
-        function showAlert(message, type) {
+        function showAlert(message, type, autoRemove = true) {
             const alertDiv = document.createElement('div');
             alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
             alertDiv.innerHTML = `
@@ -2369,11 +2647,13 @@
             document.querySelector('.main-content').insertBefore(alertDiv, document.querySelector('.main-content').firstChild);
             
             // Auto remove after 5 seconds
-            setTimeout(() => {
-                if (alertDiv.parentElement) {
-                    alertDiv.remove();
-                }
-            }, 5000);
+            if (autoRemove) {
+                setTimeout(() => {
+                    if (alertDiv.parentElement) {
+                        alertDiv.remove();
+                    }
+                }, 5000);
+            }
         }
 
         // Tab functionality for tickets
@@ -2393,6 +2673,21 @@
                 // For this demo, we'll just show a message
                 const tabType = this.getAttribute('data-tab');
                 showAlert(`Affichage des tickets: ${tabType.replace('-', ' ')}`, 'info');
+            });
+        });
+
+        // Search functionality for products
+        document.getElementById('product-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const productTitle = card.querySelector('.product-title').textContent.toLowerCase();
+                if (productTitle.includes(searchTerm)) {
+                    card.parentElement.style.display = 'block';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
             });
         });
 
