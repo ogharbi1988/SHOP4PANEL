@@ -594,8 +594,7 @@
             margin-bottom: 20px;
         }
 
-        /* CAPTCHA Canvas */
-        #captchaCanvas {
+    
             border: 1px solid #e1e5eb;
             border-radius: 6px;
             margin-top: 10px;
@@ -626,20 +625,7 @@
                             <input type="password" class="form-control" id="password" placeholder="Votre mot de passe" required>
                         </div>
                     </div>
-                    <!-- CAPTCHA -->
-                    <div class="mb-3">
-                        <label for="captcha" class="form-label">CAPTCHA</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-shield-alt"></i></span>
-                            <input type="text" class="form-control" id="captcha" placeholder="Entrez le CAPTCHA" required>
-                            <button type="button" class="btn btn-outline-secondary" id="refresh-captcha">
-                                <i class="fas fa-redo"></i>
-                            </button>
-                        </div>
-                        <div class="mt-2">
-                            <canvas id="captchaCanvas" width="200" height="60"></canvas>
-                        </div>
-                    </div>
+                                </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="remember">
                         <label class="form-check-label" for="remember">Se souvenir de moi</label>
@@ -1677,7 +1663,7 @@
         ];
 
         let currentUser = null;
-        let currentCaptcha = '';
+       
 
         // Sauvegarder les données dans le localStorage
         function saveData() {
@@ -1687,31 +1673,9 @@
             localStorage.setItem('shop4panel_purchase_history', JSON.stringify(purchaseHistory));
         }
 
-        // Générer un CAPTCHA
-        function generateCaptcha() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let captcha = '';
-            for (let i = 0; i < 6; i++) {
-                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            currentCaptcha = captcha;
+      
             
-            const canvas = document.getElementById('captchaCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw background
-            ctx.fillStyle = '#f8f9fa';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw text
-            ctx.font = '30px Arial';
-            ctx.fillStyle = '#4361ee';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(captcha, canvas.width / 2, canvas.height / 2);
+           
             
             // Add some noise
             for (let i = 0; i < 100; i++) {
@@ -2274,12 +2238,9 @@
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const captcha = document.getElementById('captcha').value;
+
             
-            // Vérifier le CAPTCHA
-            if (captcha !== currentCaptcha) {
-                showAlert('CAPTCHA incorrect!', 'danger');
-                generateCaptcha();
+    
                 return;
             }
             
@@ -2323,7 +2284,7 @@
                 showAlert('Connexion réussie!', 'success');
             } else {
                 showAlert('Email ou mot de passe incorrect.', 'danger');
-                generateCaptcha();
+          
             }
         });
 
@@ -2341,8 +2302,8 @@
             // Reset current user
             currentUser = null;
             
-            // Regenerate CAPTCHA
-            generateCaptcha();
+       
+       
             
             showAlert('Déconnexion réussie!', 'info');
         });
@@ -2878,14 +2839,6 @@
             });
         });
 
-        // Refresh CAPTCHA
-        document.getElementById('refresh-captcha').addEventListener('click', function() {
-            generateCaptcha();
-        });
-
-        // Initialize data on page load
-        saveData();
-        generateCaptcha();
     </script>
 </body>
 </html>
