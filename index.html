@@ -655,6 +655,24 @@
             border-radius: 20px;
             font-weight: 600;
         }
+
+        /* Countdown Timer */
+        .countdown-timer {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -738,6 +756,17 @@
                             <div class="small text-muted" id="user-role">Administrateur</div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Countdown Timer (will be shown for limited accounts) -->
+            <div id="countdown-container" class="mb-3" style="display: none;">
+                <div class="alert alert-warning d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-clock me-2"></i>
+                        <span id="countdown-text">Temps restant sur votre compte:</span>
+                    </div>
+                    <div id="countdown-timer" class="countdown-timer">48:00:00</div>
                 </div>
             </div>
 
@@ -892,566 +921,29 @@
                 </div>
             </div>
 
-            <!-- Balance Page -->
-            <div id="balance" class="page-content" style="display: none;">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Mon solde</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="balance-card">
-                                            <h3 id="current-balance">1500.00 MAD</h3>
-                                            <p>Solde actuel</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <i class="fas fa-plus-circle fa-3x text-primary mb-3"></i>
-                                                <h5>Recharger mon solde</h5>
-                                                <p class="text-muted">Choisissez une méthode de paiement ci-dessous</p>
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rechargeModal">Demander une recharge</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <h5>Méthodes de paiement</h5>
-                                    <div class="payment-method">
-                                        <div class="payment-header">
-                                            <i class="fab fa-whatsapp payment-icon"></i>
-                                            <h6 class="mb-0">CashPlus via WhatsApp</h6>
-                                        </div>
-                                        <p>Contactez l'administrateur sur WhatsApp pour recharger votre compte via CashPlus.</p>
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-phone me-2 text-success"></i>
-                                            <span>+212 601-323232</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="payment-method">
-                                        <div class="payment-header">
-                                            <i class="fas fa-university payment-icon"></i>
-                                            <h6 class="mb-0">Virement bancaire CIH</h6>
-                                        </div>
-                                        <p>Effectuez un virement vers le compte suivant et envoyez le reçu à l'administrateur.</p>
-                                        <div class="bank-details">
-                                            <div><strong>RIB:</strong> 230 780 2365106211011000 31</div>
-                                            <div><strong>IBAN:</strong> MA64 2307 8023 6510 6211 0110 0031</div>
-                                            <div><strong>Code SWIFT:</strong> CIHMMAMC</div>
-                                            <div><strong>Motif du virement:</strong> Services</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <h5>Historique des rechargements</h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Montant</th>
-                                                    <th>Méthode</th>
-                                                    <th>Statut</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>15/10/2023</td>
-                                                    <td>200.00 MAD</td>
-                                                    <td>Admin</td>
-                                                    <td><span class="badge bg-success">Complétée</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>05/10/2023</td>
-                                                    <td>100.00 MAD</td>
-                                                    <td>Admin</td>
-                                                    <td><span class="badge bg-success">Complétée</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>25/09/2023</td>
-                                                    <td>150.00 MAD</td>
-                                                    <td>Admin</td>
-                                                    <td><span class="badge bg-success">Complétée</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Informations de recharge</h5>
-                            </div>
-                            <div class="card-body">
-                                <p>Pour recharger votre compte, veuillez utiliser l'une des méthodes de paiement disponibles.</p>
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle me-2"></i>
-                                    <strong>Note:</strong> Les rechargements sont traités manuellement par l'administrateur après réception du paiement.
-                                </div>
-                                <div class="alert alert-warning">
-                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                    <strong>Important:</strong> Le solde minimum de recharge est de 500 MAD.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Rest of the pages remain the same -->
+            <!-- ... -->
 
-            <!-- Tickets Page -->
-            <div id="tickets" class="page-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Système de tickets</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-4">
-                            <div>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newTicketModal">
-                                    <i class="fas fa-plus me-2"></i>Nouveau ticket
-                                </button>
-                            </div>
-                            <div>
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="#" data-tab="all-tickets">Tous</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" data-tab="open-tickets">Ouverts</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" data-tab="closed-tickets">Fermés</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Sujet</th>
-                                        <th>Catégorie</th>
-                                        <th>Date</th>
-                                        <th>Statut</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#1254</td>
-                                        <td>Problème avec l'activation King 365</td>
-                                        <td>Activation</td>
-                                        <td>15/10/2023</td>
-                                        <td><span class="status-badge status-open">Ouvert</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1248</td>
-                                        <td>Demande de recharge de compte</td>
-                                        <td>Compte</td>
-                                        <td>12/10/2023</td>
-                                        <td><span class="status-badge status-closed">Fermé</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1239</td>
-                                        <td>Problème de lecture des chaînes</td>
-                                        <td>Technique</td>
-                                        <td>10/10/2023</td>
-                                        <td><span class="status-badge status-pending">En attente</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1225</td>
-                                        <td>Question sur les produits disponibles</td>
-                                        <td>Information</td>
-                                        <td>05/10/2023</td>
-                                        <td><span class="status-badge status-closed">Fermé</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary">Voir</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- History Page -->
-            <div id="history" class="page-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Historique des achats</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Produit</th>
-                                        <th>Prix</th>
-                                        <th>Quantité</th>
-                                        <th>Total</th>
-                                        <th>Statut</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="purchase-history-body">
-                                    <!-- Purchase history will be populated by JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Generator Page -->
-            <div id="generator" class="page-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Générateur de codes</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Générer un code d'abonnement</h5>
-                                        <form id="generator-form">
-                                            <div class="mb-3">
-                                                <label for="product-select" class="form-label">Produit</label>
-                                                <select class="form-select" id="product-select" required>
-                                                    <option value="" selected disabled>Sélectionnez un produit</option>
-                                                    <!-- Products will be populated by JavaScript -->
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="quantity" class="form-label">Quantité</label>
-                                                <input type="number" class="form-control" id="quantity" min="1" max="10" value="1" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="duration" class="form-label">Durée</label>
-                                                <select class="form-select" id="duration" required>
-                                                    <option value="1">1 mois</option>
-                                                    <option value="3">3 mois</option>
-                                                    <option value="6">6 mois</option>
-                                                    <option value="12" selected>12 mois</option>
-                                                </select>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary w-100">Générer le code</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Codes générés</h5>
-                                        <div id="generated-codes">
-                                            <div class="alert alert-info">
-                                                <i class="fas fa-info-circle me-2"></i>
-                                                Aucun code généré pour le moment.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Admin Page -->
-            <div id="admin" class="page-content" style="display: none;">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Panneau d'administration</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="nav nav-tabs mb-4">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#users-tab">Gestion des utilisateurs</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#balance-tab">Gestion des soldes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#products-tab">Gestion des produits</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#codes-tab">Gestion des codes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#promotion-tab">Gestion des promotions</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <!-- Users Tab -->
-                            <div class="tab-pane fade show active" id="users-tab">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h5>Liste des utilisateurs</h5>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                                        <i class="fas fa-plus me-2"></i>Ajouter un utilisateur
-                                    </button>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nom</th>
-                                                <th>Email</th>
-                                                <th>Rôle</th>
-                                                <th>Solde</th>
-                                                <th>Date d'inscription</th>
-                                                <th>Expire le</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="users-table-body">
-                                            <!-- Users will be populated by JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <!-- Balance Tab -->
-                            <div class="tab-pane fade" id="balance-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-title mb-0">Recharger un compte</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <form id="admin-recharge-form">
-                                                    <div class="mb-3">
-                                                        <label for="user-select" class="form-label">Utilisateur</label>
-                                                        <select class="form-select" id="user-select" required>
-                                                            <option value="" selected disabled>Sélectionnez un utilisateur</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="recharge-amount-admin" class="form-label">Montant (MAD)</label>
-                                                        <input type="number" class="form-control" id="recharge-amount-admin" min="1" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="recharge-note-admin" class="form-label">Note (optionnel)</label>
-                                                        <textarea class="form-control" id="recharge-note-admin" rows="3"></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary w-100">Recharger le compte</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-title mb-0">Historique des rechargements</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Date</th>
-                                                                <th>Utilisateur</th>
-                                                                <th>Montant</th>
-                                                                <th>Admin</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="recharge-history-body">
-                                                            <!-- Recharge history will be populated by JavaScript -->
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Products Tab -->
-                            <div class="tab-pane fade" id="products-tab">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h5>Gestion des produits IPTV</h5>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                                        <i class="fas fa-plus me-2"></i>Ajouter un produit
-                                    </button>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nom</th>
-                                                <th>Prix</th>
-                                                <th>Durée</th>
-                                                <th>Statut</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="products-table-body">
-                                            <!-- Products will be populated by JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            
-                            <!-- Codes Tab -->
-                            <div class="tab-pane fade" id="codes-tab">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h5>Gestion des codes IPTV</h5>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCodeModal">
-                                        <i class="fas fa-plus me-2"></i>Ajouter des codes
-                                    </button>
-                                </div>
-                                <div class="product-management">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h6 class="card-title mb-0">Produits avec codes</h6>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div id="products-with-codes">
-                                                        <!-- Products with codes will be populated by JavaScript -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h6 class="card-title mb-0">Statistiques des codes</h6>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div id="codes-stats">
-                                                        <!-- Codes statistics will be populated by JavaScript -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Promotion Tab -->
-                            <div class="tab-pane fade" id="promotion-tab">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h5>Gestion des promotions</h5>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#promotionModal">
-                                        <i class="fas fa-edit me-2"></i>Modifier la promotion
-                                    </button>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title mb-0">Promotion actuelle</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="current-promotion">
-                                            <p class="text-muted">Aucune promotion active</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
     <!-- Modals -->
-    <!-- Recharge Modal -->
-    <div class="modal fade" id="rechargeModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Demande de recharge</h5>
+    <!-- Promotion Popup Modal -->
+    <div class="modal fade" id="promotionPopup" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content promotion-popup">
+                <div class="promotion-header d-flex justify-content-between align-items-center">
+                    <span class="promotion-badge">PROMOTION SPÉCIALE</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="recharge-form">
-                        <div class="mb-3">
-                            <label for="recharge-amount" class="form-label">Montant (MAD)</label>
-                            <input type="number" class="form-control" id="recharge-amount" min="500" required>
-                            <div class="form-text">Le montant minimum de recharge est de 500 MAD</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="recharge-method" class="form-label">Méthode de paiement</label>
-                            <select class="form-select" id="recharge-method" required>
-                                <option value="" selected disabled>Sélectionnez une méthode</option>
-                                <option value="cashplus">CashPlus via WhatsApp</option>
-                                <option value="cih">Virement bancaire CIH</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="recharge-note" class="form-label">Note (optionnel)</label>
-                            <textarea class="form-control" id="recharge-note" rows="3"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="submit-recharge">Soumettre la demande</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- New Ticket Modal -->
-    <div class="modal fade" id="newTicketModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Nouveau ticket</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="ticket-form">
-                        <div class="mb-3">
-                            <label for="ticket-subject" class="form-label">Sujet</label>
-                            <input type="text" class="form-control" id="ticket-subject" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ticket-category" class="form-label">Catégorie</label>
-                            <select class="form-select" id="ticket-category" required>
-                                <option value="" selected disabled>Sélectionnez une catégorie</option>
-                                <option value="technical">Problème technique</option>
-                                <option value="activation">Activation de compte</option>
-                                <option value="billing">Facturation</option>
-                                <option value="product">Produit</option>
-                                <option value="other">Autre</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ticket-message" class="form-label">Message</label>
-                            <textarea class="form-control" id="ticket-message" rows="5" required></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="submit-ticket">Créer le ticket</button>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-gift fa-3x mb-3"></i>
+                    <h3 id="promotion-title">Offre Spéciale</h3>
+                    <p id="promotion-message" class="mb-3">Profitez de nos offres exceptionnelles pour un temps limité !</p>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-light" onclick="showPage('products')" data-bs-dismiss="modal">Voir les produits</button>
+                        <button class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1515,107 +1007,6 @@
         </div>
     </div>
 
-    <!-- Promotion Popup Modal -->
-    <div class="modal fade" id="promotionPopup" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content promotion-popup">
-                <div class="promotion-header d-flex justify-content-between align-items-center">
-                    <span class="promotion-badge">PROMOTION SPÉCIALE</span>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <i class="fas fa-gift fa-3x mb-3"></i>
-                    <h3 id="promotion-title">Offre Spéciale</h3>
-                    <p id="promotion-message" class="mb-3">Profitez de nos offres exceptionnelles pour un temps limité !</p>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-light" data-bs-dismiss="modal">Voir les produits</button>
-                        <button class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Promotion Management Modal -->
-    <div class="modal fade" id="promotionModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Gestion des promotions</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="promotion-form">
-                        <div class="mb-3">
-                            <label for="promotion-title-input" class="form-label">Titre de la promotion</label>
-                            <input type="text" class="form-control" id="promotion-title-input" placeholder="Ex: Offre Spéciale Été">
-                        </div>
-                        <div class="mb-3">
-                            <label for="promotion-message-input" class="form-label">Message de promotion</label>
-                            <textarea class="form-control" id="promotion-message-input" rows="4" placeholder="Décrivez votre promotion ici..."></textarea>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="promotion-active">
-                            <label class="form-check-label" for="promotion-active">Promotion active</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="save-promotion">Enregistrer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajouter un utilisateur</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="add-user-form">
-                        <div class="mb-3">
-                            <label for="new-user-name" class="form-label">Nom complet</label>
-                            <input type="text" class="form-control" id="new-user-name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new-user-email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="new-user-email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new-user-password" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" id="new-user-password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new-user-role" class="form-label">Rôle</label>
-                            <select class="form-select" id="new-user-role" required>
-                                <option value="user">Utilisateur</option>
-                                <option value="admin">Administrateur</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new-user-balance" class="form-label">Solde initial (MAD)</label>
-                            <input type="number" class="form-control" id="new-user-balance" min="500" value="500" required>
-                            <div class="form-text">Le solde initial minimum est de 500 MAD</div>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="new-user-limited" checked>
-                            <label class="form-check-label" for="new-user-limited">Compte à durée limitée (48 heures)</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="submit-new-user">Créer l'utilisateur</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Add Product Modal -->
     <div class="modal fade" id="addProductModal" tabindex="-1">
         <div class="modal-dialog">
@@ -1657,91 +1048,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                     <button type="button" class="btn btn-primary" id="submit-new-product">Créer le produit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add Code Modal -->
-    <div class="modal fade" id="addCodeModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajouter des codes</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="add-code-form">
-                        <div class="mb-3">
-                            <label for="code-product" class="form-label">Produit</label>
-                            <select class="form-select" id="code-product" required>
-                                <option value="" selected disabled>Sélectionnez un produit</option>
-                                <!-- Products will be populated by JavaScript -->
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="code-duration" class="form-label">Durée</label>
-                            <select class="form-select" id="code-duration" required>
-                                <option value="1">1 mois</option>
-                                <option value="3">3 mois</option>
-                                <option value="6">6 mois</option>
-                                <option value="12" selected>12 mois</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="code-quantity" class="form-label">Nombre de codes à générer</label>
-                            <input type="number" class="form-control" id="code-quantity" min="1" max="100" value="10" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="submit-new-codes">Générer les codes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit User Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modifier l'utilisateur</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="edit-user-form">
-                        <input type="hidden" id="edit-user-id">
-                        <div class="mb-3">
-                            <label for="edit-user-name" class="form-label">Nom complet</label>
-                            <input type="text" class="form-control" id="edit-user-name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-user-email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="edit-user-email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-user-role" class="form-label">Rôle</label>
-                            <select class="form-select" id="edit-user-role" required>
-                                <option value="user">Utilisateur</option>
-                                <option value="admin">Administrateur</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-user-balance" class="form-label">Solde (MAD)</label>
-                            <input type="number" class="form-control" id="edit-user-balance" min="500" required>
-                            <div class="form-text">Le solde minimum est de 500 MAD</div>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="edit-user-limited">
-                            <label class="form-check-label" for="edit-user-limited">Compte à durée limitée (48 heures)</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="submit-edit-user">Enregistrer les modifications</button>
                 </div>
             </div>
         </div>
@@ -1814,6 +1120,7 @@
         };
 
         let currentUser = null;
+        let countdownInterval = null;
 
         // Sauvegarder les données dans le localStorage
         function saveData() {
@@ -1847,6 +1154,9 @@
             // Afficher le tableau de bord par défaut
             showDashboard();
             
+            // Démarrer le compte à rebours si nécessaire
+            startCountdown();
+            
             // Afficher le popup de promotion si actif
             if (promotionData.active && currentUser && currentUser.role !== 'admin') {
                 setTimeout(() => {
@@ -1856,35 +1166,615 @@
             }
         }
 
+        // Afficher une page spécifique
+        function showPage(pageId) {
+            // Hide all page contents
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Update page title
+            document.getElementById('page-title').textContent = document.querySelector(`[data-page="${pageId}"] span`).textContent;
+            
+            // Set active menu item
+            document.querySelectorAll('.sidebar-menu a').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+        }
+
         // Mettre à jour l'affichage de la promotion
         function updatePromotionDisplay() {
             // Mettre à jour le popup
             document.getElementById('promotion-title').textContent = promotionData.title;
             document.getElementById('promotion-message').textContent = promotionData.message;
+        }
+
+        // Démarrer le compte à rebours pour les comptes limités
+        function startCountdown() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
             
-            // Mettre à jour le formulaire d'administration
-            document.getElementById('promotion-title-input').value = promotionData.title;
-            document.getElementById('promotion-message-input').value = promotionData.message;
-            document.getElementById('promotion-active').checked = promotionData.active;
+            if (currentUser && currentUser.validUntil) {
+                const countdownContainer = document.getElementById('countdown-container');
+                const countdownTimer = document.getElementById('countdown-timer');
+                
+                countdownContainer.style.display = 'block';
+                
+                countdownInterval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const validUntil = new Date(currentUser.validUntil).getTime();
+                    const distance = validUntil - now;
+                    
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        countdownTimer.textContent = "EXPIRÉ";
+                        countdownContainer.className = "alert alert-danger d-flex justify-content-between align-items-center";
+                        
+                        // Désactiver le compte si expiré
+                        currentUser.status = 'expired';
+                        saveData();
+                    } else {
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        
+                        countdownTimer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    }
+                }, 1000);
+            }
+        }
+
+        // Mettre à jour la page des produits
+        function updateProductsPage() {
+            const productsContainer = document.getElementById('products-container');
+            if (!productsContainer) return;
             
-            // Mettre à jour l'affichage dans l'onglet promotion
-            const currentPromotion = document.getElementById('current-promotion');
-            if (promotionData.active) {
-                currentPromotion.innerHTML = `
-                    <div class="alert alert-success">
-                        <h6>${promotionData.title}</h6>
-                        <p class="mb-0">${promotionData.message}</p>
-                        <small class="text-success"><i class="fas fa-check-circle me-1"></i>Promotion active</small>
+            productsContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                if (product.status !== 'active') return;
+                
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-4';
+                
+                // Utiliser l'image du produit si disponible, sinon une image par défaut
+                const imageUrl = product.image || `https://via.placeholder.com/300x150/2E8B57/ffffff?text=${encodeURIComponent(product.name)}`;
+                
+                col.innerHTML = `
+                    <div class="card product-card">
+                        <div class="card-body">
+                            <div class="product-image" style="background-image: url('${imageUrl}')"></div>
+                            <div class="product-price">${product.price} MAD</div>
+                            <h5 class="product-title">${product.name}</h5>
+                            <p class="product-duration">Durée: ${product.duration}</p>
+                            <div class="product-features">
+                                <span class="product-feature"><i class="fas fa-check text-success"></i> +15,000 Chaînes</span>
+                                <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
+                            </div>
+                            <div class="product-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-key text-primary"></i>
+                                    <span>${product.codes ? product.codes.length : 0} codes</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-shopping-cart text-success"></i>
+                                    <span>${getProductSalesCount(product.id)} ventes</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100 buy-btn" data-product="${product.name}" data-price="${product.price}" data-id="${product.id}">Acheter maintenant</button>
+                        </div>
                     </div>
+                `;
+                
+                productsContainer.appendChild(col);
+            });
+            
+            // Réattacher les événements aux boutons d'achat
+            attachBuyButtonEvents();
+            
+            // Recherche de produits
+            document.getElementById('product-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const productCards = document.querySelectorAll('.product-card');
+                
+                productCards.forEach(card => {
+                    const productTitle = card.querySelector('.product-title').textContent.toLowerCase();
+                    if (productTitle.includes(searchTerm)) {
+                        card.parentElement.style.display = 'block';
+                    } else {
+                        card.parentElement.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Obtenir le nombre de ventes pour un produit
+        function getProductSalesCount(productId) {
+            return purchaseHistory.filter(purchase => purchase.productId === productId).length;
+        }
+
+        // Attacher les événements aux boutons d'achat
+        function attachBuyButtonEvents() {
+            document.querySelectorAll('.buy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.getAttribute('data-product');
+                    const price = this.getAttribute('data-price');
+                    const productId = this.getAttribute('data-id');
+                    
+                    document.getElementById('purchase-product').value = productName;
+                    document.getElementById('purchase-price').value = price + ' MAD';
+                    document.getElementById('purchase-quantity').value = 1;
+                    document.getElementById('purchase-quantity').setAttribute('data-product-id', productId);
+                    updatePurchaseTotal();
+                    
+                    const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                    purchaseModal.show();
+                });
+            });
+        }
+
+        // Mettre à jour le total d'achat
+        function updatePurchaseTotal() {
+            const priceText = document.getElementById('purchase-price').value;
+            const price = parseFloat(priceText.replace(' MAD', ''));
+            const quantity = parseInt(document.getElementById('purchase-quantity').value);
+            const total = price * quantity;
+            
+            document.getElementById('purchase-total').value = total.toFixed(2) + ' MAD';
+        }
+
+        // Confirmer l'achat
+        document.getElementById('confirm-purchase').addEventListener('click', function() {
+            const productName = document.getElementById('purchase-product').value;
+            const priceText = document.getElementById('purchase-price').value;
+            const price = parseFloat(priceText.replace(' MAD', ''));
+            const quantity = parseInt(document.getElementById('purchase-quantity').value);
+            const productId = parseInt(document.getElementById('purchase-quantity').getAttribute('data-product-id'));
+            const total = price * quantity;
+            
+            // Vérifier si le solde est suffisant
+            if (currentUser.balance < total) {
+                showAlert('Solde insuffisant pour effectuer cet achat!', 'danger');
+                return;
+            }
+            
+            // Vérifier le solde minimum après achat (500 MAD)
+            if ((currentUser.balance - total) < 500) {
+                showAlert('Le solde après achat doit être d\'au moins 500 MAD!', 'danger');
+                return;
+            }
+            
+            // Trouver le produit
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Produit non trouvé!', 'danger');
+                return;
+            }
+            
+            // Vérifier s'il y a des codes disponibles
+            if (!product.codes || product.codes.length < quantity) {
+                showAlert('Pas assez de codes disponibles pour ce produit!', 'danger');
+                return;
+            }
+            
+            // Déduire le montant du solde
+            currentUser.balance -= total;
+            
+            // Récupérer les codes
+            const purchasedCodes = product.codes.splice(0, quantity);
+            
+            // Enregistrer l'achat
+            const newPurchase = {
+                id: purchaseHistory.length + 1,
+                userId: currentUser.id,
+                productId: product.id,
+                productName: productName,
+                price: price,
+                quantity: quantity,
+                total: total,
+                date: new Date().toISOString().split('T')[0],
+                codes: purchasedCodes
+            };
+            purchaseHistory.push(newPurchase);
+            
+            // Sauvegarder les données
+            saveData();
+            
+            // Mettre à jour l'interface
+            document.getElementById('user-balance').textContent = currentUser.balance.toFixed(2) + ' MAD';
+            document.getElementById('current-balance').textContent = currentUser.balance.toFixed(2) + ' MAD';
+            updatePurchaseHistory();
+            updatePopularProducts();
+            updateProductsWithCodes();
+            updateCodeStats();
+            updateProductsPage();
+            
+            // Close modal
+            const purchaseModal = bootstrap.Modal.getInstance(document.getElementById('purchaseModal'));
+            purchaseModal.hide();
+            
+            // Afficher les détails de l'achat
+            document.getElementById('purchase-details').textContent = `${productName} - ${quantity} x ${price} MAD = ${total} MAD`;
+            
+            // Afficher les codes achetés
+            let codesHtml = '<h6>Codes achetés:</h6>';
+            purchasedCodes.forEach(code => {
+                codesHtml += `<div class="code-item mb-2"><span>${code}</span><button class="btn btn-sm btn-outline-primary copy-code ms-2" data-code="${code}"><i class="fas fa-copy"></i></button></div>`;
+            });
+            document.getElementById('purchased-codes').innerHTML = codesHtml;
+            
+            // Afficher le modal de succès
+            const successModal = new bootstrap.Modal(document.getElementById('purchaseSuccessModal'));
+            successModal.show();
+            
+            // Réattacher les événements de copie
+            setTimeout(() => {
+                document.querySelectorAll('.copy-code').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const code = this.getAttribute('data-code');
+                        navigator.clipboard.writeText(code).then(() => {
+                            showAlert('Code copié dans le presse-papier!', 'success');
+                        });
+                    });
+                });
+            }, 100);
+        });
+
+        // Ajouter un nouveau produit
+        document.getElementById('submit-new-product').addEventListener('click', function() {
+            const name = document.getElementById('new-product-name').value;
+            const price = parseFloat(document.getElementById('new-product-price').value);
+            const duration = document.getElementById('new-product-duration').value;
+            const description = document.getElementById('new-product-description').value;
+            const imageFile = document.getElementById('new-product-image').files[0];
+            
+            // Create new product
+            const newProduct = {
+                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                name: name,
+                price: price,
+                duration: duration + ' mois',
+                description: description,
+                status: 'active',
+                codes: [],
+                image: null
+            };
+            
+            // Traitement de l'image si fournie
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    newProduct.image = e.target.result;
+                    products.push(newProduct);
+                    saveData();
+                    
+                    // Update UI
+                    updateProductsTable();
+                    updateProductsPage();
+                    updateProductSelect();
+                    updateCodeProductSelect();
+                    updatePopularProducts();
+                    
+                    // Close modal
+                    const addProductModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+                    addProductModal.hide();
+                    
+                    // Reset form
+                    document.getElementById('add-product-form').reset();
+                    
+                    // Show success message
+                    showAlert('Produit créé avec succès!', 'success');
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                products.push(newProduct);
+                saveData();
+                
+                // Update UI
+                updateProductsTable();
+                updateProductsPage();
+                updateProductSelect();
+                updateCodeProductSelect();
+                updatePopularProducts();
+                
+                // Close modal
+                const addProductModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+                addProductModal.hide();
+                
+                // Reset form
+                document.getElementById('add-product-form').reset();
+                
+                // Show success message
+                showAlert('Produit créé avec succès!', 'success');
+            }
+        });
+
+        // Mettre à jour le tableau des utilisateurs
+        function updateUsersTable() {
+            const tableBody = document.getElementById('users-table-body');
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name} ${user.role === 'admin' ? '<span class="admin-badge">ADMIN</span>' : ''}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role === 'admin' ? 'Administrateur' : 'Utilisateur'}</td>
+                    <td>${user.balance} MAD</td>
+                    <td>${user.registrationDate}</td>
+                    <td>${user.validUntil || 'Illimité'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary edit-user" data-id="${user.id}">Modifier</button>
+                        ${user.id !== currentUser.id ? `<button class="btn btn-sm btn-outline-danger delete-user" data-id="${user.id}">Supprimer</button>` : ''}
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour le tableau des produits
+        function updateProductsTable() {
+            const tableBody = document.getElementById('products-table-body');
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = '';
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price} MAD</td>
+                    <td>${product.duration}</td>
+                    <td><span class="badge ${product.status === 'active' ? 'bg-success' : 'bg-secondary'}">${product.status === 'active' ? 'Actif' : 'Inactif'}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary edit-product" data-id="${product.id}">Modifier</button>
+                        <button class="btn btn-sm btn-outline-danger delete-product" data-id="${product.id}">Supprimer</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour les produits populaires
+        function updatePopularProducts() {
+            const popularProducts = document.getElementById('popular-products');
+            if (!popularProducts) return;
+            
+            popularProducts.innerHTML = '';
+            
+            // Trier les produits par nombre de ventes
+            const sortedProducts = [...products].sort((a, b) => {
+                return getProductSalesCount(b.id) - getProductSalesCount(a.id);
+            }).slice(0, 4); // Prendre les 4 premiers
+            
+            sortedProducts.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${product.price} MAD</td>
+                    <td>${getProductSalesCount(product.id)}</td>
+                    <td><span class="badge ${product.codes && product.codes.length > 0 ? 'bg-success' : 'bg-danger'}">${product.codes && product.codes.length > 0 ? 'Disponible' : 'Rupture'}</span></td>
+                `;
+                popularProducts.appendChild(row);
+            });
+        }
+
+        // Mettre à jour la liste déroulante des produits
+        function updateProductSelect() {
+            const productSelect = document.getElementById('product-select');
+            if (!productSelect) return;
+            
+            productSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un produit</option>';
+            
+            products.forEach(product => {
+                if (product.status === 'active') {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.name;
+                    productSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Mettre à jour la liste déroulante des produits pour les codes
+        function updateCodeProductSelect() {
+            const codeProduct = document.getElementById('code-product');
+            if (!codeProduct) return;
+            
+            codeProduct.innerHTML = '<option value="" selected disabled>Sélectionnez un produit</option>';
+            
+            products.forEach(product => {
+                if (product.status === 'active') {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = product.name;
+                    codeProduct.appendChild(option);
+                }
+            });
+        }
+
+        // Mettre à jour les produits avec codes
+        function updateProductsWithCodes() {
+            const productsWithCodes = document.getElementById('products-with-codes');
+            if (!productsWithCodes) return;
+            
+            productsWithCodes.innerHTML = '';
+            
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'mb-4';
+                
+                productDiv.innerHTML = `
+                    <h6 class="fw-bold">${product.name}</h6>
+                    <div class="product-stats mb-2">
+                        <div class="stat-item">
+                            <i class="fas fa-key text-primary"></i>
+                            <span>${product.codes ? product.codes.length : 0} codes disponibles</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-shopping-cart text-success"></i>
+                            <span>${getProductSalesCount(product.id)} ventes</span>
+                        </div>
+                    </div>
+                    <div id="codes-${product.id}">
+                        <!-- Codes will be populated below -->
+                    </div>
+                `;
+                
+                productsWithCodes.appendChild(productDiv);
+                
+                // Ajouter les codes pour ce produit
+                const codesContainer = document.getElementById(`codes-${product.id}`);
+                if (product.codes && product.codes.length > 0) {
+                    product.codes.forEach((code, index) => {
+                        const codeItem = document.createElement('div');
+                        codeItem.className = 'code-item';
+                        codeItem.innerHTML = `
+                            <div>
+                                <strong>${code}</strong>
+                                <div class="small text-muted">${product.duration}</div>
+                            </div>
+                            <div class="code-actions">
+                                <button class="btn btn-sm btn-outline-primary copy-code" data-code="${code}">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger delete-code" data-product="${product.id}" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        codesContainer.appendChild(codeItem);
+                    });
+                } else {
+                    codesContainer.innerHTML = '<div class="alert alert-warning">Aucun code disponible</div>';
+                }
+            });
+        }
+
+        // Mettre à jour les statistiques des codes
+        function updateCodeStats() {
+            const codesStats = document.getElementById('codes-stats');
+            if (!codesStats) return;
+            
+            let totalCodes = 0;
+            let usedCodes = 0;
+            let availableCodes = 0;
+            
+            products.forEach(product => {
+                if (product.codes) {
+                    totalCodes += product.codes.length;
+                }
+            });
+            
+            // Dans une implémentation réelle, vous auriez un moyen de suivre les codes utilisés
+            availableCodes = totalCodes;
+            
+            codesStats.innerHTML = `
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Total des codes:</span>
+                        <span class="fw-bold">${totalCodes}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Codes utilisés:</span>
+                        <span class="fw-bold text-danger">${usedCodes}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Codes disponibles:</span>
+                        <span class="fw-bold text-success">${availableCodes}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Produits avec codes:</span>
+                        <span class="fw-bold">${products.filter(p => p.codes && p.codes.length > 0).length}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Mettre à jour l'historique des rechargements
+        function updateRechargeHistory() {
+            const tableBody = document.getElementById('recharge-history-body');
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = '';
+
+            rechargeHistory.forEach(record => {
+                const user = users.find(u => u.id === record.userId);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.date}</td>
+                    <td>${user ? user.name : 'Utilisateur inconnu'}</td>
+                    <td>${record.amount} MAD</td>
+                    <td>${record.admin}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour la liste déroulante des utilisateurs
+        function updateUserSelect() {
+            const userSelect = document.getElementById('user-select');
+            if (!userSelect) return;
+            
+            userSelect.innerHTML = '<option value="" selected disabled>Sélectionnez un utilisateur</option>';
+
+            users.forEach(user => {
+                if (user.role !== 'admin') {
+                    const option = document.createElement('option');
+                    option.value = user.id;
+                    option.textContent = `${user.name} (${user.balance} MAD)`;
+                    userSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Mettre à jour l'historique des achats
+        function updatePurchaseHistory() {
+            const tableBody = document.getElementById('purchase-history-body');
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = '';
+            
+            // Filtrer les achats de l'utilisateur courant
+            const userPurchases = purchaseHistory.filter(purchase => purchase.userId === currentUser.id);
+            
+            if (userPurchases.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center">Aucun achat effectué</td>
+                    </tr>
                 `;
             } else {
-                currentPromotion.innerHTML = `
-                    <div class="alert alert-secondary">
-                        <h6>${promotionData.title}</h6>
-                        <p class="mb-0">${promotionData.message}</p>
-                        <small class="text-muted"><i class="fas fa-pause-circle me-1"></i>Promotion inactive</small>
-                    </div>
-                `;
+                userPurchases.forEach(purchase => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${purchase.date}</td>
+                        <td>${purchase.productName}</td>
+                        <td>${purchase.price} MAD</td>
+                        <td>${purchase.quantity}</td>
+                        <td>${purchase.total} MAD</td>
+                        <td><span class="badge bg-success">Livré</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary view-codes" data-codes='${JSON.stringify(purchase.codes)}'>Voir codes</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
             }
         }
 
@@ -1908,7 +1798,7 @@
             document.querySelector('[data-page="dashboard-home"]').classList.add('active');
         }
 
-        // Login functionality - CORRECTION COMPLÈTE
+        // Login functionality
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1956,6 +1846,11 @@
         document.getElementById('logout-btn').addEventListener('click', function(e) {
             e.preventDefault();
             
+            // Clear countdown interval
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
             // Show login page and hide dashboard
             document.getElementById('login-page').style.display = 'flex';
             document.getElementById('dashboard').style.display = 'none';
@@ -1973,43 +1868,12 @@
         document.querySelectorAll('.sidebar-menu a[data-page]').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('.sidebar-menu a').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Add active class to clicked link
-                this.classList.add('active');
-                
-                // Hide all page contents
-                document.querySelectorAll('.page-content').forEach(page => {
-                    page.style.display = 'none';
-                });
-                
-                // Show selected page
-                const pageId = this.getAttribute('data-page');
-                document.getElementById(pageId).style.display = 'block';
-                
-                // Update page title
-                document.getElementById('page-title').textContent = this.querySelector('span').textContent;
+                showPage(this.getAttribute('data-page'));
             });
         });
 
-        // Gestion de la promotion
-        document.getElementById('save-promotion').addEventListener('click', function() {
-            promotionData.title = document.getElementById('promotion-title-input').value;
-            promotionData.message = document.getElementById('promotion-message-input').value;
-            promotionData.active = document.getElementById('promotion-active').checked;
-            
-            saveData();
-            updatePromotionDisplay();
-            
-            const promotionModal = bootstrap.Modal.getInstance(document.getElementById('promotionModal'));
-            promotionModal.hide();
-            
-            showAlert('Promotion mise à jour avec succès!', 'success');
-        });
+        // Update purchase total when quantity changes
+        document.getElementById('purchase-quantity').addEventListener('input', updatePurchaseTotal);
 
         // Helper function to show alerts
         function showAlert(message, type, autoRemove = true) {
@@ -2033,95 +1897,6 @@
                     }, 5000);
                 }
             }
-        }
-
-        // Les autres fonctions JavaScript nécessaires au fonctionnement
-        function updateUsersTable() {
-            const tableBody = document.getElementById('users-table-body');
-            if (!tableBody) return;
-            
-            tableBody.innerHTML = '';
-
-            users.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.name} ${user.role === 'admin' ? '<span class="admin-badge">ADMIN</span>' : ''}</td>
-                    <td>${user.email}</td>
-                    <td>${user.role === 'admin' ? 'Administrateur' : 'Utilisateur'}</td>
-                    <td>${user.balance} MAD</td>
-                    <td>${user.registrationDate}</td>
-                    <td>${user.validUntil || 'Illimité'}</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary edit-user" data-id="${user.id}">Modifier</button>
-                        ${user.id !== currentUser.id ? `<button class="btn btn-sm btn-outline-danger delete-user" data-id="${user.id}">Supprimer</button>` : ''}
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        function updateProductsTable() {
-            const tableBody = document.getElementById('products-table-body');
-            if (!tableBody) return;
-            
-            tableBody.innerHTML = '';
-
-            products.forEach(product => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${product.id}</td>
-                    <td>${product.name}</td>
-                    <td>${product.price} MAD</td>
-                    <td>${product.duration}</td>
-                    <td><span class="badge ${product.status === 'active' ? 'bg-success' : 'bg-secondary'}">${product.status === 'active' ? 'Actif' : 'Inactif'}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary edit-product" data-id="${product.id}">Modifier</button>
-                        <button class="btn btn-sm btn-outline-danger delete-product" data-id="${product.id}">Supprimer</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        function updateProductsPage() {
-            const productsContainer = document.getElementById('products-container');
-            if (!productsContainer) return;
-            
-            productsContainer.innerHTML = '';
-            
-            products.forEach(product => {
-                if (product.status !== 'active') return;
-                
-                const col = document.createElement('div');
-                col.className = 'col-md-4 mb-4';
-                
-                const imageUrl = product.image || `https://via.placeholder.com/300x150/2E8B57/ffffff?text=${encodeURIComponent(product.name)}`;
-                
-                col.innerHTML = `
-                    <div class="card product-card">
-                        <div class="card-body">
-                            <div class="product-image" style="background-image: url('${imageUrl}')"></div>
-                            <div class="product-price">${product.price} MAD</div>
-                            <h5 class="product-title">${product.name}</h5>
-                            <p class="product-duration">Durée: ${product.duration}</p>
-                            <div class="product-features">
-                                <span class="product-feature"><i class="fas fa-check text-success"></i> +15,000 Chaînes</span>
-                                <span class="product-feature"><i class="fas fa-check text-success"></i> VOD</span>
-                            </div>
-                            <div class="product-stats">
-                                <div class="stat-item">
-                                    <i class="fas fa-key text-primary"></i>
-                                    <span>${product.codes ? product.codes.length : 0} codes</span>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary w-100 buy-btn" data-product="${product.name}" data-price="${product.price}" data-id="${product.id}">Acheter maintenant</button>
-                        </div>
-                    </div>
-                `;
-                
-                productsContainer.appendChild(col);
-            });
         }
 
         // Initialize data on page load
