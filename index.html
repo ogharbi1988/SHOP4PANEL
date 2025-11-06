@@ -682,9 +682,21 @@
             margin-top: 10px;
             display: none;
         }
+        
+        /* Alert Styles */
+        .alert-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
     </style>
 </head>
 <body>
+    <!-- Alert Container -->
+    <div class="alert-container"></div>
+
     <!-- Login Page -->
     <div id="login-page" class="login-container">
         <div class="login-card fade-in">
@@ -1474,6 +1486,47 @@
         </div>
     </div>
 
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Ajouter un utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="user-name" class="form-label">Nom complet</label>
+                        <input type="text" class="form-control" id="user-name" placeholder="Nom complet">
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="user-email" placeholder="Adresse email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="user-password" placeholder="Mot de passe">
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-role" class="form-label">Rôle</label>
+                        <select class="form-select" id="user-role">
+                            <option value="user">Utilisateur</option>
+                            <option value="admin">Administrateur</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-balance" class="form-label">Solde initial (MAD)</label>
+                        <input type="number" class="form-control" id="user-balance" min="0" step="0.01" value="0" placeholder="Solde initial">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="save-user">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Promotion Popup -->
     <div class="promotion-overlay" id="promotion-overlay"></div>
     <div class="promotion-popup" id="promotion-popup">
@@ -1494,7 +1547,7 @@
     
     <script>
         // Sample data
-        const products = [
+        let products = [
             {
                 id: 1,
                 name: "King 365 M3U 12 MOIS",
@@ -1541,11 +1594,11 @@
             }
         ];
 
-        const users = [
-            { id: 1, name: "Admin User", email: "admin@shop4panel.com", role: "admin", balance: 1500.00, status: "active" },
-            { id: 2, name: "Test User", email: "user@shop4panel.com", role: "user", balance: 300.00, status: "active" },
-            { id: 3, name: "Ahmed Benali", email: "ahmed@example.com", role: "user", balance: 750.00, status: "active" },
-            { id: 4, name: "Fatima Zahra", email: "fatima@example.com", role: "user", balance: 200.00, status: "inactive" }
+        let users = [
+            { id: 1, name: "Admin User", email: "admin@shop4panel.com", password: "admin123", role: "admin", balance: 1500.00, status: "active" },
+            { id: 2, name: "Test User", email: "user@shop4panel.com", password: "user123", role: "user", balance: 300.00, status: "active" },
+            { id: 3, name: "Ahmed Benali", email: "ahmed@example.com", password: "ahmed123", role: "user", balance: 750.00, status: "active" },
+            { id: 4, name: "Fatima Zahra", email: "fatima@example.com", password: "fatima123", role: "user", balance: 200.00, status: "inactive" }
         ];
 
         // Current user
@@ -1561,7 +1614,7 @@
                 const password = $('#password').val();
                 
                 // Simple authentication (in a real app, this would be server-side)
-                const user = users.find(u => u.email === email && password === (u.role === 'admin' ? 'admin123' : 'user123'));
+                const user = users.find(u => u.email === email && u.password === password);
                 
                 if (user) {
                     currentUser = user;
@@ -1575,7 +1628,7 @@
                         updateCountdown();
                     }
                 } else {
-                    alert('Email ou mot de passe incorrect!');
+                    showAlert('Email ou mot de passe incorrect!', 'danger');
                 }
             });
 
@@ -1654,16 +1707,16 @@
                 const method = $('.payment-method-card.selected').data('method');
                 
                 if (!method) {
-                    alert('Veuillez sélectionner une méthode de paiement.');
+                    showAlert('Veuillez sélectionner une méthode de paiement.', 'warning');
                     return;
                 }
                 
                 if (amount < 500) {
-                    alert('Le montant minimum de recharge est de 500 MAD.');
+                    showAlert('Le montant minimum de recharge est de 500 MAD.', 'warning');
                     return;
                 }
                 
-                alert(`Demande de recharge de ${amount} MAD par ${method} soumise avec succès!`);
+                showAlert(`Demande de recharge de ${amount} MAD par ${method} soumise avec succès!`, 'success');
                 $('#rechargeModal').modal('hide');
             });
 
@@ -1673,7 +1726,7 @@
                 const quantity = $('#quantity').val();
                 
                 if (!product) {
-                    alert('Veuillez sélectionner un produit.');
+                    showAlert('Veuillez sélectionner un produit.', 'warning');
                     return;
                 }
                 
@@ -1689,6 +1742,7 @@
                 }
                 
                 $('#generated-codes').html(codes);
+                showAlert(`${quantity} code(s) généré(s) avec succès!`, 'success');
             });
 
             // Save product (admin)
@@ -1700,13 +1754,13 @@
                 const description = $('#product-description').val();
                 
                 if (!name || !price) {
-                    alert('Veuillez remplir tous les champs obligatoires.');
+                    showAlert('Veuillez remplir tous les champs obligatoires.', 'warning');
                     return;
                 }
                 
                 // Add product to the list (in a real app, this would be sent to the server)
                 const newProduct = {
-                    id: products.length + 1,
+                    id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
                     name: name,
                     type: type,
                     duration: duration + ' Mois',
@@ -1721,19 +1775,59 @@
                 renderProducts();
                 renderAdminProducts();
                 
-                alert('Produit ajouté avec succès!');
+                showAlert('Produit ajouté avec succès!', 'success');
                 $('#addProductModal').modal('hide');
                 $('#product-name, #product-price, #product-description').val('');
             });
 
+            // Save user (admin)
+            $('#save-user').on('click', function() {
+                const name = $('#user-name').val();
+                const email = $('#user-email').val();
+                const password = $('#user-password').val();
+                const role = $('#user-role').val();
+                const balance = $('#user-balance').val();
+                
+                if (!name || !email || !password) {
+                    showAlert('Veuillez remplir tous les champs obligatoires.', 'warning');
+                    return;
+                }
+                
+                // Check if email already exists
+                if (users.find(u => u.email === email)) {
+                    showAlert('Un utilisateur avec cet email existe déjà!', 'danger');
+                    return;
+                }
+                
+                // Add user to the list
+                const newUser = {
+                    id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                    name: name,
+                    email: email,
+                    password: password,
+                    role: role,
+                    balance: parseFloat(balance),
+                    status: "active"
+                };
+                
+                users.push(newUser);
+                renderAdminUsers();
+                
+                showAlert('Utilisateur ajouté avec succès!', 'success');
+                $('#addUserModal').modal('hide');
+                $('#user-name, #user-email, #user-password, #user-balance').val('');
+            });
+
             // Create test users (admin)
             $('#create-test-users').on('click', function() {
+                const testPassword = generateTestPassword();
                 const testUser = {
                     id: users.length + 1,
                     name: "Utilisateur Test",
                     email: `test${users.length + 1}@shop4panel.com`,
+                    password: testPassword,
                     role: "user",
-                    balance: 100.00,
+                    balance: 0.00, // Test users have 0 balance
                     status: "test",
                     expiry: new Date(Date.now() + 48 * 60 * 60 * 1000) // 48 hours from now
                 };
@@ -1741,7 +1835,7 @@
                 users.push(testUser);
                 renderAdminUsers();
                 
-                alert('Utilisateur test créé avec succès! Il expirera dans 48 heures.');
+                showAlert(`Utilisateur test créé avec succès!<br>Email: ${testUser.email}<br>Mot de passe: ${testPassword}<br>Il expirera dans 48 heures.`, 'success');
             });
 
             // Activate promotion popup (admin)
@@ -1768,7 +1862,7 @@
                 const discount = $('#promotion-discount').val();
                 
                 if (!title || !description || !discount) {
-                    alert('Veuillez remplir tous les champs de la promotion.');
+                    showAlert('Veuillez remplir tous les champs de la promotion.', 'warning');
                     return;
                 }
                 
@@ -1786,7 +1880,7 @@
                     $('#promotion-popup, #promotion-overlay').show();
                 });
                 
-                alert('Promotion enregistrée avec succès!');
+                showAlert('Promotion enregistrée avec succès!', 'success');
             });
 
             // Initialize the dashboard
@@ -1856,9 +1950,9 @@
                             $('#user-balance, #current-balance').text(currentUser.balance.toFixed(2) + ' MAD');
                             
                             // Show success message
-                            alert(`Achat réussi! Vous avez acheté ${product.name} pour ${product.price.toFixed(2)} MAD.`);
+                            showAlert(`Achat réussi! Vous avez acheté ${product.name} pour ${product.price.toFixed(2)} MAD.`, 'success');
                         } else {
-                            alert('Solde insuffisant! Veuillez recharger votre compte.');
+                            showAlert('Solde insuffisant! Veuillez recharger votre compte.', 'danger');
                         }
                     }
                 });
@@ -1958,6 +2052,16 @@
                 return code;
             }
 
+            // Generate test password
+            function generateTestPassword() {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let password = '';
+                for (let i = 0; i < 8; i++) {
+                    password += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return password;
+            }
+
             // Update countdown for test users
             function updateCountdown() {
                 if (!testUserExpiry) return;
@@ -1992,6 +2096,24 @@
                     }
                 });
             });
+
+            // Show alert function
+            function showAlert(message, type) {
+                const alertId = 'alert-' + Date.now();
+                const alertHtml = `
+                    <div id="${alertId}" class="alert alert-${type} alert-dismissible fade show" role="alert">
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                
+                $('.alert-container').append(alertHtml);
+                
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    $(`#${alertId}`).alert('close');
+                }, 5000);
+            }
         });
     </script>
 </body>
