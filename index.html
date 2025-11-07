@@ -1610,48 +1610,37 @@
     </div>
 
     <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel" data-i18n="add_user">Ajouter un utilisateur</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="add-user-form">
-                        <div class="mb-3">
-                            <label for="user-name" class="form-label" data-i18n="full_name">Nom complet</label>
-                            <input type="text" class="form-control" id="user-name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="user-email" class="form-label" data-i18n="email">Email</label>
-                            <input type="email" class="form-control" id="user-email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="user-password" class="form-label" data-i18n="password">Mot de passe</label>
-                            <input type="password" class="form-control" id="user-password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="user-role" class="form-label" data-i18n="role">Rôle</label>
-                            <select class="form-select" id="user-role" required>
-                                <option value="user" data-i18n="user">Utilisateur</option>
-                                <option value="test" data-i18n="test_user">Utilisateur de test (48h)</option>
-                                <option value="admin" data-i18n="admin">Administrateur</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="user-balance" class="form-label" data-i18n="initial_balance">Solde initial (MAD)</label>
-                            <input type="number" class="form-control" id="user-balance" min="0" value="0">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="cancel">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="submit-user" data-i18n="add_user">Ajouter l'utilisateur</button>
-                </div>
-            </div>
-        </div>
+ <form id="add-user-form" novalidate>
+    <div class="mb-3">
+        <label for="user-name" class="form-label" data-i18n="full_name">Nom complet *</label>
+        <input type="text" class="form-control" id="user-name" required>
+        <div class="invalid-feedback">Veuillez saisir un nom complet.</div>
     </div>
+    <div class="mb-3">
+        <label for="user-email" class="form-label" data-i18n="email">Email *</label>
+        <input type="email" class="form-control" id="user-email" required>
+        <div class="invalid-feedback">Veuillez saisir un email valide.</div>
+    </div>
+    <div class="mb-3">
+        <label for="user-password" class="form-label" data-i18n="password">Mot de passe *</label>
+        <input type="password" class="form-control" id="user-password" minlength="4" required>
+        <div class="invalid-feedback">Le mot de passe doit contenir au moins 4 caractères.</div>
+    </div>
+    <div class="mb-3">
+        <label for="user-role" class="form-label" data-i18n="role">Rôle *</label>
+        <select class="form-select" id="user-role" required>
+            <option value="" selected disabled data-i18n="choose_role">Choisir un rôle</option>
+            <option value="user" data-i18n="user">Utilisateur</option>
+            <option value="test" data-i18n="test_user">Utilisateur de test (48h)</option>
+            <option value="admin" data-i18n="admin">Administrateur</option>
+        </select>
+        <div class="invalid-feedback">Veuillez sélectionner un rôle.</div>
+    </div>
+    <div class="mb-3">
+        <label for="user-balance" class="form-label" data-i18n="initial_balance">Solde initial (MAD)</label>
+        <input type="number" class="form-control" id="user-balance" min="0" value="0">
+    </div>
+</form>
 
     <!-- Add Product Modal -->
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
@@ -2055,11 +2044,34 @@
             }
         }
 
-        // Language switcher event
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                changeLanguage(lang);
+      // Fonctions de validation
+function validateForm(formId) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll('input[required], select[required]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        input.classList.remove('is-invalid');
+        
+        if (!input.value.trim()) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        } else if (input.type === 'email' && !isValidEmail(input.value)) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        } else if (input.type === 'password' && input.value.length < 4) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
             });
         });
 
@@ -2249,40 +2261,56 @@
                 }
             });
             
-            // Add User Form
-            $('#submit-user').on('click', function() {
-                const name = $('#user-name').val();
-                const email = $('#user-email').val();
-                const password = $('#user-password').val();
-                const role = $('#user-role').val();
-                const balance = parseFloat($('#user-balance').val()) || 0;
-                
-                if (name && email && password) {
-                    const newUser = {
-                        id: users.length + 1,
-                        name: name,
-                        email: email,
-                        password: password,
-                        role: role,
-                        balance: balance,
-                        status: 'active',
-                        loyaltyPoints: 0
-                    };
-                    
-                    if (role === 'test') {
-                        newUser.testExpiry = new Date(Date.now() + 48 * 60 * 60 * 1000);
-                    }
-                    
-                    users.push(newUser);
-                    loadUsersTable();
-                    alert('Utilisateur ajouté avec succès!');
-                    $('#addUserModal').modal('hide');
-                    $('#add-user-form')[0].reset();
-                } else {
-                    alert('Veuillez remplir tous les champs obligatoires');
-                }
-            });
-            
+           // Add User Form - CORRIGÉE
+$('#submit-user').on('click', function() {
+    const name = $('#user-name').val().trim();
+    const email = $('#user-email').val().trim();
+    const password = $('#user-password').val();
+    const role = $('#user-role').val();
+    const balance = parseFloat($('#user-balance').val()) || 0;
+    
+    console.log('Validation - Name:', name, 'Email:', email, 'Password:', password, 'Role:', role);
+    
+    // Validation améliorée
+    if (name && email && password && role) {
+        // Vérifier si l'email existe déjà
+        const existingUser = users.find(u => u.email === email);
+        if (existingUser) {
+            alert('Un utilisateur avec cet email existe déjà!');
+            return;
+        }
+        
+        const newUser = {
+            id: users.length + 1,
+            name: name,
+            email: email,
+            password: password,
+            role: role,
+            balance: balance,
+            status: 'active',
+            loyaltyPoints: 0
+        };
+        
+        if (role === 'test') {
+            newUser.testExpiry = new Date(Date.now() + 48 * 60 * 60 * 1000);
+        }
+        
+        users.push(newUser);
+        loadUsersTable();
+        alert('Utilisateur ajouté avec succès!');
+        $('#addUserModal').modal('hide');
+        $('#add-user-form')[0].reset();
+    } else {
+        // Message d'erreur détaillé
+        let errorMessage = 'Veuillez remplir tous les champs obligatoires:\n';
+        if (!name) errorMessage += '- Nom complet\n';
+        if (!email) errorMessage += '- Email\n';
+        if (!password) errorMessage += '- Mot de passe\n';
+        if (!role) errorMessage += '- Rôle\n';
+        
+        alert(errorMessage);
+    }
+});
             // Add Product Form
             $('#submit-product').on('click', function() {
                 const name = $('#product-name').val();
