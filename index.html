@@ -3,374 +3,906 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SHOP 4 PANEL — Login Fix</title>
+<title>SHOP 4 PANEL — Système Complet</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
 :root{
-  --bg1:#053642; /* bleu pétrole foncé */
-  --bg2:#ff8a00; /* orange */
-  --card:#ffffff;
-  --muted:#6b7280;
-  --turquoise:#00BFA6;
-  --green:#32CD32;
-  --orange:#FFB347;
-  --glass: rgba(255,255,255,0.08);
-  --radius:18px;
+  --bg1:#053642; --bg2:#ff8a00;
+  --card:#ffffff; --muted:#6b7280;
+  --turquoise:#00BFA6; --green:#32CD32; --orange:#FFB347;
   --shadow: 0 12px 40px rgba(2,6,23,0.18);
+  --offline:#94a3b8; --success:#16a34a;
+  --error:#b00020; --warning:#f59e0b;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
-body{
-  background: linear-gradient(135deg,var(--bg1) 10%, #0f4b57 40%, #2a7f78 60%, var(--bg2) 100%);
-  display:flex;align-items:center;justify-content:center;min-height:100vh;color:#06121a;
-}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(135deg,var(--bg1) 10%, #0f4b57 40%, #2a7f78 60%, var(--bg2) 100%);color:#06121a}
+.center-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn 700ms ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* centered login card */
-.login-wrap{width:100%;max-width:980px;margin:24px;padding:22px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));backdrop-filter: blur(8px);box-shadow:var(--shadow);display:flex;gap:18px;align-items:stretch;}
-.left{
-  flex:1.1;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));padding:28px;border-radius:14px;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;color:white;
-}
-.brand-logo{background:rgba(255,255,255,0.06);padding:12px 18px;border-radius:12px;font-weight:800;font-size:20px;display:inline-block;margin-bottom:12px}
-.brand-sub{font-size:13px;opacity:0.9}
-.hero-illus{width:100%;max-width:300px;margin-top:12px;opacity:0.95}
-.right{flex:1;background:var(--card);border-radius:14px;padding:26px;box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+/* login card */
+.login-wrap{width:100%;max-width:1120px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));backdrop-filter: blur(8px);box-shadow:var(--shadow);display:flex;gap:18px;overflow:hidden;transition:transform .4s ease}
+.left{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:36px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white}
+.brand-logo{background:rgba(255,255,255,0.06);padding:12px 18px;border-radius:12px;font-weight:800;font-size:20px;margin-bottom:8px}
+.brand-sub{font-size:13px;opacity:0.95}
+.hero-illus{width:100%;max-width:360px;margin-top:18px;opacity:0.98}
 
-/* form styles */
-.form-title{font-weight:800;margin-bottom:2px}
+/* form */
+.right{flex:1;background:var(--card);padding:28px;border-radius:14px}
+.form-title{font-weight:800;margin-bottom:4px}
 .form-sub{color:var(--muted);font-size:13px;margin-bottom:14px}
-.input-group .form-control{border-radius:12px;padding:12px 14px;border:1px solid #e6eef4}
-.input-icon{width:44px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--turquoise),var(--green));color:white;border-radius:10px;margin-right:8px;height:44px}
+.field-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.input-icon{width:44px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--turquoise),var(--green));color:white;border-radius:10px;height:44px}
+.form-control{border-radius:12px;padding:12px 14px;border:1px solid #e6eef4;width:100%;transition:border-color 0.3s ease}
+.form-control:focus{border-color:var(--turquoise);outline:none}
+.btn-login{width:100%;background:linear-gradient(90deg,var(--turquoise),var(--green));border:none;color:white;padding:12px;border-radius:12px;font-weight:700;box-shadow:0 8px 22px rgba(2,6,23,0.08);cursor:pointer;transition:transform 0.2s ease}
+.btn-login:hover{transform:translateY(-2px)}
+.small-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn-secondary-soft{background:transparent;border:1px solid rgba(2,6,23,0.06);padding:10px;border-radius:10px;cursor:pointer;transition:all 0.2s ease}
+.btn-secondary-soft:hover{background:rgba(2,6,23,0.03)}
 
-/* buttons */
-.btn-login{width:100%;background:linear-gradient(90deg,var(--turquoise),var(--green));border:none;color:white;padding:12px;border-radius:12px;font-weight:700;box-shadow:0 8px 22px rgba(2,6,23,0.08)}
-.btn-secondary-soft{background:transparent;border:1px solid rgba(2,6,23,0.06);padding:10px;border-radius:10px}
+/* error */
+.error-msg{color:var(--error);font-weight:700;font-size:13px;margin-top:6px;display:none;padding:8px;background:rgba(176,0,32,0.05);border-radius:8px}
+.success-msg{color:var(--success);font-weight:700;font-size:13px;margin-top:6px;display:none;padding:8px;background:rgba(22,163,74,0.05);border-radius:8px}
 
-/* dashboard layout (hidden until login) */
+/* app/dashboard */
 .app{display:none;min-height:100vh;width:100%;background:#f7fbfc;color:#07212a;padding:28px}
 .top-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
 .logo-small{font-weight:800;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--turquoise),var(--orange));color:white}
 .user-info{display:flex;gap:12px;align-items:center}
 .avatar{width:48px;height:48px;border-radius:12px;background:linear-gradient(90deg,var(--turquoise),var(--green));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+.status-dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-left:8px;vertical-align:middle}
 
-/* tile buttons */
+/* tiles */
 .tiles{display:flex;gap:12px;flex-wrap:wrap}
 .tile{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);flex:1;min-width:160px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:transform .12s ease}
 .tile:hover{transform:translateY(-6px)}
-.tile .ico{width:44px;height:44;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white}
-
-/* pages */
-.page{display:none;margin-top:12px}
-.card{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
+.tile .ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white}
 
 /* marquee */
 .marquee{background:linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));padding:8px 12px;border-radius:8px;margin-bottom:12px;overflow:hidden;white-space:nowrap}
 .marquee span{display:inline-block;padding-left:100%;animation:marq 16s linear infinite}
 @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
+/* pages and cards */
+.page{display:none;margin-top:12px}
+.card{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
+
+/* admin badges */
+.bad-online{display:inline-block;background:linear-gradient(90deg,var(--green),#10b981);color:white;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
+.bad-offline{display:inline-block;background:var(--offline);color:white;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
+
+/* payment methods */
+.payment-methods{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.payment-method{flex:1;min-width:120px;background:white;border:2px solid #e6eef4;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all 0.2s ease}
+.payment-method:hover{border-color:var(--turquoise)}
+.payment-method.selected{border-color:var(--turquoise);background:rgba(0,191,166,0.05)}
+.payment-icon{font-size:24px;margin-bottom:8px}
+.payment-name{font-weight:600;font-size:14px}
+
+/* modal */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(2,6,23,0.5);z-index:1000;align-items:center;justify-content:center}
+.modal-content{background:white;padding:24px;border-radius:16px;max-width:480px;width:90%;box-shadow:var(--shadow)}
+.modal-title{font-weight:800;margin-bottom:12px}
+.modal-actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+
 /* responsive */
 @media (max-width:900px){
-  .login-wrap{flex-direction:column;padding:18px}
-  .left{order:2}
-  .right{order:1}
+  .login-wrap{flex-direction:column}
+  .left{order:2;padding:18px}
+  .right{order:1;padding:18px}
   .tiles{flex-direction:column}
+  .modal-content{width:95%;margin:20px}
 }
 </style>
 </head>
 <body>
-
-<!-- Centered login + dashboard container -->
-<div id="root-container" style="width:100%;max-width:1100px;padding:18px">
-  <!-- Login card -->
+<div class="center-wrap">
   <div class="login-wrap" id="login-wrap">
     <div class="left">
       <div class="brand-logo">SHOP 4 PANEL</div>
       <div class="brand-sub">Nouvelle Génération &amp; Smart</div>
-      <img src="https://i.imgur.com/6YVd6QJ.png" alt="ill" class="hero-illus" style="max-width:280px">
+      <img src="https://i.imgur.com/6YVd6QJ.png" alt="illustration" class="hero-illus">
     </div>
 
     <div class="right">
       <div class="form-title">Se connecter</div>
       <div class="form-sub">Connectez-vous avec votre compte</div>
-
-      <form id="login-form" style="display:flex;flex-direction:column;gap:12px">
-        <div style="display:flex;gap:8px;align-items:center">
+      <form id="login-form" style="display:flex;flex-direction:column" autocomplete="on" novalidate>
+        <div class="field-row" style="width:100%">
           <div class="input-icon"><i class="fa fa-envelope"></i></div>
-          <input id="email" type="email" placeholder="Email" class="form-control" required>
+          <input id="email" name="email" type="email" placeholder="Email" class="form-control" required autocomplete="username">
         </div>
-
-        <div style="display:flex;gap:8px;align-items:center">
+        <div class="field-row" style="width:100%">
           <div class="input-icon"><i class="fa fa-lock"></i></div>
-          <input id="password" type="password" placeholder="Mot de passe" class="form-control" required>
+          <input id="password" name="password" type="password" placeholder="Mot de passe" class="form-control" required autocomplete="current-password">
         </div>
-
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div><input id="remember" type="checkbox"> <label for="remember">Se souvenir</label></div>
           <div><a href="#" id="forgot" style="color:var(--turquoise);text-decoration:none;font-weight:600">Mot de passe oublié ?</a></div>
         </div>
 
-        <div id="login-error" style="color:#b00020;font-weight:700;display:none"></div>
+        <div id="field-error" class="error-msg"></div>
+        <div id="field-success" class="success-msg"></div>
 
-        <button type="submit" class="btn-login">Se connecter</button>
-        <div style="display:flex;gap:8px;justify-content:space-between;margin-top:6px">
+        <button type="submit" class="btn-login" id="btnLogin">Se connecter</button>
+
+        <div class="small-actions">
           <button type="button" class="btn-secondary-soft" id="demo-admin">Admin demo</button>
           <button type="button" class="btn-secondary-soft" id="demo-user">User demo</button>
+          <button type="button" class="btn-secondary-soft" id="demo-test">Test demo</button>
+          <button type="button" class="btn-secondary-soft" id="generate-test-users">Générer users test</button>
         </div>
-
-        <div style="margin-top:10px;font-size:13px;color:#334155">Identifiants : <strong>ogharbi1988@shop4panel.com / admin1988</strong> (admin) — <strong>user@shop4panel.com / admin1988</strong> (user)</div>
+        <div style="margin-top:10px;font-size:13px;color:#334155">
+          <div><strong>Admin:</strong> ogharbi1988@shop4panel.com / admin1988</div>
+          <div><strong>User:</strong> user@shop4panel.com / admin1988</div>
+          <div><strong>Test:</strong> test@shop4panel.com / test123</div>
+        </div>
       </form>
     </div>
-  </div>
-
-  <!-- App / dashboard (hidden initially) -->
-  <div class="app" id="app" style="display:none">
-    <div class="top-bar">
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="logo-small">SHOP 4 PANEL</div>
-        <div>
-          <div style="font-weight:700" id="hdr-welcome">Tableau de bord</div>
-          <div style="font-size:13px;color:var(--muted)">Interface moderne</div>
-        </div>
-      </div>
-      <div class="user-info">
-        <div style="text-align:right;margin-right:8px">
-          <div id="hdr-name" style="font-weight:700">Invité</div>
-          <div id="hdr-role" style="font-size:13px;color:var(--muted)">Non connecté</div>
-        </div>
-        <div class="avatar" id="hdr-avatar">S4</div>
-      </div>
-    </div>
-
-    <!-- Marquee bilingual in top of dashboard -->
-    <div class="marquee card" id="marquee"><span>⚠️ Le montant minimum pour la recharge est de 500 DH — الحد الأدنى لإعادة الشحن هو 500 درهم &nbsp;&nbsp;&nbsp;</span></div>
-
-    <!-- Tiles/buttons -->
-    <div class="tiles">
-      <div class="tile" data-page="dashboard-home"><div class="ico turq" style="background:linear-gradient(90deg,var(--turquoise),var(--green))"><i class="fas fa-home"></i></div><div><strong>Tableau de bord</strong><div class="muted">Vue générale</div></div></div>
-      <div class="tile" data-page="products"><div class="ico green" style="background:linear-gradient(90deg,var(--green),var(--turquoise))"><i class="fas fa-box-open"></i></div><div><strong>Produits</strong><div class="muted">Catalogue & achats</div></div></div>
-      <div class="tile" data-page="balance"><div class="ico orange" style="background:linear-gradient(90deg,var(--orange),var(--turquoise))"><i class="fas fa-wallet"></i></div><div><strong>Mon solde</strong><div class="muted">Recharges</div></div></div>
-      <div class="tile" data-page="tickets"><div class="ico turq" style="background:linear-gradient(90deg,var(--turquoise),var(--orange))"><i class="fas fa-ticket-alt"></i></div><div><strong>Tickets</strong><div class="muted">Support</div></div></div>
-      <div class="tile" data-page="generator"><div class="ico green" style="background:linear-gradient(90deg,var(--green),var(--orange))"><i class="fas fa-key"></i></div><div><strong>Générateur</strong><div class="muted">Codes & licences</div></div></div>
-      <div class="tile" id="admin-tile" data-page="admin" style="display:none"><div class="ico orange" style="background:linear-gradient(90deg,var(--turquoise),var(--orange))"><i class="fas fa-cogs"></i></div><div><strong>Administration</strong><div class="muted">Utilisateurs & produits</div></div></div>
-      <div class="tile" id="logout-tile" style="display:none"><div class="ico" style="background:#94a3b8"><i class="fas fa-sign-out-alt"></i></div><div><strong>Déconnexion</strong><div class="muted">Se déconnecter</div></div></div>
-    </div>
-
-    <!-- Pages content -->
-    <div id="dashboard-home" class="page card" style="display:block;margin-top:12px">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <h4 style="margin:0">Bonjour, <span id="user-greet">Invité</span></h4>
-          <div class="muted">Aperçu des activités</div>
-        </div>
-        <div class="muted">Connecté depuis: <strong id="session-duration">—</strong></div>
-      </div>
-
-      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-        <div class="card" style="flex:1;min-width:220px">
-          <div class="muted">Solde actuel</div>
-          <div style="font-weight:800;font-size:20px" id="user-balance">0.00 MAD</div>
-        </div>
-        <div class="card" style="flex:1;min-width:220px">
-          <div class="muted">Produits disponibles</div>
-          <div style="font-weight:800;font-size:20px" id="products-count">0</div>
-        </div>
-        <div class="card" style="flex:1;min-width:220px">
-          <div class="muted">Tickets ouverts</div>
-          <div style="font-weight:800;font-size:20px">0</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="products" class="page card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h4 style="margin:0">Produits</h4>
-        <div class="muted">Total: <span id="products-count-2">0</span></div>
-      </div>
-      <div id="products-container" style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px"></div>
-    </div>
-
-    <div id="balance" class="page card" style="display:none">
-      <h4>Mon solde</h4>
-      <div style="margin-top:8px"><div class="muted">Solde actuel</div><div id="current-balance" style="font-weight:800">0.00 MAD</div></div>
-      <div style="margin-top:12px"><button class="btn-login" id="open-recharge-small" style="width:auto;background:linear-gradient(90deg,var(--orange),var(--turquoise))">Demander une recharge</button></div>
-    </div>
-
-    <div id="tickets" class="page card" style="display:none">
-      <h4>Tickets</h4>
-      <div class="muted">Envoyer une demande au support</div>
-      <div style="margin-top:12px"><button class="btn-login" id="new-ticket-small" style="width:auto;background:linear-gradient(90deg,var(--turquoise),var(--green))">Nouveau ticket</button></div>
-    </div>
-
-    <div id="generator" class="page card" style="display:none">
-      <h4>Générateur</h4>
-      <div class="muted">Générer des codes (admin seulement)</div>
-      <form id="gen-form" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-        <select id="product-select" class="form-control" style="flex:1 1 200px"><option value="">Choisir un produit</option></select>
-        <input id="gen-qty" class="form-control" type="number" min="1" value="1" style="width:120px">
-        <button class="btn-login" type="submit" style="width:auto">Générer</button>
-      </form>
-      <div id="generated" style="margin-top:12px"></div>
-    </div>
-
-    <div id="admin" class="page card" style="display:none">
-      <h4>Administration</h4>
-      <div class="muted">Gestion des utilisateurs</div>
-      <div style="margin-top:12px;overflow:auto">
-        <table style="width:100%;border-collapse:collapse">
-          <thead><tr style="text-align:left"><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Durée connectée</th><th>Solde</th></tr></thead>
-          <tbody id="admin-users-table"></tbody>
-        </table>
-      </div>
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button class="btn-login" id="btn-add-user" style="width:auto;background:linear-gradient(90deg,var(--turquoise),var(--green))">Ajouter utilisateur</button>
-        <button class="btn-login" id="btn-add-product" style="width:auto;background:linear-gradient(90deg,var(--orange),var(--turquoise))">Ajouter produit</button>
-      </div>
-    </div>
-
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- App Dashboard -->
+<div class="app" id="app">
+  <div class="top-bar">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="logo-small">SHOP 4 PANEL</div>
+      <div>
+        <div style="font-weight:700" id="hdr-welcome">Tableau de bord</div>
+        <div style="font-size:13px;color:var(--muted)">Interface moderne</div>
+      </div>
+    </div>
+    <div class="user-info">
+      <div style="text-align:right;margin-right:8px">
+        <div id="hdr-name" style="font-weight:700">Invité <span id="online-dot" class="status-dot" style="background:var(--offline)"></span></div>
+        <div id="hdr-role" style="font-size:13px;color:var(--muted)">Non connecté</div>
+      </div>
+      <div class="avatar" id="hdr-avatar">S4</div>
+    </div>
+  </div>
+
+  <div class="marquee card" id="marquee">
+    <span>⚠️ Le montant minimum pour la recharge est de 500 DH — الحد الأدنى لإعادة الشحن هو 500 درهم &nbsp;&nbsp;&nbsp;</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" data-page="dashboard-home">
+      <div class="ico turq" style="background:linear-gradient(90deg,var(--turquoise),var(--green))"><i class="fas fa-home"></i></div>
+      <div><strong>Tableau de bord</strong><div class="muted">Vue générale</div></div>
+    </div>
+    <div class="tile" data-page="products">
+      <div class="ico green" style="background:linear-gradient(90deg,var(--green),var(--turquoise))"><i class="fas fa-box-open"></i></div>
+      <div><strong>Produits</strong><div class="muted">Catalogue & achats</div></div>
+    </div>
+    <div class="tile" data-page="balance">
+      <div class="ico orange" style="background:linear-gradient(90deg,var(--orange),var(--turquoise))"><i class="fas fa-wallet"></i></div>
+      <div><strong>Mon solde</strong><div class="muted">Recharges</div></div>
+    </div>
+    <div class="tile" data-page="tickets">
+      <div class="ico turq" style="background:linear-gradient(90deg,var(--turquoise),var(--orange))"><i class="fas fa-ticket-alt"></i></div>
+      <div><strong>Tickets</strong><div class="muted">Support</div></div>
+    </div>
+    <div class="tile" data-page="generator">
+      <div class="ico green" style="background:linear-gradient(90deg,var(--green),var(--orange))"><i class="fas fa-key"></i></div>
+      <div><strong>Générateur</strong><div class="muted">Codes & licences</div></div>
+    </div>
+    <div class="tile" id="admin-tile" data-page="admin" style="display:none">
+      <div class="ico orange" style="background:linear-gradient(90deg,var(--turquoise),var(--orange))"><i class="fas fa-cogs"></i></div>
+      <div><strong>Administration</strong><div class="muted">Utilisateurs & produits</div></div>
+    </div>
+    <div class="tile" id="logout-tile" style="display:none">
+      <div class="ico" style="background:#94a3b8"><i class="fas fa-sign-out-alt"></i></div>
+      <div><strong>Déconnexion</strong><div class="muted">Se déconnecter</div></div>
+    </div>
+  </div>
+
+  <!-- Pages Content -->
+  <div id="dashboard-home" class="page card" style="display:block">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <h4 style="margin:0">Bonjour, <span id="user-greet">Invité</span></h4>
+        <div class="muted">Aperçu des activités</div>
+      </div>
+      <div class="muted">Connecté depuis: <strong id="session-duration">—</strong></div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+      <div class="card" style="flex:1;min-width:220px">
+        <div class="muted">Solde actuel</div>
+        <div style="font-weight:800;font-size:20px" id="user-balance">0.00 MAD</div>
+      </div>
+      <div class="card" style="flex:1;min-width:220px">
+        <div class="muted">Produits disponibles</div>
+        <div style="font-weight:800;font-size:20px" id="products-count">0</div>
+      </div>
+      <div class="card" style="flex:1;min-width:220px">
+        <div class="muted">Tickets ouverts</div>
+        <div style="font-weight:800;font-size:20px">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="products" class="page card" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h4 style="margin:0">Produits</h4>
+      <div class="muted">Total: <span id="products-count-2">0</span></div>
+    </div>
+    <div id="products-container" style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px"></div>
+  </div>
+
+  <div id="balance" class="page card" style="display:none">
+    <h4>Mon solde</h4>
+    <div style="margin-top:8px"><div class="muted">Solde actuel</div><div id="current-balance" style="font-weight:800">0.00 MAD</div></div>
+    
+    <div style="margin-top:20px">
+      <h5>Méthodes de paiement</h5>
+      <div class="payment-methods">
+        <div class="payment-method selected" data-method="virement">
+          <div class="payment-icon"><i class="fas fa-university"></i></div>
+          <div class="payment-name">Virement</div>
+        </div>
+        <div class="payment-method" data-method="cash">
+          <div class="payment-icon"><i class="fas fa-money-bill-wave"></i></div>
+          <div class="payment-name">Cash</div>
+        </div>
+        <div class="payment-method" data-method="usdt">
+          <div class="payment-icon"><i class="fab fa-bitcoin"></i></div>
+          <div class="payment-name">USDT</div>
+        </div>
+      </div>
+    </div>
+    
+    <div style="margin-top:12px">
+      <button class="btn-login" id="open-recharge-small" style="width:auto;background:linear-gradient(90deg,var(--orange),var(--turquoise))">Demander une recharge</button>
+    </div>
+  </div>
+
+  <div id="tickets" class="page card" style="display:none">
+    <h4>Tickets</h4>
+    <div class="muted">Envoyer une demande au support</div>
+    <div style="margin-top:12px">
+      <button class="btn-login" id="new-ticket-small" style="width:auto;background:linear-gradient(90deg,var(--turquoise),var(--green))">Nouveau ticket</button>
+    </div>
+  </div>
+
+  <div id="generator" class="page card" style="display:none">
+    <h4>Générateur</h4>
+    <div class="muted">Générer des codes (admin seulement)</div>
+    <form id="gen-form" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <select id="product-select" class="form-control" style="flex:1 1 200px"><option value="">Choisir un produit</option></select>
+      <input id="gen-qty" class="form-control" type="number" min="1" value="1" style="width:120px">
+      <button class="btn-login" type="submit" style="width:auto">Générer</button>
+    </form>
+    <div id="generated" style="margin-top:12px"></div>
+  </div>
+
+  <div id="admin" class="page card" style="display:none">
+    <h4>Administration</h4>
+    <div class="muted">Gestion des utilisateurs</div>
+    <div style="margin-top:12px;overflow:auto">
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr style="text-align:left"><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Durée connectée</th><th>Statut</th><th>Solde</th><th>Actions</th></tr></thead>
+        <tbody id="admin-users-table"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn-login" id="btn-add-user" style="width:auto;background:linear-gradient(90deg,var(--turquoise),var(--green))">Ajouter utilisateur</button>
+      <button class="btn-login" id="btn-add-product" style="width:auto;background:linear-gradient(90deg,var(--orange),var(--turquoise))">Ajouter produit</button>
+      <button class="btn-login" id="btn-generate-test-users" style="width:auto;background:linear-gradient(90deg,var(--green),var(--orange))">Générer users test</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-title" id="modal-title">Titre</div>
+    <div id="modal-body">Contenu</div>
+    <div class="modal-actions">
+      <button class="btn-secondary-soft" id="modal-cancel">Annuler</button>
+      <button class="btn-login" id="modal-confirm" style="width:auto">Confirmer</button>
+    </div>
+  </div>
+</div>
+
 <script>
-// Data
-const products = [
-  {id:1,name:"LPTV M3U 12 Mois",price:350,stock:10,category:"M3U"},
-  {id:2,name:"CODE HTV 6 Mois",price:250,stock:12,category:"CODE"},
-  {id:3,name:"Test 24h",price:0,stock:50,category:"TEST"}
-];
+// ==================== CONFIGURATION INITIALE ====================
+class Shop4Panel {
+  constructor() {
+    this.products = this.loadFromStorage('products') || [
+      {id:1,name:"LPTV M3U 12 Mois",price:350,stock:10,category:"M3U"},
+      {id:2,name:"CODE HTV 6 Mois",price:250,stock:12,category:"CODE"},
+      {id:3,name:"Test 24h",price:0,stock:50,category:"TEST"}
+    ];
+    
+    this.users = this.loadFromStorage('users') || [
+      {id:1,name:"Admin Ogharbi",email:"ogharbi1988@shop4panel.com",password:"admin1988",role:"admin",balance:1500,lastLogin:null,sessionStart:null,isOnline:false},
+      {id:2,name:"User Demo",email:"user@shop4panel.com",password:"admin1988",role:"user",balance:500,lastLogin:null,sessionStart:null,isOnline:false},
+      {id:3,name:"Test User",email:"test@shop4panel.com",password:"test123",role:"test",balance:0,lastLogin:null,sessionStart:null,isOnline:false}
+    ];
+    
+    this.currentUser = null;
+    this.sessionInterval = null;
+    this.selectedPaymentMethod = "virement";
+    
+    this.init();
+  }
 
-const users = [
-  {id:1,name:"Admin Ogharbi",email:"ogharbi1988@shop4panel.com",password:"admin1988",role:"admin",balance:1500,lastLogin:null,sessionStart:null,isOnline:false},
-  {id:2,name:"User Demo",email:"user@shop4panel.com",password:"admin1988",role:"user",balance:500,lastLogin:null,sessionStart:null,isOnline:false},
-  {id:3,name:"Test User",email:"test@shop4panel.com",password:"test123",role:"test",balance:0,lastLogin:null,sessionStart:null,isOnline:false}
-];
+  // ==================== METHODS UTILITAIRES ====================
+  el(id) { return document.getElementById(id); }
+  qs(sel) { return document.querySelector(sel); }
+  qsa(sel) { return Array.from(document.querySelectorAll(sel)); }
 
-let currentUser = null;
-let sessionInterval = null;
+  showMessage(message, type = 'error') {
+    const element = type === 'success' ? this.el('field-success') : this.el('field-error');
+    element.textContent = message;
+    element.style.display = 'block';
+    setTimeout(() => { element.style.display = 'none'; }, 4500);
+  }
 
-// helpers
-function showLoginError(msg){ $('#login-error').text(msg).show(); setTimeout(()=>$('#login-error').fadeOut(300),5000); }
-function formatDuration(ms){ if(!ms) return '-'; const s=Math.floor(ms/1000), h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60; return `${h}h ${m}m ${sec}s`; }
-function fmt(dt){ if(!dt) return 'Jamais'; return (new Date(dt)).toLocaleString('fr-FR'); }
+  formatDate(date) {
+    if (!date) return 'Jamais';
+    return new Date(date).toLocaleString('fr-FR');
+  }
 
-// render products
-function renderProducts(){
-  $('#products-container').empty();
-  products.forEach(p=>{
-    const card = $(\`<div class="card" style="padding:12px"><div style="display:flex;gap:12px;align-items:center"><div style="width:64px;height:64px;border-radius:10px;background:linear-gradient(90deg,var(--turquoise),var(--green));color:white;display:flex;align-items:center;justify-content:center;font-weight:700">\${p.name.split(' ')[0]}</div><div style="flex:1"><strong>\${p.name}</strong><div class="muted">\${p.category} • Stock: \${p.stock}</div></div><div><div style="font-weight:700">\${p.price>0?p.price.toFixed(2)+' MAD':'GRATUIT'}</div><div style="margin-top:8px"><button class="btn-login buy" data-id="\${p.id}" style="background:linear-gradient(90deg,var(--turquoise),var(--green));width:100px">Acheter</button></div></div></div></div>\`);
-    $('#products-container').append(card);
-  });
-  $('#products-count').text(products.length);
-  $('#products-count-2').text(products.length);
-  $('#product-select').empty().append('<option value="">Choisir un produit</option>');
-  products.forEach(p=>$('#product-select').append('<option value="'+p.id+'">'+p.name+'</option>'));
+  formatDuration(ms) {
+    if (!ms) return '-';
+    const s = Math.floor(ms / 1000);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    return `${h}h ${m}m ${sec}s`;
+  }
+
+  // ==================== GESTION STOCKAGE ====================
+  saveToStorage(key, data) {
+    try {
+      localStorage.setItem(`s4p_${key}`, JSON.stringify(data));
+      return true;
+    } catch (e) {
+      console.warn('Erreur sauvegarde:', e);
+      return false;
+    }
+  }
+
+  loadFromStorage(key) {
+    try {
+      const data = localStorage.getItem(`s4p_${key}`);
+      return data ? JSON.parse(data) : null;
+    } catch (e) {
+      console.warn('Erreur chargement:', e);
+      return null;
+    }
+  }
+
+  // ==================== GESTION SESSIONS ====================
+  saveSession() {
+    if (!this.currentUser) return;
+    const sessionData = {
+      email: this.currentUser.email,
+      lastLogin: this.currentUser.lastLogin,
+      sessionStart: this.currentUser.sessionStart
+    };
+    this.saveToStorage('session', sessionData);
+  }
+
+  loadSession() {
+    try {
+      const sessionData = this.loadFromStorage('session');
+      if (!sessionData) return false;
+
+      const user = this.users.find(u => u.email === sessionData.email);
+      if (!user) return false;
+
+      user.lastLogin = sessionData.lastLogin;
+      user.sessionStart = sessionData.sessionStart;
+      user.isOnline = true;
+      this.currentUser = user;
+      
+      this.applyAfterLogin();
+      return true;
+    } catch (e) {
+      console.warn('Erreur chargement session:', e);
+      return false;
+    }
+  }
+
+  clearSession() {
+    try {
+      localStorage.removeItem('s4p_session');
+    } catch (e) {
+      console.warn('Erreur suppression session:', e);
+    }
+  }
+
+  // ==================== GESTION LOGIN ====================
+  handleLogin(email, password, remember = false) {
+    // Validation
+    if (!email || !password) {
+      this.showMessage('Email et mot de passe sont requis');
+      return false;
+    }
+
+    // Recherche utilisateur
+    const user = this.users.find(u => u.email === email && u.password === password);
+    if (!user) {
+      this.showMessage('Email ou mot de passe incorrect');
+      return false;
+    }
+
+    // Mise à jour statut utilisateurs
+    this.users.forEach(u => {
+      u.isOnline = false;
+      u.sessionStart = null;
+    });
+
+    // Connexion utilisateur
+    user.lastLogin = new Date().toISOString();
+    user.sessionStart = Date.now();
+    user.isOnline = true;
+    this.currentUser = user;
+
+    // Sauvegarde session si "Se souvenir"
+    if (remember) {
+      this.saveSession();
+    }
+
+    this.applyAfterLogin();
+    this.showMessage(`Bienvenue ${user.name} !`, 'success');
+    return true;
+  }
+
+  handleLogout() {
+    if (this.currentUser) {
+      this.currentUser.isOnline = false;
+      this.currentUser.sessionStart = null;
+    }
+    
+    this.currentUser = null;
+    
+    if (this.sessionInterval) {
+      clearInterval(this.sessionInterval);
+      this.sessionInterval = null;
+    }
+    
+    this.clearSession();
+    
+    // Réinitialisation UI
+    this.el('app').style.display = 'none';
+    this.el('login-wrap').style.display = 'flex';
+    this.el('email').value = '';
+    this.el('password').value = '';
+    this.el('hdr-name').textContent = 'Invité';
+    this.el('hdr-role').textContent = 'Non connecté';
+    this.el('hdr-avatar').textContent = 'S4';
+    this.el('online-dot').style.background = 'var(--offline)';
+    this.el('session-duration').textContent = '—';
+    
+    this.showMessage('Déconnexion réussie', 'success');
+  }
+
+  applyAfterLogin() {
+    if (!this.currentUser) return;
+
+    // Mise à jour header
+    this.el('hdr-name').textContent = this.currentUser.name;
+    this.el('hdr-role').textContent = this.getRoleDisplay(this.currentUser.role);
+    this.el('hdr-avatar').textContent = this.getUserInitials(this.currentUser.name);
+    this.el('user-greet').textContent = this.currentUser.name.split(' ')[0];
+    this.el('user-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
+    this.el('current-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
+    this.el('online-dot').style.background = 'var(--success)';
+
+    // Affichage sections
+    this.el('login-wrap').style.display = 'none';
+    this.el('app').style.display = 'block';
+    
+    // Gestion droits admin
+    const isAdmin = this.currentUser.role === 'admin';
+    this.el('admin-tile').style.display = isAdmin ? 'block' : 'none';
+    this.el('logout-tile').style.display = 'block';
+
+    // Initialisation données
+    this.renderProducts();
+    this.updateAdminTable();
+
+    // Timer session
+    if (this.sessionInterval) clearInterval(this.sessionInterval);
+    this.sessionInterval = setInterval(() => {
+      if (this.currentUser && this.currentUser.sessionStart) {
+        this.el('session-duration').textContent = 
+          this.formatDuration(Date.now() - this.currentUser.sessionStart);
+      }
+      this.updateAdminTable();
+    }, 1000);
+  }
+
+  getRoleDisplay(role) {
+    const roles = {
+      'admin': 'Administrateur',
+      'user': 'Utilisateur',
+      'test': 'Utilisateur test'
+    };
+    return roles[role] || role;
+  }
+
+  getUserInitials(name) {
+    return name.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase();
+  }
+
+  // ==================== GESTION PRODUITS ====================
+  renderProducts() {
+    const container = this.el('products-container');
+    container.innerHTML = '';
+
+    this.products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.padding = '12px';
+      
+      card.innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:64px;height:64px;border-radius:10px;background:linear-gradient(90deg,var(--turquoise),var(--green));color:white;display:flex;align-items:center;justify-content:center;font-weight:700">
+            ${product.name.split(' ')[0]}
+          </div>
+          <div style="flex:1">
+            <strong>${product.name}</strong>
+            <div class="muted">${product.category} • Stock: ${product.stock}</div>
+          </div>
+          <div>
+            <div style="font-weight:700">${product.price > 0 ? product.price.toFixed(2) + ' MAD' : 'GRATUIT'}</div>
+            <div style="margin-top:8px">
+              <button class="btn-login buy" data-id="${product.id}" style="background:linear-gradient(90deg,var(--turquoise),var(--green));width:100px">
+                Acheter
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      container.appendChild(card);
+    });
+
+    // Mise à jour compteurs
+    const countElements = this.qsa('#products-count, #products-count-2');
+    countElements.forEach(el => el.textContent = this.products.length);
+
+    // Remplissage select générateur
+    const select = this.el('product-select');
+    select.innerHTML = '<option value="">Choisir un produit</option>';
+    this.products.forEach(p => {
+      const option = document.createElement('option');
+      option.value = p.id;
+      option.textContent = p.name;
+      select.appendChild(option);
+    });
+
+    this.saveToStorage('products', this.products);
+  }
+
+  // ==================== GESTION UTILISATEURS ====================
+  updateAdminTable() {
+    const tbody = this.el('admin-users-table');
+    tbody.innerHTML = '';
+
+    this.users.forEach(user => {
+      const row = document.createElement('tr');
+      const duration = (user.isOnline && user.sessionStart) ? 
+        this.formatDuration(Date.now() - user.sessionStart) : '-';
+      
+      const statusBadge = user.isOnline ? 
+        '<span class="bad-online">En ligne</span>' : 
+        '<span class="bad-offline">Hors ligne</span>';
+
+      row.innerHTML = `
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${this.getRoleDisplay(user.role)}</td>
+        <td>${this.formatDate(user.lastLogin)}</td>
+        <td>${duration}</td>
+        <td>${statusBadge}</td>
+        <td>${user.balance.toFixed(2)} MAD</td>
+        <td>
+          <button class="btn-secondary-soft edit-user" data-id="${user.id}" style="font-size:12px;padding:4px 8px">Modifier</button>
+        </td>
+      `;
+      
+      tbody.appendChild(row);
+    });
+
+    this.saveToStorage('users', this.users);
+  }
+
+  generateTestUsers(count = 5) {
+    const baseId = Math.max(...this.users.map(u => u.id)) + 1;
+    
+    for (let i = 0; i < count; i++) {
+      const userNum = baseId + i;
+      this.users.push({
+        id: userNum,
+        name: `Test User ${userNum}`,
+        email: `test${userNum}@shop4panel.com`,
+        password: "1236542025",
+        role: "test",
+        balance: 0,
+        lastLogin: null,
+        sessionStart: null,
+        isOnline: false
+      });
+    }
+    
+    this.updateAdminTable();
+    this.showMessage(`${count} utilisateurs test générés. Mot de passe: 1236542025`, 'success');
+  }
+
+  addUser(userData) {
+    const newId = Math.max(...this.users.map(u => u.id)) + 1;
+    const newUser = {
+      id: newId,
+      ...userData,
+      lastLogin: null,
+      sessionStart: null,
+      isOnline: false
+    };
+    
+    this.users.push(newUser);
+    this.updateAdminTable();
+    this.showMessage('Utilisateur ajouté avec succès', 'success');
+  }
+
+  addProduct(productData) {
+    const newId = Math.max(...this.products.map(p => p.id)) + 1;
+    const newProduct = {
+      id: newId,
+      stock: 10,
+      ...productData
+    };
+    
+    this.products.push(newProduct);
+    this.renderProducts();
+    this.showMessage('Produit ajouté avec succès', 'success');
+  }
+
+  // ==================== GESTION ACHATS ====================
+  handlePurchase(productId) {
+    if (!this.currentUser) {
+      this.showMessage('Veuillez vous connecter pour acheter');
+      return false;
+    }
+
+    const product = this.products.find(p => p.id === productId);
+    if (!product) {
+      this.showMessage('Produit non trouvé');
+      return false;
+    }
+
+    if (product.stock <= 0) {
+      this.showMessage('Stock épuisé');
+      return false;
+    }
+
+    if (this.currentUser.balance < product.price) {
+      this.showMessage('Solde insuffisant');
+      return false;
+    }
+
+    // Traitement achat
+    this.currentUser.balance -= product.price;
+    product.stock -= 1;
+
+    // Mise à jour UI
+    this.el('user-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
+    this.el('current-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
+    
+    this.renderProducts();
+    this.updateAdminTable();
+    
+    this.showMessage(`Achat réussi: ${product.name}`, 'success');
+    return true;
+  }
+
+  handleRecharge(amount) {
+    if (!this.currentUser) {
+      this.showMessage('Veuillez vous connecter');
+      return false;
+    }
+
+    if (amount < 500) {
+      this.showMessage('Le montant minimum est de 500 MAD');
+      return false;
+    }
+
+    this.currentUser.balance += amount;
+    
+    // Mise à jour UI
+    this.el('user-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
+    this.el('current-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
+    
+    this.updateAdminTable();
+    
+    this.showMessage(`Recharge ${this.selectedPaymentMethod} effectuée: ${amount} MAD`, 'success');
+    return true;
+  }
+
+  // ==================== GESTION PAGES ====================
+  showPage(pageId) {
+    // Vérification accès admin
+    if (pageId === 'admin' && (!this.currentUser || this.currentUser.role !== 'admin')) {
+      this.showMessage('Accès administration réservé');
+      return;
+    }
+
+    // Masquer toutes les pages
+    this.qsa('.page').forEach(page => {
+      page.style.display = 'none';
+    });
+
+    // Afficher page demandée
+    const targetPage = this.el(pageId);
+    if (targetPage) {
+      targetPage.style.display = 'block';
+    }
+  }
+
+  // ==================== INITIALISATION ====================
+  init() {
+    // Chargement session
+    this.loadSession();
+
+    // Événement formulaire login
+    this.el('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = this.el('email').value.trim();
+      const password = this.el('password').value.trim();
+      const remember = this.el('remember').checked;
+      
+      this.handleLogin(email, password, remember);
+    });
+
+    // Boutons démo
+    this.el('demo-admin').addEventListener('click', () => {
+      this.el('email').value = 'ogharbi1988@shop4panel.com';
+      this.el('password').value = 'admin1988';
+      this.el('remember').checked = true;
+    });
+
+    this.el('demo-user').addEventListener('click', () => {
+      this.el('email').value = 'user@shop4panel.com';
+      this.el('password').value = 'admin1988';
+      this.el('remember').checked = true;
+    });
+
+    this.el('demo-test').addEventListener('click', () => {
+      this.el('email').value = 'test@shop4panel.com';
+      this.el('password').value = 'test123';
+      this.el('remember').checked = false;
+    });
+
+    // Génération users test
+    this.el('generate-test-users').addEventListener('click', () => {
+      this.generateTestUsers(5);
+    });
+
+    this.el('btn-generate-test-users').addEventListener('click', () => {
+      this.generateTestUsers(5);
+    });
+
+    // Navigation tiles
+    this.qsa('.tile[data-page]').forEach(tile => {
+      tile.addEventListener('click', () => {
+        const page = tile.dataset.page;
+        this.showPage(page);
+      });
+    });
+
+    // Déconnexion
+    this.el('logout-tile').addEventListener('click', () => {
+      this.handleLogout();
+    });
+
+    // Gestion achats (délégation d'événements)
+    document.body.addEventListener('click', (e) => {
+      if (e.target.classList.contains('buy')) {
+        const productId = parseInt(e.target.dataset.id);
+        this.handlePurchase(productId);
+      }
+    });
+
+    // Méthodes de paiement
+    this.qsa('.payment-method').forEach(method => {
+      method.addEventListener('click', () => {
+        this.qsa('.payment-method').forEach(m => m.classList.remove('selected'));
+        method.classList.add('selected');
+        this.selectedPaymentMethod = method.dataset.method;
+      });
+    });
+
+    // Recharge solde
+    this.el('open-recharge-small').addEventListener('click', () => {
+      const amount = parseFloat(prompt(`Montant recharge (min 500 MAD) - Méthode: ${this.selectedPaymentMethod.toUpperCase()}`) || 0);
+      if (amount) {
+        this.handleRecharge(amount);
+      }
+    });
+
+    // Générateur codes
+    this.el('gen-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      if (!this.currentUser || this.currentUser.role !== 'admin') {
+        this.showMessage('Accès réservé aux administrateurs');
+        return;
+      }
+
+      const productId = this.el('product-select').value;
+      const quantity = parseInt(this.el('gen-qty').value) || 1;
+
+      if (!productId) {
+        this.showMessage('Veuillez choisir un produit');
+        return;
+      }
+
+      let codes = '';
+      for (let i = 0; i < quantity; i++) {
+        codes += `CODE-${Math.random().toString(36).slice(2, 10).toUpperCase()}<br>`;
+      }
+
+      this.el('generated').innerHTML = `
+        <div class="card">
+          <strong>Codes générés (${quantity}):</strong>
+          <div style="margin-top:8px;font-family:monospace">${codes}</div>
+        </div>
+      `;
+    });
+
+    // Administration - Ajout utilisateur
+    this.el('btn-add-user').addEventListener('click', () => {
+      if (!this.currentUser || this.currentUser.role !== 'admin') {
+        this.showMessage('Accès réservé aux administrateurs');
+        return;
+      }
+
+      const name = prompt('Nom complet:');
+      if (!name) return;
+
+      const email = prompt('Email:');
+      if (!email) return;
+
+      const password = prompt('Mot de passe:');
+      if (!password) return;
+
+      const role = prompt('Rôle (admin/user/test):', 'user');
+      const balance = parseFloat(prompt('Solde initial (MAD):', '0')) || 0;
+
+      this.addUser({ name, email, password, role, balance });
+    });
+
+    // Administration - Ajout produit
+    this.el('btn-add-product').addEventListener('click', () => {
+      if (!this.currentUser || this.currentUser.role !== 'admin') {
+        this.showMessage('Accès réservé aux administrateurs');
+        return;
+      }
+
+      const name = prompt('Nom du produit:');
+      if (!name) return;
+
+      const price = parseFloat(prompt('Prix (MAD):', '0')) || 0;
+      const category = prompt('Catégorie:', 'M3U');
+
+      this.addProduct({ name, price, category });
+    });
+
+    // Initialisation rendu
+    this.renderProducts();
+    this.updateAdminTable();
+  }
 }
 
-// admin users table update
-function updateAdminTable(){
-  $('#admin-users-table').empty();
-  users.forEach(u=>{
-    const dur = u.isOnline && u.sessionStart ? formatDuration(Date.now()-u.sessionStart) : '-';
-    $('#admin-users-table').append('<tr><td>'+u.name+'</td><td>'+u.email+'</td><td>'+u.role+'</td><td>'+fmt(u.lastLogin)+'</td><td>'+dur+'</td><td>'+u.balance.toFixed(2)+' MAD</td></tr>');
-  });
-}
-
-// login submit
-$('#login-form').on('submit', function(e){
-  e.preventDefault();
-  const email = $('#email').val().trim(), pwd = $('#password').val().trim();
-  if(!email || !pwd){ showLoginError('Email et mot de passe requis'); return; }
-  const user = users.find(u=>u.email===email && u.password===pwd);
-  if(!user){ showLoginError('Email ou mot de passe incorrect'); return; }
-  // reset other sessions as requested (reset on each new login)
-  users.forEach(u=>{ u.isOnline=false; u.sessionStart=null; });
-  user.lastLogin = new Date().toISOString();
-  user.sessionStart = Date.now();
-  user.isOnline = true;
-  currentUser = user;
-  // update header
-  $('#hdr-name').text(currentUser.name); $('#hdr-role').text(currentUser.role==='admin'?'Administrateur':(currentUser.role==='test'?'Utilisateur test':'Utilisateur')); $('#hdr-avatar').text(currentUser.name.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase());
-  $('#user-greet').text(currentUser.name);
-  $('#user-balance, #current-balance').text(currentUser.balance.toFixed(2)+' MAD');
-  // show app
-  $('#login-wrap').hide();
-  $('#app').show();
-  // show admin tile only for admin role
-  if(currentUser.role==='admin'){ $('#admin-tile').show(); $('#logout-tile').show(); } else { $('#admin-tile').hide(); $('#logout-tile').show(); }
-  renderProducts();
-  updateAdminTable();
-  // start session timer update
-  if(sessionInterval) clearInterval(sessionInterval);
-  sessionInterval = setInterval(()=>{
-    if(currentUser && currentUser.sessionStart) $('#session-duration').text(formatDuration(Date.now()-currentUser.sessionStart));
-    updateAdminTable();
-  },1000);
+// Démarrage de l'application
+document.addEventListener('DOMContentLoaded', () => {
+  new Shop4Panel();
 });
-
-// demo buttons prefill
-$('#demo-admin').on('click', function(){ $('#email').val('ogharbi1988@shop4panel.com'); $('#password').val('admin1988'); });
-$('#demo-user').on('click', function(){ $('#email').val('user@shop4panel.com'); $('#password').val('admin1988'); });
-
-// tiles navigation
-$(document).on('click', '.tile', function(){
-  const page = $(this).data('page');
-  if(!page) return;
-  // admin access check
-  if(page==='admin' && (!currentUser || currentUser.role!=='admin')){ showLoginError('Accès administration réservé aux administrateurs'); return; }
-  $('.page').hide();
-  $('#'+page).show();
-});
-
-// logout tile
-$('#logout-tile').on('click', function(){ if(currentUser){ currentUser.isOnline=false; currentUser.sessionStart=null; } currentUser=null; if(sessionInterval) clearInterval(sessionInterval); $('#app').hide(); $('#login-wrap').show(); $('#email,#password').val(''); $('#hdr-name').text('Invité'); $('#hdr-role').text('Non connecté'); $('#hdr-avatar').text('S4'); showLoginError('Déconnecté'); });
-
-// buy product
-$(document).on('click', '.buy', function(){
-  const id = $(this).data('id'); const p = products.find(x=>x.id==id);
-  if(!currentUser){ showLoginError('Veuillez vous connecter pour acheter'); return; }
-  if(currentUser.balance >= p.price){
-    currentUser.balance -= p.price; p.stock = Math.max(0,p.stock-1);
-    $('#user-balance, #current-balance').text(currentUser.balance.toFixed(2)+' MAD');
-    renderProducts(); updateAdminTable(); showLoginError('Achat réussi: '+p.name);
-  } else showLoginError('Solde insuffisant');
-});
-
-// recharge simple prompt
-$('#open-recharge-small').on('click', function(){
-  if(!currentUser){ showLoginError('Connectez-vous d\'abord'); return; }
-  const amt = prompt('Montant recharge (min 500)'); const n = parseFloat(amt||0);
-  if(isNaN(n) || n<500){ showLoginError('Montant invalide (min 500)'); return; }
-  currentUser.balance += n; $('#user-balance, #current-balance').text(currentUser.balance.toFixed(2)+' MAD'); updateAdminTable(); showLoginError('Recharge ajoutée: '+n+' MAD');
-});
-
-// generator (admin only)
-$('#gen-form').on('submit', function(e){
-  e.preventDefault();
-  if(!currentUser || currentUser.role!=='admin'){ showLoginError('Accès réservé aux administrateurs'); return; }
-  const pid = $('#product-select').val(); const qty = parseInt($('#gen-qty').val())||1;
-  if(!pid){ showLoginError('Choisir un produit'); return; }
-  let codes=''; for(let i=0;i<qty;i++){ codes += 'CODE-'+Math.random().toString(36).slice(2,10).toUpperCase()+'<br>'; }
-  $('#generated').html('<div class="card"><strong>Codes générés:</strong><div style="margin-top:8px">'+codes+'</div></div>');
-});
-
-// add user (admin only)
-$('#btn-add-user').on('click', function(){
-  if(!currentUser || currentUser.role!=='admin'){ showLoginError('Accès réservé aux administrateurs'); return; }
-  const name = prompt('Nom complet'); if(!name) return; const email = prompt('Email'); if(!email) return; const pwd = prompt('Mot de passe'); if(!pwd) return;
-  const role = prompt('Rôle (user/test/admin)','user'); const bal = parseFloat(prompt('Solde initial (MAD)','0'))||0;
-  const id = users.length+1; users.push({id,name,email,password:pwd,role,balance:bal,lastLogin:null,sessionStart:null,isOnline:false}); updateAdminTable(); showLoginError('Utilisateur ajouté');
-});
-
-// add product (admin only)
-$('#btn-add-product').on('click', function(){
-  if(!currentUser || currentUser.role!=='admin'){ showLoginError('Accès réservé aux administrateurs'); return; }
-  const name = prompt('Nom produit'); if(!name) return; const price = parseFloat(prompt('Prix (MAD)','0'))||0; const cat = prompt('Catégorie','M3U');
-  const id = products.length+1; products.push({id,name,price,stock:10,category:cat}); renderProducts(); showLoginError('Produit ajouté');
-});
-
-// init render
-renderProducts(); updateAdminTable();
 </script>
 </body>
 </html>
