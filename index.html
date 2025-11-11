@@ -1,1505 +1,2756 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+
+<html class="light-style layout-menu-fixed" data-theme="theme-default" data-assets-path="http://topmultivendeur.com/assets/" data-base-url="http://topmultivendeur.com" data-framework="laravel" data-template="vertical-menu-laravel-template-free">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SHOP 4 PANEL — V6 PRO</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Dashboard </title>
+  <script src="https://static.geetest.com/v4/gt4.js"></script> 
+  <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
+  <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5, bootstrap 5 free, free admin template">
+  <!-- laravel CRUD token -->
+  <meta name="csrf-token" content="3S5nDGNqLqiLhvNBSmcaXDqQLy97UWyRDG04HxId">
+  <!-- Canonical SEO -->
+  <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-html-laravel-admin-template/">
+  <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://topmultivendeur.com/storage/assets/img/panel/1728320593-P1.png" />
+    <!-- Include Styles -->
+  <!-- BEGIN: Theme CSS-->
+<!-- Fonts -->
+<meta charset="UTF-8">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/fonts/boxicons.css?id=a9a7a946ee13016e04f57799146804c7" />
+
+<!-- Core CSS -->
+<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/css/core.css?id=681d86959458f8858f2b5b11f2eee554" />
+<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/css/theme-default.css?id=3e8cb4751ca766e56a68fe0bd72b5fef?v=1762855729" />
+<link rel="stylesheet" href="https://topmultivendeur.com/assets/css/demo.css?id=6ec63121218f83eed6a13a8aa3decb44" />
+
+<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css?id=858f7088631c9c1fe122f541dcad3a4d" />
+
+
+<!-- Vendor Styles -->
+<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/libs/apex-charts/apex-charts.css">
 <style>
-:root {
-  --bg-a: #05292d; 
-  --accent1: #00bfa6; 
-  --accent2: #10b981; 
-  --accent3: #ff8a00;
-  --accent4: #6366f1;
-  --card-radius: 20px; 
-  --shadow: 0 25px 60px rgba(2,6,23,0.15);
-  --shadow-light: 0 15px 40px rgba(2,6,23,0.08);
-  --muted: #7b8890;
-  --gradient-primary: linear-gradient(135deg, var(--accent1), var(--accent4));
-  --gradient-secondary: linear-gradient(135deg, var(--accent2), var(--accent3));
+  .btn-clignote {
+    animation-duration: 1.8s;
+    animation-name: clignoter;
+    animation-iteration-count: infinite;
+    transition: none;
+    color: red;
 }
 
-* {
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0;
-}
-
-html, body {
-  height: 100%; 
-  font-family: 'Public Sans', Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-}
-
-body {
-  background: linear-gradient(135deg, var(--bg-a), #0b3940 40%, #0f6e6a 70%, var(--accent3)); 
-  color: #03121a;
-  overflow-x: hidden;
-}
-
-/* Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(0,191,166,0.3); }
-  50% { box-shadow: 0 0 30px rgba(0,191,166,0.6); }
-}
-
-/* Layout principal */
-.container-center {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px;
-  position: relative;
-  z-index: 2;
-}
-
-/* Effets de fond animés */
-.background-effects {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.floating-shape {
-  position: absolute;
-  border-radius: 50%;
-  background: linear-gradient(45deg, var(--accent1), transparent);
-  animation: float 6s ease-in-out infinite;
-}
-
-.shape-1 { width: 200px; height: 200px; top: 10%; left: 5%; animation-delay: 0s; }
-.shape-2 { width: 150px; height: 150px; top: 60%; right: 10%; animation-delay: 2s; }
-.shape-3 { width: 100px; height: 100px; bottom: 20%; left: 20%; animation-delay: 4s; }
-
-/* Carte de connexion moderne */
-.loginCard {
-  width: 100%;
-  max-width: 420px;
-  border-radius: var(--card-radius);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: slideIn 0.8s ease-out;
-  position: relative;
-  z-index: 10;
-}
-
-.loginHeader {
-  background: var(--gradient-primary);
-  padding: 30px;
-  text-align: center;
-  color: white;
-  position: relative;
-}
-
-.logoBadge {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-weight: 900;
-  font-size: 24px;
-  margin: 0 auto 15px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.logoTitle {
-  font-size: 24px;
-  font-weight: 900;
-  margin-bottom: 8px;
-}
-
-.slogan {
-  font-size: 14px;
-  opacity: 0.9;
-  font-weight: 500;
-}
-
-/* Formulaire */
-.form {
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.field {
-  position: relative;
-}
-
-.field input, .field select {
-  width: 100%;
-  padding: 16px 16px 16px 50px;
-  border-radius: 12px;
-  border: 2px solid #f0f0f0;
-  background: white;
-  font-size: 15px;
-  outline: none;
-  transition: all 0.3s ease;
-  font-family: 'Public Sans', sans-serif;
-}
-
-.field input:focus, .field select:focus {
-  border-color: var(--accent1);
-  box-shadow: 0 0 0 3px rgba(0, 191, 166, 0.1);
-  transform: translateY(-2px);
-}
-
-.icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent1);
-  z-index: 2;
-}
-
-/* Boutons */
-.btnPrimary {
-  padding: 16px;
-  border-radius: 12px;
-  border: none;
-  background: var(--gradient-primary);
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
-  font-family: 'Public Sans', sans-serif;
-  font-size: 15px;
-}
-
-.btnPrimary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(0, 191, 166, 0.3);
-  animation: glow 2s infinite;
-}
-
-.btnSecondary {
-  padding: 12px 20px;
-  border-radius: 10px;
-  border: 2px solid var(--accent1);
-  background: transparent;
-  color: var(--accent1);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btnSecondary:hover {
-  background: var(--accent1);
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* App Layout */
-.app {
-  display: none;
-  min-height: 100vh;
-  background: #f8fafc;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background: white;
-  box-shadow: 0 2px 20px rgba(2,6,23,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.brand {
-  font-weight: 800;
-  padding: 10px 20px;
-  border-radius: 12px;
-  background: var(--gradient-primary);
-  color: white;
-  font-size: 18px;
-}
-
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.notification-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #ff4757;
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 800;
-  background: var(--gradient-secondary);
-}
-
-/* Sidebar moderne */
-.sidebar {
-  width: 280px;
-  background: white;
-  box-shadow: 2px 0 20px rgba(2,6,23,0.08);
-  padding: 25px;
-  height: calc(100vh - 70px);
-  position: fixed;
-  overflow-y: auto;
-}
-
-.menu {
-  margin-top: 25px;
-}
-
-.menu .item {
-  padding: 14px 16px;
-  border-radius: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-  transition: all 0.3s ease;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.menu .item:hover, .menu .item.active {
-  background: var(--gradient-primary);
-  color: white;
-  transform: translateX(5px);
-}
-
-.menu .item i {
-  width: 20px;
-  text-align: center;
-}
-
-/* Contenu principal */
-.content {
-  flex: 1;
-  padding: 30px;
-  margin-left: 280px;
-  background: #f8fafc;
-  min-height: calc(100vh - 70px);
-}
-
-/* Grille de statistiques */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  margin: 25px 0;
-}
-
-.stat-card {
-  background: white;
-  border-radius: var(--card-radius);
-  padding: 25px;
-  box-shadow: var(--shadow-light);
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--gradient-primary);
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
-}
-
-.stat-value {
-  font-size: 32px;
-  font-weight: 800;
-  margin: 10px 0;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-/* Produits */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.product-card {
-  background: white;
-  border-radius: var(--card-radius);
-  padding: 20px;
-  box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
-}
-
-.product-image {
-  width: 100%;
-  height: 160px;
-  border-radius: 12px;
-  object-fit: cover;
-  margin-bottom: 15px;
-  background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-}
-
-.product-price {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--accent1);
-  margin: 10px 0;
-}
-
-/* Modals */
-.modal {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(2,6,23,0.6);
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-}
-
-.modal .modalInner {
-  background: white;
-  padding: 30px;
-  border-radius: var(--card-radius);
-  min-width: 400px;
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: slideIn 0.3s ease;
-  box-shadow: var(--shadow);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #374151;
-}
-
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  font-family: 'Public Sans', sans-serif;
-}
-
-.form-group input:focus, .form-group select:focus {
-  border-color: var(--accent1);
-  box-shadow: 0 0 0 3px rgba(0, 191, 166, 0.1);
-}
-
-/* Tableaux */
-.data-table {
-  background: white;
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-light);
-  margin-top: 20px;
-}
-
-.table-header {
-  padding: 20px;
-  background: var(--gradient-primary);
-  color: white;
-  font-weight: 700;
-  font-size: 18px;
-}
-
-.table-content {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 15px 20px;
-  text-align: left;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-th {
-  background: #f8fafc;
-  font-weight: 600;
-  color: #475569;
-}
-
-tr:hover {
-  background: #f8fafc;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 99;
+  </style>
+<style>
+    .menu-icon-clinot {
+        margin-left: 20px;
+    height: 30px;
+    width: 30px;
+    opacity: 1; /* Initially visible */
+    transition: opacity 2s ease-in-out; /* Transition effect */
   }
-  
-  .sidebar.active {
-    transform: translateX(0);
+
+  .menu-icon.hidden {
+    opacity: 0; /* Hidden */
   }
-  
-  .content {
-    margin-left: 0;
-  }
-  
-  .menu-toggle {
-    display: block !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .topbar {
-    padding: 15px 20px;
-  }
-  
-  .content {
-    padding: 20px;
-  }
-  
-  .modal .modalInner {
-    min-width: 90%;
-    margin: 20px;
-  }
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: var(--accent1);
-  cursor: pointer;
-}
-
-/* Badges */
-.badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.badge-success {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.badge-warning {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.badge-danger {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-/* Utilitaires */
-.text-success { color: #10b981; }
-.text-danger { color: #ef4444; }
-.text-warning { color: #f59e0b; }
-
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.hidden {
-  display: none !important;
-}
-</style>
-</head>
-<body>
-<!-- Effets de fond -->
-<div class="background-effects">
-  <div class="floating-shape shape-1"></div>
-  <div class="floating-shape shape-2"></div>
-  <div class="floating-shape shape-3"></div>
-</div>
-
-<!-- PAGE DE CONNEXION -->
-<div class="container-center" id="loginView">
-  <div class="loginCard">
-    <div class="loginHeader">
-      <div class="logoBadge">S4</div>
-      <div class="logoTitle">SHOP 4 PANEL PRO</div>
-      <div class="slogan">Système de gestion nouvelle génération</div>
-    </div>
     
-    <form id="loginForm" class="form" autocomplete="on" novalidate>
-      <div class="field">
-        <div class="icon"><i class="fa fa-user"></i></div>
-        <select id="userType" required>
-          <option value="">Type d'utilisateur</option>
-          <option value="admin">Administrateur</option>
-          <option value="user">Utilisateur</option>
-        </select>
-      </div>
-      
-      <div class="field">
-        <div class="icon"><i class="fa fa-envelope"></i></div>
-        <input id="email" type="email" placeholder="Email" required>
-      </div>
-      
-      <div class="field">
-        <div class="icon"><i class="fa fa-lock"></i></div>
-        <input id="password" type="password" placeholder="Mot de passe" required>
-      </div>
-      
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <label style="display: flex; align-items: center; gap: 8px;">
-          <input id="remember" type="checkbox"> Se souvenir
-        </label>
-        <div>
-          <a href="#" id="langFR">FR</a> · <a href="#" id="langAR">AR</a>
-        </div>
-      </div>
-      
-      <div id="loginErr" class="msg err" role="alert"></div>
-      
-      <button type="submit" class="btnPrimary" id="btnLogin">
-        <i class="fa fa-sign-in-alt"></i> Se connecter
-      </button>
-      
-      <div style="display: flex; gap: 10px; margin-top: 15px;">
-        <button type="button" class="btnSecondary" id="demoAdmin">
-          <i class="fa fa-crown"></i> Admin demo
-        </button>
-        <button type="button" class="btnSecondary" id="demoUser">
-          <i class="fa fa-user"></i> User demo
-        </button>
-      </div>
-      
-      <div style="margin-top: 20px; font-size: 12px; color: var(--muted); text-align: center;">
-        <div><strong>Admin:</strong> admin@shop4panel.com / admin123</div>
-        <div><strong>User:</strong> user@shop4panel.com / user123</div>
-      </div>
-    </form>
-  </div>
-</div>
+  .scrollable-container {
+    overflow: auto; /* or overflow: scroll; */
+}
+.btn-primary {
+  background-color: #5726d4;
+}
+.solde-div {
+  background-image: url("http://topmultivendeur.com/assets/img/backgrounds/backcarte.jpg"); /* Replace with your image URL */
+  background-size: auto; /* Ensures the image does not resize */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+}
 
-<!-- APPLICATION PRINCIPALE -->
-<div class="app" id="app">
-  <!-- Topbar -->
-  <div class="topbar">
-    <div style="display: flex; align-items: center; gap: 15px;">
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fa fa-bars"></i>
-      </button>
-      <div class="brand">SHOP 4 PANEL PRO</div>
-    </div>
-    
-    <div class="user-menu">
-      <div style="position: relative; cursor: pointer;" id="notificationsBtn">
-        <i class="fa fa-bell" style="font-size: 20px; color: var(--accent1);"></i>
-        <span class="notification-badge" id="notificationCount">3</span>
-      </div>
-      
-      <div id="userInfo" style="text-align: right;">
-        <div id="uName" style="font-weight: 700;">Invité</div>
-        <div id="uRole" style="font-size: 12px; color: var(--muted);">Non connecté</div>
-      </div>
-      
-      <div class="user-avatar" id="uAvatar">S4</div>
-    </div>
-  </div>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="menu">
-      <div class="item active" data-page="dashboard">
-        <i class="fa fa-chart-line"></i> Tableau de bord
-      </div>
-      <div class="item" data-page="products">
-        <i class="fa fa-boxes"></i> Produits
-      </div>
-      <div class="item" data-page="balance">
-        <i class="fa fa-wallet"></i> Mon solde
-      </div>
-      <div class="item" data-page="users" id="usersMenu" style="display: none;">
-        <i class="fa fa-users"></i> Gestion utilisateurs
-      </div>
-      <div class="item" data-page="history">
-        <i class="fa fa-history"></i> Historique
-      </div>
-      <div class="item" data-page="settings">
-        <i class="fa fa-cog"></i> Paramètres
-      </div>
-    </div>
-    
-    <div style="margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 12px;">
-      <button id="logoutBtn" class="btnPrimary" style="width: 100%;">
-        <i class="fa fa-sign-out-alt"></i> Déconnexion
-      </button>
-    </div>
-  </aside>
+    </style>
 
-  <!-- Contenu principal -->
-  <main class="content" id="content">
-    <!-- Tableau de bord -->
-    <section id="dashboard" class="page">
-      <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 10px;">
-        <div>
-          <h2 style="margin: 0;">Tableau de bord</h2>
-          <div style="color: var(--muted);">Vue d'ensemble de votre activité</div>
-        </div>
-        <div id="adminStats" style="display: none;">
-          <span class="badge badge-success" id="onlineUsers">0 utilisateurs en ligne</span>
-        </div>
-      </div>
+<!-- Page Styles -->
 
-      <!-- Statistiques -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Solde actuel</div>
-          <div class="stat-value" id="userBalance">0.00 MAD</div>
-          <div style="font-size: 12px; color: var(--muted);">Disponible</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-label">Produits en stock</div>
-          <div class="stat-value" id="totalProducts">0</div>
-          <div style="font-size: 12px; color: var(--muted);">Total produits</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-label">Ventes du mois</div>
-          <div class="stat-value" id="monthlySales">0</div>
-          <div style="font-size: 12px; color: var(--muted);">Ce mois-ci</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-label">Utilisateurs</div>
-          <div class="stat-value" id="totalUsers">0</div>
-          <div style="font-size: 12px; color: var(--muted);">Total inscrits</div>
-        </div>
-      </div>
+  <!-- Include Scripts for customizer, helper, analytics, config -->
+  <!-- laravel style -->
+<script src="https://topmultivendeur.com/assets/vendor/js/helpers.js"></script>
 
-      <!-- Graphique et activité récente -->
-      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 30px;">
-        <div style="background: white; padding: 25px; border-radius: var(--card-radius); box-shadow: var(--shadow-light);">
-          <h3 style="margin-bottom: 20px;">Activité des ventes</h3>
-          <canvas id="salesChart" height="250"></canvas>
-        </div>
-        
-        <div style="background: white; padding: 25px; border-radius: var(--card-radius); box-shadow: var(--shadow-light);">
-          <h3 style="margin-bottom: 20px;">Activité récente</h3>
-          <div id="recentActivity" style="max-height: 300px; overflow-y: auto;">
-            <!-- Activité récente -->
-          </div>
-        </div>
-      </div>
-    </section>
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script src="https://topmultivendeur.com/assets/js/config.js"></script>
 
-    <!-- Page Produits -->
-    <section id="products" class="page hidden">
-      <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 25px;">
-        <div>
-          <h2 style="margin: 0;">Gestion des produits</h2>
-          <div style="color: var(--muted);">Ajouter et gérer vos produits</div>
-        </div>
-        <button class="btnPrimary" id="addProductBtn">
-          <i class="fa fa-plus"></i> Nouveau produit
-        </button>
-      </div>
+<!-- beautify ignore:end -->
 
-      <div class="products-grid" id="productsGrid">
-        <!-- Produits chargés dynamiquement -->
-      </div>
-    </section>
-
-    <!-- Page Utilisateurs (Admin seulement) -->
-    <section id="users" class="page hidden">
-      <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 25px;">
-        <div>
-          <h2 style="margin: 0;">Gestion des utilisateurs</h2>
-          <div style="color: var(--muted);">Gérer les comptes utilisateurs</div>
-        </div>
-        <button class="btnPrimary" id="addUserBtn">
-          <i class="fa fa-user-plus"></i> Nouvel utilisateur
-        </button>
-      </div>
-
-      <div class="data-table">
-        <div class="table-header">Liste des utilisateurs</div>
-        <div class="table-content">
-          <table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Rôle</th>
-                <th>Solde</th>
-                <th>Statut</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="usersTable">
-              <!-- Utilisateurs chargés dynamiquement -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Autres pages (solde, historique, paramètres) -->
-    <section id="balance" class="page hidden">
-      <h2>Mon solde</h2>
-      <!-- Contenu solde -->
-    </section>
-
-    <section id="history" class="page hidden">
-      <h2>Historique</h2>
-      <!-- Contenu historique -->
-    </section>
-
-    <section id="settings" class="page hidden">
-      <h2>Paramètres</h2>
-      <!-- Contenu paramètres -->
-    </section>
-  </main>
-</div>
-
-<!-- MODALS -->
-
-<!-- Modal Ajouter Produit -->
-<div class="modal" id="addProductModal">
-  <div class="modalInner">
-    <h3 style="margin-bottom: 20px;">Ajouter un produit</h3>
-    <form id="addProductForm">
-      <div class="form-group">
-        <label>Nom du produit</label>
-        <input type="text" id="productName" required placeholder="Ex: Abonnement VIP 12 mois">
-      </div>
-      
-      <div class="form-group">
-        <label>Prix (MAD)</label>
-        <input type="number" id="productPrice" required min="0" step="0.01" placeholder="0.00">
-      </div>
-      
-      <div class="form-group">
-        <label>Quantité en stock</label>
-        <input type="number" id="productStock" required min="0" placeholder="0">
-      </div>
-      
-      <div class="form-group">
-        <label>Catégorie</label>
-        <select id="productCategory" required>
-          <option value="">Choisir une catégorie</option>
-          <option value="m3u">M3U</option>
-          <option value="code">Code</option>
-          <option value="test">Test</option>
-          <option value="vip">VIP</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label>Image du produit (URL)</label>
-        <input type="url" id="productImage" placeholder="https://example.com/image.jpg">
-      </div>
-      
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="productDescription" rows="3" placeholder="Description du produit..."></textarea>
-      </div>
-      
-      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
-        <button type="button" class="btnSecondary" id="cancelProduct">Annuler</button>
-        <button type="submit" class="btnPrimary">Créer le produit</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal Ajouter Utilisateur -->
-<div class="modal" id="addUserModal">
-  <div class="modalInner">
-    <h3 style="margin-bottom: 20px;">Créer un utilisateur</h3>
-    <form id="addUserForm">
-      <div class="form-group">
-        <label>Nom complet</label>
-        <input type="text" id="userName" required placeholder="Ex: John Doe">
-      </div>
-      
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="userEmail" required placeholder="exemple@email.com">
-      </div>
-      
-      <div class="form-group">
-        <label>Mot de passe</label>
-        <input type="password" id="userPassword" required placeholder="Mot de passe sécurisé">
-      </div>
-      
-      <div class="form-group">
-        <label>Type d'utilisateur</label>
-        <select id="userRole" required>
-          <option value="user">Utilisateur standard</option>
-          <option value="test">Utilisateur test (12h)</option>
-          <option value="admin">Administrateur</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label>Solde initial (MAD)</label>
-        <input type="number" id="userBalance" value="0" min="0" step="0.01">
-      </div>
-      
-      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
-        <button type="button" class="btnSecondary" id="cancelUser">Annuler</button>
-        <button type="submit" class="btnPrimary">Créer l'utilisateur</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal Notifications -->
-<div class="modal" id="notificationsModal">
-  <div class="modalInner" style="max-width: 500px;">
-    <h3 style="margin-bottom: 20px;">Notifications</h3>
-    <div id="notificationsList" style="max-height: 400px; overflow-y: auto;">
-      <!-- Notifications -->
-    </div>
-    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-      <button class="btnSecondary" id="clearNotifications">Tout effacer</button>
-      <button class="btnPrimary" id="closeNotifications">Fermer</button>
-    </div>
-  </div>
-</div>
-
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
 <script>
-// ========== DONNÉES ET STOCKAGE ==========
-const defaultUsers = [
-  {
-    id: 1,
-    name: "Administrateur",
-    email: "admin@shop4panel.com",
-    password: "admin123",
-    role: "admin",
-    balance: 5000,
-    createdAt: new Date().toISOString(),
-    isOnline: false
-  },
-  {
-    id: 2,
-    name: "Utilisateur Demo",
-    email: "user@shop4panel.com",
-    password: "user123",
-    role: "user",
-    balance: 500,
-    createdAt: new Date().toISOString(),
-    isOnline: false
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
   }
-];
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
 
-const defaultProducts = [
-  {
-    id: 1,
-    name: "Abonnement M3U 12 mois",
-    price: 350,
-    stock: 50,
-    category: "m3u",
-    image: "",
-    description: "Abonnement complet 12 mois avec tous les chaînes",
-    sales: 45,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 2,
-    name: "Code VIP 6 mois",
-    price: 250,
-    stock: 100,
-    category: "code",
-    image: "",
-    description: "Code d'accès VIP pour 6 mois",
-    sales: 32,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 3,
-    name: "Test 24h",
-    price: 0,
-    stock: 999,
-    category: "test",
-    image: "",
-    description: "Test gratuit 24 heures",
-    sales: 128,
-    createdAt: new Date().toISOString()
-  }
-];
+</script>
 
-// Fonctions de stockage
-function save(key, val) {
-  try {
-    localStorage.setItem('s4p_pro_' + key, JSON.stringify(val));
-  } catch(e) {
-    console.warn('Erreur sauvegarde:', e);
-  }
-}
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
 
-function load(key) {
-  try {
-    const v = localStorage.getItem('s4p_pro_' + key);
-    return v ? JSON.parse(v) : null;
-  } catch(e) {
-    return null;
-  }
-}
+<body class="" data-select2-id="52">
+  <!-- Layout Content -->
+  <div class="layout-wrapper layout-content-navbar ">
+  <div class="layout-container">
 
-// Initialisation des données
-if (!load('users')) save('users', defaultUsers);
-if (!load('products')) save('products', defaultProducts);
-if (!load('transactions')) save('transactions', []);
-if (!load('notifications')) save('notifications', []);
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-// ========== UTILITAIRES ==========
-const el = id => document.getElementById(id);
-const showPage = (pageId) => {
-  document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
-  el(pageId).classList.remove('hidden');
+  <!-- ! Hide app brand if navbar-full -->
+  <div class="app-brand demo" style="height:150px">
+    <a href="https://topmultivendeur.com" class="app-brand-link">
+      <span class="app-brand-logo demo ms-4">
+        <img src="https://topmultivendeur.com/storage/assets/img/panel/1728320593-P1.png" width="150" />      </span>
+      <!--<span class="app-brand-text demo menu-text fw-bold ms-2">King SHOP</span>-->
+    </a>
+
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-autod-block d-xl-none">
+      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    </a>
+    
+  </div>
+
+  <div class="menu-inner-shadow">
+    
+  </div>
+
+  <ul class="menu-inner py-1">
   
-  // Mettre à jour le menu actif
-  document.querySelectorAll('.menu .item').forEach(item => {
-    item.classList.remove('active');
-    if (item.dataset.page === pageId) {
-      item.classList.add('active');
-    }
-  });
-};
 
-const openModal = (modalId) => {
-  el(modalId).style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-};
+ <li class="menu-item open active " >
+      <a href="https://topmultivendeur.com/dashboard" class=" menu-link">
+       
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/webp/dash.webp" />
+     
+    
+      </a>
 
-const closeModal = (modalId) => {
-  el(modalId).style.display = 'none';
-  document.body.style.overflow = 'auto';
-};
+     
+    </li>
 
-// ========== GESTION DE L'AUTHENTIFICATION ==========
-el('demoAdmin').addEventListener('click', () => {
-  el('userType').value = 'admin';
-  el('email').value = 'admin@shop4panel.com';
-  el('password').value = 'admin123';
-});
 
-el('demoUser').addEventListener('click', () => {
-  el('userType').value = 'user';
-  el('email').value = 'user@shop4panel.com';
-  el('password').value = 'user123';
-});
+    <li class="menu-item  " >
+      <a href="https://topmultivendeur.com/chargepage" class="menu-link">
+       
+       
+        <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/foot.png" />
+     
+      </a>
 
-el('loginForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const userType = el('userType').value;
-  const email = el('email').value.trim();
-  const password = el('password').value;
-  
-  if (!userType || !email || !password) {
-    showError('Veuillez remplir tous les champs');
-    return;
-  }
-  
-  const users = load('users') || [];
-  const user = users.find(u => u.email === email && u.password === password && u.role === userType);
-  
-  if (!user) {
-    showError('Identifiants incorrects ou type d\'utilisateur invalide');
-    return;
-  }
-  
-  // Connexion réussie
-  user.isOnline = true;
-  user.lastLogin = new Date().toISOString();
-  save('users', users);
-  save('currentUser', user);
-  
-  el('loginView').style.display = 'none';
-  el('app').style.display = 'block';
-  initDashboard();
-});
+     
+    </li>
 
-function showError(message) {
-  const errEl = el('loginErr');
-  errEl.textContent = message;
-  errEl.style.display = 'block';
-  setTimeout(() => errEl.style.display = 'none', 5000);
-}
 
-// ========== INITIALISATION DU DASHBOARD ==========
-function initDashboard() {
-  const user = load('currentUser');
-  if (!user) return;
-  
-  // Mettre à jour l'interface utilisateur
-  el('uName').textContent = user.name;
-  el('uRole').textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
-  el('uAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
-  el('userBalance').textContent = user.balance.toFixed(2) + ' MAD';
-  
-  // Afficher/masquer les éléments admin
-  if (user.role === 'admin') {
-    el('usersMenu').style.display = 'block';
-    el('adminStats').style.display = 'block';
-  }
-  
-  // Charger les données
-  loadProducts();
-  loadUsers();
-  updateStats();
-  showPage('dashboard');
-  
-  // Initialiser le graphique
-  initChart();
-}
+	<li class="menu-item  ">
+      <a href="https://topmultivendeur.com/listCategories" class="menu-link ">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/produit.png" />
+       
+           
+      </a>
 
-// ========== GESTION DES PRODUITS ==========
-function loadProducts() {
-  const products = load('products') || [];
-  const grid = el('productsGrid');
+    </li>
+
+    <li class="menu-item   ">
+      <a href="javascript:void(0);" class=" menu-link  menu-toggle " >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/bein.png" />
+              
+      </a>
+
+     <ul class="menu-sub">
+
+     <li class="menu-item ">
+    <a href="https://topmultivendeur.com/BeinCheckCarte" class=" menu-link">
+      
+      <i class=""></i>
+      
+      <div>Check Carte</div>
+    </a>
+
+   
+  </li>
+    <li class="menu-item ">
+    <a href="https://topmultivendeur.com/BeinAddingPackages" class=" menu-link">
+      
+      <i class=""></i>
+      
+      <div>Renew</div>
+    </a>
+
+   
+  </li>
+
+  <!--<li class="menu-item ">
+    <a href="http://topmultivendeur.com/BeinRenouvellement" class=" menu-link">
+      
+      <i class=""></i>
+      
+      <div>Renouvellement</div>
+    </a>
+
+   
+  </li>-->
+</ul>
+
+    </li>
+
+
+
+    <li class="menu-item    ">
+      <a href="javascript:void(0);" class=" menu-link  menu-toggle " >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/mango.png" />
+       
+       
+      </a>
+
+     <ul class="menu-sub">
+
+     <li class="menu-item ">
+    <a href="https://topmultivendeur.com/MangoIndex" class=" menu-link">
+      
+      <i class=""></i>
+      
+      <div>Mango</div>
+    </a>
+
+   
+  </li>
+ 
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/NShareIndex" class=" menu-link">
+      
+      <i class=""></i>
+      
+      <div>Renew Nashare</div>
+    </a>
+
+   
+  </li>
+
+  <!--<li class="menu-item ">
+    <a href="http://topmultivendeur.com/MangoRenewCode" class=" menu-link">
+      
+      <i class=""></i>
+      
+      <div>Renew Code</div>
+    </a>
+
+   
+  </li>-->
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/MangoIPTV" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>Renew IPTV</div>
+    </a>
+
+   
+  </li>
+   
+</ul>
+
+    </li>
+
+
+
+
+   
   
-  grid.innerHTML = products.map(product => `
-    <div class="product-card">
-      ${product.image ? `<img src="${product.image}" class="product-image" alt="${product.name}">` : 
-        `<div class="product-image" style="display: flex; align-items: center; justify-content: center; background: var(--gradient-primary); color: white; font-size: 14px;">
-          <i class="fa fa-box"></i>
-        </div>`}
-      <h3 style="margin: 0 0 10px 0;">${product.name}</h3>
-      <div style="color: var(--muted); font-size: 14px; margin-bottom: 10px;">${product.category.toUpperCase()}</div>
-      <div class="product-price">${product.price > 0 ? product.price.toFixed(2) + ' MAD' : 'GRATUIT'}</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-        <span class="badge ${product.stock > 10 ? 'badge-success' : product.stock > 0 ? 'badge-warning' : 'badge-danger'}">
-          ${product.stock} en stock
-        </span>
-        <span style="font-size: 12px; color: var(--muted);">${product.sales || 0} ventes</span>
+  
+  <li class="menu-item ">
+  
+    <a href="https://topmultivendeur.com/TODIndex" class="menu-link">
+     
+    <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/tod.png" />
+     
+      
+    </a>
+
+   
+  </li>
+
+
+
+  <li class="menu-item  ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle" >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/ibon.png" />
+       
+       
+      </a>
+
+     <ul class="menu-sub">
+     <li class="menu-item ">
+    <a href="https://topmultivendeur.com/IboIndex" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>Check Mac</div>
+    </a>
+
+   
+  </li>
+  
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/IboActivationIndex" class="menu-link">
+      <i class=""></i>
+      <div>Activation Mac</div>
+    </a>
+  </li>
+
+</ul>
+
+    </li>
+
+
+    <li class="menu-item ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle" >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/ibopron.png" />
+       
+        
+      </a>
+
+     <ul class="menu-sub">
+     <li class="menu-item ">
+    <a href="https://topmultivendeur.com/IboProIndex" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>Check Mac</div>
+    </a>
+
+   
+  </li>
+  
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/IboProActivationIndex" class="menu-link">
+      <i class=""></i>
+      <div>Activation Mac</div>
+    </a>
+  </li>
+
+</ul>
+
+    </li>
+
+    <li class="menu-item   ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle" >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/ht.png" />
+       
+        <div></div>
+       
+      </a>
+
+     <ul class="menu-sub">
+     <li class="menu-item ">
+    <a href="https://topmultivendeur.com/HotPlayerCheckMacIndex" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>Check Mac</div>
+    </a>
+
+   
+  </li>
+  
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/HotPlayerActivationIndex" class="menu-link">
+      <i class=""></i>
+      <div>Activation Mac</div>
+    </a>
+  </li>
+
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/playlistHotindex" class="menu-link">
+      <i class=""></i>
+      <div>Add PlayList</div>
+    </a>
+  </li>
+
+</ul>
+
+    </li>
+
+    <li class="menu-item  ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle" >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/by.png" />
+       
+        <div></div>
+       
+      </a>
+
+     <ul class="menu-sub">
+     <li class="menu-item ">
+    <a href="https://topmultivendeur.com/BayTvCheckMacIndex" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>Check Mac</div>
+    </a>
+
+   
+  </li>
+  
+  <li class="menu-item ">
+    <a href="https://topmultivendeur.com/BayTvActivationIndex" class="menu-link">
+      <i class=""></i>
+      <div>Activation Mac</div>
+    </a>
+  </li>
+
+
+</ul>
+
+    </li>
+
+    <li class="menu-item ">
+      <a href="https://topmultivendeur.com/commande" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/webp/cmd.webp" />
+     
+      </a>
+
+     
+    </li>
+
+    <li class="menu-item ">
+      <a href="https://topmultivendeur.com/ConvertM3UIndex" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/convert.png" />
+     
+      </a>
+
+     
+    </li>
+
+    <li class="menu-item ">
+      <a href="https://topmultivendeur.com/transaction" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/tr.png" />
+     
+      </a>
+
+     
+    </li>
+
+    
+	<li class="menu-item " >
+      <a href="https://topmultivendeur.com/historique" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/his.png" />
+     
+      </a>
+
+     
+    </li>
+
+    	<li class="menu-item  ">
+      <a href="https://topmultivendeur.com/Revendeurs" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/rev.png" />
+     
+      </a>
+
+     
+    </li>
+        <li class="menu-item  ">
+      <a href="https://topmultivendeur.com/Packages" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/pack.png" />
+     
+      </a>
+
+     
+    </li>
+    
+    
+    	
+	
+
+    
+   
+    
+
+    <li class="menu-item ">
+     
+      <a href="https://topmultivendeur.com/ResetRequest" class=" menu-link">
+           
+    <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/reset.png" />
+     
+       
+      </a>
+
+     
+    </li>
+
+   
+    
+
+    	
+	<li class="menu-item  ">
+      <a href="javascript:void(0);" class=" menu-link menu-toggle" >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/sys.png" />
+       
+      </a>
+
+     <ul class="menu-sub">
+     
+  <li class="menu-item ">
+   
+    <a href="https://ibosol.com/login" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>IBO PLAYER</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/2" class="  menu-link">
+        <i class=""></i>
+      
+      <div>IBO PRO BRAZIL</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/3" class="  menu-link">
+        <i class=""></i>
+      
+      <div>MANGO</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/4" class="  menu-link">
+        <i class=""></i>
+      
+      <div>PANEL SMARTONE</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/5" class="  menu-link">
+        <i class=""></i>
+      
+      <div>PANEL BAY TV</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/6" class="  menu-link">
+        <i class=""></i>
+      
+      <div>PANEL HOTIPTV</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/7" class="  menu-link">
+        <i class=""></i>
+      
+      <div>arc player</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://elkplayer.org/user/login.php" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>PANEL ELK PLAYER</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/9" class="  menu-link">
+        <i class=""></i>
+      
+      <div>ROOM IPTV</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/10" class="  menu-link">
+        <i class=""></i>
+      
+      <div>PANEL RELAX PLAY</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://dontv.eu/admin/index/cmVzZWxsZXI=" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>DONTV</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/12" class="  menu-link">
+        <i class=""></i>
+      
+      <div>Vuplayer</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://setsysteme.com/set.app" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>SET IPTV playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://renovi2.net/" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>SP1 Spain</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/15" class="  menu-link">
+        <i class=""></i>
+      
+      <div>liveonsat</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/16" class="  menu-link">
+        <i class=""></i>
+      
+      <div>bob-playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/17" class="  menu-link">
+        <i class=""></i>
+      
+      <div>virginia</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/18" class="  menu-link">
+        <i class=""></i>
+      
+      <div>4k4matic</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/19" class="  menu-link">
+        <i class=""></i>
+      
+      <div>moon player</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/20" class="  menu-link">
+        <i class=""></i>
+      
+      <div>playlist relaxplay</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/21" class="  menu-link">
+        <i class=""></i>
+      
+      <div>playlist relaxplay</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/22" class="  menu-link">
+        <i class=""></i>
+      
+      <div>miroplayer</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/23" class="  menu-link">
+        <i class=""></i>
+      
+      <div>miroplayer playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/24" class="  menu-link">
+        <i class=""></i>
+      
+      <div>duplexplay</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/25" class="  menu-link">
+        <i class=""></i>
+      
+      <div>duplexplay</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/26" class="  menu-link">
+        <i class=""></i>
+      
+      <div>iboplayer Playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://iboplayer.com/device/login" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>iboplayer Playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/28" class="  menu-link">
+        <i class=""></i>
+      
+      <div>iboproapp-playlists</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/29" class="  menu-link">
+        <i class=""></i>
+      
+      <div>smartone playlists</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/30" class="  menu-link">
+        <i class=""></i>
+      
+      <div>smartone playlists</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/31" class="  menu-link">
+        <i class=""></i>
+      
+      <div>hotplayer playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/32" class="  menu-link">
+        <i class=""></i>
+      
+      <div>BAY TV playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/33" class="  menu-link">
+        <i class=""></i>
+      
+      <div>BAY TV playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/34" class="  menu-link">
+        <i class=""></i>
+      
+      <div>elkplayer playlist</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/35" class="  menu-link">
+        <i class=""></i>
+      
+      <div>panel capplayer</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/systemcharge/36" class="  menu-link">
+        <i class=""></i>
+      
+      <div>capplayer</div>
+    </a>
+
+   
+  </li>
+    
+
+   
+</ul>
+
+    </li>
+
+    <li class="menu-item  ">
+      <a href="javascript:void(0);" class=" menu-link menu-toggle" >
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/soft.png" />
+       
+      </a>
+
+     <ul class="menu-sub">
+     
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/1" class=" menu-link">
+        <i class=""></i>
+      
+      <div>vision</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/2" class=" menu-link">
+        <i class=""></i>
+      
+      <div>echolink</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="http://www.moresat.net/" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>moresat</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/4" class=" menu-link">
+        <i class=""></i>
+      
+      <div>satdl</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/5" class=" menu-link">
+        <i class=""></i>
+      
+      <div>Tiger</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/6" class=" menu-link">
+        <i class=""></i>
+      
+      <div>dreamtv</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://swmediastar.com/" class=" menu-link" target="_blank" >
+        <i class=""></i>
+      
+      <div>mediastar</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/8" class=" menu-link">
+        <i class=""></i>
+      
+      <div>Downloader</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/9" class=" menu-link">
+        <i class=""></i>
+      
+      <div>sansat</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/10" class=" menu-link">
+        <i class=""></i>
+      
+      <div>starsat</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/11" class=" menu-link">
+        <i class=""></i>
+      
+      <div>KING PRO</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/12" class=" menu-link">
+        <i class=""></i>
+      
+      <div>dino</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/13" class=" menu-link">
+        <i class=""></i>
+      
+      <div>alphasat</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/14" class=" menu-link">
+        <i class=""></i>
+      
+      <div>spidersat</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/15" class=" menu-link">
+        <i class=""></i>
+      
+      <div>magic</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/16" class=" menu-link">
+        <i class=""></i>
+      
+      <div>panelhelper pro</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/17" class=" menu-link">
+        <i class=""></i>
+      
+      <div>powercam</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/18" class=" menu-link">
+        <i class=""></i>
+      
+      <div>ultracam</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/19" class=" menu-link">
+        <i class=""></i>
+      
+      <div>echolink2</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/20" class=" menu-link">
+        <i class=""></i>
+      
+      <div>suptv</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/21" class=" menu-link">
+        <i class=""></i>
+      
+      <div>crystal</div>
+    </a>
+
+   
+  </li>
+   
+  <li class="menu-item ">
+   
+    <a href="https://topmultivendeur.com/SoftwareSystem/22" class=" menu-link">
+        <i class=""></i>
+      
+      <div>istar</div>
+    </a>
+
+   
+  </li>
+    
+
+   
+</ul>
+
+    </li>
+
+
+            
+       
+   
+
+    
+    
+        <li class="menu-item ">
+      <a href="https://topmultivendeur.com/ImageDash" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/img.png" />
+     
+      </a>
+
+     
+    </li>
+    
+    
+        <li class="menu-item ">
+      <a href="https://topmultivendeur.com/TextDash" class=" menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/txt.png" />
+     
+      </a>
+
+     
+    </li>
+    
+
+    <li class="menu-item ">
+      <a href="https://topmultivendeur.com/videos" class="menu-link">
+       
+      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/video.png" />
+     
+      </a>
+
+     
+    </li>
+    
+		<!-- To create menu title -->
+	<!--
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">TXT</span>
+    </li> -->
+	
+	<!-- menu toggle -->
+	<!--
+	<li class="menu-item ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle" >
+       
+        <i class=""></i>
+       
+        <div>Test</div>
+      </a>
+
+     <ul class="menu-sub">
+  <li class="menu-item ">
+    <a href="" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>S Test</div>
+    </a>
+
+   
+  </li>
+   <li class="menu-item ">
+    <a href="" class="menu-link">
+      
+      <i class=""></i>
+      
+      <div>S Test 2</div>
+    </a>
+
+   
+  </li>
+</ul>
+
+    </li>
+-->
+    
+   
+  </ul>
+
+</aside>
+    
+
+    <!-- Layout page -->
+    <div class="layout-page">
+      <!-- BEGIN: Navbar-->
+            <!-- Navbar -->
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+    
+      <!--  Brand demo (display only for navbar-full and hide on below xl) -->
+      
+      <!-- ! Not required for layout-without-menu -->
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0  d-xl-none ">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+          <i class="bx bx-menu bx-sm"></i>
+        </a>
       </div>
-      ${load('currentUser').role === 'admin' ? `
-        <div style="display: flex; gap: 8px; margin-top: 15px;">
-          <button class="btnSecondary" style="flex: 1; padding: 8px;" onclick="editProduct(${product.id})">
-            <i class="fa fa-edit"></i>
-          </button>
-          <button class="btnSecondary" style="flex: 1; padding: 8px; background: #fee2e2; color: #dc2626; border-color: #dc2626;" onclick="deleteProduct(${product.id})">
-            <i class="fa fa-trash"></i>
-          </button>
+      
+      <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <!-- Search -->
+        <div class="navbar-nav align-items-center">
+          <div class="nav-item d-flex align-items-center">
+            <!--<i class="bx bx-search fs-4 lh-0"></i>
+            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search...">-->
+			          </div>
         </div>
-      ` : ''}
-    </div>
-  `).join('');
-  
-  el('totalProducts').textContent = products.length;
-}
-
-// Ajouter un produit
-el('addProductBtn').addEventListener('click', () => openModal('addProductModal'));
-el('cancelProduct').addEventListener('click', () => closeModal('addProductModal'));
-
-el('addProductForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const products = load('products') || [];
-  const newProduct = {
-    id: Math.max(...products.map(p => p.id), 0) + 1,
-    name: el('productName').value,
-    price: parseFloat(el('productPrice').value),
-    stock: parseInt(el('productStock').value),
-    category: el('productCategory').value,
-    image: el('productImage').value,
-    description: el('productDescription').value,
-    sales: 0,
-    createdAt: new Date().toISOString()
-  };
-  
-  products.push(newProduct);
-  save('products', products);
-  loadProducts();
-  closeModal('addProductModal');
-  this.reset();
-  
-  // Ajouter une notification
-  addNotification('Produit ajouté', `Le produit "${newProduct.name}" a été créé avec succès`);
-});
-
-// ========== GESTION DES UTILISATEURS ==========
-function loadUsers() {
-  const users = load('users') || [];
-  const table = el('usersTable');
-  
-  table.innerHTML = users.map(user => `
-    <tr>
-      <td>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--gradient-secondary); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 600;">
-            ${user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+        <!-- /Search -->
+                <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            Commande <i class="bx bx-bell bx-sm"></i>
+            <span class="badge bg-success rounded-pill badge-notifications">4</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end py-0">
+            <li class="dropdown-menu-header border-bottom">
+              <div class="dropdown-header d-flex align-items-center py-3">
+                <h5 class="text-body mb-0 me-auto">Commande</h5>
+              </div>
+            </li>
+            <li class="dropdown-notifications-list scrollable-container">
+              <ul class="list-group list-group-flush">
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Commande</h6>
+                <p class="mb-0">votre commande de KING 365 M3U 12 MOIS à été livrée.</p>                
+             
+                      
+                      <small class="text-muted">2025-11-01 02:56:42</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Commande</h6>
+                <p class="mb-0">Votre Commande de 1 KING 365 M3U 12 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-11-01 14:54:07</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Commande</h6>
+                <p class="mb-0">votre commande de KING 365 M3U 12 MOIS à été livrée.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-31 05:34:42</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Commande</h6>
+                <p class="mb-0">Votre Commande de 1 KING 365 M3U 12 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-31 17:16:47</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                
+                              
+                
+              </ul>
+          </li>
+            <li class="dropdown-menu-footer border-top p-3">
+              <button onclick="window.location.href = 'http://topmultivendeur.com/DelnotificationCom';" class="btn btn-primary text-uppercase w-100">supprimer les notifications</button>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            Notification <i class="bx bx-bell bx-sm"></i>
+            <span class="badge bg-danger rounded-pill badge-notifications">17</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end py-0">
+            <li class="dropdown-menu-header border-bottom">
+              <div class="dropdown-header d-flex align-items-center py-3">
+                <h5 class="text-body mb-0 me-auto">Notification</h5>
+              </div>
+            </li>
+            <li class="dropdown-notifications-list scrollable-container ps ps--active-y">
+              <ul class="list-group list-group-flush">
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-11-10 10:43:30</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Recharge</h6>
+                <p class="mb-0">Vous avez récu 536 MAD de l\&#039;administrateur</p>                
+             
+                      
+                      <small class="text-muted">2025-11-10 10:23:25</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 4K OTT/COBRA/PROMAX 6 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-11-04 18:22:59</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de  Premium 3 Months (3 Months) (bein carte: 751446155) à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-11-02 15:42:26</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Recharge</h6>
+                <p class="mb-0">Vous avez récu 560 MAD de l\&#039;administrateur</p>                
+             
+                      
+                      <small class="text-muted">2025-11-01 10:45:29</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-31 13:52:47</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ M3U 12 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-30 19:16:37</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 4K OTT/COBRA/PROMAX 6 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-28 12:12:03</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-28 12:10:01</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 TREX M3U 6 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-26 14:51:01</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 6 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-26 13:30:01</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ M3U 6 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-26 13:28:00</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-26 13:16:31</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 IRON PRO FULL DH 6 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-22 13:24:18</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de HotPlayer Activation LifeTime (mac: A8:23:FE:AB:80:BB) à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-21 20:06:29</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Achat</h6>
+                <p class="mb-0">Votre Achat de 1 IRON PRO FULL DH 3 MOIS à été bien effectué.</p>                
+             
+                      
+                      <small class="text-muted">2025-10-21 19:42:37</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                  <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                      <div class="avatar">
+                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                   
+                <h6 class="text-muted d-block mb-1">Recharge</h6>
+                <p class="mb-0">Vous avez récu 1200 MAD de l\&#039;administrateur</p>                
+             
+                      
+                      <small class="text-muted">2025-10-21 09:57:41</small>
+                    </div>
+                    <div class="flex-shrink-0 dropdown-notifications-actions">
+                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    </div>
+                  </div>
+                </li>
+                              
+                
+              </ul>
+            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+          </li>
+            <li class="dropdown-menu-footer border-top p-3">
+              <button onclick="window.location.href = 'http://topmultivendeur.com/Delnotification';" class="btn btn-primary text-uppercase w-100">Supprimer les notifications</button>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item me-2 me-xl-5">
+          
+           
+          <div class="d-flex border-primary p-2 border rounded mb-4" style="margin:0px !important">
+                      <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/wallet-info.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                <p class="mb-0">Solde</p>
+                                <a href="javascript:void(0)" class="small" data-bs-target="#upgradePlanModal" data-bs-toggle="modal">Level 4</a>
+                              </div>
+              <div class="user-progress">
+                <div class="d-flex justify-content-center">
+                  <sup class="mt-3 mb-0 me-1"></sup>
+                   
+                                          <h3 class="mb-0" >480</h3>
+                                      
+                                    <sub class="mt-auto mb-2"> /MAD</sub>
+                </div>
+              </div>
+            </div>
           </div>
-          ${user.name}
+          </li>
+        
+          <!-- User -->
+          <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+              <div class="avatar avatar-online">
+                <img src="https://topmultivendeur.com/storage/assets/img/profile/default.png" alt class="w-px-40 h-auto rounded-circle">
+              </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="javascript:void(0);">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                      <div class="avatar avatar-online">
+                        <img src="https://topmultivendeur.com/storage/assets/img/profile/default.png" alt class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                      <span class="fw-semibold d-block"><span class="__cf_email__" data-cfemail="1351767d717261787a3d222553747e727a7f3d707c7e">[email&#160;protected]</span></span>
+                      <small class="text-muted"> Admin </small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://topmultivendeur.com/profile">
+                  <i class="bx bx-user me-2"></i>
+                  <span class="align-middle">Profile</span>
+                </a>
+              </li>
+              
+             
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://topmultivendeur.com/logout">
+                  <i class='bx bx-power-off me-2'></i>
+                  <span class="align-middle">Se déconnecter</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--/ User -->
+        </ul>
+      </div>
+
+        </nav>
+  <!-- / Navbar -->
+            <!-- END: Navbar-->
+
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+
+        <!-- Content -->
+                  <div class="container-xxl flex-grow-1 container-p-y">
+            
+            <div class="bs-toast toast toast-placement-ex m-2" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+  <div class="toast-header">
+    <i class='bx bx-bell me-2'></i>
+    <div class="me-auto fw-semibold">Notification</div>
+    <small>maintenant</small>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+          </div>
+</div>
+<div class="row">
+    <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
+<marquee style="background:#fff; font-size:28px;border-radius:5px;text-shadow: #666 1px 2px;height:60px;color:#000000" class="shadow-lg fw-bold p-2 mt-1 " width="100%" direction="right" height="40%">
+        كل شخص مطالب بتفعيل Gogole authtentifcator اجباري اجباري لا اتحمل مسؤولية اي      
+       </marquee>
+          </div> 
+            <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
+<marquee style="background:#fff; font-size:28px;border-radius:5px;text-shadow: #666 1px 2px;height:60px;color:#000000" class="shadow-lg fw-bold p-2 mt-1 " width="100%" direction="right" height="40%">
+        اقل رصيد 1000 درهم      
+       </marquee>
+          </div> 
+          
+                    
+  
+                <div class="col-lg-4 col-md-4 order-2">
+    <div class="row">
+<!-- ICI CODE -->
+    
+    
+ 
+        <div class="col-lg-12 mb-4 order-0">
+    <div class="card bg-danger" >
+      <div class="d-flex align-items-end row">
+        <div class="col-sm-12">
+          <div class="card-body">
+            <h5 class="card-title" style="color:#fff">Bienvenue à Top Multi Vendeur!</h5>
+            <p class="mb-4" style="color: #fff;">Votre email n'est pas vérifié Veuillez vérifier votre email.</p>
+
+            <button type="button" href="javascript:;" id="sendmailv" class="btn btn-sm btn-outline-white">Envoyer Email de verification</button>
+          </div>
         </div>
-      </td>
-      <td>${user.email}</td>
-      <td>
-        <span class="badge ${user.role === 'admin' ? 'badge-warning' : user.role === 'test' ? 'badge-success' : 'badge-success'}">
-          ${user.role === 'admin' ? 'Admin' : user.role === 'test' ? 'Test 12h' : 'Utilisateur'}
-        </span>
-      </td>
-      <td><strong>${user.balance.toFixed(2)} MAD</strong></td>
-      <td>
-        <span class="badge ${user.isOnline ? 'badge-success' : 'badge-danger'}">
-          ${user.isOnline ? 'En ligne' : 'Hors ligne'}
-        </span>
-      </td>
-      <td>
-        <button class="btnSecondary" style="padding: 6px 12px; font-size: 12px;" onclick="editUser(${user.id})">
-          <i class="fa fa-edit"></i>
-        </button>
-      </td>
-    </tr>
-  `).join('');
+        
+      </div>
+    </div>
+  </div>
   
-  el('totalUsers').textContent = users.length;
-  el('onlineUsers').textContent = `${users.filter(u => u.isOnline).length} utilisateurs en ligne`;
-}
 
-// Ajouter un utilisateur
-el('addUserBtn').addEventListener('click', () => openModal('addUserModal'));
-el('cancelUser').addEventListener('click', () => closeModal('addUserModal'));
 
-el('addUserForm').addEventListener('submit', function(e) {
-  e.preventDefault();
   
-  const users = load('users') || [];
-  const userData = {
-    id: Math.max(...users.map(u => u.id), 0) + 1,
-    name: el('userName').value,
-    email: el('userEmail').value,
-    password: el('userPassword').value,
-    role: el('userRole').value,
-    balance: parseFloat(el('userBalance').value) || 0,
-    createdAt: new Date().toISOString(),
-    isOnline: false
-  };
   
-  // Si c'est un utilisateur test, définir une date d'expiration
-  if (userData.role === 'test') {
-    const expiry = new Date();
-    expiry.setHours(expiry.getHours() + 12);
-    userData.expiresAt = expiry.toISOString();
-  }
-  
-  users.push(userData);
-  save('users', users);
-  loadUsers();
-  closeModal('addUserModal');
-  this.reset();
-  
-  addNotification('Utilisateur créé', `L'utilisateur "${userData.name}" a été créé avec succès`);
-});
+      <div class="col-12 col-md-6 col-lg-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between" style="position: relative;">
+              <div class="d-flex flex-column">
+                <div class="card-title mb-auto">
+                  <h4 class="mb-0">Bénéfice</h4>
+                  <small class="text-success text-nowrap fw-medium">Plus de revendeurs, plus de profits. 😃</small>
+                </div>
+                <div class="chart-statistics">
+                  <br>
+                                    <h3 class="card-title mb-1">0.000 MAD</h3>
+                 
+                                      
+                  <form method="post" action="https://topmultivendeur.com/RemboursementSolde" enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="3S5nDGNqLqiLhvNBSmcaXDqQLy97UWyRDG04HxId">
+                  <button type="submit" class="btn btn-primary" >Rembourser</button>
+                  </form>
+                </div>
+              </div>
+             
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-lg-12 order-3 order-md-2">
+    <div class="row">
+      <div class="col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded">
+              </div>
+             
+            </div>
+            <span class="d-block mb-1">Solde Récu</span>
+            <h3 class="card-title text-nowrap mb-2">1096 MAD</h3>
+            <small class="text-success fw-semibold">Ce mois</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <img src="https://topmultivendeur.com/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded">
+              </div>
+              
+            </div>
+            <span class="fw-semibold d-block mb-1">Solde Envoyé</span>
+            <h3 class="card-title mb-2">0 MAD</h3>
+            <small class="text-success fw-semibold">Ce mois</small>
+          </div>
+        </div>
+      </div>
+      <!-- </div>
+    <div class="row"> -->
+      
+    </div>
+  </div>
+     
+     
+      
+    </div>
+  </div>
+  <!-- Total Revenue -->
 
-// ========== STATISTIQUES ==========
-function updateStats() {
-  const user = load('currentUser');
-  const products = load('products') || [];
-  const users = load('users') || [];
-  const transactions = load('transactions') || [];
   
-  if (user) {
-    el('userBalance').textContent = user.balance.toFixed(2) + ' MAD';
-  }
   
-  // Calculer les ventes du mois
-  const currentMonth = new Date().getMonth();
-  const monthlySales = transactions.filter(t => {
-    const date = new Date(t.date);
-    return date.getMonth() === currentMonth;
-  }).length;
-  
-  el('monthlySales').textContent = monthlySales;
-}
 
-// ========== GRAPHIQUE ==========
-function initChart() {
-  const ctx = document.getElementById('salesChart').getContext('2d');
-  const transactions = load('transactions') || [];
+
+  <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+    <div class="card">
+      <div class="row row-bordered g-0">
+        <div class="col-md-12">
+          <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
+          <div id="totalRevenueChart" class="px-2"></div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:20px">
+  <!-- Order Statistics -->
+  <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-6">
+    <div class="card h-100">
+      <div class="card-header d-flex align-items-center justify-content-between pb-0">
+        <div class="card-title mb-0">
+          <h5 class="m-0 me-2">Top 5 Produit vendu</h5>
+          <small class="text-muted">Ce Mois</small>
+        </div>
+        
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex flex-column align-items-center gap-1">
+            
+
+            <h2 class="mb-2">0</h2>
+            <span>Quantité Vendu</span>
+          </div>
+          
+        </div>
+        <ul class="p-0 m-0">
+           
+                <span>Aucune vente n'est réalisée depuis votre panel.</span>
+                              
+          
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ Order Statistics -->
+
   
-  // Données exemple pour le graphique
-  const data = {
-    labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
-    datasets: [{
-      label: 'Ventes',
-      data: [12, 19, 8, 15, 12, 18, 10],
-      borderColor: '#00bfa6',
-      backgroundColor: 'rgba(0, 191, 166, 0.1)',
-      tension: 0.4,
-      fill: true
-    }]
-  };
+
+  <!-- Transactions -->
+  <div class="col-md-6 col-lg-6 order-2 mb-4">
+    <div class="card h-100">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h5 class="card-title m-0 me-2">Dernier Transactions</h5>
+        
+      </div>
+      <div class="card-body">
+        <ul class="p-0 m-0">
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                              <small class="text-muted d-block mb-1">Achat Produit</small>
+                <h6 class="mb-0">SMART+ SMART X2 12MOIS</h6>                
+                                                          
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                <h6 class="mb-0">-65.000</h6> <span class="text-muted">MAD</span>
+                                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                              <small class="text-muted d-block mb-1">Achat Produit</small>
+                <h6 class="mb-0">4K OTT/COBRA/PROMAX 6 MOIS</h6>                
+                                                          
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                <h6 class="mb-0">-80.000</h6> <span class="text-muted">MAD</span>
+                                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                              <small class="text-muted d-block mb-1">Achat Produit</small>
+                <h6 class="mb-0">Premium 3 Months (3 Months)</h6>                
+                                                          
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                <h6 class="mb-0">-435.000</h6> <span class="text-muted">MAD</span>
+                                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                              <small class="text-muted d-block mb-1">Achat Produit</small>
+                <h6 class="mb-0">KING 365 M3U 12 MOIS</h6>                
+                                                          
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                <h6 class="mb-0">-210.000</h6> <span class="text-muted">MAD</span>
+                                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                              <small class="text-muted d-block mb-1">Achat Produit</small>
+                <h6 class="mb-0">KING 365 M3U 12 MOIS</h6>                
+                                                          
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                <h6 class="mb-0">-210.000</h6> <span class="text-muted">MAD</span>
+                                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                              <small class="text-muted d-block mb-1">Achat Produit</small>
+                <h6 class="mb-0">SMART+ SMART X2 12MOIS</h6>                
+                                                          
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                <h6 class="mb-0">-65.000</h6> <span class="text-muted">MAD</span>
+                                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                                          <small class="text-muted d-block mb-1">Recharge</small>
+                <h6 class="mb-0">536 MAD</h6>
+                                            
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+536 MAD</h6> <span class="text-muted"></span>
+                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                                          <small class="text-muted d-block mb-1">Recharge</small>
+                <h6 class="mb-0">560 MAD</h6>
+                                            
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+560 MAD</h6> <span class="text-muted"></span>
+                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                                          <small class="text-muted d-block mb-1">Recharge</small>
+                <h6 class="mb-0">1200 MAD</h6>
+                                            
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+1200 MAD</h6> <span class="text-muted"></span>
+                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                                          <small class="text-muted d-block mb-1">Recharge</small>
+                <h6 class="mb-0">600 MAD</h6>
+                                            
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+600 MAD</h6> <span class="text-muted"></span>
+                                              </div>
+            </div>
+          </li>
+                    <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                                          <small class="text-muted d-block mb-1">Recharge</small>
+                <h6 class="mb-0">0 MAD</h6>
+                                            
+              </div>
+              <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+0 MAD</h6> <span class="text-muted"></span>
+                                              </div>
+            </div>
+          </li>
+                   
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ Transactions -->
+</div>
+
+  </div>
+  <!--/ Total Revenue -->
   
-  new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: false
+</div>
+
+
+            <!-- pricingModal -->
+                        <!--/ pricingModal -->
+
+          </div>
+          <!-- / Content -->
+
+          <!-- Footer -->
+                    <!-- Footer-->
+<footer class="content-footer footer bg-footer-theme">
+  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+    <div class="mb-2 mb-md-0">
+      © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.write(new Date().getFullYear())
+
+      </script>
+      , made by GH Company
+    </div>
+    
+  </div>
+</footer>
+<!--/ Footer-->
+                    <!-- / Footer -->
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!--/ Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+
+        <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
+  </div>
+  <!-- / Layout wrapper -->
+    <!--/ Layout Content -->
+
+	    
+  <div class="modal fade dtr-bs-modal"  aria-hidden="true" id="modaldash0">
+<div class="modal-dialog modal-lg" role="document"><div class="modal-content">
+<div class="modal-header"><h4 class="modal-title">.</h4>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+</button></div>
+  <div class="modal-body" style="padding:20px;font-size:20px;font-weight:bold">
+    
+  اقل رصيد 1000 درهم
+        
+        
+</div>
+<div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+</div></div></div>
+
+
+        
+   
+
+    <!-- Include Scripts -->
+  <!-- BEGIN: Vendor JS-->
+<script src="https://topmultivendeur.com/assets/vendor/libs/jquery/jquery.js?id=61b6b590f1cc3c668eb64b481bd6524c"></script>
+<script src="https://topmultivendeur.com/assets/vendor/libs/popper/popper.js?id=ce797c28ba57ea09097033fefdb24ace"></script>
+<script src="https://topmultivendeur.com/assets/vendor/js/bootstrap.js?id=fa922f4cb597f4cce190fa608dace7c0"></script>
+<script src="https://topmultivendeur.com/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js?id=302c26f0ffdcc86cc83a6bb8ec2164ad"></script>
+<script src="https://topmultivendeur.com/assets/vendor/js/menu.js?id=a687fa9660a310acc9084fa245bb7706"></script>
+
+<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables/jquery.dataTables.min.js"></script>
+<!--<script src="http://topmultivendeur.com/assets/vendor/datatable/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>-->
+<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<!--<script src="http://topmultivendeur.com/assets/vendor/datatable/datatables-responsive/js/responsive.bootstrap4.min.js"></script>-->
+<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<!--<script src="http://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.bootstrap4.min.js"></script>-->
+<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://topmultivendeur.com/assets/vendor/particles/particles.js"></script>
+<script src="https://topmultivendeur.com/assets/vendor/particles/particlesapp_default.js"></script>
+
+<script src="https://topmultivendeur.com/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- END: Page Vendor JS-->
+<!-- BEGIN: Theme JS-->
+<script src="https://topmultivendeur.com/assets/js/main.js?id=5971037ce98c7a1fb1c8931365d154ea"></script>
+
+<!-- END: Theme JS-->
+<!-- Pricing Modal JS-->
+<!-- END: Pricing Modal JS-->
+<!-- BEGIN: Page JS-->
+<script src="https://topmultivendeur.com/assets/js/dashboards-analytics.js"></script>
+<script>
+'use strict';
+
+(function () {
+  let cardColor, headingColor, axisColor, shadeColor, borderColor;
+
+  cardColor = config.colors.white;
+  headingColor = config.colors.headingColor;
+  axisColor = config.colors.axisColor;
+  borderColor = config.colors.borderColor;
+
+  // Total Revenue Report Chart - Bar Chart
+  // --------------------------------------------------------------------
+  const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
+    totalRevenueChartOptions = {
+      series: [
+        {
+          name: 'Recharge',
+          data: [0, 0, 0, 0, 0, 1200, 1096]
+        },
+        {
+          name: 'Vente',
+          data: [-0, -0, -0, -0, -0, -1030, -790]
+        }
+      ],
+      chart: {
+        height: 300,
+        stacked: true,
+        type: 'bar',
+        toolbar: { show: false }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '33%',
+          borderRadius: 12,
+          startingShape: 'rounded',
+          endingShape: 'rounded'
         }
       },
-      scales: {
-        y: {
-          beginAtZero: true
+      colors: [config.colors.primary, config.colors.info],
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'smooth',
+        width: 6,
+        lineCap: 'round',
+        colors: [cardColor]
+      },
+      legend: {
+        show: true,
+        horizontalAlign: 'left',
+        position: 'top',
+        markers: {
+          height: 8,
+          width: 8,
+          radius: 12,
+          offsetX: -3
+        },
+        labels: {
+          colors: axisColor
+        },
+        itemMargin: {
+          horizontal: 10
+        }
+      },
+      grid: {
+        borderColor: borderColor,
+        padding: {
+          top: 0,
+          bottom: -8, 
+          left: 20,
+          right: 20
+        }
+      },
+      xaxis: {
+        categories: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'], 
+        labels: {
+          style: {
+            fontSize: '13px',
+            colors: axisColor
+          }
+        },
+        axisTicks: {
+          show: false
+        },
+        axisBorder: {
+          show: false
+        }
+      },
+      yaxis: {
+        labels: {
+          style: {
+            fontSize: '13px',
+            colors: axisColor
+          }
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 1700,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '32%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 1580,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '35%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 1440,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '42%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 1300,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '48%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 1200,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '40%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 1040,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 11,
+                columnWidth: '48%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 991,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '30%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 840,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '35%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 768,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '28%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 640,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '32%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 576,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '37%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 480,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '45%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 420,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '52%'
+              }
+            }
+          }
+        },
+        {
+          breakpoint: 380,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                columnWidth: '60%'
+              }
+            }
+          }
+        }
+      ],
+      states: {
+        hover: {
+          filter: {
+            type: 'none'
+          }
+        },
+        active: {
+          filter: {
+            type: 'none'
+          }
         }
       }
-    }
-  });
-}
-
-// ========== NOTIFICATIONS ==========
-function addNotification(title, message) {
-  const notifications = load('notifications') || [];
-  notifications.unshift({
-    id: Date.now(),
-    title,
-    message,
-    date: new Date().toLocaleString(),
-    read: false
-  });
-  save('notifications', notifications);
-  updateNotifications();
-}
-
-function updateNotifications() {
-  const notifications = load('notifications') || [];
-  const unreadCount = notifications.filter(n => !n.read).length;
-  
-  el('notificationCount').textContent = unreadCount;
-  
-  const list = el('notificationsList');
-  list.innerHTML = notifications.slice(0, 10).map(notif => `
-    <div style="padding: 12px; border-bottom: 1px solid #f1f5f9; cursor: pointer; ${!notif.read ? 'background: #f0f9ff;' : ''}" 
-         onclick="markNotificationRead(${notif.id})">
-      <div style="font-weight: 600; color: var(--accent1);">${notif.title}</div>
-      <div style="font-size: 14px; margin-top: 4px;">${notif.message}</div>
-      <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">${notif.date}</div>
-    </div>
-  `).join('');
-}
-
-function markNotificationRead(id) {
-  const notifications = load('notifications') || [];
-  const updated = notifications.map(n => n.id === id ? {...n, read: true} : n);
-  save('notifications', updated);
-  updateNotifications();
-}
-
-// Gestion des événements de notifications
-el('notificationsBtn').addEventListener('click', () => openModal('notificationsModal'));
-el('closeNotifications').addEventListener('click', () => closeModal('notificationsModal'));
-el('clearNotifications').addEventListener('click', () => {
-  save('notifications', []);
-  updateNotifications();
-});
-
-// ========== NAVIGATION ET UI ==========
-document.querySelectorAll('.menu .item').forEach(item => {
-  item.addEventListener('click', () => {
-    const page = item.dataset.page;
-    const user = load('currentUser');
-    
-    // Vérifier les permissions
-    if (page === 'users' && user.role !== 'admin') {
-      addNotification('Accès refusé', 'Cette section est réservée aux administrateurs');
-      return;
-    }
-    
-    showPage(page);
-    
-    // Fermer le sidebar sur mobile
-    if (window.innerWidth <= 1024) {
-      el('sidebar').classList.remove('active');
-    }
-  });
-});
-
-el('menuToggle').addEventListener('click', () => {
-  el('sidebar').classList.toggle('active');
-});
-
-el('logoutBtn').addEventListener('click', () => {
-  const user = load('currentUser');
-  if (user) {
-    const users = load('users') || [];
-    const updatedUsers = users.map(u => 
-      u.id === user.id ? {...u, isOnline: false} : u
-    );
-    save('users', updatedUsers);
+    };
+  if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
+    const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
+    totalRevenueChart.render();
   }
+
   
-  localStorage.removeItem('s4p_pro_currentUser');
-  location.reload();
-});
 
-// ========== FONCTIONS ADMIN ==========
-function editProduct(id) {
-  const products = load('products') || [];
-  const product = products.find(p => p.id === id);
-  if (product) {
-    // Remplir le formulaire avec les données du produit
-    el('productName').value = product.name;
-    el('productPrice').value = product.price;
-    el('productStock').value = product.stock;
-    el('productCategory').value = product.category;
-    el('productImage').value = product.image;
-    el('productDescription').value = product.description;
-    
-    openModal('addProductModal');
-    // Changer le texte du bouton
-    document.querySelector('#addProductForm button[type="submit"]').textContent = 'Modifier le produit';
-  }
-}
-
-function deleteProduct(id) {
-  if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-    const products = load('products') || [];
-    const updatedProducts = products.filter(p => p.id !== id);
-    save('products', updatedProducts);
-    loadProducts();
-    addNotification('Produit supprimé', 'Le produit a été supprimé avec succès');
-  }
-}
-
-function editUser(id) {
-  const users = load('users') || [];
-  const user = users.find(u => u.id === id);
-  if (user) {
-    // Implémenter l'édition d'utilisateur
-    addNotification('Édition', `Édition de l'utilisateur ${user.name}`);
-  }
-}
-
-// ========== INITIALISATION ==========
-document.addEventListener('DOMContentLoaded', function() {
-  const currentUser = load('currentUser');
-  if (currentUser) {
-    el('loginView').style.display = 'none';
-    el('app').style.display = 'block';
-    initDashboard();
-  }
-  
-  updateNotifications();
-  
-  // Fermer les modals en cliquant à l'extérieur
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal(this.id);
+   // Order Statistics Chart
+  // --------------------------------------------------------------------
+  const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
+    orderChartConfig = {
+      chart: {
+        height: 165,
+        width: 130,
+        type: 'donut'
+      },
+      labels: ['-', '-', '-', '-'],
+      series: [0, 0, 0, 0],
+      colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success, config.colors.danger],
+      stroke: {
+        width: 5,
+        colors: cardColor
+      },
+      dataLabels: {
+        enabled: false,
+        formatter: function (val, opt) {
+          return parseInt(val) + '%';
+        }
+      },
+      legend: {
+        show: false
+      },
+      grid: {
+        padding: {
+          top: 0,
+          bottom: 0,
+          right: 15
+        }
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '75%',
+            labels: {
+              show: true,
+              value: {
+                fontSize: '1.5rem',
+                fontFamily: 'Public Sans',
+                color: headingColor,
+                offsetY: -15,
+                formatter: function (val) {
+                  return parseInt(val) + '%';
+                }
+              },
+              name: {
+                offsetY: 20,
+                fontFamily: 'Public Sans'
+              },
+              total: {
+                show: true,
+                fontSize: '0.8125rem',
+                color: axisColor,
+                label: '', 
+                formatter: function (w) {
+                  return '--';
+                }
+              }
+            }
+          }
+        }
       }
-    });
-  });
-});
-
-// Gestion du responsive
-window.addEventListener('resize', function() {
-  if (window.innerWidth > 1024) {
-    el('sidebar').classList.remove('active');
+    };
+  if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
+    const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
+    statisticsChart.render();
   }
-});
+
+})();
+
+  </script>
+<script>
+    let shouldSubmitForm = true;
+(function () {
+  // Bootstrap toasts example
+  // --------------------------------------------------------------------
+  const toastPlacementExample = document.querySelector('.toast-placement-ex'),
+    toastPlacementBtn = document.querySelector('#showToastPlacement');
+  let selectedType, selectedPlacement, toastPlacement;
+
+  // Dispose toast when open another
+  function toastDispose(toast) {
+    if (toast && toast._element !== null) {
+      if (toastPlacementExample) {
+        toastPlacementExample.classList.remove(selectedType);
+        DOMTokenList.prototype.remove.apply(toastPlacementExample.classList, selectedPlacement);
+      }
+      toast.dispose();
+    }
+  }
+  // Placement Button click
+
+    
+  $(document).ready(function() {
+        $("#modaldash"+0).modal('show');
+        });
+
+   
+
+  
+    
+  
+})();
+
+
+  $('#sendmailv').click(function(){
+                $.ajax({
+                    url: "http://topmultivendeur.com/SendCodeVerificationMail",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '3S5nDGNqLqiLhvNBSmcaXDqQLy97UWyRDG04HxId'
+                    },
+                    success: function(response) {
+                // Enable the renvoye button and start the countdown
+                $('#sendmailv').prop('disabled', true);
+                var seconds = 60;
+                var countdown = setInterval(function() {
+                    $('#sendmailv').text('Envoyer Email de verification (' + seconds + 's)');
+                    seconds--;
+                    if (seconds < 0) {
+                        clearInterval(countdown);
+                        $('#sendmailv').text('Envoyer Email de verification');
+                        $('#sendmailv').prop('disabled', false);
+                    }
+                }, 1000);
+            },
+                    
+                });
+            });
+            
+            var countdown_var1 = setInterval(function() {
+              if(document.getElementById('countdown_1')) {
+        var countdownElement = document.getElementById('countdown_1').innerText;
+        var timeArray = countdownElement.split(/j|h|m|s/).map(Number);
+        var seconds = timeArray[0] * 24 * 60 * 60 + timeArray[1] * 60 * 60 + timeArray[2] * 60 + timeArray[3] - 1;
+       // alert(seconds);
+        if (seconds >= 0) {
+            var days = Math.floor(seconds / (24 * 60 * 60));
+            seconds %= (24 * 60 * 60);
+            var hours = Math.floor(seconds / (60 * 60));
+            seconds %= (60 * 60); 
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+           // alert(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm:' + ('0' + remainingSeconds).slice(-2) + 's');
+            $("#countdown_1").html(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm' + ('0' + remainingSeconds).slice(-2) + 's');
+           // setTimeout(decrementTimer, 1000);
+        } else {
+          clearInterval(countdown_var1);
+        }
+      } else {
+        clearInterval(countdown_var1);
+      }
+                }, 1000);
+                
+              
+
+                var countdown_var2 = setInterval(function() {
+                  if(document.getElementById('countdown_2')) {
+        var countdownElement = document.getElementById('countdown_2').innerText;
+        var timeArray = countdownElement.split(/j|h|m|s/).map(Number);
+        var seconds = timeArray[0] * 24 * 60 * 60 + timeArray[1] * 60 * 60 + timeArray[2] * 60 + timeArray[3] - 1;
+       // alert(seconds);
+        if (seconds >= 0) {
+            var days = Math.floor(seconds / (24 * 60 * 60));
+            seconds %= (24 * 60 * 60);
+            var hours = Math.floor(seconds / (60 * 60));
+            seconds %= (60 * 60);
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+           // alert(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm:' + ('0' + remainingSeconds).slice(-2) + 's');
+            $("#countdown_2").html(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm' + ('0' + remainingSeconds).slice(-2) + 's');
+           // setTimeout(decrementTimer, 1000);
+        } else {
+          clearInterval(countdown_var2);
+        }
+      } else {
+        clearInterval(countdown_var2);
+      }
+                }, 1000);
+
+              
 </script>
+<!-- END: Page JS-->
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6af5ab23d1804d139a4c1642e804770e","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
+
 </html>
+
