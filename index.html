@@ -1,2756 +1,1876 @@
-<!DOCTYPE html>
 
-<html class="light-style layout-menu-fixed" data-theme="theme-default" data-assets-path="http://topmultivendeur.com/assets/" data-base-url="http://topmultivendeur.com" data-framework="laravel" data-template="vertical-menu-laravel-template-free">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Dashboard </title>
-  <script src="https://static.geetest.com/v4/gt4.js"></script> 
-  <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-  <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5, bootstrap 5 free, free admin template">
-  <!-- laravel CRUD token -->
-  <meta name="csrf-token" content="3S5nDGNqLqiLhvNBSmcaXDqQLy97UWyRDG04HxId">
-  <!-- Canonical SEO -->
-  <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-html-laravel-admin-template/">
-  <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="https://topmultivendeur.com/storage/assets/img/panel/1728320593-P1.png" />
-    <!-- Include Styles -->
-  <!-- BEGIN: Theme CSS-->
-<!-- Fonts -->
-<meta charset="UTF-8">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/fonts/boxicons.css?id=a9a7a946ee13016e04f57799146804c7" />
-
-<!-- Core CSS -->
-<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/css/core.css?id=681d86959458f8858f2b5b11f2eee554" />
-<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/css/theme-default.css?id=3e8cb4751ca766e56a68fe0bd72b5fef?v=1762855729" />
-<link rel="stylesheet" href="https://topmultivendeur.com/assets/css/demo.css?id=6ec63121218f83eed6a13a8aa3decb44" />
-
-<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css?id=858f7088631c9c1fe122f541dcad3a4d" />
-
-
-<!-- Vendor Styles -->
-<link rel="stylesheet" href="https://topmultivendeur.com/assets/vendor/libs/apex-charts/apex-charts.css">
-<style>
-  .btn-clignote {
-    animation-duration: 1.8s;
-    animation-name: clignoter;
-    animation-iteration-count: infinite;
-    transition: none;
-    color: red;
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><style>
+/* /src/app/global.css */
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
-  </style>
-<style>
-    .menu-icon-clinot {
-        margin-left: 20px;
-    height: 30px;
-    width: 30px;
-    opacity: 1; /* Initially visible */
-    transition: opacity 2s ease-in-out; /* Transition effect */
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: Inter, sans-serif; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+  input, textarea, select, button {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+  input:focus, textarea:focus, select:focus, button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.visible {
+  visibility: visible;
+}
+.static {
+  position: static;
+}
+.fixed {
+  position: fixed;
+}
+.relative {
+  position: relative;
+}
+.inset-0 {
+  inset: 0px;
+}
+.bottom-4 {
+  bottom: 1rem;
+}
+.left-1\/2 {
+  left: 50%;
+}
+.z-50 {
+  z-index: 50;
+}
+.z-\[2147483647\] {
+  z-index: 2147483647;
+}
+.order-1 {
+  order: 1;
+}
+.order-2 {
+  order: 2;
+}
+.mx-20 {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.mb-\[40px\] {
+  margin-bottom: 40px;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mb-12 {
+  margin-bottom: 3rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.ml-3 {
+  margin-left: 0.75rem;
+}
+.mt-16 {
+  margin-top: 4rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.ml-6 {
+  margin-left: 1.5rem;
+}
+.mr-1 {
+  margin-right: 0.25rem;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
+.flex {
+  display: flex;
+}
+.table {
+  display: table;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-10 {
+  height: 2.5rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.h-48 {
+  height: 12rem;
+}
+.h-8 {
+  height: 2rem;
+}
+.h-full {
+  height: 100%;
+}
+.h-20 {
+  height: 5rem;
+}
+.h-32 {
+  height: 8rem;
+}
+.h-2 {
+  height: 0.5rem;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.w-1\/2 {
+  width: 50%;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-56 {
+  width: 14rem;
+}
+.w-8 {
+  width: 2rem;
+}
+.w-80 {
+  width: 20rem;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.w-\[300px\] {
+  width: 300px;
+}
+.w-\[350px\] {
+  width: 350px;
+}
+.w-\[calc\(100\%-160px\)\] {
+  width: calc(100% - 160px);
+}
+.w-\[calc\(100vw-2rem\)\] {
+  width: calc(100vw - 2rem);
+}
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.w-full {
+  width: 100%;
+}
+.w-screen {
+  width: 100vw;
+}
+.w-20 {
+  width: 5rem;
+}
+.w-64 {
+  width: 16rem;
+}
+.min-w-0 {
+  min-width: 0px;
+}
+.min-w-full {
+  min-width: 100%;
+}
+.max-w-\[300px\] {
+  max-width: 300px;
+}
+.max-w-\[350px\] {
+  max-width: 350px;
+}
+.max-w-\[600px\] {
+  max-width: 600px;
+}
+.max-w-\[800px\] {
+  max-width: 800px;
+}
+.max-w-\[80rem\] {
+  max-width: 80rem;
+}
+.max-w-md {
+  max-width: 28rem;
+}
+.max-w-sm {
+  max-width: 24rem;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-7xl {
+  max-width: 80rem;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.basis-full {
+  flex-basis: 100%;
+}
+.border-collapse {
+  border-collapse: collapse;
+}
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-0 {
+  --tw-translate-y: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-\[200\%\] {
+  --tw-translate-y: 200%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-full {
+  --tw-translate-y: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.resize {
+  resize: both;
+}
+.list-inside {
+  list-style-position: inside;
+}
+.list-decimal {
+  list-style-type: decimal;
+}
+.list-disc {
+  list-style-type: disc;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-1 {
+  gap: 0.25rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-\[10px\] {
+  gap: 10px;
+}
+.gap-\[20px\] {
+  gap: 20px;
+}
+.gap-\[4px\] {
+  gap: 4px;
+}
+.gap-\[5px\] {
+  gap: 5px;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+.space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+.divide-x > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+}
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-divide-opacity, 1));
+}
+.self-start {
+  align-self: flex-start;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-\[8px\] {
+  border-radius: 8px;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.border {
+  border-width: 1px;
+}
+.border-0 {
+  border-width: 0px;
+}
+.border-\[1px\] {
+  border-width: 1px;
+}
+.border-b {
+  border-bottom-width: 1px;
+}
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+.border-l-4 {
+  border-left-width: 4px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-l {
+  border-left-width: 1px;
+}
+.border-r {
+  border-right-width: 1px;
+}
+.border-r-0 {
+  border-right-width: 0px;
+}
+.border-\[\#414243\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(65 66 67 / var(--tw-border-opacity, 1));
+}
+.border-\[\#c4c4c4\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(196 196 196 / var(--tw-border-opacity, 1));
+}
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
+}
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
+}
+.border-red-500\/50 {
+  border-color: rgb(239 68 68 / 0.5);
+}
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.border-white\/10 {
+  border-color: rgb(255 255 255 / 0.1);
+}
+.border-blue-500\/50 {
+  border-color: rgb(59 130 246 / 0.5);
+}
+.border-green-500\/50 {
+  border-color: rgb(34 197 94 / 0.5);
+}
+.border-yellow-500\/50 {
+  border-color: rgb(234 179 8 / 0.5);
+}
+.bg-\[\#18191B\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 25 27 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#2C2D2F\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(44 45 47 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#F2F2F2\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 242 242 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#f9f9f9\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+.bg-red-500\/20 {
+  background-color: rgb(239 68 68 / 0.2);
+}
+.bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.bg-black\/20 {
+  background-color: rgb(0 0 0 / 0.2);
+}
+.bg-black\/30 {
+  background-color: rgb(0 0 0 / 0.3);
+}
+.bg-blue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));
+}
+.bg-green-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
+}
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
+}
+.bg-red-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
+.bg-yellow-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(202 138 4 / var(--tw-bg-opacity, 1));
+}
+.bg-black\/50 {
+  background-color: rgb(0 0 0 / 0.5);
+}
+.bg-gray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
+}
+.bg-blue-500\/20 {
+  background-color: rgb(59 130 246 / 0.2);
+}
+.bg-green-500\/20 {
+  background-color: rgb(34 197 94 / 0.2);
+}
+.bg-yellow-500\/20 {
+  background-color: rgb(234 179 8 / 0.2);
+}
+.bg-blue-500\/30 {
+  background-color: rgb(59 130 246 / 0.3);
+}
+.bg-green-500\/30 {
+  background-color: rgb(34 197 94 / 0.3);
+}
+.bg-orange-500\/30 {
+  background-color: rgb(249 115 22 / 0.3);
+}
+.bg-purple-500\/30 {
+  background-color: rgb(168 85 247 / 0.3);
+}
+.bg-white\/5 {
+  background-color: rgb(255 255 255 / 0.05);
+}
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+.from-blue-600 {
+  --tw-gradient-from: #2563eb var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(37 99 235 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-blue-900 {
+  --tw-gradient-from: #1e3a8a var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(30 58 138 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-red-600 {
+  --tw-gradient-from: #dc2626 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(220 38 38 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-green-600 {
+  --tw-gradient-from: #16a34a var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(22 163 74 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-blue-500 {
+  --tw-gradient-from: #3b82f6 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(59 130 246 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.via-purple-900 {
+  --tw-gradient-to: rgb(88 28 135 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #581c87 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+.to-indigo-900 {
+  --tw-gradient-to: #312e81 var(--tw-gradient-to-position);
+}
+.to-purple-600 {
+  --tw-gradient-to: #9333ea var(--tw-gradient-to-position);
+}
+.to-red-700 {
+  --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);
+}
+.to-green-700 {
+  --tw-gradient-to: #15803d var(--tw-gradient-to-position);
+}
+.to-purple-500 {
+  --tw-gradient-to: #a855f7 var(--tw-gradient-to-position);
+}
+.to-purple-900 {
+  --tw-gradient-to: #581c87 var(--tw-gradient-to-position);
+}
+.bg-cover {
+  background-size: cover;
+}
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.p-0 {
+  padding: 0px;
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.p-\[20px\] {
+  padding: 20px;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-\[10px\] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.px-\[14px\] {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+.px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.px-\[50px\] {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.px-\[8px\] {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-\[4px\] {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.py-\[5px\] {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.pb-12 {
+  padding-bottom: 3rem;
+}
+.pb-20 {
+  padding-bottom: 5rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+.pb-\[10px\] {
+  padding-bottom: 10px;
+}
+.pl-4 {
+  padding-left: 1rem;
+}
+.pt-3 {
+  padding-top: 0.75rem;
+}
+.pt-4 {
+  padding-top: 1rem;
+}
+.pt-\[100px\] {
+  padding-top: 100px;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-\[1\.125rem\] {
+  font-size: 1.125rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.italic {
+  font-style: italic;
+}
+.leading-none {
+  line-height: 1;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-snug {
+  line-height: 1.375;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.text-\[\#18191B\] {
+  --tw-text-opacity: 1;
+  color: rgb(24 25 27 / var(--tw-text-opacity, 1));
+}
+.text-\[\#959697\] {
+  --tw-text-opacity: 1;
+  color: rgb(149 150 151 / var(--tw-text-opacity, 1));
+}
+.text-\[\#F2F2F2\] {
+  --tw-text-opacity: 1;
+  color: rgb(242 242 242 / var(--tw-text-opacity, 1));
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity, 1));
+}
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
+}
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+}
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-blue-200 {
+  --tw-text-opacity: 1;
+  color: rgb(191 219 254 / var(--tw-text-opacity, 1));
+}
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity, 1));
+}
+.text-red-200 {
+  --tw-text-opacity: 1;
+  color: rgb(254 202 202 / var(--tw-text-opacity, 1));
+}
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity, 1));
+}
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
+}
+.text-blue-100 {
+  --tw-text-opacity: 1;
+  color: rgb(219 234 254 / var(--tw-text-opacity, 1));
+}
+.text-green-200 {
+  --tw-text-opacity: 1;
+  color: rgb(187 247 208 / var(--tw-text-opacity, 1));
+}
+.text-yellow-100 {
+  --tw-text-opacity: 1;
+  color: rgb(254 249 195 / var(--tw-text-opacity, 1));
+}
+.text-yellow-200 {
+  --tw-text-opacity: 1;
+  color: rgb(254 240 138 / var(--tw-text-opacity, 1));
+}
+.text-blue-300 {
+  --tw-text-opacity: 1;
+  color: rgb(147 197 253 / var(--tw-text-opacity, 1));
+}
+.text-green-300 {
+  --tw-text-opacity: 1;
+  color: rgb(134 239 172 / var(--tw-text-opacity, 1));
+}
+.text-orange-300 {
+  --tw-text-opacity: 1;
+  color: rgb(253 186 116 / var(--tw-text-opacity, 1));
+}
+.text-orange-400 {
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity, 1));
+}
+.text-purple-300 {
+  --tw-text-opacity: 1;
+  color: rgb(216 180 254 / var(--tw-text-opacity, 1));
+}
+.text-purple-400 {
+  --tw-text-opacity: 1;
+  color: rgb(192 132 252 / var(--tw-text-opacity, 1));
+}
+.text-white\/70 {
+  color: rgb(255 255 255 / 0.7);
+}
+.text-yellow-300 {
+  --tw-text-opacity: 1;
+  color: rgb(253 224 71 / var(--tw-text-opacity, 1));
+}
+.line-through {
+  text-decoration-line: line-through;
+}
+.no-underline {
+  text-decoration-line: none;
+}
+.placeholder-gray-300::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-placeholder-opacity, 1));
+}
+.placeholder-gray-300::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-placeholder-opacity, 1));
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-100 {
+  opacity: 1;
+}
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-2xl {
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.outline {
+  outline-style: solid;
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.backdrop-blur-lg {
+  --tw-backdrop-blur: blur(16px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-500 {
+  transition-duration: 500ms;
+}
+.duration-200 {
+  transition-duration: 200ms;
+}
+.duration-300 {
+  transition-duration: 300ms;
+}
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:transform:hover {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:border-white\/40:hover {
+  border-color: rgb(255 255 255 / 0.4);
+}
+
+.hover\:bg-\[\#414243\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(65 66 67 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-\[\#dbdbdb\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 219 219 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-gray-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-green-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-red-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-yellow-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(161 98 7 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-gray-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-white\/20:hover {
+  background-color: rgb(255 255 255 / 0.2);
+}
+
+.hover\:bg-white\/10:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+
+.hover\:from-blue-700:hover {
+  --tw-gradient-from: #1d4ed8 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(29 78 216 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.hover\:from-red-700:hover {
+  --tw-gradient-from: #b91c1c var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(185 28 28 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.hover\:from-green-700:hover {
+  --tw-gradient-from: #15803d var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(21 128 61 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.hover\:to-purple-700:hover {
+  --tw-gradient-to: #7e22ce var(--tw-gradient-to-position);
+}
+
+.hover\:to-red-800:hover {
+  --tw-gradient-to: #991b1b var(--tw-gradient-to-position);
+}
+
+.hover\:to-green-800:hover {
+  --tw-gradient-to: #166534 var(--tw-gradient-to-position);
+}
+
+.hover\:text-blue-300:hover {
+  --tw-text-opacity: 1;
+  color: rgb(147 197 253 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
+}
+
+.focus\:border-transparent:focus {
+  border-color: transparent;
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity, 1));
+}
+
+.focus\:ring-red-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(239 68 68 / var(--tw-ring-opacity, 1));
+}
+
+.focus\:ring-green-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(34 197 94 / var(--tw-ring-opacity, 1));
+}
+
+.focus\:ring-offset-2:focus {
+  --tw-ring-offset-width: 2px;
+}
+
+.focus\:ring-offset-transparent:focus {
+  --tw-ring-offset-color: transparent;
+}
+
+.active\:bg-\[\#555658\]:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 86 88 / var(--tw-bg-opacity, 1));
+}
+
+.active\:bg-\[\#c4c4c4\]:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(196 196 196 / var(--tw-bg-opacity, 1));
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
+.group:hover .group-hover\:shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 640px) {
+
+  .sm\:h-56 {
+    height: 14rem;
   }
 
-  .menu-icon.hidden {
-    opacity: 0; /* Hidden */
+  .sm\:w-full {
+    width: 100%;
   }
-    
-  .scrollable-container {
-    overflow: auto; /* or overflow: scroll; */
-}
-.btn-primary {
-  background-color: #5726d4;
-}
-.solde-div {
-  background-image: url("http://topmultivendeur.com/assets/img/backgrounds/backcarte.jpg"); /* Replace with your image URL */
-  background-size: auto; /* Ensures the image does not resize */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-}
 
-
-    </style>
-
-<!-- Page Styles -->
-
-  <!-- Include Scripts for customizer, helper, analytics, config -->
-  <!-- laravel style -->
-<script src="https://topmultivendeur.com/assets/vendor/js/helpers.js"></script>
-
-<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="https://topmultivendeur.com/assets/js/config.js"></script>
-
-<!-- beautify ignore:end -->
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag() {
-    dataLayer.push(arguments);
+  .sm\:min-w-\[850px\] {
+    min-width: 850px;
   }
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID');
 
-</script>
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-</head>
-
-<body class="" data-select2-id="52">
-  <!-- Layout Content -->
-  <div class="layout-wrapper layout-content-navbar ">
-  <div class="layout-container">
-
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-  <!-- ! Hide app brand if navbar-full -->
-  <div class="app-brand demo" style="height:150px">
-    <a href="https://topmultivendeur.com" class="app-brand-link">
-      <span class="app-brand-logo demo ms-4">
-        <img src="https://topmultivendeur.com/storage/assets/img/panel/1728320593-P1.png" width="150" />      </span>
-      <!--<span class="app-brand-text demo menu-text fw-bold ms-2">King SHOP</span>-->
-    </a>
-
-    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-autod-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
-    </a>
-    
-  </div>
-
-  <div class="menu-inner-shadow">
-    
-  </div>
-
-  <ul class="menu-inner py-1">
-  
-
- <li class="menu-item open active " >
-      <a href="https://topmultivendeur.com/dashboard" class=" menu-link">
-       
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/webp/dash.webp" />
-     
-    
-      </a>
-
-     
-    </li>
-
-
-    <li class="menu-item  " >
-      <a href="https://topmultivendeur.com/chargepage" class="menu-link">
-       
-       
-        <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/foot.png" />
-     
-      </a>
-
-     
-    </li>
-
-
-	<li class="menu-item  ">
-      <a href="https://topmultivendeur.com/listCategories" class="menu-link ">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/produit.png" />
-       
-           
-      </a>
-
-    </li>
-
-    <li class="menu-item   ">
-      <a href="javascript:void(0);" class=" menu-link  menu-toggle " >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/bein.png" />
-              
-      </a>
-
-     <ul class="menu-sub">
-
-     <li class="menu-item ">
-    <a href="https://topmultivendeur.com/BeinCheckCarte" class=" menu-link">
-      
-      <i class=""></i>
-      
-      <div>Check Carte</div>
-    </a>
-
-   
-  </li>
-    <li class="menu-item ">
-    <a href="https://topmultivendeur.com/BeinAddingPackages" class=" menu-link">
-      
-      <i class=""></i>
-      
-      <div>Renew</div>
-    </a>
-
-   
-  </li>
-
-  <!--<li class="menu-item ">
-    <a href="http://topmultivendeur.com/BeinRenouvellement" class=" menu-link">
-      
-      <i class=""></i>
-      
-      <div>Renouvellement</div>
-    </a>
-
-   
-  </li>-->
-</ul>
-
-    </li>
-
-
-
-    <li class="menu-item    ">
-      <a href="javascript:void(0);" class=" menu-link  menu-toggle " >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/mango.png" />
-       
-       
-      </a>
-
-     <ul class="menu-sub">
-
-     <li class="menu-item ">
-    <a href="https://topmultivendeur.com/MangoIndex" class=" menu-link">
-      
-      <i class=""></i>
-      
-      <div>Mango</div>
-    </a>
-
-   
-  </li>
- 
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/NShareIndex" class=" menu-link">
-      
-      <i class=""></i>
-      
-      <div>Renew Nashare</div>
-    </a>
-
-   
-  </li>
-
-  <!--<li class="menu-item ">
-    <a href="http://topmultivendeur.com/MangoRenewCode" class=" menu-link">
-      
-      <i class=""></i>
-      
-      <div>Renew Code</div>
-    </a>
-
-   
-  </li>-->
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/MangoIPTV" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>Renew IPTV</div>
-    </a>
-
-   
-  </li>
-   
-</ul>
-
-    </li>
-
-
-
-
-   
-  
-  
-  <li class="menu-item ">
-  
-    <a href="https://topmultivendeur.com/TODIndex" class="menu-link">
-     
-    <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/tod.png" />
-     
-      
-    </a>
-
-   
-  </li>
-
-
-
-  <li class="menu-item  ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle" >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/ibon.png" />
-       
-       
-      </a>
-
-     <ul class="menu-sub">
-     <li class="menu-item ">
-    <a href="https://topmultivendeur.com/IboIndex" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>Check Mac</div>
-    </a>
-
-   
-  </li>
-  
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/IboActivationIndex" class="menu-link">
-      <i class=""></i>
-      <div>Activation Mac</div>
-    </a>
-  </li>
-
-</ul>
-
-    </li>
-
-
-    <li class="menu-item ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle" >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/ibopron.png" />
-       
-        
-      </a>
-
-     <ul class="menu-sub">
-     <li class="menu-item ">
-    <a href="https://topmultivendeur.com/IboProIndex" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>Check Mac</div>
-    </a>
-
-   
-  </li>
-  
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/IboProActivationIndex" class="menu-link">
-      <i class=""></i>
-      <div>Activation Mac</div>
-    </a>
-  </li>
-
-</ul>
-
-    </li>
-
-    <li class="menu-item   ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle" >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/ht.png" />
-       
-        <div></div>
-       
-      </a>
-
-     <ul class="menu-sub">
-     <li class="menu-item ">
-    <a href="https://topmultivendeur.com/HotPlayerCheckMacIndex" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>Check Mac</div>
-    </a>
-
-   
-  </li>
-  
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/HotPlayerActivationIndex" class="menu-link">
-      <i class=""></i>
-      <div>Activation Mac</div>
-    </a>
-  </li>
-
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/playlistHotindex" class="menu-link">
-      <i class=""></i>
-      <div>Add PlayList</div>
-    </a>
-  </li>
-
-</ul>
-
-    </li>
-
-    <li class="menu-item  ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle" >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/by.png" />
-       
-        <div></div>
-       
-      </a>
-
-     <ul class="menu-sub">
-     <li class="menu-item ">
-    <a href="https://topmultivendeur.com/BayTvCheckMacIndex" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>Check Mac</div>
-    </a>
-
-   
-  </li>
-  
-  <li class="menu-item ">
-    <a href="https://topmultivendeur.com/BayTvActivationIndex" class="menu-link">
-      <i class=""></i>
-      <div>Activation Mac</div>
-    </a>
-  </li>
-
-
-</ul>
-
-    </li>
-
-    <li class="menu-item ">
-      <a href="https://topmultivendeur.com/commande" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/webp/cmd.webp" />
-     
-      </a>
-
-     
-    </li>
-
-    <li class="menu-item ">
-      <a href="https://topmultivendeur.com/ConvertM3UIndex" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/convert.png" />
-     
-      </a>
-
-     
-    </li>
-
-    <li class="menu-item ">
-      <a href="https://topmultivendeur.com/transaction" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/tr.png" />
-     
-      </a>
-
-     
-    </li>
-
-    
-	<li class="menu-item " >
-      <a href="https://topmultivendeur.com/historique" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/his.png" />
-     
-      </a>
-
-     
-    </li>
-
-    	<li class="menu-item  ">
-      <a href="https://topmultivendeur.com/Revendeurs" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/rev.png" />
-     
-      </a>
-
-     
-    </li>
-        <li class="menu-item  ">
-      <a href="https://topmultivendeur.com/Packages" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/pack.png" />
-     
-      </a>
-
-     
-    </li>
-    
-    
-    	
-	
-
-    
-   
-    
-
-    <li class="menu-item ">
-     
-      <a href="https://topmultivendeur.com/ResetRequest" class=" menu-link">
-           
-    <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/reset.png" />
-     
-       
-      </a>
-
-     
-    </li>
-
-   
-    
-
-    	
-	<li class="menu-item  ">
-      <a href="javascript:void(0);" class=" menu-link menu-toggle" >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/sys.png" />
-       
-      </a>
-
-     <ul class="menu-sub">
-     
-  <li class="menu-item ">
-   
-    <a href="https://ibosol.com/login" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>IBO PLAYER</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/2" class="  menu-link">
-        <i class=""></i>
-      
-      <div>IBO PRO BRAZIL</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/3" class="  menu-link">
-        <i class=""></i>
-      
-      <div>MANGO</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/4" class="  menu-link">
-        <i class=""></i>
-      
-      <div>PANEL SMARTONE</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/5" class="  menu-link">
-        <i class=""></i>
-      
-      <div>PANEL BAY TV</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/6" class="  menu-link">
-        <i class=""></i>
-      
-      <div>PANEL HOTIPTV</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/7" class="  menu-link">
-        <i class=""></i>
-      
-      <div>arc player</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://elkplayer.org/user/login.php" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>PANEL ELK PLAYER</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/9" class="  menu-link">
-        <i class=""></i>
-      
-      <div>ROOM IPTV</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/10" class="  menu-link">
-        <i class=""></i>
-      
-      <div>PANEL RELAX PLAY</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://dontv.eu/admin/index/cmVzZWxsZXI=" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>DONTV</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/12" class="  menu-link">
-        <i class=""></i>
-      
-      <div>Vuplayer</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://setsysteme.com/set.app" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>SET IPTV playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://renovi2.net/" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>SP1 Spain</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/15" class="  menu-link">
-        <i class=""></i>
-      
-      <div>liveonsat</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/16" class="  menu-link">
-        <i class=""></i>
-      
-      <div>bob-playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/17" class="  menu-link">
-        <i class=""></i>
-      
-      <div>virginia</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/18" class="  menu-link">
-        <i class=""></i>
-      
-      <div>4k4matic</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/19" class="  menu-link">
-        <i class=""></i>
-      
-      <div>moon player</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/20" class="  menu-link">
-        <i class=""></i>
-      
-      <div>playlist relaxplay</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/21" class="  menu-link">
-        <i class=""></i>
-      
-      <div>playlist relaxplay</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/22" class="  menu-link">
-        <i class=""></i>
-      
-      <div>miroplayer</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/23" class="  menu-link">
-        <i class=""></i>
-      
-      <div>miroplayer playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/24" class="  menu-link">
-        <i class=""></i>
-      
-      <div>duplexplay</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/25" class="  menu-link">
-        <i class=""></i>
-      
-      <div>duplexplay</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/26" class="  menu-link">
-        <i class=""></i>
-      
-      <div>iboplayer Playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://iboplayer.com/device/login" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>iboplayer Playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/28" class="  menu-link">
-        <i class=""></i>
-      
-      <div>iboproapp-playlists</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/29" class="  menu-link">
-        <i class=""></i>
-      
-      <div>smartone playlists</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/30" class="  menu-link">
-        <i class=""></i>
-      
-      <div>smartone playlists</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/31" class="  menu-link">
-        <i class=""></i>
-      
-      <div>hotplayer playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/32" class="  menu-link">
-        <i class=""></i>
-      
-      <div>BAY TV playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/33" class="  menu-link">
-        <i class=""></i>
-      
-      <div>BAY TV playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/34" class="  menu-link">
-        <i class=""></i>
-      
-      <div>elkplayer playlist</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/35" class="  menu-link">
-        <i class=""></i>
-      
-      <div>panel capplayer</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/systemcharge/36" class="  menu-link">
-        <i class=""></i>
-      
-      <div>capplayer</div>
-    </a>
-
-   
-  </li>
-    
-
-   
-</ul>
-
-    </li>
-
-    <li class="menu-item  ">
-      <a href="javascript:void(0);" class=" menu-link menu-toggle" >
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/soft.png" />
-       
-      </a>
-
-     <ul class="menu-sub">
-     
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/1" class=" menu-link">
-        <i class=""></i>
-      
-      <div>vision</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/2" class=" menu-link">
-        <i class=""></i>
-      
-      <div>echolink</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="http://www.moresat.net/" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>moresat</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/4" class=" menu-link">
-        <i class=""></i>
-      
-      <div>satdl</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/5" class=" menu-link">
-        <i class=""></i>
-      
-      <div>Tiger</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/6" class=" menu-link">
-        <i class=""></i>
-      
-      <div>dreamtv</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://swmediastar.com/" class=" menu-link" target="_blank" >
-        <i class=""></i>
-      
-      <div>mediastar</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/8" class=" menu-link">
-        <i class=""></i>
-      
-      <div>Downloader</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/9" class=" menu-link">
-        <i class=""></i>
-      
-      <div>sansat</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/10" class=" menu-link">
-        <i class=""></i>
-      
-      <div>starsat</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/11" class=" menu-link">
-        <i class=""></i>
-      
-      <div>KING PRO</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/12" class=" menu-link">
-        <i class=""></i>
-      
-      <div>dino</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/13" class=" menu-link">
-        <i class=""></i>
-      
-      <div>alphasat</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/14" class=" menu-link">
-        <i class=""></i>
-      
-      <div>spidersat</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/15" class=" menu-link">
-        <i class=""></i>
-      
-      <div>magic</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/16" class=" menu-link">
-        <i class=""></i>
-      
-      <div>panelhelper pro</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/17" class=" menu-link">
-        <i class=""></i>
-      
-      <div>powercam</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/18" class=" menu-link">
-        <i class=""></i>
-      
-      <div>ultracam</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/19" class=" menu-link">
-        <i class=""></i>
-      
-      <div>echolink2</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/20" class=" menu-link">
-        <i class=""></i>
-      
-      <div>suptv</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/21" class=" menu-link">
-        <i class=""></i>
-      
-      <div>crystal</div>
-    </a>
-
-   
-  </li>
-   
-  <li class="menu-item ">
-   
-    <a href="https://topmultivendeur.com/SoftwareSystem/22" class=" menu-link">
-        <i class=""></i>
-      
-      <div>istar</div>
-    </a>
-
-   
-  </li>
-    
-
-   
-</ul>
-
-    </li>
-
-
-            
-       
-   
-
-    
-    
-        <li class="menu-item ">
-      <a href="https://topmultivendeur.com/ImageDash" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/img.png" />
-     
-      </a>
-
-     
-    </li>
-    
-    
-        <li class="menu-item ">
-      <a href="https://topmultivendeur.com/TextDash" class=" menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/txt.png" />
-     
-      </a>
-
-     
-    </li>
-    
-
-    <li class="menu-item ">
-      <a href="https://topmultivendeur.com/videos" class="menu-link">
-       
-      <img calss="menu-icon tf-icons bx" style="margin-right:5px" width="200" src="https://topmultivendeur.com/assets/img/icons/navbar/new/video.png" />
-     
-      </a>
-
-     
-    </li>
-    
-		<!-- To create menu title -->
-	<!--
-    <li class="menu-header small text-uppercase">
-      <span class="menu-header-text">TXT</span>
-    </li> -->
-	
-	<!-- menu toggle -->
-	<!--
-	<li class="menu-item ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle" >
-       
-        <i class=""></i>
-       
-        <div>Test</div>
-      </a>
-
-     <ul class="menu-sub">
-  <li class="menu-item ">
-    <a href="" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>S Test</div>
-    </a>
-
-   
-  </li>
-   <li class="menu-item ">
-    <a href="" class="menu-link">
-      
-      <i class=""></i>
-      
-      <div>S Test 2</div>
-    </a>
-
-   
-  </li>
-</ul>
-
-    </li>
--->
-    
-   
-  </ul>
-
-</aside>
-    
-
-    <!-- Layout page -->
-    <div class="layout-page">
-      <!-- BEGIN: Navbar-->
-            <!-- Navbar -->
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-    
-      <!--  Brand demo (display only for navbar-full and hide on below xl) -->
-      
-      <!-- ! Not required for layout-without-menu -->
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0  d-xl-none ">
-        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-          <i class="bx bx-menu bx-sm"></i>
-        </a>
-      </div>
-      
-      <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <!-- Search -->
-        <div class="navbar-nav align-items-center">
-          <div class="nav-item d-flex align-items-center">
-            <!--<i class="bx bx-search fs-4 lh-0"></i>
-            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search...">-->
-			          </div>
-        </div>
-        <!-- /Search -->
-                <ul class="navbar-nav flex-row align-items-center ms-auto">
-        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            Commande <i class="bx bx-bell bx-sm"></i>
-            <span class="badge bg-success rounded-pill badge-notifications">4</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end py-0">
-            <li class="dropdown-menu-header border-bottom">
-              <div class="dropdown-header d-flex align-items-center py-3">
-                <h5 class="text-body mb-0 me-auto">Commande</h5>
-              </div>
-            </li>
-            <li class="dropdown-notifications-list scrollable-container">
-              <ul class="list-group list-group-flush">
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Commande</h6>
-                <p class="mb-0">votre commande de KING 365 M3U 12 MOIS à été livrée.</p>                
-             
-                      
-                      <small class="text-muted">2025-11-01 02:56:42</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Commande</h6>
-                <p class="mb-0">Votre Commande de 1 KING 365 M3U 12 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-11-01 14:54:07</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Commande</h6>
-                <p class="mb-0">votre commande de KING 365 M3U 12 MOIS à été livrée.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-31 05:34:42</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Commande</h6>
-                <p class="mb-0">Votre Commande de 1 KING 365 M3U 12 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-31 17:16:47</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                
-                              
-                
-              </ul>
-          </li>
-            <li class="dropdown-menu-footer border-top p-3">
-              <button onclick="window.location.href = 'http://topmultivendeur.com/DelnotificationCom';" class="btn btn-primary text-uppercase w-100">supprimer les notifications</button>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            Notification <i class="bx bx-bell bx-sm"></i>
-            <span class="badge bg-danger rounded-pill badge-notifications">17</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end py-0">
-            <li class="dropdown-menu-header border-bottom">
-              <div class="dropdown-header d-flex align-items-center py-3">
-                <h5 class="text-body mb-0 me-auto">Notification</h5>
-              </div>
-            </li>
-            <li class="dropdown-notifications-list scrollable-container ps ps--active-y">
-              <ul class="list-group list-group-flush">
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-11-10 10:43:30</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Recharge</h6>
-                <p class="mb-0">Vous avez récu 536 MAD de l\&#039;administrateur</p>                
-             
-                      
-                      <small class="text-muted">2025-11-10 10:23:25</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 4K OTT/COBRA/PROMAX 6 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-11-04 18:22:59</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de  Premium 3 Months (3 Months) (bein carte: 751446155) à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-11-02 15:42:26</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Recharge</h6>
-                <p class="mb-0">Vous avez récu 560 MAD de l\&#039;administrateur</p>                
-             
-                      
-                      <small class="text-muted">2025-11-01 10:45:29</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-31 13:52:47</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ M3U 12 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-30 19:16:37</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 4K OTT/COBRA/PROMAX 6 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-28 12:12:03</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-28 12:10:01</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 TREX M3U 6 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-26 14:51:01</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 6 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-26 13:30:01</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ M3U 6 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-26 13:28:00</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 SMART+ SMART X2 12MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-26 13:16:31</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 IRON PRO FULL DH 6 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-22 13:24:18</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de HotPlayer Activation LifeTime (mac: A8:23:FE:AB:80:BB) à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-21 20:06:29</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Achat</h6>
-                <p class="mb-0">Votre Achat de 1 IRON PRO FULL DH 3 MOIS à été bien effectué.</p>                
-             
-                      
-                      <small class="text-muted">2025-10-21 19:42:37</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="" class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                   
-                <h6 class="text-muted d-block mb-1">Recharge</h6>
-                <p class="mb-0">Vous avez récu 1200 MAD de l\&#039;administrateur</p>                
-             
-                      
-                      <small class="text-muted">2025-10-21 09:57:41</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                    </div>
-                  </div>
-                </li>
-                              
-                
-              </ul>
-            <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
-          </li>
-            <li class="dropdown-menu-footer border-top p-3">
-              <button onclick="window.location.href = 'http://topmultivendeur.com/Delnotification';" class="btn btn-primary text-uppercase w-100">Supprimer les notifications</button>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item me-2 me-xl-5">
-          
-           
-          <div class="d-flex border-primary p-2 border rounded mb-4" style="margin:0px !important">
-                      <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/wallet-info.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <p class="mb-0">Solde</p>
-                                <a href="javascript:void(0)" class="small" data-bs-target="#upgradePlanModal" data-bs-toggle="modal">Level 4</a>
-                              </div>
-              <div class="user-progress">
-                <div class="d-flex justify-content-center">
-                  <sup class="mt-3 mb-0 me-1"></sup>
-                   
-                                          <h3 class="mb-0" >480</h3>
-                                      
-                                    <sub class="mt-auto mb-2"> /MAD</sub>
-                </div>
-              </div>
-            </div>
-          </div>
-          </li>
-        
-          <!-- User -->
-          <li class="nav-item navbar-dropdown dropdown-user dropdown">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-              <div class="avatar avatar-online">
-                <img src="https://topmultivendeur.com/storage/assets/img/profile/default.png" alt class="w-px-40 h-auto rounded-circle">
-              </div>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="javascript:void(0);">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar avatar-online">
-                        <img src="https://topmultivendeur.com/storage/assets/img/profile/default.png" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <span class="fw-semibold d-block"><span class="__cf_email__" data-cfemail="1351767d717261787a3d222553747e727a7f3d707c7e">[email&#160;protected]</span></span>
-                      <small class="text-muted"> Admin </small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <a class="dropdown-item" href="https://topmultivendeur.com/profile">
-                  <i class="bx bx-user me-2"></i>
-                  <span class="align-middle">Profile</span>
-                </a>
-              </li>
-              
-             
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <a class="dropdown-item" href="https://topmultivendeur.com/logout">
-                  <i class='bx bx-power-off me-2'></i>
-                  <span class="align-middle">Se déconnecter</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!--/ User -->
-        </ul>
-      </div>
-
-        </nav>
-  <!-- / Navbar -->
-            <!-- END: Navbar-->
-
-
-      <!-- Content wrapper -->
-      <div class="content-wrapper">
-
-        <!-- Content -->
-                  <div class="container-xxl flex-grow-1 container-p-y">
-            
-            <div class="bs-toast toast toast-placement-ex m-2" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
-  <div class="toast-header">
-    <i class='bx bx-bell me-2'></i>
-    <div class="me-auto fw-semibold">Notification</div>
-    <small>maintenant</small>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-          </div>
-</div>
-<div class="row">
-    <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
-<marquee style="background:#fff; font-size:28px;border-radius:5px;text-shadow: #666 1px 2px;height:60px;color:#000000" class="shadow-lg fw-bold p-2 mt-1 " width="100%" direction="right" height="40%">
-        كل شخص مطالب بتفعيل Gogole authtentifcator اجباري اجباري لا اتحمل مسؤولية اي      
-       </marquee>
-          </div> 
-            <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
-<marquee style="background:#fff; font-size:28px;border-radius:5px;text-shadow: #666 1px 2px;height:60px;color:#000000" class="shadow-lg fw-bold p-2 mt-1 " width="100%" direction="right" height="40%">
-        اقل رصيد 1000 درهم      
-       </marquee>
-          </div> 
-          
-                    
-  
-                <div class="col-lg-4 col-md-4 order-2">
-    <div class="row">
-<!-- ICI CODE -->
-    
-    
- 
-        <div class="col-lg-12 mb-4 order-0">
-    <div class="card bg-danger" >
-      <div class="d-flex align-items-end row">
-        <div class="col-sm-12">
-          <div class="card-body">
-            <h5 class="card-title" style="color:#fff">Bienvenue à Top Multi Vendeur!</h5>
-            <p class="mb-4" style="color: #fff;">Votre email n'est pas vérifié Veuillez vérifier votre email.</p>
-
-            <button type="button" href="javascript:;" id="sendmailv" class="btn btn-sm btn-outline-white">Envoyer Email de verification</button>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-
-
-  
-  
-      <div class="col-12 col-md-6 col-lg-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between" style="position: relative;">
-              <div class="d-flex flex-column">
-                <div class="card-title mb-auto">
-                  <h4 class="mb-0">Bénéfice</h4>
-                  <small class="text-success text-nowrap fw-medium">Plus de revendeurs, plus de profits. 😃</small>
-                </div>
-                <div class="chart-statistics">
-                  <br>
-                                    <h3 class="card-title mb-1">0.000 MAD</h3>
-                 
-                                      
-                  <form method="post" action="https://topmultivendeur.com/RemboursementSolde" enctype="multipart/form-data">
-                  <input type="hidden" name="_token" value="3S5nDGNqLqiLhvNBSmcaXDqQLy97UWyRDG04HxId">
-                  <button type="submit" class="btn btn-primary" >Rembourser</button>
-                  </form>
-                </div>
-              </div>
-             
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-12 col-lg-12 order-3 order-md-2">
-    <div class="row">
-      <div class="col-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title d-flex align-items-start justify-content-between">
-              <div class="avatar flex-shrink-0">
-                <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded">
-              </div>
-             
-            </div>
-            <span class="d-block mb-1">Solde Récu</span>
-            <h3 class="card-title text-nowrap mb-2">1096 MAD</h3>
-            <small class="text-success fw-semibold">Ce mois</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title d-flex align-items-start justify-content-between">
-              <div class="avatar flex-shrink-0">
-                <img src="https://topmultivendeur.com/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded">
-              </div>
-              
-            </div>
-            <span class="fw-semibold d-block mb-1">Solde Envoyé</span>
-            <h3 class="card-title mb-2">0 MAD</h3>
-            <small class="text-success fw-semibold">Ce mois</small>
-          </div>
-        </div>
-      </div>
-      <!-- </div>
-    <div class="row"> -->
-      
-    </div>
-  </div>
-     
-     
-      
-    </div>
-  </div>
-  <!-- Total Revenue -->
-
-  
-  
-
-
-  <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-    <div class="card">
-      <div class="row row-bordered g-0">
-        <div class="col-md-12">
-          <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-          <div id="totalRevenueChart" class="px-2"></div>
-        </div>
-        
-      </div>
-    </div>
-
-    <div class="row" style="margin-top:20px">
-  <!-- Order Statistics -->
-  <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-6">
-    <div class="card h-100">
-      <div class="card-header d-flex align-items-center justify-content-between pb-0">
-        <div class="card-title mb-0">
-          <h5 class="m-0 me-2">Top 5 Produit vendu</h5>
-          <small class="text-muted">Ce Mois</small>
-        </div>
-        
-      </div>
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="d-flex flex-column align-items-center gap-1">
-            
-
-            <h2 class="mb-2">0</h2>
-            <span>Quantité Vendu</span>
-          </div>
-          
-        </div>
-        <ul class="p-0 m-0">
-           
-                <span>Aucune vente n'est réalisée depuis votre panel.</span>
-                              
-          
-          
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!--/ Order Statistics -->
-
-  
-
-  <!-- Transactions -->
-  <div class="col-md-6 col-lg-6 order-2 mb-4">
-    <div class="card h-100">
-      <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="card-title m-0 me-2">Dernier Transactions</h5>
-        
-      </div>
-      <div class="card-body">
-        <ul class="p-0 m-0">
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                              <small class="text-muted d-block mb-1">Achat Produit</small>
-                <h6 class="mb-0">SMART+ SMART X2 12MOIS</h6>                
-                                                          
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">-65.000</h6> <span class="text-muted">MAD</span>
-                                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                              <small class="text-muted d-block mb-1">Achat Produit</small>
-                <h6 class="mb-0">4K OTT/COBRA/PROMAX 6 MOIS</h6>                
-                                                          
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">-80.000</h6> <span class="text-muted">MAD</span>
-                                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                              <small class="text-muted d-block mb-1">Achat Produit</small>
-                <h6 class="mb-0">Premium 3 Months (3 Months)</h6>                
-                                                          
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">-435.000</h6> <span class="text-muted">MAD</span>
-                                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                              <small class="text-muted d-block mb-1">Achat Produit</small>
-                <h6 class="mb-0">KING 365 M3U 12 MOIS</h6>                
-                                                          
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">-210.000</h6> <span class="text-muted">MAD</span>
-                                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                              <small class="text-muted d-block mb-1">Achat Produit</small>
-                <h6 class="mb-0">KING 365 M3U 12 MOIS</h6>                
-                                                          
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">-210.000</h6> <span class="text-muted">MAD</span>
-                                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                              <small class="text-muted d-block mb-1">Achat Produit</small>
-                <h6 class="mb-0">SMART+ SMART X2 12MOIS</h6>                
-                                                          
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">-65.000</h6> <span class="text-muted">MAD</span>
-                                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                                          <small class="text-muted d-block mb-1">Recharge</small>
-                <h6 class="mb-0">536 MAD</h6>
-                                            
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+536 MAD</h6> <span class="text-muted"></span>
-                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                                          <small class="text-muted d-block mb-1">Recharge</small>
-                <h6 class="mb-0">560 MAD</h6>
-                                            
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+560 MAD</h6> <span class="text-muted"></span>
-                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                                          <small class="text-muted d-block mb-1">Recharge</small>
-                <h6 class="mb-0">1200 MAD</h6>
-                                            
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+1200 MAD</h6> <span class="text-muted"></span>
-                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                                          <small class="text-muted d-block mb-1">Recharge</small>
-                <h6 class="mb-0">600 MAD</h6>
-                                            
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+600 MAD</h6> <span class="text-muted"></span>
-                                              </div>
-            </div>
-          </li>
-                    <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="https://topmultivendeur.com/assets/img/icons/unicons/paypal.png" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                                          <small class="text-muted d-block mb-1">Recharge</small>
-                <h6 class="mb-0">0 MAD</h6>
-                                            
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+0 MAD</h6> <span class="text-muted"></span>
-                                              </div>
-            </div>
-          </li>
-                   
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!--/ Transactions -->
-</div>
-
-  </div>
-  <!--/ Total Revenue -->
-  
-</div>
-
-
-            <!-- pricingModal -->
-                        <!--/ pricingModal -->
-
-          </div>
-          <!-- / Content -->
-
-          <!-- Footer -->
-                    <!-- Footer-->
-<footer class="content-footer footer bg-footer-theme">
-  <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-    <div class="mb-2 mb-md-0">
-      © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        document.write(new Date().getFullYear())
-
-      </script>
-      , made by GH Company
-    </div>
-    
-  </div>
-</footer>
-<!--/ Footer-->
-                    <!-- / Footer -->
-          <div class="content-backdrop fade"></div>
-        </div>
-        <!--/ Content wrapper -->
-      </div>
-      <!-- / Layout page -->
-    </div>
-
-        <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-    <div class="drag-target"></div>
-  </div>
-  <!-- / Layout wrapper -->
-    <!--/ Layout Content -->
-
-	    
-  <div class="modal fade dtr-bs-modal"  aria-hidden="true" id="modaldash0">
-<div class="modal-dialog modal-lg" role="document"><div class="modal-content">
-<div class="modal-header"><h4 class="modal-title">.</h4>
-<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-</button></div>
-  <div class="modal-body" style="padding:20px;font-size:20px;font-weight:bold">
-    
-  اقل رصيد 1000 درهم
-        
-        
-</div>
-<div class="modal-footer">
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                </div>
-</div></div></div>
-
-
-        
-   
-
-    <!-- Include Scripts -->
-  <!-- BEGIN: Vendor JS-->
-<script src="https://topmultivendeur.com/assets/vendor/libs/jquery/jquery.js?id=61b6b590f1cc3c668eb64b481bd6524c"></script>
-<script src="https://topmultivendeur.com/assets/vendor/libs/popper/popper.js?id=ce797c28ba57ea09097033fefdb24ace"></script>
-<script src="https://topmultivendeur.com/assets/vendor/js/bootstrap.js?id=fa922f4cb597f4cce190fa608dace7c0"></script>
-<script src="https://topmultivendeur.com/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js?id=302c26f0ffdcc86cc83a6bb8ec2164ad"></script>
-<script src="https://topmultivendeur.com/assets/vendor/js/menu.js?id=a687fa9660a310acc9084fa245bb7706"></script>
-
-<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables/jquery.dataTables.min.js"></script>
-<!--<script src="http://topmultivendeur.com/assets/vendor/datatable/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>-->
-<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<!--<script src="http://topmultivendeur.com/assets/vendor/datatable/datatables-responsive/js/responsive.bootstrap4.min.js"></script>-->
-<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<!--<script src="http://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.bootstrap4.min.js"></script>-->
-<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="https://topmultivendeur.com/assets/vendor/datatable/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="https://topmultivendeur.com/assets/vendor/particles/particles.js"></script>
-<script src="https://topmultivendeur.com/assets/vendor/particles/particlesapp_default.js"></script>
-
-<script src="https://topmultivendeur.com/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-<!-- END: Page Vendor JS-->
-<!-- BEGIN: Theme JS-->
-<script src="https://topmultivendeur.com/assets/js/main.js?id=5971037ce98c7a1fb1c8931365d154ea"></script>
-
-<!-- END: Theme JS-->
-<!-- Pricing Modal JS-->
-<!-- END: Pricing Modal JS-->
-<!-- BEGIN: Page JS-->
-<script src="https://topmultivendeur.com/assets/js/dashboards-analytics.js"></script>
-<script>
-'use strict';
-
-(function () {
-  let cardColor, headingColor, axisColor, shadeColor, borderColor;
-
-  cardColor = config.colors.white;
-  headingColor = config.colors.headingColor;
-  axisColor = config.colors.axisColor;
-  borderColor = config.colors.borderColor;
-
-  // Total Revenue Report Chart - Bar Chart
-  // --------------------------------------------------------------------
-  const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
-    totalRevenueChartOptions = {
-      series: [
-        {
-          name: 'Recharge',
-          data: [0, 0, 0, 0, 0, 1200, 1096]
-        },
-        {
-          name: 'Vente',
-          data: [-0, -0, -0, -0, -0, -1030, -790]
-        }
-      ],
-      chart: {
-        height: 300,
-        stacked: true,
-        type: 'bar',
-        toolbar: { show: false }
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: '33%',
-          borderRadius: 12,
-          startingShape: 'rounded',
-          endingShape: 'rounded'
-        }
-      },
-      colors: [config.colors.primary, config.colors.info],
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 6,
-        lineCap: 'round',
-        colors: [cardColor]
-      },
-      legend: {
-        show: true,
-        horizontalAlign: 'left',
-        position: 'top',
-        markers: {
-          height: 8,
-          width: 8,
-          radius: 12,
-          offsetX: -3
-        },
-        labels: {
-          colors: axisColor
-        },
-        itemMargin: {
-          horizontal: 10
-        }
-      },
-      grid: {
-        borderColor: borderColor,
-        padding: {
-          top: 0,
-          bottom: -8, 
-          left: 20,
-          right: 20
-        }
-      },
-      xaxis: {
-        categories: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'], 
-        labels: {
-          style: {
-            fontSize: '13px',
-            colors: axisColor
-          }
-        },
-        axisTicks: {
-          show: false
-        },
-        axisBorder: {
-          show: false
-        }
-      },
-      yaxis: {
-        labels: {
-          style: {
-            fontSize: '13px',
-            colors: axisColor
-          }
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 1700,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '32%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1580,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '35%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1440,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '42%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1300,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '48%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1200,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '40%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 1040,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 11,
-                columnWidth: '48%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 991,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '30%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 840,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '35%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 768,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '28%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 640,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '32%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 576,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '37%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 480,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '45%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 420,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '52%'
-              }
-            }
-          }
-        },
-        {
-          breakpoint: 380,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 10,
-                columnWidth: '60%'
-              }
-            }
-          }
-        }
-      ],
-      states: {
-        hover: {
-          filter: {
-            type: 'none'
-          }
-        },
-        active: {
-          filter: {
-            type: 'none'
-          }
-        }
+  .sm\:max-w-\[425px\] {
+    max-width: 425px;
+  }
+
+  .sm\:basis-\[calc\(50\%-0\.375rem\)\] {
+    flex-basis: calc(50% - 0.375rem);
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .md\:w-\[400px\] {
+    width: 400px;
+  }
+
+  .md\:basis-1\/2 {
+    flex-basis: 50%;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .lg\:h-64 {
+    height: 16rem;
+  }
+
+  .lg\:w-\[500px\] {
+    width: 500px;
+  }
+
+  .lg\:basis-1\/3 {
+    flex-basis: 33.333333%;
+  }
+
+  .lg\:grid-cols-\[\.75fr_1fr\] {
+    grid-template-columns: .75fr 1fr;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .lg\:pb-\[80px\] {
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .xl\:basis-\[calc\(33\.333\%-0\.5rem\)\] {
+    flex-basis: calc(33.333% - 0.5rem);
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+</style><script type="module" src="/src/__create/dev-error-overlay.js"></script><link rel="icon" href="/src/__create/favicon.png"/></head><body><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section><script>((storageKey2, restoreKey) => {
+    if (!window.history.state || !window.history.state.key) {
+      let key = Math.random().toString(32).slice(2);
+      window.history.replaceState({ key }, "");
+    }
+    try {
+      let positions = JSON.parse(sessionStorage.getItem(storageKey2) || "{}");
+      let storedY = positions[restoreKey || window.history.state.key];
+      if (typeof storedY === "number") {
+        window.scrollTo(0, storedY);
       }
-    };
-  if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
-    const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
-    totalRevenueChart.render();
-  }
-
-  
-
-   // Order Statistics Chart
-  // --------------------------------------------------------------------
-  const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
-    orderChartConfig = {
-      chart: {
-        height: 165,
-        width: 130,
-        type: 'donut'
-      },
-      labels: ['-', '-', '-', '-'],
-      series: [0, 0, 0, 0],
-      colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success, config.colors.danger],
-      stroke: {
-        width: 5,
-        colors: cardColor
-      },
-      dataLabels: {
-        enabled: false,
-        formatter: function (val, opt) {
-          return parseInt(val) + '%';
-        }
-      },
-      legend: {
-        show: false
-      },
-      grid: {
-        padding: {
-          top: 0,
-          bottom: 0,
-          right: 15
-        }
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '75%',
-            labels: {
-              show: true,
-              value: {
-                fontSize: '1.5rem',
-                fontFamily: 'Public Sans',
-                color: headingColor,
-                offsetY: -15,
-                formatter: function (val) {
-                  return parseInt(val) + '%';
-                }
-              },
-              name: {
-                offsetY: 20,
-                fontFamily: 'Public Sans'
-              },
-              total: {
-                show: true,
-                fontSize: '0.8125rem',
-                color: axisColor,
-                label: '', 
-                formatter: function (w) {
-                  return '--';
-                }
-              }
-            }
-          }
-        }
-      }
-    };
-  if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
-    const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
-    statisticsChart.render();
-  }
-
-})();
-
-  </script>
-<script>
-    let shouldSubmitForm = true;
-(function () {
-  // Bootstrap toasts example
-  // --------------------------------------------------------------------
-  const toastPlacementExample = document.querySelector('.toast-placement-ex'),
-    toastPlacementBtn = document.querySelector('#showToastPlacement');
-  let selectedType, selectedPlacement, toastPlacement;
-
-  // Dispose toast when open another
-  function toastDispose(toast) {
-    if (toast && toast._element !== null) {
-      if (toastPlacementExample) {
-        toastPlacementExample.classList.remove(selectedType);
-        DOMTokenList.prototype.remove.apply(toastPlacementExample.classList, selectedPlacement);
-      }
-      toast.dispose();
+    } catch (error) {
+      console.error(error);
+      sessionStorage.removeItem(storageKey2);
+    }
+  })("react-router-scroll-positions", null)</script><link rel="modulepreload" href="/node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx"/><link rel="modulepreload" href="/src/app/root.tsx"/><link rel="modulepreload" href="/src/app/page.jsx"/><script>window.__reactRouterContext = {"basename":"/","future":{"unstable_middleware":false,"unstable_optimizeDeps":false,"unstable_splitRouteModules":false,"unstable_subResourceIntegrity":false,"unstable_viteEnvironmentApi":false},"routeDiscovery":{"mode":"lazy","manifestPath":"/__manifest"},"ssr":true,"isSpaMode":false,"criticalCss":"\n/* /src/app/global.css */\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n  --tw-contain-size:  ;\n  --tw-contain-layout:  ;\n  --tw-contain-paint:  ;\n  --tw-contain-style:  ;\n}/*\n! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n7. Disable tap highlights on iOS\n*/\n\nhtml,\n:host {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: Inter, sans-serif; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n  -webkit-tap-highlight-color: transparent; /* 7 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font-family by default.\n2. Use the user's configured `mono` font-feature-settings by default.\n3. Use the user's configured `mono` font-variation-settings by default.\n4. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-feature-settings: normal; /* 2 */\n  font-variation-settings: normal; /* 3 */\n  font-size: 1em; /* 4 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  letter-spacing: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\ninput:where([type='button']),\ninput:where([type='reset']),\ninput:where([type='submit']) {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden]:where(:not([hidden=\"until-found\"])) {\n  display: none;\n}\n  input, textarea, select, button {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n  input:focus, textarea:focus, select:focus, button:focus {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n.visible {\n  visibility: visible;\n}\n.static {\n  position: static;\n}\n.fixed {\n  position: fixed;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-4 {\n  bottom: 1rem;\n}\n.left-1\\/2 {\n  left: 50%;\n}\n.z-50 {\n  z-index: 50;\n}\n.z-\\[2147483647\\] {\n  z-index: 2147483647;\n}\n.order-1 {\n  order: 1;\n}\n.order-2 {\n  order: 2;\n}\n.mx-20 {\n  margin-left: 5rem;\n  margin-right: 5rem;\n}\n.mx-4 {\n  margin-left: 1rem;\n  margin-right: 1rem;\n}\n.mx-auto {\n  margin-left: auto;\n  margin-right: auto;\n}\n.my-4 {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n}\n.mb-\\[40px\\] {\n  margin-bottom: 40px;\n}\n.mb-2 {\n  margin-bottom: 0.5rem;\n}\n.mb-8 {\n  margin-bottom: 2rem;\n}\n.mb-6 {\n  margin-bottom: 1.5rem;\n}\n.mt-4 {\n  margin-top: 1rem;\n}\n.mb-12 {\n  margin-bottom: 3rem;\n}\n.mb-4 {\n  margin-bottom: 1rem;\n}\n.ml-3 {\n  margin-left: 0.75rem;\n}\n.mt-16 {\n  margin-top: 4rem;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.mt-1 {\n  margin-top: 0.25rem;\n}\n.mt-8 {\n  margin-top: 2rem;\n}\n.ml-6 {\n  margin-left: 1.5rem;\n}\n.mr-1 {\n  margin-right: 0.25rem;\n}\n.line-clamp-2 {\n  overflow: hidden;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.table {\n  display: table;\n}\n.grid {\n  display: grid;\n}\n.hidden {\n  display: none;\n}\n.h-10 {\n  height: 2.5rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-48 {\n  height: 12rem;\n}\n.h-8 {\n  height: 2rem;\n}\n.h-full {\n  height: 100%;\n}\n.h-20 {\n  height: 5rem;\n}\n.h-32 {\n  height: 8rem;\n}\n.h-2 {\n  height: 0.5rem;\n}\n.min-h-screen {\n  min-height: 100vh;\n}\n.w-1\\/2 {\n  width: 50%;\n}\n.w-10 {\n  width: 2.5rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-56 {\n  width: 14rem;\n}\n.w-8 {\n  width: 2rem;\n}\n.w-80 {\n  width: 20rem;\n}\n.w-9 {\n  width: 2.25rem;\n}\n.w-\\[300px\\] {\n  width: 300px;\n}\n.w-\\[350px\\] {\n  width: 350px;\n}\n.w-\\[calc\\(100\\%-160px\\)\\] {\n  width: calc(100% - 160px);\n}\n.w-\\[calc\\(100vw-2rem\\)\\] {\n  width: calc(100vw - 2rem);\n}\n.w-fit {\n  width: -moz-fit-content;\n  width: fit-content;\n}\n.w-full {\n  width: 100%;\n}\n.w-screen {\n  width: 100vw;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.min-w-0 {\n  min-width: 0px;\n}\n.min-w-full {\n  min-width: 100%;\n}\n.max-w-\\[300px\\] {\n  max-width: 300px;\n}\n.max-w-\\[350px\\] {\n  max-width: 350px;\n}\n.max-w-\\[600px\\] {\n  max-width: 600px;\n}\n.max-w-\\[800px\\] {\n  max-width: 800px;\n}\n.max-w-\\[80rem\\] {\n  max-width: 80rem;\n}\n.max-w-md {\n  max-width: 28rem;\n}\n.max-w-sm {\n  max-width: 24rem;\n}\n.max-w-2xl {\n  max-width: 42rem;\n}\n.max-w-7xl {\n  max-width: 80rem;\n}\n.flex-1 {\n  flex: 1 1 0%;\n}\n.flex-shrink-0 {\n  flex-shrink: 0;\n}\n.flex-grow {\n  flex-grow: 1;\n}\n.basis-full {\n  flex-basis: 100%;\n}\n.border-collapse {\n  border-collapse: collapse;\n}\n.-translate-x-1\\/2 {\n  --tw-translate-x: -50%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.translate-y-0 {\n  --tw-translate-y: 0px;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.translate-y-\\[200\\%\\] {\n  --tw-translate-y: 200%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.translate-y-full {\n  --tw-translate-y: 100%;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.select-none {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n          user-select: none;\n}\n.resize {\n  resize: both;\n}\n.list-inside {\n  list-style-position: inside;\n}\n.list-decimal {\n  list-style-type: decimal;\n}\n.list-disc {\n  list-style-type: disc;\n}\n.grid-cols-1 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n.grid-cols-2 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n.flex-row {\n  flex-direction: row;\n}\n.flex-row-reverse {\n  flex-direction: row-reverse;\n}\n.flex-col {\n  flex-direction: column;\n}\n.flex-wrap {\n  flex-wrap: wrap;\n}\n.items-start {\n  align-items: flex-start;\n}\n.items-center {\n  align-items: center;\n}\n.justify-end {\n  justify-content: flex-end;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-1 {\n  gap: 0.25rem;\n}\n.gap-2 {\n  gap: 0.5rem;\n}\n.gap-3 {\n  gap: 0.75rem;\n}\n.gap-\\[10px\\] {\n  gap: 10px;\n}\n.gap-\\[20px\\] {\n  gap: 20px;\n}\n.gap-\\[4px\\] {\n  gap: 4px;\n}\n.gap-\\[5px\\] {\n  gap: 5px;\n}\n.gap-4 {\n  gap: 1rem;\n}\n.gap-6 {\n  gap: 1.5rem;\n}\n.gap-8 {\n  gap: 2rem;\n}\n.space-x-4 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(1rem * var(--tw-space-x-reverse));\n  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.space-y-1 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));\n}\n.space-y-2 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));\n}\n.space-y-6 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));\n}\n.space-x-2 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(0.5rem * var(--tw-space-x-reverse));\n  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.space-y-4 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(1rem * var(--tw-space-y-reverse));\n}\n.space-y-3 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-y-reverse: 0;\n  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));\n  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));\n}\n.space-x-reverse \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 1;\n}\n.divide-x \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-x-reverse: 0;\n  border-right-width: calc(1px * var(--tw-divide-x-reverse));\n  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));\n}\n.divide-gray-200 \u003e :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-opacity: 1;\n  border-color: rgb(229 231 235 / var(--tw-divide-opacity, 1));\n}\n.self-start {\n  align-self: flex-start;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.rounded {\n  border-radius: 0.25rem;\n}\n.rounded-\\[8px\\] {\n  border-radius: 8px;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-lg {\n  border-radius: 0.5rem;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.rounded-2xl {\n  border-radius: 1rem;\n}\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n.border {\n  border-width: 1px;\n}\n.border-0 {\n  border-width: 0px;\n}\n.border-\\[1px\\] {\n  border-width: 1px;\n}\n.border-b {\n  border-bottom-width: 1px;\n}\n.border-b-2 {\n  border-bottom-width: 2px;\n}\n.border-l-4 {\n  border-left-width: 4px;\n}\n.border-t {\n  border-top-width: 1px;\n}\n.border-l {\n  border-left-width: 1px;\n}\n.border-r {\n  border-right-width: 1px;\n}\n.border-r-0 {\n  border-right-width: 0px;\n}\n.border-\\[\\#414243\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(65 66 67 / var(--tw-border-opacity, 1));\n}\n.border-\\[\\#c4c4c4\\] {\n  --tw-border-opacity: 1;\n  border-color: rgb(196 196 196 / var(--tw-border-opacity, 1));\n}\n.border-gray-200 {\n  --tw-border-opacity: 1;\n  border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));\n}\n.border-gray-300 {\n  --tw-border-opacity: 1;\n  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));\n}\n.border-red-500\\/50 {\n  border-color: rgb(239 68 68 / 0.5);\n}\n.border-white\\/20 {\n  border-color: rgb(255 255 255 / 0.2);\n}\n.border-white\\/10 {\n  border-color: rgb(255 255 255 / 0.1);\n}\n.border-blue-500\\/50 {\n  border-color: rgb(59 130 246 / 0.5);\n}\n.border-green-500\\/50 {\n  border-color: rgb(34 197 94 / 0.5);\n}\n.border-yellow-500\\/50 {\n  border-color: rgb(234 179 8 / 0.5);\n}\n.bg-\\[\\#18191B\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(24 25 27 / var(--tw-bg-opacity, 1));\n}\n.bg-\\[\\#2C2D2F\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(44 45 47 / var(--tw-bg-opacity, 1));\n}\n.bg-\\[\\#F2F2F2\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(242 242 242 / var(--tw-bg-opacity, 1));\n}\n.bg-\\[\\#f9f9f9\\] {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 249 249 / var(--tw-bg-opacity, 1));\n}\n.bg-black {\n  --tw-bg-opacity: 1;\n  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));\n}\n.bg-gray-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));\n}\n.bg-gray-50 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));\n}\n.bg-transparent {\n  background-color: transparent;\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));\n}\n.bg-red-500\\/20 {\n  background-color: rgb(239 68 68 / 0.2);\n}\n.bg-white\\/10 {\n  background-color: rgb(255 255 255 / 0.1);\n}\n.bg-black\\/20 {\n  background-color: rgb(0 0 0 / 0.2);\n}\n.bg-black\\/30 {\n  background-color: rgb(0 0 0 / 0.3);\n}\n.bg-blue-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));\n}\n.bg-green-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));\n}\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));\n}\n.bg-red-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));\n}\n.bg-yellow-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(202 138 4 / var(--tw-bg-opacity, 1));\n}\n.bg-black\\/50 {\n  background-color: rgb(0 0 0 / 0.5);\n}\n.bg-gray-600 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));\n}\n.bg-blue-500\\/20 {\n  background-color: rgb(59 130 246 / 0.2);\n}\n.bg-green-500\\/20 {\n  background-color: rgb(34 197 94 / 0.2);\n}\n.bg-yellow-500\\/20 {\n  background-color: rgb(234 179 8 / 0.2);\n}\n.bg-blue-500\\/30 {\n  background-color: rgb(59 130 246 / 0.3);\n}\n.bg-green-500\\/30 {\n  background-color: rgb(34 197 94 / 0.3);\n}\n.bg-orange-500\\/30 {\n  background-color: rgb(249 115 22 / 0.3);\n}\n.bg-purple-500\\/30 {\n  background-color: rgb(168 85 247 / 0.3);\n}\n.bg-white\\/5 {\n  background-color: rgb(255 255 255 / 0.05);\n}\n.bg-gradient-to-br {\n  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));\n}\n.bg-gradient-to-r {\n  background-image: linear-gradient(to right, var(--tw-gradient-stops));\n}\n.bg-gradient-to-b {\n  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));\n}\n.from-blue-600 {\n  --tw-gradient-from: #2563eb var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(37 99 235 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n.from-blue-900 {\n  --tw-gradient-from: #1e3a8a var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(30 58 138 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n.from-red-600 {\n  --tw-gradient-from: #dc2626 var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(220 38 38 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n.from-green-600 {\n  --tw-gradient-from: #16a34a var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(22 163 74 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n.from-blue-500 {\n  --tw-gradient-from: #3b82f6 var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(59 130 246 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n.via-purple-900 {\n  --tw-gradient-to: rgb(88 28 135 / 0)  var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), #581c87 var(--tw-gradient-via-position), var(--tw-gradient-to);\n}\n.to-indigo-900 {\n  --tw-gradient-to: #312e81 var(--tw-gradient-to-position);\n}\n.to-purple-600 {\n  --tw-gradient-to: #9333ea var(--tw-gradient-to-position);\n}\n.to-red-700 {\n  --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);\n}\n.to-green-700 {\n  --tw-gradient-to: #15803d var(--tw-gradient-to-position);\n}\n.to-purple-500 {\n  --tw-gradient-to: #a855f7 var(--tw-gradient-to-position);\n}\n.to-purple-900 {\n  --tw-gradient-to: #581c87 var(--tw-gradient-to-position);\n}\n.bg-cover {\n  background-size: cover;\n}\n.object-cover {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.p-0 {\n  padding: 0px;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-2 {\n  padding: 0.5rem;\n}\n.p-3 {\n  padding: 0.75rem;\n}\n.p-4 {\n  padding: 1rem;\n}\n.p-5 {\n  padding: 1.25rem;\n}\n.p-6 {\n  padding: 1.5rem;\n}\n.p-\\[20px\\] {\n  padding: 20px;\n}\n.p-8 {\n  padding: 2rem;\n}\n.px-2 {\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n}\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.px-\\[10px\\] {\n  padding-left: 10px;\n  padding-right: 10px;\n}\n.px-\\[14px\\] {\n  padding-left: 14px;\n  padding-right: 14px;\n}\n.px-\\[20px\\] {\n  padding-left: 20px;\n  padding-right: 20px;\n}\n.px-\\[50px\\] {\n  padding-left: 50px;\n  padding-right: 50px;\n}\n.px-\\[8px\\] {\n  padding-left: 8px;\n  padding-right: 8px;\n}\n.py-2 {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n.py-\\[4px\\] {\n  padding-top: 4px;\n  padding-bottom: 4px;\n}\n.py-\\[5px\\] {\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n.py-3 {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n}\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.py-12 {\n  padding-top: 3rem;\n  padding-bottom: 3rem;\n}\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n.py-8 {\n  padding-top: 2rem;\n  padding-bottom: 2rem;\n}\n.px-8 {\n  padding-left: 2rem;\n  padding-right: 2rem;\n}\n.pb-12 {\n  padding-bottom: 3rem;\n}\n.pb-20 {\n  padding-bottom: 5rem;\n}\n.pb-5 {\n  padding-bottom: 1.25rem;\n}\n.pb-\\[10px\\] {\n  padding-bottom: 10px;\n}\n.pl-4 {\n  padding-left: 1rem;\n}\n.pt-3 {\n  padding-top: 0.75rem;\n}\n.pt-4 {\n  padding-top: 1rem;\n}\n.pt-\\[100px\\] {\n  padding-top: 100px;\n}\n.text-left {\n  text-align: left;\n}\n.text-center {\n  text-align: center;\n}\n.text-right {\n  text-align: right;\n}\n.text-3xl {\n  font-size: 1.875rem;\n  line-height: 2.25rem;\n}\n.text-4xl {\n  font-size: 2.25rem;\n  line-height: 2.5rem;\n}\n.text-\\[1\\.125rem\\] {\n  font-size: 1.125rem;\n}\n.text-base {\n  font-size: 1rem;\n  line-height: 1.5rem;\n}\n.text-lg {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-xl {\n  font-size: 1.25rem;\n  line-height: 1.75rem;\n}\n.text-2xl {\n  font-size: 1.5rem;\n  line-height: 2rem;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.font-bold {\n  font-weight: 700;\n}\n.font-light {\n  font-weight: 300;\n}\n.font-medium {\n  font-weight: 500;\n}\n.font-normal {\n  font-weight: 400;\n}\n.font-semibold {\n  font-weight: 600;\n}\n.capitalize {\n  text-transform: capitalize;\n}\n.italic {\n  font-style: italic;\n}\n.leading-none {\n  line-height: 1;\n}\n.leading-relaxed {\n  line-height: 1.625;\n}\n.leading-snug {\n  line-height: 1.375;\n}\n.leading-tight {\n  line-height: 1.25;\n}\n.text-\\[\\#18191B\\] {\n  --tw-text-opacity: 1;\n  color: rgb(24 25 27 / var(--tw-text-opacity, 1));\n}\n.text-\\[\\#959697\\] {\n  --tw-text-opacity: 1;\n  color: rgb(149 150 151 / var(--tw-text-opacity, 1));\n}\n.text-\\[\\#F2F2F2\\] {\n  --tw-text-opacity: 1;\n  color: rgb(242 242 242 / var(--tw-text-opacity, 1));\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity, 1));\n}\n.text-blue-500 {\n  --tw-text-opacity: 1;\n  color: rgb(59 130 246 / var(--tw-text-opacity, 1));\n}\n.text-gray-300 {\n  --tw-text-opacity: 1;\n  color: rgb(209 213 219 / var(--tw-text-opacity, 1));\n}\n.text-gray-400 {\n  --tw-text-opacity: 1;\n  color: rgb(156 163 175 / var(--tw-text-opacity, 1));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity, 1));\n}\n.text-gray-900 {\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity, 1));\n}\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n.text-blue-200 {\n  --tw-text-opacity: 1;\n  color: rgb(191 219 254 / var(--tw-text-opacity, 1));\n}\n.text-blue-400 {\n  --tw-text-opacity: 1;\n  color: rgb(96 165 250 / var(--tw-text-opacity, 1));\n}\n.text-red-200 {\n  --tw-text-opacity: 1;\n  color: rgb(254 202 202 / var(--tw-text-opacity, 1));\n}\n.text-green-400 {\n  --tw-text-opacity: 1;\n  color: rgb(74 222 128 / var(--tw-text-opacity, 1));\n}\n.text-red-400 {\n  --tw-text-opacity: 1;\n  color: rgb(248 113 113 / var(--tw-text-opacity, 1));\n}\n.text-blue-100 {\n  --tw-text-opacity: 1;\n  color: rgb(219 234 254 / var(--tw-text-opacity, 1));\n}\n.text-green-200 {\n  --tw-text-opacity: 1;\n  color: rgb(187 247 208 / var(--tw-text-opacity, 1));\n}\n.text-yellow-100 {\n  --tw-text-opacity: 1;\n  color: rgb(254 249 195 / var(--tw-text-opacity, 1));\n}\n.text-yellow-200 {\n  --tw-text-opacity: 1;\n  color: rgb(254 240 138 / var(--tw-text-opacity, 1));\n}\n.text-blue-300 {\n  --tw-text-opacity: 1;\n  color: rgb(147 197 253 / var(--tw-text-opacity, 1));\n}\n.text-green-300 {\n  --tw-text-opacity: 1;\n  color: rgb(134 239 172 / var(--tw-text-opacity, 1));\n}\n.text-orange-300 {\n  --tw-text-opacity: 1;\n  color: rgb(253 186 116 / var(--tw-text-opacity, 1));\n}\n.text-orange-400 {\n  --tw-text-opacity: 1;\n  color: rgb(251 146 60 / var(--tw-text-opacity, 1));\n}\n.text-purple-300 {\n  --tw-text-opacity: 1;\n  color: rgb(216 180 254 / var(--tw-text-opacity, 1));\n}\n.text-purple-400 {\n  --tw-text-opacity: 1;\n  color: rgb(192 132 252 / var(--tw-text-opacity, 1));\n}\n.text-white\\/70 {\n  color: rgb(255 255 255 / 0.7);\n}\n.text-yellow-300 {\n  --tw-text-opacity: 1;\n  color: rgb(253 224 71 / var(--tw-text-opacity, 1));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.no-underline {\n  text-decoration-line: none;\n}\n.placeholder-gray-300::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgb(209 213 219 / var(--tw-placeholder-opacity, 1));\n}\n.placeholder-gray-300::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgb(209 213 219 / var(--tw-placeholder-opacity, 1));\n}\n.opacity-0 {\n  opacity: 0;\n}\n.opacity-100 {\n  opacity: 1;\n}\n.shadow-lg {\n  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.shadow-md {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.shadow-sm {\n  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);\n  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.shadow-2xl {\n  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);\n  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.outline-none {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n.outline {\n  outline-style: solid;\n}\n.filter {\n  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);\n}\n.backdrop-blur-lg {\n  --tw-backdrop-blur: blur(16px);\n  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);\n  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.transition-colors {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-500 {\n  transition-duration: 500ms;\n}\n.duration-200 {\n  transition-duration: 200ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-out {\n  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);\n}\n\n.hover\\:scale-105:hover {\n  --tw-scale-x: 1.05;\n  --tw-scale-y: 1.05;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n\n.hover\\:transform:hover {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n\n.hover\\:border-white\\/40:hover {\n  border-color: rgb(255 255 255 / 0.4);\n}\n\n.hover\\:bg-\\[\\#414243\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(65 66 67 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-\\[\\#dbdbdb\\]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(219 219 219 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-gray-50:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-blue-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-green-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-red-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-yellow-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(161 98 7 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-gray-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));\n}\n\n.hover\\:bg-white\\/20:hover {\n  background-color: rgb(255 255 255 / 0.2);\n}\n\n.hover\\:bg-white\\/10:hover {\n  background-color: rgb(255 255 255 / 0.1);\n}\n\n.hover\\:from-blue-700:hover {\n  --tw-gradient-from: #1d4ed8 var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(29 78 216 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n\n.hover\\:from-red-700:hover {\n  --tw-gradient-from: #b91c1c var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(185 28 28 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n\n.hover\\:from-green-700:hover {\n  --tw-gradient-from: #15803d var(--tw-gradient-from-position);\n  --tw-gradient-to: rgb(21 128 61 / 0) var(--tw-gradient-to-position);\n  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);\n}\n\n.hover\\:to-purple-700:hover {\n  --tw-gradient-to: #7e22ce var(--tw-gradient-to-position);\n}\n\n.hover\\:to-red-800:hover {\n  --tw-gradient-to: #991b1b var(--tw-gradient-to-position);\n}\n\n.hover\\:to-green-800:hover {\n  --tw-gradient-to: #166534 var(--tw-gradient-to-position);\n}\n\n.hover\\:text-blue-300:hover {\n  --tw-text-opacity: 1;\n  color: rgb(147 197 253 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:text-white:hover {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity, 1));\n}\n\n.hover\\:underline:hover {\n  text-decoration-line: underline;\n}\n\n.focus\\:border-transparent:focus {\n  border-color: transparent;\n}\n\n.focus\\:outline-none:focus {\n  outline: 2px solid transparent;\n  outline-offset: 2px;\n}\n\n.focus\\:ring-2:focus {\n  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);\n  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);\n  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);\n}\n\n.focus\\:ring-blue-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity, 1));\n}\n\n.focus\\:ring-red-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(239 68 68 / var(--tw-ring-opacity, 1));\n}\n\n.focus\\:ring-green-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(34 197 94 / var(--tw-ring-opacity, 1));\n}\n\n.focus\\:ring-offset-2:focus {\n  --tw-ring-offset-width: 2px;\n}\n\n.focus\\:ring-offset-transparent:focus {\n  --tw-ring-offset-color: transparent;\n}\n\n.active\\:bg-\\[\\#555658\\]:active {\n  --tw-bg-opacity: 1;\n  background-color: rgb(85 86 88 / var(--tw-bg-opacity, 1));\n}\n\n.active\\:bg-\\[\\#c4c4c4\\]:active {\n  --tw-bg-opacity: 1;\n  background-color: rgb(196 196 196 / var(--tw-bg-opacity, 1));\n}\n\n.disabled\\:opacity-50:disabled {\n  opacity: 0.5;\n}\n\n.group:hover .group-hover\\:shadow-md {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n\n@media (min-width: 640px) {\n\n  .sm\\:h-56 {\n    height: 14rem;\n  }\n\n  .sm\\:w-full {\n    width: 100%;\n  }\n\n  .sm\\:min-w-\\[850px\\] {\n    min-width: 850px;\n  }\n\n  .sm\\:max-w-\\[425px\\] {\n    max-width: 425px;\n  }\n\n  .sm\\:basis-\\[calc\\(50\\%-0\\.375rem\\)\\] {\n    flex-basis: calc(50% - 0.375rem);\n  }\n\n  .sm\\:flex-row {\n    flex-direction: row;\n  }\n\n  .sm\\:px-6 {\n    padding-left: 1.5rem;\n    padding-right: 1.5rem;\n  }\n}\n\n@media (min-width: 768px) {\n\n  .md\\:w-\\[400px\\] {\n    width: 400px;\n  }\n\n  .md\\:basis-1\\/2 {\n    flex-basis: 50%;\n  }\n\n  .md\\:grid-cols-2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\n@media (min-width: 1024px) {\n\n  .lg\\:h-64 {\n    height: 16rem;\n  }\n\n  .lg\\:w-\\[500px\\] {\n    width: 500px;\n  }\n\n  .lg\\:basis-1\\/3 {\n    flex-basis: 33.333333%;\n  }\n\n  .lg\\:grid-cols-\\[\\.75fr_1fr\\] {\n    grid-template-columns: .75fr 1fr;\n  }\n\n  .lg\\:grid-cols-3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n\n  .lg\\:grid-cols-2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n\n  .lg\\:grid-cols-4 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n\n  .lg\\:px-8 {\n    padding-left: 2rem;\n    padding-right: 2rem;\n  }\n\n  .lg\\:pb-\\[80px\\] {\n    padding-bottom: 80px;\n  }\n}\n\n@media (min-width: 1280px) {\n\n  .xl\\:basis-\\[calc\\(33\\.333\\%-0\\.5rem\\)\\] {\n    flex-basis: calc(33.333% - 0.5rem);\n  }\n\n  .xl\\:grid-cols-4 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n"};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/@id/__x00__virtual:react-router/inject-hmr-runtime";;
+import * as route0 from "/src/app/root.tsx";
+import * as route1 from "/src/app/page.jsx";
+  window.__reactRouterManifest = {
+  "version": "0.46815707037591703",
+  "url": "/@id/__x00__virtual:react-router/browser-manifest",
+  "hmr": {
+    "runtime": "/@id/__x00__virtual:react-router/inject-hmr-runtime"
+  },
+  "entry": {
+    "module": "/node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx",
+    "imports": []
+  },
+  "routes": {
+    "root": {
+      "id": "root",
+      "path": "",
+      "module": "/src/app/root.tsx",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasClientAction": false,
+      "hasClientLoader": false,
+      "hasClientMiddleware": false,
+      "hasErrorBoundary": true,
+      "imports": []
+    },
+    "page": {
+      "id": "page",
+      "parentId": "root",
+      "index": true,
+      "module": "/src/app/page.jsx",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasClientAction": false,
+      "hasClientLoader": false,
+      "hasClientMiddleware": false,
+      "hasErrorBoundary": false,
+      "imports": []
     }
   }
-  // Placement Button click
+};
+  window.__reactRouterRouteModules = {"root":route0,"page":route1};
 
-    
-  $(document).ready(function() {
-        $("#modaldash"+0).modal('show');
-        });
-
-   
-
-  
-    
-  
-})();
-
-
-  $('#sendmailv').click(function(){
-                $.ajax({
-                    url: "http://topmultivendeur.com/SendCodeVerificationMail",
-                    type: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': '3S5nDGNqLqiLhvNBSmcaXDqQLy97UWyRDG04HxId'
-                    },
-                    success: function(response) {
-                // Enable the renvoye button and start the countdown
-                $('#sendmailv').prop('disabled', true);
-                var seconds = 60;
-                var countdown = setInterval(function() {
-                    $('#sendmailv').text('Envoyer Email de verification (' + seconds + 's)');
-                    seconds--;
-                    if (seconds < 0) {
-                        clearInterval(countdown);
-                        $('#sendmailv').text('Envoyer Email de verification');
-                        $('#sendmailv').prop('disabled', false);
-                    }
-                }, 1000);
-            },
-                    
-                });
-            });
-            
-            var countdown_var1 = setInterval(function() {
-              if(document.getElementById('countdown_1')) {
-        var countdownElement = document.getElementById('countdown_1').innerText;
-        var timeArray = countdownElement.split(/j|h|m|s/).map(Number);
-        var seconds = timeArray[0] * 24 * 60 * 60 + timeArray[1] * 60 * 60 + timeArray[2] * 60 + timeArray[3] - 1;
-       // alert(seconds);
-        if (seconds >= 0) {
-            var days = Math.floor(seconds / (24 * 60 * 60));
-            seconds %= (24 * 60 * 60);
-            var hours = Math.floor(seconds / (60 * 60));
-            seconds %= (60 * 60); 
-            var minutes = Math.floor(seconds / 60);
-            var remainingSeconds = seconds % 60;
-           // alert(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm:' + ('0' + remainingSeconds).slice(-2) + 's');
-            $("#countdown_1").html(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm' + ('0' + remainingSeconds).slice(-2) + 's');
-           // setTimeout(decrementTimer, 1000);
-        } else {
-          clearInterval(countdown_var1);
-        }
-      } else {
-        clearInterval(countdown_var1);
-      }
-                }, 1000);
-                
-              
-
-                var countdown_var2 = setInterval(function() {
-                  if(document.getElementById('countdown_2')) {
-        var countdownElement = document.getElementById('countdown_2').innerText;
-        var timeArray = countdownElement.split(/j|h|m|s/).map(Number);
-        var seconds = timeArray[0] * 24 * 60 * 60 + timeArray[1] * 60 * 60 + timeArray[2] * 60 + timeArray[3] - 1;
-       // alert(seconds);
-        if (seconds >= 0) {
-            var days = Math.floor(seconds / (24 * 60 * 60));
-            seconds %= (24 * 60 * 60);
-            var hours = Math.floor(seconds / (60 * 60));
-            seconds %= (60 * 60);
-            var minutes = Math.floor(seconds / 60);
-            var remainingSeconds = seconds % 60;
-           // alert(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm:' + ('0' + remainingSeconds).slice(-2) + 's');
-            $("#countdown_2").html(('0' + days).slice(-2) + 'j' + ('0' + hours).slice(-2) + 'h' + ('0' + minutes).slice(-2) + 'm' + ('0' + remainingSeconds).slice(-2) + 's');
-           // setTimeout(decrementTimer, 1000);
-        } else {
-          clearInterval(countdown_var2);
-        }
-      } else {
-        clearInterval(countdown_var2);
-      }
-                }, 1000);
-
-              
-</script>
-<!-- END: Page JS-->
-
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6af5ab23d1804d139a4c1642e804770e","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
-
-</html>
-
+import("/node_modules/@react-router/dev/dist/config/defaults/entry.client.tsx");</script><script src="https://kit.fontawesome.com/2c15cc0cc7.js" crossorigin="anonymous" async=""></script></body></html><!--$?--><template id="B:0"></template><!--/$--><div hidden id="S:0"><script>window.__reactRouterContext.streamController.enqueue("[{\"_1\":2,\"_3\":-5,\"_4\":-5},\"loaderData\",{},\"actionData\",\"errors\"]\n");</script><!--$?--><template id="B:1"></template><!--/$--></div><script>function $RC(a,b){a=document.getElementById(a);b=document.getElementById(b);b.parentNode.removeChild(b);if(a){a=a.previousSibling;var f=a.parentNode,c=a.nextSibling,e=0;do{if(c&&8===c.nodeType){var d=c.data;if("/$"===d)if(0===e)break;else e--;else"$"!==d&&"$?"!==d&&"$!"!==d||e++}d=c.nextSibling;f.removeChild(c);c=d}while(c);for(;b.firstChild;)f.insertBefore(b.firstChild,c);a.data="$";a._reactRetry&&a._reactRetry()}};$RC("B:0","S:0")</script><div hidden id="S:1"><script>window.__reactRouterContext.streamController.close();</script></div><script>$RC("B:1","S:1")</script>
