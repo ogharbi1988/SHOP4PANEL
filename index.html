@@ -3,535 +3,1503 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SHOP 4 PANEL — V4</title>
+<title>SHOP 4 PANEL — V6 PRO</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg-a:#05292d; --accent1:#00bfa6; --accent2:#10b981; --accent3:#ff8a00;
-  --card-radius:16px; --shadow:0 20px 50px rgba(2,6,23,0.25);
-  --muted:#7b8890;
+:root {
+  --bg-a: #05292d; 
+  --accent1: #00bfa6; 
+  --accent2: #10b981; 
+  --accent3: #ff8a00;
+  --accent4: #6366f1;
+  --card-radius: 20px; 
+  --shadow: 0 25px 60px rgba(2,6,23,0.15);
+  --shadow-light: 0 15px 40px rgba(2,6,23,0.08);
+  --muted: #7b8890;
+  --gradient-primary: linear-gradient(135deg, var(--accent1), var(--accent4));
+  --gradient-secondary: linear-gradient(135deg, var(--accent2), var(--accent3));
 }
-*{box-sizing:border-box} html,body{height:100%;margin:0;font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, Arial;}
-body{background:linear-gradient(135deg,var(--bg-a),#0b3940 40%, #0f6e6a 70%, var(--accent3)); color:#03121a;}
 
-/* layout & glass */
-.container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;position:relative;z-index:2}
-.card{width:100%;max-width:1200px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));box-shadow:var(--shadow);backdrop-filter:blur(10px);display:flex;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
-.left{flex:1;padding:34px;color:white;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);display:flex;flex-direction:column;justify-content:center}
-.right{flex:1.05;padding:34px;background:transparent;display:flex;flex-direction:column;justify-content:center}
+* {
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0;
+}
 
-/* logo */
-.logo{display:flex;align-items:center;gap:14px;margin-bottom:8px}
-.logoBadge{width:72px;height:72px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;font-weight:900;font-size:22px}
-.logoTitle{font-size:22px;font-weight:900}
+html, body {
+  height: 100%; 
+  font-family: 'Public Sans', Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
 
-/* form */
-.form{width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.field{position:relative}
-.field input[type="text"], .field input[type="email"], .field input[type="password"], .field input[type="number"], textarea, select{width:100%;padding:12px 12px 12px 48px;border-radius:12px;border:1px solid rgba(15,25,30,0.06);background:rgba(255,255,255,0.98);font-size:15px;outline:none}
-.icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 6px 18px rgba(2,6,23,0.12)}
-.field input:focus{box-shadow:0 10px 28px rgba(0,191,166,0.08)}
+body {
+  background: linear-gradient(135deg, var(--bg-a), #0b3940 40%, #0f6e6a 70%, var(--accent3)); 
+  color: #03121a;
+  overflow-x: hidden;
+}
 
-/* buttons */
-.btn{padding:12px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(2,6,23,0.12)}
-.smallBtn{padding:8px;border-radius:10px;border:1px solid rgba(2,6,23,0.06);background:transparent;cursor:pointer}
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
 
-/* dashboard styles */
-.app{display:none;min-height:100vh}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:rgba(255,255,255,0.98);border-bottom:1px solid #eef3f4}
-.wrapper{display:flex;min-height:calc(100vh - 74px)}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-/* sidebar */
-.sidebar{width:260px;background:linear-gradient(180deg,var(--accent1),#0f8);padding:18px;color:white}
-.menu{margin-top:20px}
-.menu .item{padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px}
-.menu .item:hover{background:rgba(255,255,255,0.06)}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,191,166,0.3); }
+  50% { box-shadow: 0 0 30px rgba(0,191,166,0.6); }
+}
 
-/* content */
-.content{flex:1;padding:22px;background:#f7fbfc}
+/* Layout principal */
+.container-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  position: relative;
+  z-index: 2;
+}
 
-/* tiles */
-.tiles{display:flex;gap:12px;flex-wrap:wrap}
-.tile{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);min-width:160px;flex:1}
+/* Effets de fond animés */
+.background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
 
-/* product card */
-.productCard{background:white;border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(2,6,23,0.04);display:flex;gap:10px;align-items:center}
-.productCard img{width:84px;height:52px;object-fit:cover;border-radius:8px}
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--accent1), transparent);
+  animation: float 6s ease-in-out infinite;
+}
 
-/* modal */
-.modal{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(2,6,23,0.45);align-items:center;justify-content:center;z-index:9999}
-.modal .modalInner{background:white;padding:18px;border-radius:12px;min-width:320px;max-width:720px;animation:modalIn .28s ease both}
-@keyframes modalIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.shape-1 { width: 200px; height: 200px; top: 10%; left: 5%; animation-delay: 0s; }
+.shape-2 { width: 150px; height: 150px; top: 60%; right: 10%; animation-delay: 2s; }
+.shape-3 { width: 100px; height: 100px; bottom: 20%; left: 20%; animation-delay: 4s; }
 
-/* chart container */
-.chartWrap{display:flex;gap:12px;align-items:center}
+/* Carte de connexion moderne */
+.loginCard {
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--card-radius);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideIn 0.8s ease-out;
+  position: relative;
+  z-index: 10;
+}
 
-/* responsive */
-@media (max-width:900px){ .card{flex-direction:column} .left,.right{padding:20px} .sidebar{display:none} .chartWrap{flex-direction:column} }
+.loginHeader {
+  background: var(--gradient-primary);
+  padding: 30px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
 
+.logoBadge {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 900;
+  font-size: 24px;
+  margin: 0 auto 15px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.logoTitle {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.slogan {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Formulaire */
+.form {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  position: relative;
+}
+
+.field input, .field select {
+  width: 100%;
+  padding: 16px 16px 16px 50px;
+  border-radius: 12px;
+  border: 2px solid #f0f0f0;
+  background: white;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.field input:focus, .field select:focus {
+  border-color: var(--accent1);
+  box-shadow: 0 0 0 3px rgba(0, 191, 166, 0.1);
+  transform: translateY(-2px);
+}
+
+.icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent1);
+  z-index: 2;
+}
+
+/* Boutons */
+.btnPrimary {
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 15px;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 191, 166, 0.3);
+  animation: glow 2s infinite;
+}
+
+.btnSecondary {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 2px solid var(--accent1);
+  background: transparent;
+  color: var(--accent1);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnSecondary:hover {
+  background: var(--accent1);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* App Layout */
+.app {
+  display: none;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: white;
+  box-shadow: 0 2px 20px rgba(2,6,23,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 18px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  background: var(--gradient-secondary);
+}
+
+/* Sidebar moderne */
+.sidebar {
+  width: 280px;
+  background: white;
+  box-shadow: 2px 0 20px rgba(2,6,23,0.08);
+  padding: 25px;
+  height: calc(100vh - 70px);
+  position: fixed;
+  overflow-y: auto;
+}
+
+.menu {
+  margin-top: 25px;
+}
+
+.menu .item {
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.menu .item:hover, .menu .item.active {
+  background: var(--gradient-primary);
+  color: white;
+  transform: translateX(5px);
+}
+
+.menu .item i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Contenu principal */
+.content {
+  flex: 1;
+  padding: 30px;
+  margin-left: 280px;
+  background: #f8fafc;
+  min-height: calc(100vh - 70px);
+}
+
+/* Grille de statistiques */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.stat-card {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 25px;
+  box-shadow: var(--shadow-light);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 10px 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Produits */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.product-card {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 20px;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.product-image {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent1);
+  margin: 10px 0;
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(2,6,23,0.6);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal .modalInner {
+  background: white;
+  padding: 30px;
+  border-radius: var(--card-radius);
+  min-width: 400px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--accent1);
+  box-shadow: 0 0 0 3px rgba(0, 191, 166, 0.1);
+}
+
+/* Tableaux */
+.data-table {
+  background: white;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  margin-top: 20px;
+}
+
+.table-header {
+  padding: 20px;
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.table-content {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+}
+
+tr:hover {
+  background: #f8fafc;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 99;
+  }
+  
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .content {
+    margin-left: 0;
+  }
+  
+  .menu-toggle {
+    display: block !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .topbar {
+    padding: 15px 20px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .modal .modalInner {
+    min-width: 90%;
+    margin: 20px;
+  }
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--accent1);
+  cursor: pointer;
+}
+
+/* Badges */
+.badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Utilitaires */
+.text-success { color: #10b981; }
+.text-danger { color: #ef4444; }
+.text-warning { color: #f59e0b; }
+
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hidden {
+  display: none !important;
+}
 </style>
 </head>
 <body>
-<div class="container" id="loginContainer">
-  <div class="card">
-    <div class="left">
-      <div class="logo"><div class="logoBadge">S4</div><div><div class="logoTitle">SHOP 4 PANEL</div><div style="opacity:0.9">Vente IPTV Premium</div></div></div>
-      <div style="margin-top:12px;font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent3));-webkit-background-clip:text;color:transparent">Recharge et gagne plus avec les points de fidélité</div>
-      <div style="margin-top:6px;font-weight:600;color:rgba(255,255,255,0.95);direction:rtl">اشحن واربح أكثر مع نقاط الولاء</div>
-      <div style="margin-top:18px;color:rgba(255,255,255,0.9);font-size:13px">Support 24/7 • USDT (TRC20), Wafa Cash, Virement, Cash</div>
+<!-- Effets de fond -->
+<div class="background-effects">
+  <div class="floating-shape shape-1"></div>
+  <div class="floating-shape shape-2"></div>
+  <div class="floating-shape shape-3"></div>
+</div>
+
+<!-- PAGE DE CONNEXION -->
+<div class="container-center" id="loginView">
+  <div class="loginCard">
+    <div class="loginHeader">
+      <div class="logoBadge">S4</div>
+      <div class="logoTitle">SHOP 4 PANEL PRO</div>
+      <div class="slogan">Système de gestion nouvelle génération</div>
     </div>
-    <div class="right">
-      <form id="loginForm" class="form" autocomplete="on" novalidate>
-        <div class="field"><div class="icon"><i class="fa fa-envelope"></i></div><input id="email" type="email" placeholder="Email"></div>
-        <div class="field"><div class="icon"><i class="fa fa-lock"></i></div><input id="password" type="password" placeholder="Mot de passe"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center"><label><input id="remember" type="checkbox"> Se souvenir</label><div><a href="#" id="langFR">FR</a> · <a href="#" id="langAR">AR</a></div></div>
-        <div id="err" style="display:none;color:#b00020;font-weight:700"></div>
-        <button type="submit" class="btn" id="btnLogin">Se connecter</button>
-        <div style="display:flex;gap:8px;margin-top:12px">
-          <button type="button" class="smallBtn" id="demoAdmin">Admin demo</button>
-          <button type="button" class="smallBtn" id="demoUser">User demo</button>
+    
+    <form id="loginForm" class="form" autocomplete="on" novalidate>
+      <div class="field">
+        <div class="icon"><i class="fa fa-user"></i></div>
+        <select id="userType" required>
+          <option value="">Type d'utilisateur</option>
+          <option value="admin">Administrateur</option>
+          <option value="user">Utilisateur</option>
+        </select>
+      </div>
+      
+      <div class="field">
+        <div class="icon"><i class="fa fa-envelope"></i></div>
+        <input id="email" type="email" placeholder="Email" required>
+      </div>
+      
+      <div class="field">
+        <div class="icon"><i class="fa fa-lock"></i></div>
+        <input id="password" type="password" placeholder="Mot de passe" required>
+      </div>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <label style="display: flex; align-items: center; gap: 8px;">
+          <input id="remember" type="checkbox"> Se souvenir
+        </label>
+        <div>
+          <a href="#" id="langFR">FR</a> · <a href="#" id="langAR">AR</a>
         </div>
-        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
-          <div><strong>Admin:</strong> ogharbi1988@shop4panel.com / admin1988</div>
-          <div><strong>User:</strong> user@shop4panel.com / admin1988</div>
-          <div><strong>Test:</strong> test@shop4panel.com / test123</div>
-        </div>
-      </form>
-    </div>
+      </div>
+      
+      <div id="loginErr" class="msg err" role="alert"></div>
+      
+      <button type="submit" class="btnPrimary" id="btnLogin">
+        <i class="fa fa-sign-in-alt"></i> Se connecter
+      </button>
+      
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <button type="button" class="btnSecondary" id="demoAdmin">
+          <i class="fa fa-crown"></i> Admin demo
+        </button>
+        <button type="button" class="btnSecondary" id="demoUser">
+          <i class="fa fa-user"></i> User demo
+        </button>
+      </div>
+      
+      <div style="margin-top: 20px; font-size: 12px; color: var(--muted); text-align: center;">
+        <div><strong>Admin:</strong> admin@shop4panel.com / admin123</div>
+        <div><strong>User:</strong> user@shop4panel.com / user123</div>
+      </div>
+    </form>
   </div>
 </div>
 
-<!-- Dashboard (hidden until login) -->
-<div class="app" id="app" style="display:none">
+<!-- APPLICATION PRINCIPALE -->
+<div class="app" id="app">
+  <!-- Topbar -->
   <div class="topbar">
-    <div><span style="font-weight:800;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white">SHOP 4 PANEL</span></div>
-    <div style="display:flex;align-items:center;gap:12px">
-      <div id="langDisplay" style="font-weight:700"></div>
-      <div id="userInfo" style="text-align:right">
-        <div id="uName" style="font-weight:800">Invité</div>
-        <div id="uRole" style="font-size:13px;color:var(--muted)">Non connecté</div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="brand">SHOP 4 PANEL PRO</div>
+    </div>
+    
+    <div class="user-menu">
+      <div style="position: relative; cursor: pointer;" id="notificationsBtn">
+        <i class="fa fa-bell" style="font-size: 20px; color: var(--accent1);"></i>
+        <span class="notification-badge" id="notificationCount">3</span>
       </div>
-      <div id="uAvatar" style="width:44px;height:44;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800">S4</div>
+      
+      <div id="userInfo" style="text-align: right;">
+        <div id="uName" style="font-weight: 700;">Invité</div>
+        <div id="uRole" style="font-size: 12px; color: var(--muted);">Non connecté</div>
+      </div>
+      
+      <div class="user-avatar" id="uAvatar">S4</div>
     </div>
   </div>
 
-  <div class="wrapper">
-    <aside class="sidebar" id="sidebar">
-      <div style="font-weight:800;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;display:inline-block">SHOP 4 PANEL</div>
-      <div class="menu" style="margin-top:18px">
-        <div class="item" data-page="dashboard-home"><i class="fa fa-home"></i> Tableau de bord</div>
-        <div class="item" data-page="products"><i class="fa fa-box-open"></i> Produits</div>
-        <div class="item" data-page="balance"><i class="fa fa-wallet"></i> Mon solde</div>
-        <div class="item" data-page="history"><i class="fa fa-history"></i> Historique</div>
-        <div class="item" data-page="tickets"><i class="fa fa-ticket-alt"></i> Tickets</div>
-        <div class="item" data-page="generator"><i class="fa fa-key"></i> Générateur</div>
-        <div class="item" data-page="admin" id="adminMenu" style="display:none"><i class="fa fa-cogs"></i> Administration</div>
-        <div class="item" data-page="settings"><i class="fa fa-cog"></i> Paramètres</div>
-        <div style="margin-top:16px"><button id="logoutBtn" class="btn" style="background:white;color:#05212a">Déconnexion</button></div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="menu">
+      <div class="item active" data-page="dashboard">
+        <i class="fa fa-chart-line"></i> Tableau de bord
       </div>
-    </aside>
+      <div class="item" data-page="products">
+        <i class="fa fa-boxes"></i> Produits
+      </div>
+      <div class="item" data-page="balance">
+        <i class="fa fa-wallet"></i> Mon solde
+      </div>
+      <div class="item" data-page="users" id="usersMenu" style="display: none;">
+        <i class="fa fa-users"></i> Gestion utilisateurs
+      </div>
+      <div class="item" data-page="history">
+        <i class="fa fa-history"></i> Historique
+      </div>
+      <div class="item" data-page="settings">
+        <i class="fa fa-cog"></i> Paramètres
+      </div>
+    </div>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 12px;">
+      <button id="logoutBtn" class="btnPrimary" style="width: 100%;">
+        <i class="fa fa-sign-out-alt"></i> Déconnexion
+      </button>
+    </div>
+  </aside>
 
-    <main class="content" id="content">
-      <div style="padding:12px;border-radius:10px;background:linear-gradient(90deg,white,rgba(255,255,255,0.95));margin-bottom:12px">⚠️ Le montant minimum pour la recharge est de 500 DH — الحد الأدنى لإعادة الشحن هو 500 درهم</div>
-
-      <section id="dashboard-home" class="page">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <h3 style="margin:0">Tableau de bord</h3>
-            <div style="color:var(--muted)">Aperçu</div>
-          </div>
-          <div id="adminTopProduct" style="font-weight:700;display:none">🥇 Top produit: —</div>
+  <!-- Contenu principal -->
+  <main class="content" id="content">
+    <!-- Tableau de bord -->
+    <section id="dashboard" class="page">
+      <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 10px;">
+        <div>
+          <h2 style="margin: 0;">Tableau de bord</h2>
+          <div style="color: var(--muted);">Vue d'ensemble de votre activité</div>
         </div>
-
-        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;align-items:flex-start">
-          <div style="flex:1;min-width:320px">
-            <div class="tiles">
-              <div class="tile"><strong>Solde actuel</strong><div id="userBalance" style="font-weight:800;font-size:20px;margin-top:8px">0.00 MAD</div></div>
-              <div class="tile"><strong>Produits disponibles</strong><div id="prodCount" style="font-weight:800;font-size:20px;margin-top:8px">0</div></div>
-              <div class="tile"><strong>Tickets ouverts</strong><div style="font-weight:800;font-size:20px;margin-top:8px">0</div></div>
-            </div>
-          </div>
-
-          <div style="width:420px">
-            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div><strong>Produits les plus vendus</strong><div style="font-size:13px;color:var(--muted)">Distribution des ventes</div></div>
-                <div id="legendSmall" style="font-size:13px;color:var(--muted)"></div>
-              </div>
-              <div class="chartWrap" style="margin-top:12px;align-items:center">
-                <canvas id="salesPie" width="300" height="300" style="max-width:300px"></canvas>
-              </div>
-            </div>
-          </div>
+        <div id="adminStats" style="display: none;">
+          <span class="badge badge-success" id="onlineUsers">0 utilisateurs en ligne</span>
         </div>
-      </section>
+      </div>
 
-      <section id="products" class="page" style="display:none;margin-top:12px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <h3>Produits</h3>
-          <div id="prodCountTop">0</div>
+      <!-- Statistiques -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Solde actuel</div>
+          <div class="stat-value" id="userBalance">0.00 MAD</div>
+          <div style="font-size: 12px; color: var(--muted);">Disponible</div>
         </div>
-        <div id="productsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px"></div>
-        <div style="margin-top:12px"><button id="openAddProduct" class="btn">Ajouter produit</button></div>
-      </section>
+        
+        <div class="stat-card">
+          <div class="stat-label">Produits en stock</div>
+          <div class="stat-value" id="totalProducts">0</div>
+          <div style="font-size: 12px; color: var(--muted);">Total produits</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-label">Ventes du mois</div>
+          <div class="stat-value" id="monthlySales">0</div>
+          <div style="font-size: 12px; color: var(--muted);">Ce mois-ci</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-label">Utilisateurs</div>
+          <div class="stat-value" id="totalUsers">0</div>
+          <div style="font-size: 12px; color: var(--muted);">Total inscrits</div>
+        </div>
+      </div>
 
-      <section id="balance" class="page" style="display:none;margin-top:12px">
-        <h3>Rechargement</h3>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
-          <div style="min-width:220px;flex:1">
-            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
-              <div style="display:flex;align-items:center;gap:12px">
-                <img src="https://cdn-icons-png.flaticon.com/512/8043/8043680.png" alt="usdt" width="42">
-                <div><strong>USDT (TRC20)</strong><div style="font-size:13px;color:var(--muted)">Adresse TRC20 + QR</div></div>
-                <div style="margin-left:auto"><button id="payUsdtBtn" class="btn">Payer</button></div>
-              </div>
-            </div>
-          </div>
-
-          <div style="min-width:220px;flex:1">
-            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
-              <div style="display:flex;align-items:center;gap:12px">
-                <img src="https://cdn-icons-png.flaticon.com/512/6404/6404655.png" alt="virement" width="42">
-                <div><strong>Virement bancaire</strong><div style="font-size:13px;color:var(--muted)">IBAN et instructions</div></div>
-                <div style="margin-left:auto"><button id="payWireBtn" class="btn">Payer</button></div>
-              </div>
-            </div>
-          </div>
-
-          <div style="min-width:220px;flex:1">
-            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
-              <div style="display:flex;align-items:center;gap:12px">
-                <img src="https://images.seeklogo.com/logo-png/25/1/wafacash-logo-png_seeklogo-251985.png" alt="wafacash" width="42">
-                <div><strong>Wafa Cash</strong><div style="font-size:13px;color:var(--muted)">Nom + référence</div></div>
-                <div style="margin-left:auto"><button id="payWafaBtn" class="btn">Payer</button></div>
-              </div>
-            </div>
-          </div>
-
-          <div style="min-width:220px;flex:1">
-            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
-              <div style="display:flex;align-items:center;gap:12px">
-                <img src="https://cdn-icons-png.flaticon.com/512/3081/3081015.png" alt="cash" width="42">
-                <div><strong>Cash</strong><div style="font-size:13px;color:var(--muted)">Remise en main propre</div></div>
-                <div style="margin-left:auto"><button id="payCashBtn" class="btn">Payer</button></div>
-              </div>
-            </div>
+      <!-- Graphique et activité récente -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 30px;">
+        <div style="background: white; padding: 25px; border-radius: var(--card-radius); box-shadow: var(--shadow-light);">
+          <h3 style="margin-bottom: 20px;">Activité des ventes</h3>
+          <canvas id="salesChart" height="250"></canvas>
+        </div>
+        
+        <div style="background: white; padding: 25px; border-radius: var(--card-radius); box-shadow: var(--shadow-light);">
+          <h3 style="margin-bottom: 20px;">Activité récente</h3>
+          <div id="recentActivity" style="max-height: 300px; overflow-y: auto;">
+            <!-- Activité récente -->
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="history" class="page" style="display:none;margin-top:12px">
-        <h3>Historique</h3>
-        <div id="historyList" class="table" style="margin-top:12px"></div>
-      </section>
-
-      <section id="tickets" class="page" style="display:none;margin-top:12px">
-        <h3>Tickets</h3>
-        <div style="margin-top:12px"><button id="newTicketBtn" class="btn">Nouveau ticket</button></div>
-      </section>
-
-      <section id="generator" class="page" style="display:none;margin-top:12px">
-        <h3>Générateur</h3>
-        <form id="genForm" style="display:flex;gap:8px;align-items:center;margin-top:12px">
-          <select id="genProduct" style="padding:8px;border-radius:8px"><option value="">Choisir produit</option></select>
-          <input id="genQty" type="number" min="1" value="1" style="padding:8px;border-radius:8px;width:80px">
-          <button class="btn">Générer</button>
-        </form>
-        <div id="generated" style="margin-top:12px"></div>
-      </section>
-
-      <section id="admin" class="page" style="display:none;margin-top:12px">
-        <h3>Administration</h3>
-        <div class="table" style="margin-top:12px">
-          <table style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left"><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Durée</th><th>Statut</th><th>Solde</th><th>Ventes</th></tr></thead><tbody id="adminUsersTable"></tbody></table>
+    <!-- Page Produits -->
+    <section id="products" class="page hidden">
+      <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 25px;">
+        <div>
+          <h2 style="margin: 0;">Gestion des produits</h2>
+          <div style="color: var(--muted);">Ajouter et gérer vos produits</div>
         </div>
-        <div style="margin-top:12px"><button id="openAddUser" class="btn">Ajouter utilisateur</button></div>
-      </section>
+        <button class="btnPrimary" id="addProductBtn">
+          <i class="fa fa-plus"></i> Nouveau produit
+        </button>
+      </div>
 
-      <section id="settings" class="page" style="display:none;margin-top:12px">
-        <h3>Paramètres</h3>
-        <div style="margin-top:12px">Langue : <select id="langSelect"><option value="fr">Français</option><option value="ar">العربية</option></select></div>
-      </section>
+      <div class="products-grid" id="productsGrid">
+        <!-- Produits chargés dynamiquement -->
+      </div>
+    </section>
 
-    </main>
+    <!-- Page Utilisateurs (Admin seulement) -->
+    <section id="users" class="page hidden">
+      <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 25px;">
+        <div>
+          <h2 style="margin: 0;">Gestion des utilisateurs</h2>
+          <div style="color: var(--muted);">Gérer les comptes utilisateurs</div>
+        </div>
+        <button class="btnPrimary" id="addUserBtn">
+          <i class="fa fa-user-plus"></i> Nouvel utilisateur
+        </button>
+      </div>
+
+      <div class="data-table">
+        <div class="table-header">Liste des utilisateurs</div>
+        <div class="table-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Solde</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTable">
+              <!-- Utilisateurs chargés dynamiquement -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Autres pages (solde, historique, paramètres) -->
+    <section id="balance" class="page hidden">
+      <h2>Mon solde</h2>
+      <!-- Contenu solde -->
+    </section>
+
+    <section id="history" class="page hidden">
+      <h2>Historique</h2>
+      <!-- Contenu historique -->
+    </section>
+
+    <section id="settings" class="page hidden">
+      <h2>Paramètres</h2>
+      <!-- Contenu paramètres -->
+    </section>
+  </main>
+</div>
+
+<!-- MODALS -->
+
+<!-- Modal Ajouter Produit -->
+<div class="modal" id="addProductModal">
+  <div class="modalInner">
+    <h3 style="margin-bottom: 20px;">Ajouter un produit</h3>
+    <form id="addProductForm">
+      <div class="form-group">
+        <label>Nom du produit</label>
+        <input type="text" id="productName" required placeholder="Ex: Abonnement VIP 12 mois">
+      </div>
+      
+      <div class="form-group">
+        <label>Prix (MAD)</label>
+        <input type="number" id="productPrice" required min="0" step="0.01" placeholder="0.00">
+      </div>
+      
+      <div class="form-group">
+        <label>Quantité en stock</label>
+        <input type="number" id="productStock" required min="0" placeholder="0">
+      </div>
+      
+      <div class="form-group">
+        <label>Catégorie</label>
+        <select id="productCategory" required>
+          <option value="">Choisir une catégorie</option>
+          <option value="m3u">M3U</option>
+          <option value="code">Code</option>
+          <option value="test">Test</option>
+          <option value="vip">VIP</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Image du produit (URL)</label>
+        <input type="url" id="productImage" placeholder="https://example.com/image.jpg">
+      </div>
+      
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="productDescription" rows="3" placeholder="Description du produit..."></textarea>
+      </div>
+      
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
+        <button type="button" class="btnSecondary" id="cancelProduct">Annuler</button>
+        <button type="submit" class="btnPrimary">Créer le produit</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<!-- Modals -->
-<div class="modal" id="modalAddUser"><div class="modalInner">
-  <h4>Ajouter un utilisateur</h4>
-  <div style="margin-top:8px"><input id="newName" placeholder="Nom complet"></div>
-  <div style="margin-top:8px"><input id="newEmail" placeholder="Email"></div>
-  <div style="margin-top:8px"><input id="newPassword" placeholder="Mot de passe"></div>
-  <div style="margin-top:8px"><select id="newRole"><option value="user">Utilisateur</option><option value="test">Test (12h)</option><option value="admin">Administrateur</option></select></div>
-  <div style="margin-top:8px"><input id="newBalance" type="number" placeholder="Solde initial (MAD)" value="0"></div>
-  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelAddUser" class="smallBtn">Annuler</button><button id="confirmAddUser" class="btn">Créer</button></div>
-</div></div>
+<!-- Modal Ajouter Utilisateur -->
+<div class="modal" id="addUserModal">
+  <div class="modalInner">
+    <h3 style="margin-bottom: 20px;">Créer un utilisateur</h3>
+    <form id="addUserForm">
+      <div class="form-group">
+        <label>Nom complet</label>
+        <input type="text" id="userName" required placeholder="Ex: John Doe">
+      </div>
+      
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="userEmail" required placeholder="exemple@email.com">
+      </div>
+      
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" id="userPassword" required placeholder="Mot de passe sécurisé">
+      </div>
+      
+      <div class="form-group">
+        <label>Type d'utilisateur</label>
+        <select id="userRole" required>
+          <option value="user">Utilisateur standard</option>
+          <option value="test">Utilisateur test (12h)</option>
+          <option value="admin">Administrateur</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Solde initial (MAD)</label>
+        <input type="number" id="userBalance" value="0" min="0" step="0.01">
+      </div>
+      
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
+        <button type="button" class="btnSecondary" id="cancelUser">Annuler</button>
+        <button type="submit" class="btnPrimary">Créer l'utilisateur</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-<div class="modal" id="modalAddProduct"><div class="modalInner">
-  <h4>Ajouter un produit</h4>
-  <div style="margin-top:8px"><input id="pName" placeholder="Nom du produit"></div>
-  <div style="margin-top:8px"><input id="pPrice" type="number" placeholder="Prix (MAD)"></div>
-  <div style="margin-top:8px"><input id="pCategory" placeholder="Catégorie"></div>
-  <div style="margin-top:8px"><input id="pStock" type="number" placeholder="Stock" value="10"></div>
-  <div style="margin-top:8px"><label>Image (URL ou fichier)</label><input id="pImageUrl" placeholder="https://..."><input id="pImageFile" type="file" accept="image/*"></div>
-  <div style="margin-top:8px"><img id="pPreview" src="" alt="Aperçu" style="width:160px;height:90px;object-fit:cover;border-radius:8px;display:none"></div>
-  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelAddProduct" class="smallBtn">Annuler</button><button id="confirmAddProduct" class="btn">Créer</button></div>
-</div></div>
-
-<div class="modal" id="modalPay"><div class="modalInner">
-  <h4 id="modalPayTitle">Paiement</h4>
-  <div id="modalPayBody" style="margin-top:8px"></div>
-  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelPay" class="smallBtn">Annuler</button><button id="confirmPay" class="btn">Confirmer paiement</button></div>
-</div></div>
+<!-- Modal Notifications -->
+<div class="modal" id="notificationsModal">
+  <div class="modalInner" style="max-width: 500px;">
+    <h3 style="margin-bottom: 20px;">Notifications</h3>
+    <div id="notificationsList" style="max-height: 400px; overflow-y: auto;">
+      <!-- Notifications -->
+    </div>
+    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+      <button class="btnSecondary" id="clearNotifications">Tout effacer</button>
+      <button class="btnPrimary" id="closeNotifications">Fermer</button>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ---------- Data and storage ---------- */
-const defaultProducts = [
-  {id:1,name:"LPTV M3U 12 Mois",category:"M3U",price:350,stock:10,image:""},
-  {id:2,name:"CODE HTV 6 Mois",category:"CODE",price:250,stock:12,image:""},
-  {id:3,name:"LPTV Test 24h",category:"TEST",price:0,stock:50,image:""}
-];
+// ========== DONNÉES ET STOCKAGE ==========
 const defaultUsers = [
-  {id:1,name:"Admin Ogharbi",email:"ogharbi1988@shop4panel.com",password:"admin1988",role:"admin",balance:1500,sales:45,lastLogin:null,sessionStart:null,isOnline:false},
-  {id:2,name:"User Demo",email:"user@shop4panel.com",password:"admin1988",role:"user",balance:500,sales:8,lastLogin:null,sessionStart:null,isOnline:false},
-  {id:3,name:"Test User",email:"test@shop4panel.com",password:"test123",role:"test",balance:0,sales:2,lastLogin:null,sessionStart:null,isOnline:false}
+  {
+    id: 1,
+    name: "Administrateur",
+    email: "admin@shop4panel.com",
+    password: "admin123",
+    role: "admin",
+    balance: 5000,
+    createdAt: new Date().toISOString(),
+    isOnline: false
+  },
+  {
+    id: 2,
+    name: "Utilisateur Demo",
+    email: "user@shop4panel.com",
+    password: "user123",
+    role: "user",
+    balance: 500,
+    createdAt: new Date().toISOString(),
+    isOnline: false
+  }
 ];
 
-function save(key,val){ try{ localStorage.setItem('s4p_'+key,JSON.stringify(val)); }catch(e){console.warn(e);} }
-function load(key){ try{ const v=localStorage.getItem('s4p_'+key); return v?JSON.parse(v):null;}catch(e){return null;} }
+const defaultProducts = [
+  {
+    id: 1,
+    name: "Abonnement M3U 12 mois",
+    price: 350,
+    stock: 50,
+    category: "m3u",
+    image: "",
+    description: "Abonnement complet 12 mois avec tous les chaînes",
+    sales: 45,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 2,
+    name: "Code VIP 6 mois",
+    price: 250,
+    stock: 100,
+    category: "code",
+    image: "",
+    description: "Code d'accès VIP pour 6 mois",
+    sales: 32,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 3,
+    name: "Test 24h",
+    price: 0,
+    stock: 999,
+    category: "test",
+    image: "",
+    description: "Test gratuit 24 heures",
+    sales: 128,
+    createdAt: new Date().toISOString()
+  }
+];
 
-if(!load('products')) save('products', defaultProducts);
-if(!load('users')) save('users', defaultUsers);
+// Fonctions de stockage
+function save(key, val) {
+  try {
+    localStorage.setItem('s4p_pro_' + key, JSON.stringify(val));
+  } catch(e) {
+    console.warn('Erreur sauvegarde:', e);
+  }
+}
 
-/* ---------- Helpers ---------- */
+function load(key) {
+  try {
+    const v = localStorage.getItem('s4p_pro_' + key);
+    return v ? JSON.parse(v) : null;
+  } catch(e) {
+    return null;
+  }
+}
+
+// Initialisation des données
+if (!load('users')) save('users', defaultUsers);
+if (!load('products')) save('products', defaultProducts);
+if (!load('transactions')) save('transactions', []);
+if (!load('notifications')) save('notifications', []);
+
+// ========== UTILITAIRES ==========
 const el = id => document.getElementById(id);
-function openModal(id){ el(id).style.display='flex'; }
-function closeModal(id){ el(id).style.display='none'; }
+const showPage = (pageId) => {
+  document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+  el(pageId).classList.remove('hidden');
+  
+  // Mettre à jour le menu actif
+  document.querySelectorAll('.menu .item').forEach(item => {
+    item.classList.remove('active');
+    if (item.dataset.page === pageId) {
+      item.classList.add('active');
+    }
+  });
+};
 
-/* ---------- Language ---------- */
-function applyLanguage(lang){
-  sessionStorage.setItem('s4p_lang', lang);
-  if(lang==='ar'){ document.body.classList.add('rtl'); el('langDisplay').textContent='العربية'; el('sidebar').classList.add('rtl'); el('langSelect').value='ar'; }
-  else { document.body.classList.remove('rtl'); el('langDisplay').textContent='Français'; el('sidebar').classList.remove('rtl'); el('langSelect').value='fr'; }
-}
-el('langFR').addEventListener('click',(e)=>{e.preventDefault();applyLanguage('fr');});
-el('langAR').addEventListener('click',(e)=>{e.preventDefault();applyLanguage('ar');});
-el('langSelect').addEventListener('change',()=>applyLanguage(el('langSelect').value));
-applyLanguage(sessionStorage.getItem('s4p_lang')||'fr');
+const openModal = (modalId) => {
+  el(modalId).style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+};
 
-/* ---------- Login same-tab ---------- */
-const users = load('users') || defaultUsers;
-el('demoAdmin').addEventListener('click', ()=>{ el('email').value='ogharbi1988@shop4panel.com'; el('password').value='admin1988'; el('remember').checked=true; });
-el('demoUser').addEventListener('click', ()=>{ el('email').value='user@shop4panel.com'; el('password').value='admin1988'; el('remember').checked=true; });
+const closeModal = (modalId) => {
+  el(modalId).style.display = 'none';
+  document.body.style.overflow = 'auto';
+};
 
-el('loginForm').addEventListener('submit', function(e){
+// ========== GESTION DE L'AUTHENTIFICATION ==========
+el('demoAdmin').addEventListener('click', () => {
+  el('userType').value = 'admin';
+  el('email').value = 'admin@shop4panel.com';
+  el('password').value = 'admin123';
+});
+
+el('demoUser').addEventListener('click', () => {
+  el('userType').value = 'user';
+  el('email').value = 'user@shop4panel.com';
+  el('password').value = 'user123';
+});
+
+el('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  el('err').style.display='none';
-  const email = el('email').value.trim(), password = el('password').value.trim();
-  if(!email||!password){ el('err').textContent='Veuillez remplir tous les champs'; el('err').style.display='block'; return; }
-  el('btnLogin').disabled = true;
-  setTimeout(()=>{
-    el('btnLogin').disabled = false;
-    const u = users.find(x=>x.email===email && x.password===password);
-    if(!u){ el('err').textContent='Email ou mot de passe incorrect'; el('err').style.display='block'; return; }
-    if(el('remember').checked) save('s4p_user', u); else localStorage.removeItem('s4p_user');
-    save('session', u);
-    document.querySelector('.container').style.display='none';
-    document.getElementById('app').style.display='block';
+  
+  const userType = el('userType').value;
+  const email = el('email').value.trim();
+  const password = el('password').value;
+  
+  if (!userType || !email || !password) {
+    showError('Veuillez remplir tous les champs');
+    return;
+  }
+  
+  const users = load('users') || [];
+  const user = users.find(u => u.email === email && u.password === password && u.role === userType);
+  
+  if (!user) {
+    showError('Identifiants incorrects ou type d\'utilisateur invalide');
+    return;
+  }
+  
+  // Connexion réussie
+  user.isOnline = true;
+  user.lastLogin = new Date().toISOString();
+  save('users', users);
+  save('currentUser', user);
+  
+  el('loginView').style.display = 'none';
+  el('app').style.display = 'block';
+  initDashboard();
+});
+
+function showError(message) {
+  const errEl = el('loginErr');
+  errEl.textContent = message;
+  errEl.style.display = 'block';
+  setTimeout(() => errEl.style.display = 'none', 5000);
+}
+
+// ========== INITIALISATION DU DASHBOARD ==========
+function initDashboard() {
+  const user = load('currentUser');
+  if (!user) return;
+  
+  // Mettre à jour l'interface utilisateur
+  el('uName').textContent = user.name;
+  el('uRole').textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
+  el('uAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+  el('userBalance').textContent = user.balance.toFixed(2) + ' MAD';
+  
+  // Afficher/masquer les éléments admin
+  if (user.role === 'admin') {
+    el('usersMenu').style.display = 'block';
+    el('adminStats').style.display = 'block';
+  }
+  
+  // Charger les données
+  loadProducts();
+  loadUsers();
+  updateStats();
+  showPage('dashboard');
+  
+  // Initialiser le graphique
+  initChart();
+}
+
+// ========== GESTION DES PRODUITS ==========
+function loadProducts() {
+  const products = load('products') || [];
+  const grid = el('productsGrid');
+  
+  grid.innerHTML = products.map(product => `
+    <div class="product-card">
+      ${product.image ? `<img src="${product.image}" class="product-image" alt="${product.name}">` : 
+        `<div class="product-image" style="display: flex; align-items: center; justify-content: center; background: var(--gradient-primary); color: white; font-size: 14px;">
+          <i class="fa fa-box"></i>
+        </div>`}
+      <h3 style="margin: 0 0 10px 0;">${product.name}</h3>
+      <div style="color: var(--muted); font-size: 14px; margin-bottom: 10px;">${product.category.toUpperCase()}</div>
+      <div class="product-price">${product.price > 0 ? product.price.toFixed(2) + ' MAD' : 'GRATUIT'}</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+        <span class="badge ${product.stock > 10 ? 'badge-success' : product.stock > 0 ? 'badge-warning' : 'badge-danger'}">
+          ${product.stock} en stock
+        </span>
+        <span style="font-size: 12px; color: var(--muted);">${product.sales || 0} ventes</span>
+      </div>
+      ${load('currentUser').role === 'admin' ? `
+        <div style="display: flex; gap: 8px; margin-top: 15px;">
+          <button class="btnSecondary" style="flex: 1; padding: 8px;" onclick="editProduct(${product.id})">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btnSecondary" style="flex: 1; padding: 8px; background: #fee2e2; color: #dc2626; border-color: #dc2626;" onclick="deleteProduct(${product.id})">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      ` : ''}
+    </div>
+  `).join('');
+  
+  el('totalProducts').textContent = products.length;
+}
+
+// Ajouter un produit
+el('addProductBtn').addEventListener('click', () => openModal('addProductModal'));
+el('cancelProduct').addEventListener('click', () => closeModal('addProductModal'));
+
+el('addProductForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const products = load('products') || [];
+  const newProduct = {
+    id: Math.max(...products.map(p => p.id), 0) + 1,
+    name: el('productName').value,
+    price: parseFloat(el('productPrice').value),
+    stock: parseInt(el('productStock').value),
+    category: el('productCategory').value,
+    image: el('productImage').value,
+    description: el('productDescription').value,
+    sales: 0,
+    createdAt: new Date().toISOString()
+  };
+  
+  products.push(newProduct);
+  save('products', products);
+  loadProducts();
+  closeModal('addProductModal');
+  this.reset();
+  
+  // Ajouter une notification
+  addNotification('Produit ajouté', `Le produit "${newProduct.name}" a été créé avec succès`);
+});
+
+// ========== GESTION DES UTILISATEURS ==========
+function loadUsers() {
+  const users = load('users') || [];
+  const table = el('usersTable');
+  
+  table.innerHTML = users.map(user => `
+    <tr>
+      <td>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--gradient-secondary); display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 600;">
+            ${user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+          </div>
+          ${user.name}
+        </div>
+      </td>
+      <td>${user.email}</td>
+      <td>
+        <span class="badge ${user.role === 'admin' ? 'badge-warning' : user.role === 'test' ? 'badge-success' : 'badge-success'}">
+          ${user.role === 'admin' ? 'Admin' : user.role === 'test' ? 'Test 12h' : 'Utilisateur'}
+        </span>
+      </td>
+      <td><strong>${user.balance.toFixed(2)} MAD</strong></td>
+      <td>
+        <span class="badge ${user.isOnline ? 'badge-success' : 'badge-danger'}">
+          ${user.isOnline ? 'En ligne' : 'Hors ligne'}
+        </span>
+      </td>
+      <td>
+        <button class="btnSecondary" style="padding: 6px 12px; font-size: 12px;" onclick="editUser(${user.id})">
+          <i class="fa fa-edit"></i>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+  
+  el('totalUsers').textContent = users.length;
+  el('onlineUsers').textContent = `${users.filter(u => u.isOnline).length} utilisateurs en ligne`;
+}
+
+// Ajouter un utilisateur
+el('addUserBtn').addEventListener('click', () => openModal('addUserModal'));
+el('cancelUser').addEventListener('click', () => closeModal('addUserModal'));
+
+el('addUserForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const users = load('users') || [];
+  const userData = {
+    id: Math.max(...users.map(u => u.id), 0) + 1,
+    name: el('userName').value,
+    email: el('userEmail').value,
+    password: el('userPassword').value,
+    role: el('userRole').value,
+    balance: parseFloat(el('userBalance').value) || 0,
+    createdAt: new Date().toISOString(),
+    isOnline: false
+  };
+  
+  // Si c'est un utilisateur test, définir une date d'expiration
+  if (userData.role === 'test') {
+    const expiry = new Date();
+    expiry.setHours(expiry.getHours() + 12);
+    userData.expiresAt = expiry.toISOString();
+  }
+  
+  users.push(userData);
+  save('users', users);
+  loadUsers();
+  closeModal('addUserModal');
+  this.reset();
+  
+  addNotification('Utilisateur créé', `L'utilisateur "${userData.name}" a été créé avec succès`);
+});
+
+// ========== STATISTIQUES ==========
+function updateStats() {
+  const user = load('currentUser');
+  const products = load('products') || [];
+  const users = load('users') || [];
+  const transactions = load('transactions') || [];
+  
+  if (user) {
+    el('userBalance').textContent = user.balance.toFixed(2) + ' MAD';
+  }
+  
+  // Calculer les ventes du mois
+  const currentMonth = new Date().getMonth();
+  const monthlySales = transactions.filter(t => {
+    const date = new Date(t.date);
+    return date.getMonth() === currentMonth;
+  }).length;
+  
+  el('monthlySales').textContent = monthlySales;
+}
+
+// ========== GRAPHIQUE ==========
+function initChart() {
+  const ctx = document.getElementById('salesChart').getContext('2d');
+  const transactions = load('transactions') || [];
+  
+  // Données exemple pour le graphique
+  const data = {
+    labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+    datasets: [{
+      label: 'Ventes',
+      data: [12, 19, 8, 15, 12, 18, 10],
+      borderColor: '#00bfa6',
+      backgroundColor: 'rgba(0, 191, 166, 0.1)',
+      tension: 0.4,
+      fill: true
+    }]
+  };
+  
+  new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+// ========== NOTIFICATIONS ==========
+function addNotification(title, message) {
+  const notifications = load('notifications') || [];
+  notifications.unshift({
+    id: Date.now(),
+    title,
+    message,
+    date: new Date().toLocaleString(),
+    read: false
+  });
+  save('notifications', notifications);
+  updateNotifications();
+}
+
+function updateNotifications() {
+  const notifications = load('notifications') || [];
+  const unreadCount = notifications.filter(n => !n.read).length;
+  
+  el('notificationCount').textContent = unreadCount;
+  
+  const list = el('notificationsList');
+  list.innerHTML = notifications.slice(0, 10).map(notif => `
+    <div style="padding: 12px; border-bottom: 1px solid #f1f5f9; cursor: pointer; ${!notif.read ? 'background: #f0f9ff;' : ''}" 
+         onclick="markNotificationRead(${notif.id})">
+      <div style="font-weight: 600; color: var(--accent1);">${notif.title}</div>
+      <div style="font-size: 14px; margin-top: 4px;">${notif.message}</div>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">${notif.date}</div>
+    </div>
+  `).join('');
+}
+
+function markNotificationRead(id) {
+  const notifications = load('notifications') || [];
+  const updated = notifications.map(n => n.id === id ? {...n, read: true} : n);
+  save('notifications', updated);
+  updateNotifications();
+}
+
+// Gestion des événements de notifications
+el('notificationsBtn').addEventListener('click', () => openModal('notificationsModal'));
+el('closeNotifications').addEventListener('click', () => closeModal('notificationsModal'));
+el('clearNotifications').addEventListener('click', () => {
+  save('notifications', []);
+  updateNotifications();
+});
+
+// ========== NAVIGATION ET UI ==========
+document.querySelectorAll('.menu .item').forEach(item => {
+  item.addEventListener('click', () => {
+    const page = item.dataset.page;
+    const user = load('currentUser');
+    
+    // Vérifier les permissions
+    if (page === 'users' && user.role !== 'admin') {
+      addNotification('Accès refusé', 'Cette section est réservée aux administrateurs');
+      return;
+    }
+    
+    showPage(page);
+    
+    // Fermer le sidebar sur mobile
+    if (window.innerWidth <= 1024) {
+      el('sidebar').classList.remove('active');
+    }
+  });
+});
+
+el('menuToggle').addEventListener('click', () => {
+  el('sidebar').classList.toggle('active');
+});
+
+el('logoutBtn').addEventListener('click', () => {
+  const user = load('currentUser');
+  if (user) {
+    const users = load('users') || [];
+    const updatedUsers = users.map(u => 
+      u.id === user.id ? {...u, isOnline: false} : u
+    );
+    save('users', updatedUsers);
+  }
+  
+  localStorage.removeItem('s4p_pro_currentUser');
+  location.reload();
+});
+
+// ========== FONCTIONS ADMIN ==========
+function editProduct(id) {
+  const products = load('products') || [];
+  const product = products.find(p => p.id === id);
+  if (product) {
+    // Remplir le formulaire avec les données du produit
+    el('productName').value = product.name;
+    el('productPrice').value = product.price;
+    el('productStock').value = product.stock;
+    el('productCategory').value = product.category;
+    el('productImage').value = product.image;
+    el('productDescription').value = product.description;
+    
+    openModal('addProductModal');
+    // Changer le texte du bouton
+    document.querySelector('#addProductForm button[type="submit"]').textContent = 'Modifier le produit';
+  }
+}
+
+function deleteProduct(id) {
+  if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+    const products = load('products') || [];
+    const updatedProducts = products.filter(p => p.id !== id);
+    save('products', updatedProducts);
+    loadProducts();
+    addNotification('Produit supprimé', 'Le produit a été supprimé avec succès');
+  }
+}
+
+function editUser(id) {
+  const users = load('users') || [];
+  const user = users.find(u => u.id === id);
+  if (user) {
+    // Implémenter l'édition d'utilisateur
+    addNotification('Édition', `Édition de l'utilisateur ${user.name}`);
+  }
+}
+
+// ========== INITIALISATION ==========
+document.addEventListener('DOMContentLoaded', function() {
+  const currentUser = load('currentUser');
+  if (currentUser) {
+    el('loginView').style.display = 'none';
+    el('app').style.display = 'block';
     initDashboard();
-  },900);
-});
-
-/* ---------- Dashboard init ---------- */
-function initDashboard(){
-  const session = load('session') || load('s4p_user');
-  if(!session) return;
-  el('uName').textContent = session.name;
-  el('uRole').textContent = session.role==='admin'?'Administrateur':(session.role==='test'?'Utilisateur test':'Utilisateur');
-  el('uAvatar').textContent = session.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
-  el('userBalance').textContent = (session.balance||0).toFixed(2)+' MAD';
-  if(session.role==='admin') el('adminMenu').style.display='block'; else el('adminMenu').style.display='none';
-  renderProducts(); renderUsersTable(); renderHistory(); updateSalesChart(); showPage('dashboard-home');
-}
-
-/* ---------- Navigation ---------- */
-const pages = ['dashboard-home','products','balance','history','tickets','generator','admin','settings'];
-function showPage(id){ pages.forEach(p=> document.getElementById(p).style.display = (p===id?'block':'none')); }
-document.querySelectorAll('.menu .item').forEach(it=> it.addEventListener('click', ()=>{
-  const page = it.dataset.page; const s = load('session') || load('s4p_user');
-  if(page==='admin' && (!s || s.role!=='admin')){ alert('Accès réservé aux administrateurs'); return; }
-  showPage(page);
-}));
-el('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem('s4p_user'); localStorage.removeItem('session'); location.reload(); });
-
-/* ---------- Products ---------- */
-function renderProducts(){
-  const products = load('products')||[]; const container = el('productsContainer'); container.innerHTML='';
-  products.forEach(p=>{
-    const div = document.createElement('div'); div.className='productCard';
-    const img = p.image ? `<img src="${p.image}" alt="${p.name}">` : `<img src="https://via.placeholder.com/300x150/10b981/ffffff?text=Produit" alt="placeholder">`;
-    div.innerHTML = `${img}<div style="flex:1"><div style="font-weight:800">${p.name}</div><div style="color:var(--muted)">${p.category} • ${p.stock} en stock</div><div style="margin-top:6px;font-weight:700">${p.price>0?p.price.toFixed(2)+' MAD':'GRATUIT'}</div><div style="margin-top:8px"><button class="btn buyBtn" data-id="${p.id}">Acheter</button></div></div>`;
-    container.appendChild(div);
+  }
+  
+  updateNotifications();
+  
+  // Fermer les modals en cliquant à l'extérieur
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal(this.id);
+      }
+    });
   });
-  el('prodCount').textContent = products.length; el('prodCountTop').textContent = products.length;
-  // fill generator select
-  const sel = el('genProduct'); sel.innerHTML = '<option value="">Choisir produit</option>';
-  products.forEach(p=> sel.insertAdjacentHTML('beforeend', `<option value="${p.id}">${p.name}</option>`));
-  updateSalesChart();
-}
-
-/* ---------- Add product modal (image handling) ---------- */
-el('openAddProduct').addEventListener('click', ()=>{ el('pName').value=''; el('pPrice').value=''; el('pCategory').value=''; el('pStock').value='10'; el('pImageUrl').value=''; el('pImageFile').value=''; el('pPreview').style.display='none'; openModal('modalAddProduct'); });
-el('cancelAddProduct').addEventListener('click', ()=> closeModal('modalAddProduct'));
-
-el('pImageFile').addEventListener('change', function(e){
-  const file = e.target.files[0]; if(!file) return;
-  const reader = new FileReader(); reader.onload = function(ev){ el('pPreview').src = ev.target.result; el('pPreview').style.display='block'; el('pImageUrl').value = ev.target.result; }; reader.readAsDataURL(file);
 });
 
-el('confirmAddProduct').addEventListener('click', ()=>{
-  const name = el('pName').value.trim(); const price = parseFloat(el('pPrice').value)||0; const cat = el('pCategory').value.trim(); const stock = parseInt(el('pStock').value)||0; const img = el('pImageUrl').value.trim();
-  if(!name){ alert('Nom requis'); return; }
-  const products = load('products')||[]; const id = (products.reduce((m,x)=>Math.max(m,x.id),0)||0)+1;
-  products.push({id,name,category:cat,price,stock,image:img}); save('products', products); renderProducts(); closeModal('modalAddProduct'); alert('Produit ajouté');
-});
-
-/* ---------- Users table ---------- */
-function renderUsersTable(){
-  const users = load('users')||[]; const tbody = el('adminUsersTable'); tbody.innerHTML='';
-  users.forEach(u=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>${u.lastLogin?new Date(u.lastLogin).toLocaleString():'Jamais'}</td><td>-</td><td>${u.isOnline?'<span style="color:green">En ligne</span>':'<span style="color:#94a3b8">Hors ligne</span>'}</td><td>${(u.balance||0).toFixed(2)} MAD</td><td>${u.sales||0}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-/* ---------- History ---------- */
-function renderHistory(){ const h = load('history')||[]; const elh = el('historyList'); elh.innerHTML=''; h.forEach(it=> elh.insertAdjacentHTML('beforeend', `<div style="padding:8px;border-bottom:1px solid #f3f4f6">${it}</div>`)); }
-function addHistory(item){ const h = load('history')||[]; h.unshift(item); save('history', h); renderHistory(); }
-
-/* ---------- Purchase handling & sales tracking ---------- */
-document.body.addEventListener('click', function(e){
-  if(e.target.classList.contains('buyBtn')){
-    const pid = parseInt(e.target.dataset.id); const products = load('products')||[]; const p = products.find(x=>x.id===pid);
-    const u = load('session') || load('s4p_user'); if(!u){ alert('Connectez-vous'); return; }
-    if(u.balance < p.price){ alert('Solde insuffisant'); return; }
-    // debit and update user & sales
-    u.balance = (u.balance||0) - p.price;
-    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email);
-    if(idx!==-1){ users[idx].balance = u.balance; users[idx].sales = (users[idx].sales||0) + 1; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); }
-    // increment product sale count stored in products as sales property
-    const prodIdx = products.findIndex(x=>x.id===pid); products[prodIdx].sales = (products[prodIdx].sales||0) + 1; save('products', products);
-    el('userBalance').textContent = u.balance.toFixed(2)+' MAD';
-    addHistory(`Achat: ${p.name} - ${p.price} MAD`);
-    alert('Achat effectué : ' + p.name);
-    renderProducts(); renderUsersTable(); updateSalesChart();
+// Gestion du responsive
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 1024) {
+    el('sidebar').classList.remove('active');
   }
 });
-
-/* ---------- Payments modals (USDT, Wire, Wafa, Cash) ---------- */
-const usdtAddr = 'TJ6Xw1hTE3aEaDhqGjS5xpg3M4svRihiA5';
-function openPayModal(title, htmlContent, onConfirm){
-  el('modalPayTitle').textContent = title; el('modalPayBody').innerHTML = htmlContent; openModal('modalPay');
-  el('confirmPay').onclick = function(){ try{ onConfirm(); } catch(e){console.warn(e);} closeModal('modalPay'); };
-  el('cancelPay').onclick = function(){ closeModal('modalPay'); };
-}
-
-el('payUsdtBtn').addEventListener('click', ()=>{
-  const qr = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(usdtAddr);
-  const html = `<div style="display:flex;gap:12px;align-items:center"><div style="width:160px;height:160px"><img src="${qr}" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div><div style="font-weight:700">Adresse TRC20</div><div style="font-family:monospace;margin-top:8px">${usdtAddr}</div></div></div>`;
-  openPayModal('Payer en USDT (TRC20)', html, ()=>{
-    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
-    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
-    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge USDT: ${amt} MAD`); alert('Recharge confirmée'); }
-  });
-});
-
-el('payWireBtn').addEventListener('click', ()=>{
-  const html = `<div><div><strong>Virement bancaire</strong></div><div style="margin-top:8px">IBAN: <span style="font-family:monospace">MA00 0000 0000 0000</span></div><div style="margin-top:8px">Nom: SHOP 4 PANEL</div></div>`;
-  openPayModal('Virement bancaire', html, ()=>{
-    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
-    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
-    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Virement: ${amt} MAD`); alert('Recharge confirmée'); }
-  });
-});
-
-el('payWafaBtn').addEventListener('click', ()=>{
-  const ref = 'WF-'+Math.random().toString(36).slice(2,8).toUpperCase();
-  const html = `<div><div><strong>Wafa Cash</strong></div><div style="margin-top:8px">Référence: <span style="font-family:monospace">${ref}</span></div><div style="margin-top:8px">Nom: SHOP 4 PANEL</div></div>`;
-  openPayModal('Wafa Cash', html, ()=>{
-    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
-    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
-    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Wafa: ${amt} MAD`); alert('Recharge confirmée'); }
-  });
-});
-
-el('payCashBtn').addEventListener('click', ()=>{
-  const html = `<div><div><strong>Cash</strong></div><div style="margin-top:8px">Remise en main propre - Confirmer la réception</div></div>`;
-  openPayModal('Paiement Cash', html, ()=>{
-    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
-    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
-    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Cash: ${amt} MAD`); alert('Recharge confirmée'); }
-  });
-});
-
-/* ---------- Generator ---------- */
-el('genForm').addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const session = load('session') || load('s4p_user'); if(!session || session.role!=='admin'){ alert('Accès réservé aux administrateurs'); return; }
-  const pid = el('genProduct').value; const qty = parseInt(el('genQty').value)||1; if(!pid){ alert('Choisir un produit'); return; }
-  let codes=''; for(let i=0;i<qty;i++) codes += 'CODE-'+Math.random().toString(36).slice(2,10).toUpperCase()+'<br>';
-  el('generated').innerHTML = `<div class="table" style="padding:12px"><strong>Codes générés:</strong><div style="margin-top:8px;font-family:monospace">${codes}</div></div>`;
-});
-
-/* ---------- Chart.js: Sales pie (user / global) ---------- */
-let salesPieChart = null;
-function updateSalesChart(){
-  const products = load('products')||[];
-  // aggregate sales per product
-  const labels = products.map(p=>p.name);
-  const data = products.map(p=>p.sales||0);
-  const colors = products.map((_,i)=>['#0bb7a0','#10b981','#ff8a00','#6366f1'][i%4]);
-  const ctx = document.getElementById('salesPie').getContext('2d');
-  if(salesPieChart) salesPieChart.destroy();
-  salesPieChart = new Chart(ctx, {
-    type: 'pie',
-    data: { labels, datasets:[{data, backgroundColor: colors}] },
-    options: { responsive:true, animation:{animateScale:true, duration:1000} }
-  });
-  // legend
-  const legend = document.getElementById('legendSmall'); legend.innerHTML = products.map((p,i)=>`<div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:${colors[i]};display:inline-block;border-radius:3px"></span> ${p.name} (${p.sales||0})</div>`).join('');
-  // admin top product
-  const session = load('session') || load('s4p_user');
-  if(session && session.role==='admin'){ const top = products.slice().sort((a,b)=>(b.sales||0)-(a.sales||0))[0]; if(top) el('adminTopProduct').textContent = `🥇 Top produit : ${top.name} – ${top.sales||0} ventes`; el('adminTopProduct').style.display='block'; }
-}
-
-/* ---------- Users table refresh on init ---------- */
-function renderUsersTable(){ const users = load('users')||[]; const tbody = el('adminUsersTable'); tbody.innerHTML=''; users.forEach(u=>{ const tr = document.createElement('tr'); tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>${u.lastLogin?new Date(u.lastLogin).toLocaleString():'Jamais'}</td><td>-</td><td>${u.isOnline?'<span style="color:green">En ligne</span>':'<span style="color:#94a3b8">Hors ligne</span>'}</td><td>${(u.balance||0).toFixed(2)} MAD</td><td>${u.sales||0}</td>`; tbody.appendChild(tr); }); updateSalesChart(); }
-
-/* ---------- Add user modal ---------- */
-el('openAddUser').addEventListener('click', ()=>{ el('newName').value=''; el('newEmail').value=''; el('newPassword').value=''; el('newBalance').value='0'; openModal('modalAddUser'); });
-el('cancelAddUser').addEventListener('click', ()=> closeModal('modalAddUser'));
-el('confirmAddUser').addEventListener('click', ()=>{
-  const name = el('newName').value.trim(), email = el('newEmail').value.trim(), password = el('newPassword').value.trim();
-  const role = el('newRole').value, bal = parseFloat(el('newBalance').value)||0;
-  if(!name||!email||!password){ alert('Tous les champs sont requis'); return; }
-  const users = load('users')||[]; if(users.find(u=>u.email===email)){ alert('Email déjà utilisé'); return; }
-  const id = (users.reduce((m,x)=>Math.max(m,x.id),0)||0)+1;
-  users.push({id,name,email,password,role,balance:bal,sales:0,lastLogin:null,sessionStart:null,isOnline:false}); save('users', users); renderUsersTable(); closeModal('modalAddUser'); alert('Utilisateur ajouté');
-});
-
-/* ---------- Initial setup if session exists ---------- */
-(function init(){
-  if(!load('products')) save('products', defaultProducts);
-  if(!load('users')) save('users', defaultUsers);
-  const session = load('session') || load('s4p_user');
-  if(session){ document.querySelector('.container').style.display='none'; document.getElementById('app').style.display='block'; initDashboard(); }
-})();
-
 </script>
 </body>
 </html>
