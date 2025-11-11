@@ -1,138 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SHOP 4 PANEL — Système Complet</title>
+<title>SHOP 4 PANEL — V4</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{
-  --bg1:#053642; --bg2:#ff8a00;
-  --card:#ffffff; --muted:#6b7280;
-  --turquoise:#00BFA6; --green:#32CD32; --orange:#FFB347;
-  --shadow: 0 12px 40px rgba(2,6,23,0.18);
-  --offline:#94a3b8; --success:#16a34a;
-  --error:#b00020; --warning:#f59e0b;
+  --bg-a:#05292d; --accent1:#00bfa6; --accent2:#10b981; --accent3:#ff8a00;
+  --card-radius:16px; --shadow:0 20px 50px rgba(2,6,23,0.25);
+  --muted:#7b8890;
 }
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(135deg,var(--bg1) 10%, #0f4b57 40%, #2a7f78 60%, var(--bg2) 100%);color:#06121a}
-.center-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn 700ms ease both}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+*{box-sizing:border-box} html,body{height:100%;margin:0;font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, Arial;}
+body{background:linear-gradient(135deg,var(--bg-a),#0b3940 40%, #0f6e6a 70%, var(--accent3)); color:#03121a;}
 
-/* login card */
-.login-wrap{width:100%;max-width:1120px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));backdrop-filter: blur(8px);box-shadow:var(--shadow);display:flex;gap:18px;overflow:hidden;transition:transform .4s ease}
-.left{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:36px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white}
-.brand-logo{background:rgba(255,255,255,0.06);padding:12px 18px;border-radius:12px;font-weight:800;font-size:20px;margin-bottom:8px}
-.brand-sub{font-size:13px;opacity:0.95}
-.hero-illus{width:100%;max-width:360px;margin-top:18px;opacity:0.98}
+/* layout & glass */
+.container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;position:relative;z-index:2}
+.card{width:100%;max-width:1200px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));box-shadow:var(--shadow);backdrop-filter:blur(10px);display:flex;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.left{flex:1;padding:34px;color:white;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);display:flex;flex-direction:column;justify-content:center}
+.right{flex:1.05;padding:34px;background:transparent;display:flex;flex-direction:column;justify-content:center}
+
+/* logo */
+.logo{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.logoBadge{width:72px;height:72px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;font-weight:900;font-size:22px}
+.logoTitle{font-size:22px;font-weight:900}
 
 /* form */
-.right{flex:1;background:var(--card);padding:28px;border-radius:14px}
-.form-title{font-weight:800;margin-bottom:4px}
-.form-sub{color:var(--muted);font-size:13px;margin-bottom:14px}
-.field-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
-.input-icon{width:44px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--turquoise),var(--green));color:white;border-radius:10px;height:44px}
-.form-control{border-radius:12px;padding:12px 14px;border:1px solid #e6eef4;width:100%;transition:border-color 0.3s ease}
-.form-control:focus{border-color:var(--turquoise);outline:none}
-.btn-login{width:100%;background:linear-gradient(90deg,var(--turquoise),var(--green));border:none;color:white;padding:12px;border-radius:12px;font-weight:700;box-shadow:0 8px 22px rgba(2,6,23,0.08);cursor:pointer;transition:transform 0.2s ease}
-.btn-login:hover{transform:translateY(-2px)}
-.small-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.btn-secondary-soft{background:transparent;border:1px solid rgba(2,6,23,0.06);padding:10px;border-radius:10px;cursor:pointer;transition:all 0.2s ease}
-.btn-secondary-soft:hover{background:rgba(2,6,23,0.03)}
+.form{width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.field{position:relative}
+.field input[type="text"], .field input[type="email"], .field input[type="password"], .field input[type="number"], textarea, select{width:100%;padding:12px 12px 12px 48px;border-radius:12px;border:1px solid rgba(15,25,30,0.06);background:rgba(255,255,255,0.98);font-size:15px;outline:none}
+.icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 6px 18px rgba(2,6,23,0.12)}
+.field input:focus{box-shadow:0 10px 28px rgba(0,191,166,0.08)}
 
-/* error */
-.error-msg{color:var(--error);font-weight:700;font-size:13px;margin-top:6px;display:none;padding:8px;background:rgba(176,0,32,0.05);border-radius:8px}
-.success-msg{color:var(--success);font-weight:700;font-size:13px;margin-top:6px;display:none;padding:8px;background:rgba(22,163,74,0.05);border-radius:8px}
+/* buttons */
+.btn{padding:12px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(2,6,23,0.12)}
+.smallBtn{padding:8px;border-radius:10px;border:1px solid rgba(2,6,23,0.06);background:transparent;cursor:pointer}
 
-/* app/dashboard */
-.app{display:none;min-height:100vh;width:100%;background:#f7fbfc;color:#07212a;padding:28px}
-.top-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.logo-small{font-weight:800;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--turquoise),var(--orange));color:white}
-.user-info{display:flex;gap:12px;align-items:center}
-.avatar{width:48px;height:48px;border-radius:12px;background:linear-gradient(90deg,var(--turquoise),var(--green));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
-.status-dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-left:8px;vertical-align:middle}
+/* dashboard styles */
+.app{display:none;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:rgba(255,255,255,0.98);border-bottom:1px solid #eef3f4}
+.wrapper{display:flex;min-height:calc(100vh - 74px)}
+
+/* sidebar */
+.sidebar{width:260px;background:linear-gradient(180deg,var(--accent1),#0f8);padding:18px;color:white}
+.menu{margin-top:20px}
+.menu .item{padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.menu .item:hover{background:rgba(255,255,255,0.06)}
+
+/* content */
+.content{flex:1;padding:22px;background:#f7fbfc}
 
 /* tiles */
 .tiles{display:flex;gap:12px;flex-wrap:wrap}
-.tile{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);flex:1;min-width:160px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:transform .12s ease}
-.tile:hover{transform:translateY(-6px)}
-.tile .ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white}
+.tile{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);min-width:160px;flex:1}
 
-/* marquee */
-.marquee{background:linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));padding:8px 12px;border-radius:8px;margin-bottom:12px;overflow:hidden;white-space:nowrap}
-.marquee span{display:inline-block;padding-left:100%;animation:marq 16s linear infinite}
-@keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-
-/* pages and cards */
-.page{display:none;margin-top:12px}
-.card{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
-
-/* admin badges */
-.bad-online{display:inline-block;background:linear-gradient(90deg,var(--green),#10b981);color:white;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
-.bad-offline{display:inline-block;background:var(--offline);color:white;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
-
-/* payment methods */
-.payment-methods{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.payment-method{flex:1;min-width:120px;background:white;border:2px solid #e6eef4;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all 0.2s ease}
-.payment-method:hover{border-color:var(--turquoise)}
-.payment-method.selected{border-color:var(--turquoise);background:rgba(0,191,166,0.05)}
-.payment-icon{font-size:24px;margin-bottom:8px}
-.payment-name{font-weight:600;font-size:14px}
+/* product card */
+.productCard{background:white;border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(2,6,23,0.04);display:flex;gap:10px;align-items:center}
+.productCard img{width:84px;height:52px;object-fit:cover;border-radius:8px}
 
 /* modal */
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(2,6,23,0.5);z-index:1000;align-items:center;justify-content:center}
-.modal-content{background:white;padding:24px;border-radius:16px;max-width:480px;width:90%;box-shadow:var(--shadow)}
-.modal-title{font-weight:800;margin-bottom:12px}
-.modal-actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+.modal{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(2,6,23,0.45);align-items:center;justify-content:center;z-index:9999}
+.modal .modalInner{background:white;padding:18px;border-radius:12px;min-width:320px;max-width:720px;animation:modalIn .28s ease both}
+@keyframes modalIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+
+/* chart container */
+.chartWrap{display:flex;gap:12px;align-items:center}
 
 /* responsive */
-@media (max-width:900px){
-  .login-wrap{flex-direction:column}
-  .left{order:2;padding:18px}
-  .right{order:1;padding:18px}
-  .tiles{flex-direction:column}
-  .modal-content{width:95%;margin:20px}
-}
+@media (max-width:900px){ .card{flex-direction:column} .left,.right{padding:20px} .sidebar{display:none} .chartWrap{flex-direction:column} }
+
 </style>
 </head>
 <body>
-<div class="center-wrap">
-  <div class="login-wrap" id="login-wrap">
+<div class="container" id="loginContainer">
+  <div class="card">
     <div class="left">
-      <div class="brand-logo">SHOP 4 PANEL</div>
-      <div class="brand-sub">Nouvelle Génération &amp; Smart</div>
-      <img src="https://i.imgur.com/6YVd6QJ.png" alt="illustration" class="hero-illus">
+      <div class="logo"><div class="logoBadge">S4</div><div><div class="logoTitle">SHOP 4 PANEL</div><div style="opacity:0.9">Vente IPTV Premium</div></div></div>
+      <div style="margin-top:12px;font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent3));-webkit-background-clip:text;color:transparent">Recharge et gagne plus avec les points de fidélité</div>
+      <div style="margin-top:6px;font-weight:600;color:rgba(255,255,255,0.95);direction:rtl">اشحن واربح أكثر مع نقاط الولاء</div>
+      <div style="margin-top:18px;color:rgba(255,255,255,0.9);font-size:13px">Support 24/7 • USDT (TRC20), Wafa Cash, Virement, Cash</div>
     </div>
-
     <div class="right">
-      <div class="form-title">Se connecter</div>
-      <div class="form-sub">Connectez-vous avec votre compte</div>
-      <form id="login-form" style="display:flex;flex-direction:column" autocomplete="on" novalidate>
-        <div class="field-row" style="width:100%">
-          <div class="input-icon"><i class="fa fa-envelope"></i></div>
-          <input id="email" name="email" type="email" placeholder="Email" class="form-control" required autocomplete="username">
+      <form id="loginForm" class="form" autocomplete="on" novalidate>
+        <div class="field"><div class="icon"><i class="fa fa-envelope"></i></div><input id="email" type="email" placeholder="Email"></div>
+        <div class="field"><div class="icon"><i class="fa fa-lock"></i></div><input id="password" type="password" placeholder="Mot de passe"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><label><input id="remember" type="checkbox"> Se souvenir</label><div><a href="#" id="langFR">FR</a> · <a href="#" id="langAR">AR</a></div></div>
+        <div id="err" style="display:none;color:#b00020;font-weight:700"></div>
+        <button type="submit" class="btn" id="btnLogin">Se connecter</button>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button type="button" class="smallBtn" id="demoAdmin">Admin demo</button>
+          <button type="button" class="smallBtn" id="demoUser">User demo</button>
         </div>
-        <div class="field-row" style="width:100%">
-          <div class="input-icon"><i class="fa fa-lock"></i></div>
-          <input id="password" name="password" type="password" placeholder="Mot de passe" class="form-control" required autocomplete="current-password">
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><input id="remember" type="checkbox"> <label for="remember">Se souvenir</label></div>
-          <div><a href="#" id="forgot" style="color:var(--turquoise);text-decoration:none;font-weight:600">Mot de passe oublié ?</a></div>
-        </div>
-
-        <div id="field-error" class="error-msg"></div>
-        <div id="field-success" class="success-msg"></div>
-
-        <button type="submit" class="btn-login" id="btnLogin">Se connecter</button>
-
-        <div class="small-actions">
-          <button type="button" class="btn-secondary-soft" id="demo-admin">Admin demo</button>
-          <button type="button" class="btn-secondary-soft" id="demo-user">User demo</button>
-          <button type="button" class="btn-secondary-soft" id="demo-test">Test demo</button>
-          <button type="button" class="btn-secondary-soft" id="generate-test-users">Générer users test</button>
-        </div>
-        <div style="margin-top:10px;font-size:13px;color:#334155">
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
           <div><strong>Admin:</strong> ogharbi1988@shop4panel.com / admin1988</div>
           <div><strong>User:</strong> user@shop4panel.com / admin1988</div>
           <div><strong>Test:</strong> test@shop4panel.com / test123</div>
@@ -142,767 +103,435 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe U
   </div>
 </div>
 
-<!-- App Dashboard -->
-<div class="app" id="app">
-  <div class="top-bar">
-    <div style="display:flex;gap:12px;align-items:center">
-      <div class="logo-small">SHOP 4 PANEL</div>
-      <div>
-        <div style="font-weight:700" id="hdr-welcome">Tableau de bord</div>
-        <div style="font-size:13px;color:var(--muted)">Interface moderne</div>
+<!-- Dashboard (hidden until login) -->
+<div class="app" id="app" style="display:none">
+  <div class="topbar">
+    <div><span style="font-weight:800;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white">SHOP 4 PANEL</span></div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div id="langDisplay" style="font-weight:700"></div>
+      <div id="userInfo" style="text-align:right">
+        <div id="uName" style="font-weight:800">Invité</div>
+        <div id="uRole" style="font-size:13px;color:var(--muted)">Non connecté</div>
       </div>
+      <div id="uAvatar" style="width:44px;height:44;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800">S4</div>
     </div>
-    <div class="user-info">
-      <div style="text-align:right;margin-right:8px">
-        <div id="hdr-name" style="font-weight:700">Invité <span id="online-dot" class="status-dot" style="background:var(--offline)"></span></div>
-        <div id="hdr-role" style="font-size:13px;color:var(--muted)">Non connecté</div>
+  </div>
+
+  <div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div style="font-weight:800;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;display:inline-block">SHOP 4 PANEL</div>
+      <div class="menu" style="margin-top:18px">
+        <div class="item" data-page="dashboard-home"><i class="fa fa-home"></i> Tableau de bord</div>
+        <div class="item" data-page="products"><i class="fa fa-box-open"></i> Produits</div>
+        <div class="item" data-page="balance"><i class="fa fa-wallet"></i> Mon solde</div>
+        <div class="item" data-page="history"><i class="fa fa-history"></i> Historique</div>
+        <div class="item" data-page="tickets"><i class="fa fa-ticket-alt"></i> Tickets</div>
+        <div class="item" data-page="generator"><i class="fa fa-key"></i> Générateur</div>
+        <div class="item" data-page="admin" id="adminMenu" style="display:none"><i class="fa fa-cogs"></i> Administration</div>
+        <div class="item" data-page="settings"><i class="fa fa-cog"></i> Paramètres</div>
+        <div style="margin-top:16px"><button id="logoutBtn" class="btn" style="background:white;color:#05212a">Déconnexion</button></div>
       </div>
-      <div class="avatar" id="hdr-avatar">S4</div>
-    </div>
-  </div>
+    </aside>
 
-  <div class="marquee card" id="marquee">
-    <span>⚠️ Le montant minimum pour la recharge est de 500 DH — الحد الأدنى لإعادة الشحن هو 500 درهم &nbsp;&nbsp;&nbsp;</span>
-  </div>
+    <main class="content" id="content">
+      <div style="padding:12px;border-radius:10px;background:linear-gradient(90deg,white,rgba(255,255,255,0.95));margin-bottom:12px">⚠️ Le montant minimum pour la recharge est de 500 DH — الحد الأدنى لإعادة الشحن هو 500 درهم</div>
 
-  <div class="tiles">
-    <div class="tile" data-page="dashboard-home">
-      <div class="ico turq" style="background:linear-gradient(90deg,var(--turquoise),var(--green))"><i class="fas fa-home"></i></div>
-      <div><strong>Tableau de bord</strong><div class="muted">Vue générale</div></div>
-    </div>
-    <div class="tile" data-page="products">
-      <div class="ico green" style="background:linear-gradient(90deg,var(--green),var(--turquoise))"><i class="fas fa-box-open"></i></div>
-      <div><strong>Produits</strong><div class="muted">Catalogue & achats</div></div>
-    </div>
-    <div class="tile" data-page="balance">
-      <div class="ico orange" style="background:linear-gradient(90deg,var(--orange),var(--turquoise))"><i class="fas fa-wallet"></i></div>
-      <div><strong>Mon solde</strong><div class="muted">Recharges</div></div>
-    </div>
-    <div class="tile" data-page="tickets">
-      <div class="ico turq" style="background:linear-gradient(90deg,var(--turquoise),var(--orange))"><i class="fas fa-ticket-alt"></i></div>
-      <div><strong>Tickets</strong><div class="muted">Support</div></div>
-    </div>
-    <div class="tile" data-page="generator">
-      <div class="ico green" style="background:linear-gradient(90deg,var(--green),var(--orange))"><i class="fas fa-key"></i></div>
-      <div><strong>Générateur</strong><div class="muted">Codes & licences</div></div>
-    </div>
-    <div class="tile" id="admin-tile" data-page="admin" style="display:none">
-      <div class="ico orange" style="background:linear-gradient(90deg,var(--turquoise),var(--orange))"><i class="fas fa-cogs"></i></div>
-      <div><strong>Administration</strong><div class="muted">Utilisateurs & produits</div></div>
-    </div>
-    <div class="tile" id="logout-tile" style="display:none">
-      <div class="ico" style="background:#94a3b8"><i class="fas fa-sign-out-alt"></i></div>
-      <div><strong>Déconnexion</strong><div class="muted">Se déconnecter</div></div>
-    </div>
-  </div>
-
-  <!-- Pages Content -->
-  <div id="dashboard-home" class="page card" style="display:block">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <h4 style="margin:0">Bonjour, <span id="user-greet">Invité</span></h4>
-        <div class="muted">Aperçu des activités</div>
-      </div>
-      <div class="muted">Connecté depuis: <strong id="session-duration">—</strong></div>
-    </div>
-
-    <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-      <div class="card" style="flex:1;min-width:220px">
-        <div class="muted">Solde actuel</div>
-        <div style="font-weight:800;font-size:20px" id="user-balance">0.00 MAD</div>
-      </div>
-      <div class="card" style="flex:1;min-width:220px">
-        <div class="muted">Produits disponibles</div>
-        <div style="font-weight:800;font-size:20px" id="products-count">0</div>
-      </div>
-      <div class="card" style="flex:1;min-width:220px">
-        <div class="muted">Tickets ouverts</div>
-        <div style="font-weight:800;font-size:20px">0</div>
-      </div>
-    </div>
-  </div>
-
-  <div id="products" class="page card" style="display:none">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h4 style="margin:0">Produits</h4>
-      <div class="muted">Total: <span id="products-count-2">0</span></div>
-    </div>
-    <div id="products-container" style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px"></div>
-  </div>
-
-  <div id="balance" class="page card" style="display:none">
-    <h4>Mon solde</h4>
-    <div style="margin-top:8px"><div class="muted">Solde actuel</div><div id="current-balance" style="font-weight:800">0.00 MAD</div></div>
-    
-    <div style="margin-top:20px">
-      <h5>Méthodes de paiement</h5>
-      <div class="payment-methods">
-        <div class="payment-method selected" data-method="virement">
-          <div class="payment-icon"><i class="fas fa-university"></i></div>
-          <div class="payment-name">Virement</div>
-        </div>
-        <div class="payment-method" data-method="cash">
-          <div class="payment-icon"><i class="fas fa-money-bill-wave"></i></div>
-          <div class="payment-name">Cash</div>
-        </div>
-        <div class="payment-method" data-method="usdt">
-          <div class="payment-icon"><i class="fab fa-bitcoin"></i></div>
-          <div class="payment-name">USDT</div>
-        </div>
-      </div>
-    </div>
-    
-    <div style="margin-top:12px">
-      <button class="btn-login" id="open-recharge-small" style="width:auto;background:linear-gradient(90deg,var(--orange),var(--turquoise))">Demander une recharge</button>
-    </div>
-  </div>
-
-  <div id="tickets" class="page card" style="display:none">
-    <h4>Tickets</h4>
-    <div class="muted">Envoyer une demande au support</div>
-    <div style="margin-top:12px">
-      <button class="btn-login" id="new-ticket-small" style="width:auto;background:linear-gradient(90deg,var(--turquoise),var(--green))">Nouveau ticket</button>
-    </div>
-  </div>
-
-  <div id="generator" class="page card" style="display:none">
-    <h4>Générateur</h4>
-    <div class="muted">Générer des codes (admin seulement)</div>
-    <form id="gen-form" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-      <select id="product-select" class="form-control" style="flex:1 1 200px"><option value="">Choisir un produit</option></select>
-      <input id="gen-qty" class="form-control" type="number" min="1" value="1" style="width:120px">
-      <button class="btn-login" type="submit" style="width:auto">Générer</button>
-    </form>
-    <div id="generated" style="margin-top:12px"></div>
-  </div>
-
-  <div id="admin" class="page card" style="display:none">
-    <h4>Administration</h4>
-    <div class="muted">Gestion des utilisateurs</div>
-    <div style="margin-top:12px;overflow:auto">
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr style="text-align:left"><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Durée connectée</th><th>Statut</th><th>Solde</th><th>Actions</th></tr></thead>
-        <tbody id="admin-users-table"></tbody>
-      </table>
-    </div>
-    <div style="margin-top:12px;display:flex;gap:8px">
-      <button class="btn-login" id="btn-add-user" style="width:auto;background:linear-gradient(90deg,var(--turquoise),var(--green))">Ajouter utilisateur</button>
-      <button class="btn-login" id="btn-add-product" style="width:auto;background:linear-gradient(90deg,var(--orange),var(--turquoise))">Ajouter produit</button>
-      <button class="btn-login" id="btn-generate-test-users" style="width:auto;background:linear-gradient(90deg,var(--green),var(--orange))">Générer users test</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Structure -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <div class="modal-title" id="modal-title">Titre</div>
-    <div id="modal-body">Contenu</div>
-    <div class="modal-actions">
-      <button class="btn-secondary-soft" id="modal-cancel">Annuler</button>
-      <button class="btn-login" id="modal-confirm" style="width:auto">Confirmer</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// ==================== CONFIGURATION INITIALE ====================
-class Shop4Panel {
-  constructor() {
-    this.products = this.loadFromStorage('products') || [
-      {id:1,name:"LPTV M3U 12 Mois",price:350,stock:10,category:"M3U"},
-      {id:2,name:"CODE HTV 6 Mois",price:250,stock:12,category:"CODE"},
-      {id:3,name:"Test 24h",price:0,stock:50,category:"TEST"}
-    ];
-    
-    this.users = this.loadFromStorage('users') || [
-      {id:1,name:"Admin Ogharbi",email:"ogharbi1988@shop4panel.com",password:"admin1988",role:"admin",balance:1500,lastLogin:null,sessionStart:null,isOnline:false},
-      {id:2,name:"User Demo",email:"user@shop4panel.com",password:"admin1988",role:"user",balance:500,lastLogin:null,sessionStart:null,isOnline:false},
-      {id:3,name:"Test User",email:"test@shop4panel.com",password:"test123",role:"test",balance:0,lastLogin:null,sessionStart:null,isOnline:false}
-    ];
-    
-    this.currentUser = null;
-    this.sessionInterval = null;
-    this.selectedPaymentMethod = "virement";
-    
-    this.init();
-  }
-
-  // ==================== METHODS UTILITAIRES ====================
-  el(id) { return document.getElementById(id); }
-  qs(sel) { return document.querySelector(sel); }
-  qsa(sel) { return Array.from(document.querySelectorAll(sel)); }
-
-  showMessage(message, type = 'error') {
-    const element = type === 'success' ? this.el('field-success') : this.el('field-error');
-    element.textContent = message;
-    element.style.display = 'block';
-    setTimeout(() => { element.style.display = 'none'; }, 4500);
-  }
-
-  formatDate(date) {
-    if (!date) return 'Jamais';
-    return new Date(date).toLocaleString('fr-FR');
-  }
-
-  formatDuration(ms) {
-    if (!ms) return '-';
-    const s = Math.floor(ms / 1000);
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
-    const sec = s % 60;
-    return `${h}h ${m}m ${sec}s`;
-  }
-
-  // ==================== GESTION STOCKAGE ====================
-  saveToStorage(key, data) {
-    try {
-      localStorage.setItem(`s4p_${key}`, JSON.stringify(data));
-      return true;
-    } catch (e) {
-      console.warn('Erreur sauvegarde:', e);
-      return false;
-    }
-  }
-
-  loadFromStorage(key) {
-    try {
-      const data = localStorage.getItem(`s4p_${key}`);
-      return data ? JSON.parse(data) : null;
-    } catch (e) {
-      console.warn('Erreur chargement:', e);
-      return null;
-    }
-  }
-
-  // ==================== GESTION SESSIONS ====================
-  saveSession() {
-    if (!this.currentUser) return;
-    const sessionData = {
-      email: this.currentUser.email,
-      lastLogin: this.currentUser.lastLogin,
-      sessionStart: this.currentUser.sessionStart
-    };
-    this.saveToStorage('session', sessionData);
-  }
-
-  loadSession() {
-    try {
-      const sessionData = this.loadFromStorage('session');
-      if (!sessionData) return false;
-
-      const user = this.users.find(u => u.email === sessionData.email);
-      if (!user) return false;
-
-      user.lastLogin = sessionData.lastLogin;
-      user.sessionStart = sessionData.sessionStart;
-      user.isOnline = true;
-      this.currentUser = user;
-      
-      this.applyAfterLogin();
-      return true;
-    } catch (e) {
-      console.warn('Erreur chargement session:', e);
-      return false;
-    }
-  }
-
-  clearSession() {
-    try {
-      localStorage.removeItem('s4p_session');
-    } catch (e) {
-      console.warn('Erreur suppression session:', e);
-    }
-  }
-
-  // ==================== GESTION LOGIN ====================
-  handleLogin(email, password, remember = false) {
-    // Validation
-    if (!email || !password) {
-      this.showMessage('Email et mot de passe sont requis');
-      return false;
-    }
-
-    // Recherche utilisateur
-    const user = this.users.find(u => u.email === email && u.password === password);
-    if (!user) {
-      this.showMessage('Email ou mot de passe incorrect');
-      return false;
-    }
-
-    // Mise à jour statut utilisateurs
-    this.users.forEach(u => {
-      u.isOnline = false;
-      u.sessionStart = null;
-    });
-
-    // Connexion utilisateur
-    user.lastLogin = new Date().toISOString();
-    user.sessionStart = Date.now();
-    user.isOnline = true;
-    this.currentUser = user;
-
-    // Sauvegarde session si "Se souvenir"
-    if (remember) {
-      this.saveSession();
-    }
-
-    this.applyAfterLogin();
-    this.showMessage(`Bienvenue ${user.name} !`, 'success');
-    return true;
-  }
-
-  handleLogout() {
-    if (this.currentUser) {
-      this.currentUser.isOnline = false;
-      this.currentUser.sessionStart = null;
-    }
-    
-    this.currentUser = null;
-    
-    if (this.sessionInterval) {
-      clearInterval(this.sessionInterval);
-      this.sessionInterval = null;
-    }
-    
-    this.clearSession();
-    
-    // Réinitialisation UI
-    this.el('app').style.display = 'none';
-    this.el('login-wrap').style.display = 'flex';
-    this.el('email').value = '';
-    this.el('password').value = '';
-    this.el('hdr-name').textContent = 'Invité';
-    this.el('hdr-role').textContent = 'Non connecté';
-    this.el('hdr-avatar').textContent = 'S4';
-    this.el('online-dot').style.background = 'var(--offline)';
-    this.el('session-duration').textContent = '—';
-    
-    this.showMessage('Déconnexion réussie', 'success');
-  }
-
-  applyAfterLogin() {
-    if (!this.currentUser) return;
-
-    // Mise à jour header
-    this.el('hdr-name').textContent = this.currentUser.name;
-    this.el('hdr-role').textContent = this.getRoleDisplay(this.currentUser.role);
-    this.el('hdr-avatar').textContent = this.getUserInitials(this.currentUser.name);
-    this.el('user-greet').textContent = this.currentUser.name.split(' ')[0];
-    this.el('user-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
-    this.el('current-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
-    this.el('online-dot').style.background = 'var(--success)';
-
-    // Affichage sections
-    this.el('login-wrap').style.display = 'none';
-    this.el('app').style.display = 'block';
-    
-    // Gestion droits admin
-    const isAdmin = this.currentUser.role === 'admin';
-    this.el('admin-tile').style.display = isAdmin ? 'block' : 'none';
-    this.el('logout-tile').style.display = 'block';
-
-    // Initialisation données
-    this.renderProducts();
-    this.updateAdminTable();
-
-    // Timer session
-    if (this.sessionInterval) clearInterval(this.sessionInterval);
-    this.sessionInterval = setInterval(() => {
-      if (this.currentUser && this.currentUser.sessionStart) {
-        this.el('session-duration').textContent = 
-          this.formatDuration(Date.now() - this.currentUser.sessionStart);
-      }
-      this.updateAdminTable();
-    }, 1000);
-  }
-
-  getRoleDisplay(role) {
-    const roles = {
-      'admin': 'Administrateur',
-      'user': 'Utilisateur',
-      'test': 'Utilisateur test'
-    };
-    return roles[role] || role;
-  }
-
-  getUserInitials(name) {
-    return name.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase();
-  }
-
-  // ==================== GESTION PRODUITS ====================
-  renderProducts() {
-    const container = this.el('products-container');
-    container.innerHTML = '';
-
-    this.products.forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.style.padding = '12px';
-      
-      card.innerHTML = `
-        <div style="display:flex;gap:12px;align-items:center">
-          <div style="width:64px;height:64px;border-radius:10px;background:linear-gradient(90deg,var(--turquoise),var(--green));color:white;display:flex;align-items:center;justify-content:center;font-weight:700">
-            ${product.name.split(' ')[0]}
-          </div>
-          <div style="flex:1">
-            <strong>${product.name}</strong>
-            <div class="muted">${product.category} • Stock: ${product.stock}</div>
-          </div>
+      <section id="dashboard-home" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center">
           <div>
-            <div style="font-weight:700">${product.price > 0 ? product.price.toFixed(2) + ' MAD' : 'GRATUIT'}</div>
-            <div style="margin-top:8px">
-              <button class="btn-login buy" data-id="${product.id}" style="background:linear-gradient(90deg,var(--turquoise),var(--green));width:100px">
-                Acheter
-              </button>
+            <h3 style="margin:0">Tableau de bord</h3>
+            <div style="color:var(--muted)">Aperçu</div>
+          </div>
+          <div id="adminTopProduct" style="font-weight:700;display:none">🥇 Top produit: —</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;align-items:flex-start">
+          <div style="flex:1;min-width:320px">
+            <div class="tiles">
+              <div class="tile"><strong>Solde actuel</strong><div id="userBalance" style="font-weight:800;font-size:20px;margin-top:8px">0.00 MAD</div></div>
+              <div class="tile"><strong>Produits disponibles</strong><div id="prodCount" style="font-weight:800;font-size:20px;margin-top:8px">0</div></div>
+              <div class="tile"><strong>Tickets ouverts</strong><div style="font-weight:800;font-size:20px;margin-top:8px">0</div></div>
+            </div>
+          </div>
+
+          <div style="width:420px">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div><strong>Produits les plus vendus</strong><div style="font-size:13px;color:var(--muted)">Distribution des ventes</div></div>
+                <div id="legendSmall" style="font-size:13px;color:var(--muted)"></div>
+              </div>
+              <div class="chartWrap" style="margin-top:12px;align-items:center">
+                <canvas id="salesPie" width="300" height="300" style="max-width:300px"></canvas>
+              </div>
             </div>
           </div>
         </div>
-      `;
-      
-      container.appendChild(card);
-    });
+      </section>
 
-    // Mise à jour compteurs
-    const countElements = this.qsa('#products-count, #products-count-2');
-    countElements.forEach(el => el.textContent = this.products.length);
-
-    // Remplissage select générateur
-    const select = this.el('product-select');
-    select.innerHTML = '<option value="">Choisir un produit</option>';
-    this.products.forEach(p => {
-      const option = document.createElement('option');
-      option.value = p.id;
-      option.textContent = p.name;
-      select.appendChild(option);
-    });
-
-    this.saveToStorage('products', this.products);
-  }
-
-  // ==================== GESTION UTILISATEURS ====================
-  updateAdminTable() {
-    const tbody = this.el('admin-users-table');
-    tbody.innerHTML = '';
-
-    this.users.forEach(user => {
-      const row = document.createElement('tr');
-      const duration = (user.isOnline && user.sessionStart) ? 
-        this.formatDuration(Date.now() - user.sessionStart) : '-';
-      
-      const statusBadge = user.isOnline ? 
-        '<span class="bad-online">En ligne</span>' : 
-        '<span class="bad-offline">Hors ligne</span>';
-
-      row.innerHTML = `
-        <td>${user.name}</td>
-        <td>${user.email}</td>
-        <td>${this.getRoleDisplay(user.role)}</td>
-        <td>${this.formatDate(user.lastLogin)}</td>
-        <td>${duration}</td>
-        <td>${statusBadge}</td>
-        <td>${user.balance.toFixed(2)} MAD</td>
-        <td>
-          <button class="btn-secondary-soft edit-user" data-id="${user.id}" style="font-size:12px;padding:4px 8px">Modifier</button>
-        </td>
-      `;
-      
-      tbody.appendChild(row);
-    });
-
-    this.saveToStorage('users', this.users);
-  }
-
-  generateTestUsers(count = 5) {
-    const baseId = Math.max(...this.users.map(u => u.id)) + 1;
-    
-    for (let i = 0; i < count; i++) {
-      const userNum = baseId + i;
-      this.users.push({
-        id: userNum,
-        name: `Test User ${userNum}`,
-        email: `test${userNum}@shop4panel.com`,
-        password: "1236542025",
-        role: "test",
-        balance: 0,
-        lastLogin: null,
-        sessionStart: null,
-        isOnline: false
-      });
-    }
-    
-    this.updateAdminTable();
-    this.showMessage(`${count} utilisateurs test générés. Mot de passe: 1236542025`, 'success');
-  }
-
-  addUser(userData) {
-    const newId = Math.max(...this.users.map(u => u.id)) + 1;
-    const newUser = {
-      id: newId,
-      ...userData,
-      lastLogin: null,
-      sessionStart: null,
-      isOnline: false
-    };
-    
-    this.users.push(newUser);
-    this.updateAdminTable();
-    this.showMessage('Utilisateur ajouté avec succès', 'success');
-  }
-
-  addProduct(productData) {
-    const newId = Math.max(...this.products.map(p => p.id)) + 1;
-    const newProduct = {
-      id: newId,
-      stock: 10,
-      ...productData
-    };
-    
-    this.products.push(newProduct);
-    this.renderProducts();
-    this.showMessage('Produit ajouté avec succès', 'success');
-  }
-
-  // ==================== GESTION ACHATS ====================
-  handlePurchase(productId) {
-    if (!this.currentUser) {
-      this.showMessage('Veuillez vous connecter pour acheter');
-      return false;
-    }
-
-    const product = this.products.find(p => p.id === productId);
-    if (!product) {
-      this.showMessage('Produit non trouvé');
-      return false;
-    }
-
-    if (product.stock <= 0) {
-      this.showMessage('Stock épuisé');
-      return false;
-    }
-
-    if (this.currentUser.balance < product.price) {
-      this.showMessage('Solde insuffisant');
-      return false;
-    }
-
-    // Traitement achat
-    this.currentUser.balance -= product.price;
-    product.stock -= 1;
-
-    // Mise à jour UI
-    this.el('user-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
-    this.el('current-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
-    
-    this.renderProducts();
-    this.updateAdminTable();
-    
-    this.showMessage(`Achat réussi: ${product.name}`, 'success');
-    return true;
-  }
-
-  handleRecharge(amount) {
-    if (!this.currentUser) {
-      this.showMessage('Veuillez vous connecter');
-      return false;
-    }
-
-    if (amount < 500) {
-      this.showMessage('Le montant minimum est de 500 MAD');
-      return false;
-    }
-
-    this.currentUser.balance += amount;
-    
-    // Mise à jour UI
-    this.el('user-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
-    this.el('current-balance').textContent = `${this.currentUser.balance.toFixed(2)} MAD`;
-    
-    this.updateAdminTable();
-    
-    this.showMessage(`Recharge ${this.selectedPaymentMethod} effectuée: ${amount} MAD`, 'success');
-    return true;
-  }
-
-  // ==================== GESTION PAGES ====================
-  showPage(pageId) {
-    // Vérification accès admin
-    if (pageId === 'admin' && (!this.currentUser || this.currentUser.role !== 'admin')) {
-      this.showMessage('Accès administration réservé');
-      return;
-    }
-
-    // Masquer toutes les pages
-    this.qsa('.page').forEach(page => {
-      page.style.display = 'none';
-    });
-
-    // Afficher page demandée
-    const targetPage = this.el(pageId);
-    if (targetPage) {
-      targetPage.style.display = 'block';
-    }
-  }
-
-  // ==================== INITIALISATION ====================
-  init() {
-    // Chargement session
-    this.loadSession();
-
-    // Événement formulaire login
-    this.el('login-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = this.el('email').value.trim();
-      const password = this.el('password').value.trim();
-      const remember = this.el('remember').checked;
-      
-      this.handleLogin(email, password, remember);
-    });
-
-    // Boutons démo
-    this.el('demo-admin').addEventListener('click', () => {
-      this.el('email').value = 'ogharbi1988@shop4panel.com';
-      this.el('password').value = 'admin1988';
-      this.el('remember').checked = true;
-    });
-
-    this.el('demo-user').addEventListener('click', () => {
-      this.el('email').value = 'user@shop4panel.com';
-      this.el('password').value = 'admin1988';
-      this.el('remember').checked = true;
-    });
-
-    this.el('demo-test').addEventListener('click', () => {
-      this.el('email').value = 'test@shop4panel.com';
-      this.el('password').value = 'test123';
-      this.el('remember').checked = false;
-    });
-
-    // Génération users test
-    this.el('generate-test-users').addEventListener('click', () => {
-      this.generateTestUsers(5);
-    });
-
-    this.el('btn-generate-test-users').addEventListener('click', () => {
-      this.generateTestUsers(5);
-    });
-
-    // Navigation tiles
-    this.qsa('.tile[data-page]').forEach(tile => {
-      tile.addEventListener('click', () => {
-        const page = tile.dataset.page;
-        this.showPage(page);
-      });
-    });
-
-    // Déconnexion
-    this.el('logout-tile').addEventListener('click', () => {
-      this.handleLogout();
-    });
-
-    // Gestion achats (délégation d'événements)
-    document.body.addEventListener('click', (e) => {
-      if (e.target.classList.contains('buy')) {
-        const productId = parseInt(e.target.dataset.id);
-        this.handlePurchase(productId);
-      }
-    });
-
-    // Méthodes de paiement
-    this.qsa('.payment-method').forEach(method => {
-      method.addEventListener('click', () => {
-        this.qsa('.payment-method').forEach(m => m.classList.remove('selected'));
-        method.classList.add('selected');
-        this.selectedPaymentMethod = method.dataset.method;
-      });
-    });
-
-    // Recharge solde
-    this.el('open-recharge-small').addEventListener('click', () => {
-      const amount = parseFloat(prompt(`Montant recharge (min 500 MAD) - Méthode: ${this.selectedPaymentMethod.toUpperCase()}`) || 0);
-      if (amount) {
-        this.handleRecharge(amount);
-      }
-    });
-
-    // Générateur codes
-    this.el('gen-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      if (!this.currentUser || this.currentUser.role !== 'admin') {
-        this.showMessage('Accès réservé aux administrateurs');
-        return;
-      }
-
-      const productId = this.el('product-select').value;
-      const quantity = parseInt(this.el('gen-qty').value) || 1;
-
-      if (!productId) {
-        this.showMessage('Veuillez choisir un produit');
-        return;
-      }
-
-      let codes = '';
-      for (let i = 0; i < quantity; i++) {
-        codes += `CODE-${Math.random().toString(36).slice(2, 10).toUpperCase()}<br>`;
-      }
-
-      this.el('generated').innerHTML = `
-        <div class="card">
-          <strong>Codes générés (${quantity}):</strong>
-          <div style="margin-top:8px;font-family:monospace">${codes}</div>
+      <section id="products" class="page" style="display:none;margin-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h3>Produits</h3>
+          <div id="prodCountTop">0</div>
         </div>
-      `;
-    });
+        <div id="productsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px"></div>
+        <div style="margin-top:12px"><button id="openAddProduct" class="btn">Ajouter produit</button></div>
+      </section>
 
-    // Administration - Ajout utilisateur
-    this.el('btn-add-user').addEventListener('click', () => {
-      if (!this.currentUser || this.currentUser.role !== 'admin') {
-        this.showMessage('Accès réservé aux administrateurs');
-        return;
-      }
+      <section id="balance" class="page" style="display:none;margin-top:12px">
+        <h3>Rechargement</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://cdn-icons-png.flaticon.com/512/8043/8043680.png" alt="usdt" width="42">
+                <div><strong>USDT (TRC20)</strong><div style="font-size:13px;color:var(--muted)">Adresse TRC20 + QR</div></div>
+                <div style="margin-left:auto"><button id="payUsdtBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
 
-      const name = prompt('Nom complet:');
-      if (!name) return;
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://cdn-icons-png.flaticon.com/512/6404/6404655.png" alt="virement" width="42">
+                <div><strong>Virement bancaire</strong><div style="font-size:13px;color:var(--muted)">IBAN et instructions</div></div>
+                <div style="margin-left:auto"><button id="payWireBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
 
-      const email = prompt('Email:');
-      if (!email) return;
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://images.seeklogo.com/logo-png/25/1/wafacash-logo-png_seeklogo-251985.png" alt="wafacash" width="42">
+                <div><strong>Wafa Cash</strong><div style="font-size:13px;color:var(--muted)">Nom + référence</div></div>
+                <div style="margin-left:auto"><button id="payWafaBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
 
-      const password = prompt('Mot de passe:');
-      if (!password) return;
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://cdn-icons-png.flaticon.com/512/3081/3081015.png" alt="cash" width="42">
+                <div><strong>Cash</strong><div style="font-size:13px;color:var(--muted)">Remise en main propre</div></div>
+                <div style="margin-left:auto"><button id="payCashBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      const role = prompt('Rôle (admin/user/test):', 'user');
-      const balance = parseFloat(prompt('Solde initial (MAD):', '0')) || 0;
+      <section id="history" class="page" style="display:none;margin-top:12px">
+        <h3>Historique</h3>
+        <div id="historyList" class="table" style="margin-top:12px"></div>
+      </section>
 
-      this.addUser({ name, email, password, role, balance });
-    });
+      <section id="tickets" class="page" style="display:none;margin-top:12px">
+        <h3>Tickets</h3>
+        <div style="margin-top:12px"><button id="newTicketBtn" class="btn">Nouveau ticket</button></div>
+      </section>
 
-    // Administration - Ajout produit
-    this.el('btn-add-product').addEventListener('click', () => {
-      if (!this.currentUser || this.currentUser.role !== 'admin') {
-        this.showMessage('Accès réservé aux administrateurs');
-        return;
-      }
+      <section id="generator" class="page" style="display:none;margin-top:12px">
+        <h3>Générateur</h3>
+        <form id="genForm" style="display:flex;gap:8px;align-items:center;margin-top:12px">
+          <select id="genProduct" style="padding:8px;border-radius:8px"><option value="">Choisir produit</option></select>
+          <input id="genQty" type="number" min="1" value="1" style="padding:8px;border-radius:8px;width:80px">
+          <button class="btn">Générer</button>
+        </form>
+        <div id="generated" style="margin-top:12px"></div>
+      </section>
 
-      const name = prompt('Nom du produit:');
-      if (!name) return;
+      <section id="admin" class="page" style="display:none;margin-top:12px">
+        <h3>Administration</h3>
+        <div class="table" style="margin-top:12px">
+          <table style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left"><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Durée</th><th>Statut</th><th>Solde</th><th>Ventes</th></tr></thead><tbody id="adminUsersTable"></tbody></table>
+        </div>
+        <div style="margin-top:12px"><button id="openAddUser" class="btn">Ajouter utilisateur</button></div>
+      </section>
 
-      const price = parseFloat(prompt('Prix (MAD):', '0')) || 0;
-      const category = prompt('Catégorie:', 'M3U');
+      <section id="settings" class="page" style="display:none;margin-top:12px">
+        <h3>Paramètres</h3>
+        <div style="margin-top:12px">Langue : <select id="langSelect"><option value="fr">Français</option><option value="ar">العربية</option></select></div>
+      </section>
 
-      this.addProduct({ name, price, category });
-    });
+    </main>
+  </div>
+</div>
 
-    // Initialisation rendu
-    this.renderProducts();
-    this.updateAdminTable();
-  }
+<!-- Modals -->
+<div class="modal" id="modalAddUser"><div class="modalInner">
+  <h4>Ajouter un utilisateur</h4>
+  <div style="margin-top:8px"><input id="newName" placeholder="Nom complet"></div>
+  <div style="margin-top:8px"><input id="newEmail" placeholder="Email"></div>
+  <div style="margin-top:8px"><input id="newPassword" placeholder="Mot de passe"></div>
+  <div style="margin-top:8px"><select id="newRole"><option value="user">Utilisateur</option><option value="test">Test (12h)</option><option value="admin">Administrateur</option></select></div>
+  <div style="margin-top:8px"><input id="newBalance" type="number" placeholder="Solde initial (MAD)" value="0"></div>
+  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelAddUser" class="smallBtn">Annuler</button><button id="confirmAddUser" class="btn">Créer</button></div>
+</div></div>
+
+<div class="modal" id="modalAddProduct"><div class="modalInner">
+  <h4>Ajouter un produit</h4>
+  <div style="margin-top:8px"><input id="pName" placeholder="Nom du produit"></div>
+  <div style="margin-top:8px"><input id="pPrice" type="number" placeholder="Prix (MAD)"></div>
+  <div style="margin-top:8px"><input id="pCategory" placeholder="Catégorie"></div>
+  <div style="margin-top:8px"><input id="pStock" type="number" placeholder="Stock" value="10"></div>
+  <div style="margin-top:8px"><label>Image (URL ou fichier)</label><input id="pImageUrl" placeholder="https://..."><input id="pImageFile" type="file" accept="image/*"></div>
+  <div style="margin-top:8px"><img id="pPreview" src="" alt="Aperçu" style="width:160px;height:90px;object-fit:cover;border-radius:8px;display:none"></div>
+  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelAddProduct" class="smallBtn">Annuler</button><button id="confirmAddProduct" class="btn">Créer</button></div>
+</div></div>
+
+<div class="modal" id="modalPay"><div class="modalInner">
+  <h4 id="modalPayTitle">Paiement</h4>
+  <div id="modalPayBody" style="margin-top:8px"></div>
+  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelPay" class="smallBtn">Annuler</button><button id="confirmPay" class="btn">Confirmer paiement</button></div>
+</div></div>
+
+<script>
+/* ---------- Data and storage ---------- */
+const defaultProducts = [
+  {id:1,name:"LPTV M3U 12 Mois",category:"M3U",price:350,stock:10,image:""},
+  {id:2,name:"CODE HTV 6 Mois",category:"CODE",price:250,stock:12,image:""},
+  {id:3,name:"LPTV Test 24h",category:"TEST",price:0,stock:50,image:""}
+];
+const defaultUsers = [
+  {id:1,name:"Admin Ogharbi",email:"ogharbi1988@shop4panel.com",password:"admin1988",role:"admin",balance:1500,sales:45,lastLogin:null,sessionStart:null,isOnline:false},
+  {id:2,name:"User Demo",email:"user@shop4panel.com",password:"admin1988",role:"user",balance:500,sales:8,lastLogin:null,sessionStart:null,isOnline:false},
+  {id:3,name:"Test User",email:"test@shop4panel.com",password:"test123",role:"test",balance:0,sales:2,lastLogin:null,sessionStart:null,isOnline:false}
+];
+
+function save(key,val){ try{ localStorage.setItem('s4p_'+key,JSON.stringify(val)); }catch(e){console.warn(e);} }
+function load(key){ try{ const v=localStorage.getItem('s4p_'+key); return v?JSON.parse(v):null;}catch(e){return null;} }
+
+if(!load('products')) save('products', defaultProducts);
+if(!load('users')) save('users', defaultUsers);
+
+/* ---------- Helpers ---------- */
+const el = id => document.getElementById(id);
+function openModal(id){ el(id).style.display='flex'; }
+function closeModal(id){ el(id).style.display='none'; }
+
+/* ---------- Language ---------- */
+function applyLanguage(lang){
+  sessionStorage.setItem('s4p_lang', lang);
+  if(lang==='ar'){ document.body.classList.add('rtl'); el('langDisplay').textContent='العربية'; el('sidebar').classList.add('rtl'); el('langSelect').value='ar'; }
+  else { document.body.classList.remove('rtl'); el('langDisplay').textContent='Français'; el('sidebar').classList.remove('rtl'); el('langSelect').value='fr'; }
+}
+el('langFR').addEventListener('click',(e)=>{e.preventDefault();applyLanguage('fr');});
+el('langAR').addEventListener('click',(e)=>{e.preventDefault();applyLanguage('ar');});
+el('langSelect').addEventListener('change',()=>applyLanguage(el('langSelect').value));
+applyLanguage(sessionStorage.getItem('s4p_lang')||'fr');
+
+/* ---------- Login same-tab ---------- */
+const users = load('users') || defaultUsers;
+el('demoAdmin').addEventListener('click', ()=>{ el('email').value='ogharbi1988@shop4panel.com'; el('password').value='admin1988'; el('remember').checked=true; });
+el('demoUser').addEventListener('click', ()=>{ el('email').value='user@shop4panel.com'; el('password').value='admin1988'; el('remember').checked=true; });
+
+el('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  el('err').style.display='none';
+  const email = el('email').value.trim(), password = el('password').value.trim();
+  if(!email||!password){ el('err').textContent='Veuillez remplir tous les champs'; el('err').style.display='block'; return; }
+  el('btnLogin').disabled = true;
+  setTimeout(()=>{
+    el('btnLogin').disabled = false;
+    const u = users.find(x=>x.email===email && x.password===password);
+    if(!u){ el('err').textContent='Email ou mot de passe incorrect'; el('err').style.display='block'; return; }
+    if(el('remember').checked) save('s4p_user', u); else localStorage.removeItem('s4p_user');
+    save('session', u);
+    document.querySelector('.container').style.display='none';
+    document.getElementById('app').style.display='block';
+    initDashboard();
+  },900);
+});
+
+/* ---------- Dashboard init ---------- */
+function initDashboard(){
+  const session = load('session') || load('s4p_user');
+  if(!session) return;
+  el('uName').textContent = session.name;
+  el('uRole').textContent = session.role==='admin'?'Administrateur':(session.role==='test'?'Utilisateur test':'Utilisateur');
+  el('uAvatar').textContent = session.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  el('userBalance').textContent = (session.balance||0).toFixed(2)+' MAD';
+  if(session.role==='admin') el('adminMenu').style.display='block'; else el('adminMenu').style.display='none';
+  renderProducts(); renderUsersTable(); renderHistory(); updateSalesChart(); showPage('dashboard-home');
 }
 
-// Démarrage de l'application
-document.addEventListener('DOMContentLoaded', () => {
-  new Shop4Panel();
+/* ---------- Navigation ---------- */
+const pages = ['dashboard-home','products','balance','history','tickets','generator','admin','settings'];
+function showPage(id){ pages.forEach(p=> document.getElementById(p).style.display = (p===id?'block':'none')); }
+document.querySelectorAll('.menu .item').forEach(it=> it.addEventListener('click', ()=>{
+  const page = it.dataset.page; const s = load('session') || load('s4p_user');
+  if(page==='admin' && (!s || s.role!=='admin')){ alert('Accès réservé aux administrateurs'); return; }
+  showPage(page);
+}));
+el('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem('s4p_user'); localStorage.removeItem('session'); location.reload(); });
+
+/* ---------- Products ---------- */
+function renderProducts(){
+  const products = load('products')||[]; const container = el('productsContainer'); container.innerHTML='';
+  products.forEach(p=>{
+    const div = document.createElement('div'); div.className='productCard';
+    const img = p.image ? `<img src="${p.image}" alt="${p.name}">` : `<img src="https://via.placeholder.com/300x150/10b981/ffffff?text=Produit" alt="placeholder">`;
+    div.innerHTML = `${img}<div style="flex:1"><div style="font-weight:800">${p.name}</div><div style="color:var(--muted)">${p.category} • ${p.stock} en stock</div><div style="margin-top:6px;font-weight:700">${p.price>0?p.price.toFixed(2)+' MAD':'GRATUIT'}</div><div style="margin-top:8px"><button class="btn buyBtn" data-id="${p.id}">Acheter</button></div></div>`;
+    container.appendChild(div);
+  });
+  el('prodCount').textContent = products.length; el('prodCountTop').textContent = products.length;
+  // fill generator select
+  const sel = el('genProduct'); sel.innerHTML = '<option value="">Choisir produit</option>';
+  products.forEach(p=> sel.insertAdjacentHTML('beforeend', `<option value="${p.id}">${p.name}</option>`));
+  updateSalesChart();
+}
+
+/* ---------- Add product modal (image handling) ---------- */
+el('openAddProduct').addEventListener('click', ()=>{ el('pName').value=''; el('pPrice').value=''; el('pCategory').value=''; el('pStock').value='10'; el('pImageUrl').value=''; el('pImageFile').value=''; el('pPreview').style.display='none'; openModal('modalAddProduct'); });
+el('cancelAddProduct').addEventListener('click', ()=> closeModal('modalAddProduct'));
+
+el('pImageFile').addEventListener('change', function(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader(); reader.onload = function(ev){ el('pPreview').src = ev.target.result; el('pPreview').style.display='block'; el('pImageUrl').value = ev.target.result; }; reader.readAsDataURL(file);
 });
+
+el('confirmAddProduct').addEventListener('click', ()=>{
+  const name = el('pName').value.trim(); const price = parseFloat(el('pPrice').value)||0; const cat = el('pCategory').value.trim(); const stock = parseInt(el('pStock').value)||0; const img = el('pImageUrl').value.trim();
+  if(!name){ alert('Nom requis'); return; }
+  const products = load('products')||[]; const id = (products.reduce((m,x)=>Math.max(m,x.id),0)||0)+1;
+  products.push({id,name,category:cat,price,stock,image:img}); save('products', products); renderProducts(); closeModal('modalAddProduct'); alert('Produit ajouté');
+});
+
+/* ---------- Users table ---------- */
+function renderUsersTable(){
+  const users = load('users')||[]; const tbody = el('adminUsersTable'); tbody.innerHTML='';
+  users.forEach(u=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>${u.lastLogin?new Date(u.lastLogin).toLocaleString():'Jamais'}</td><td>-</td><td>${u.isOnline?'<span style="color:green">En ligne</span>':'<span style="color:#94a3b8">Hors ligne</span>'}</td><td>${(u.balance||0).toFixed(2)} MAD</td><td>${u.sales||0}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ---------- History ---------- */
+function renderHistory(){ const h = load('history')||[]; const elh = el('historyList'); elh.innerHTML=''; h.forEach(it=> elh.insertAdjacentHTML('beforeend', `<div style="padding:8px;border-bottom:1px solid #f3f4f6">${it}</div>`)); }
+function addHistory(item){ const h = load('history')||[]; h.unshift(item); save('history', h); renderHistory(); }
+
+/* ---------- Purchase handling & sales tracking ---------- */
+document.body.addEventListener('click', function(e){
+  if(e.target.classList.contains('buyBtn')){
+    const pid = parseInt(e.target.dataset.id); const products = load('products')||[]; const p = products.find(x=>x.id===pid);
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Connectez-vous'); return; }
+    if(u.balance < p.price){ alert('Solde insuffisant'); return; }
+    // debit and update user & sales
+    u.balance = (u.balance||0) - p.price;
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email);
+    if(idx!==-1){ users[idx].balance = u.balance; users[idx].sales = (users[idx].sales||0) + 1; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); }
+    // increment product sale count stored in products as sales property
+    const prodIdx = products.findIndex(x=>x.id===pid); products[prodIdx].sales = (products[prodIdx].sales||0) + 1; save('products', products);
+    el('userBalance').textContent = u.balance.toFixed(2)+' MAD';
+    addHistory(`Achat: ${p.name} - ${p.price} MAD`);
+    alert('Achat effectué : ' + p.name);
+    renderProducts(); renderUsersTable(); updateSalesChart();
+  }
+});
+
+/* ---------- Payments modals (USDT, Wire, Wafa, Cash) ---------- */
+const usdtAddr = 'TJ6Xw1hTE3aEaDhqGjS5xpg3M4svRihiA5';
+function openPayModal(title, htmlContent, onConfirm){
+  el('modalPayTitle').textContent = title; el('modalPayBody').innerHTML = htmlContent; openModal('modalPay');
+  el('confirmPay').onclick = function(){ try{ onConfirm(); } catch(e){console.warn(e);} closeModal('modalPay'); };
+  el('cancelPay').onclick = function(){ closeModal('modalPay'); };
+}
+
+el('payUsdtBtn').addEventListener('click', ()=>{
+  const qr = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(usdtAddr);
+  const html = `<div style="display:flex;gap:12px;align-items:center"><div style="width:160px;height:160px"><img src="${qr}" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div><div style="font-weight:700">Adresse TRC20</div><div style="font-family:monospace;margin-top:8px">${usdtAddr}</div></div></div>`;
+  openPayModal('Payer en USDT (TRC20)', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge USDT: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+el('payWireBtn').addEventListener('click', ()=>{
+  const html = `<div><div><strong>Virement bancaire</strong></div><div style="margin-top:8px">IBAN: <span style="font-family:monospace">MA00 0000 0000 0000</span></div><div style="margin-top:8px">Nom: SHOP 4 PANEL</div></div>`;
+  openPayModal('Virement bancaire', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Virement: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+el('payWafaBtn').addEventListener('click', ()=>{
+  const ref = 'WF-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  const html = `<div><div><strong>Wafa Cash</strong></div><div style="margin-top:8px">Référence: <span style="font-family:monospace">${ref}</span></div><div style="margin-top:8px">Nom: SHOP 4 PANEL</div></div>`;
+  openPayModal('Wafa Cash', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Wafa: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+el('payCashBtn').addEventListener('click', ()=>{
+  const html = `<div><div><strong>Cash</strong></div><div style="margin-top:8px">Remise en main propre - Confirmer la réception</div></div>`;
+  openPayModal('Paiement Cash', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Cash: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+/* ---------- Generator ---------- */
+el('genForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const session = load('session') || load('s4p_user'); if(!session || session.role!=='admin'){ alert('Accès réservé aux administrateurs'); return; }
+  const pid = el('genProduct').value; const qty = parseInt(el('genQty').value)||1; if(!pid){ alert('Choisir un produit'); return; }
+  let codes=''; for(let i=0;i<qty;i++) codes += 'CODE-'+Math.random().toString(36).slice(2,10).toUpperCase()+'<br>';
+  el('generated').innerHTML = `<div class="table" style="padding:12px"><strong>Codes générés:</strong><div style="margin-top:8px;font-family:monospace">${codes}</div></div>`;
+});
+
+/* ---------- Chart.js: Sales pie (user / global) ---------- */
+let salesPieChart = null;
+function updateSalesChart(){
+  const products = load('products')||[];
+  // aggregate sales per product
+  const labels = products.map(p=>p.name);
+  const data = products.map(p=>p.sales||0);
+  const colors = products.map((_,i)=>['#0bb7a0','#10b981','#ff8a00','#6366f1'][i%4]);
+  const ctx = document.getElementById('salesPie').getContext('2d');
+  if(salesPieChart) salesPieChart.destroy();
+  salesPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: { labels, datasets:[{data, backgroundColor: colors}] },
+    options: { responsive:true, animation:{animateScale:true, duration:1000} }
+  });
+  // legend
+  const legend = document.getElementById('legendSmall'); legend.innerHTML = products.map((p,i)=>`<div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:${colors[i]};display:inline-block;border-radius:3px"></span> ${p.name} (${p.sales||0})</div>`).join('');
+  // admin top product
+  const session = load('session') || load('s4p_user');
+  if(session && session.role==='admin'){ const top = products.slice().sort((a,b)=>(b.sales||0)-(a.sales||0))[0]; if(top) el('adminTopProduct').textContent = `🥇 Top produit : ${top.name} – ${top.sales||0} ventes`; el('adminTopProduct').style.display='block'; }
+}
+
+/* ---------- Users table refresh on init ---------- */
+function renderUsersTable(){ const users = load('users')||[]; const tbody = el('adminUsersTable'); tbody.innerHTML=''; users.forEach(u=>{ const tr = document.createElement('tr'); tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>${u.lastLogin?new Date(u.lastLogin).toLocaleString():'Jamais'}</td><td>-</td><td>${u.isOnline?'<span style="color:green">En ligne</span>':'<span style="color:#94a3b8">Hors ligne</span>'}</td><td>${(u.balance||0).toFixed(2)} MAD</td><td>${u.sales||0}</td>`; tbody.appendChild(tr); }); updateSalesChart(); }
+
+/* ---------- Add user modal ---------- */
+el('openAddUser').addEventListener('click', ()=>{ el('newName').value=''; el('newEmail').value=''; el('newPassword').value=''; el('newBalance').value='0'; openModal('modalAddUser'); });
+el('cancelAddUser').addEventListener('click', ()=> closeModal('modalAddUser'));
+el('confirmAddUser').addEventListener('click', ()=>{
+  const name = el('newName').value.trim(), email = el('newEmail').value.trim(), password = el('newPassword').value.trim();
+  const role = el('newRole').value, bal = parseFloat(el('newBalance').value)||0;
+  if(!name||!email||!password){ alert('Tous les champs sont requis'); return; }
+  const users = load('users')||[]; if(users.find(u=>u.email===email)){ alert('Email déjà utilisé'); return; }
+  const id = (users.reduce((m,x)=>Math.max(m,x.id),0)||0)+1;
+  users.push({id,name,email,password,role,balance:bal,sales:0,lastLogin:null,sessionStart:null,isOnline:false}); save('users', users); renderUsersTable(); closeModal('modalAddUser'); alert('Utilisateur ajouté');
+});
+
+/* ---------- Initial setup if session exists ---------- */
+(function init(){
+  if(!load('products')) save('products', defaultProducts);
+  if(!load('users')) save('users', defaultUsers);
+  const session = load('session') || load('s4p_user');
+  if(session){ document.querySelector('.container').style.display='none'; document.getElementById('app').style.display='block'; initDashboard(); }
+})();
+
 </script>
 </body>
 </html>
