@@ -1,729 +1,538 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion de Boutique</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SHOP 4 PANEL — V4</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{
+  --bg-a:#05292d; --accent1:#00bfa6; --accent2:#10b981; --accent3:#ff8a00;
+  --card-radius:16px; --shadow:0 20px 50px rgba(2,6,23,0.25);
+  --muted:#7b8890;
+}
+*{box-sizing:border-box} html,body{height:100%;margin:0;font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, Arial;}
+body{background:linear-gradient(135deg,var(--bg-a),#0b3940 40%, #0f6e6a 70%, var(--accent3)); color:#03121a;}
+
+/* layout & glass */
+.container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;position:relative;z-index:2}
+.card{width:100%;max-width:1200px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));box-shadow:var(--shadow);backdrop-filter:blur(10px);display:flex;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.left{flex:1;padding:34px;color:white;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);display:flex;flex-direction:column;justify-content:center}
+.right{flex:1.05;padding:34px;background:transparent;display:flex;flex-direction:column;justify-content:center}
+
+/* logo */
+.logo{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.logoBadge{width:72px;height:72px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;font-weight:900;font-size:22px}
+.logoTitle{font-size:22px;font-weight:900}
+
+/* form */
+.form{width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.field{position:relative}
+.field input[type="text"], .field input[type="email"], .field input[type="password"], .field input[type="number"], textarea, select{width:100%;padding:12px 12px 12px 48px;border-radius:12px;border:1px solid rgba(15,25,30,0.06);background:rgba(255,255,255,0.98);font-size:15px;outline:none}
+.icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 6px 18px rgba(2,6,23,0.12)}
+.field input:focus{box-shadow:0 10px 28px rgba(0,191,166,0.08)}
+
+/* buttons */
+.btn{padding:12px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(2,6,23,0.12)}
+.smallBtn{padding:8px;border-radius:10px;border:1px solid rgba(2,6,23,0.06);background:transparent;cursor:pointer}
+
+/* dashboard styles */
+.app{display:none;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:rgba(255,255,255,0.98);border-bottom:1px solid #eef3f4}
+.wrapper{display:flex;min-height:calc(100vh - 74px)}
+
+/* sidebar */
+.sidebar{width:260px;background:linear-gradient(180deg,var(--accent1),#0f8);padding:18px;color:white}
+.menu{margin-top:20px}
+.menu .item{padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.menu .item:hover{background:rgba(255,255,255,0.06)}
+
+/* content */
+.content{flex:1;padding:22px;background:#f7fbfc}
+
+/* tiles */
+.tiles{display:flex;gap:12px;flex-wrap:wrap}
+.tile{background:white;padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);min-width:160px;flex:1}
+
+/* product card */
+.productCard{background:white;border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(2,6,23,0.04);display:flex;gap:10px;align-items:center}
+.productCard img{width:84px;height:52px;object-fit:cover;border-radius:8px}
+
+/* modal */
+.modal{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(2,6,23,0.45);align-items:center;justify-content:center;z-index:9999}
+.modal .modalInner{background:white;padding:18px;border-radius:12px;min-width:320px;max-width:720px;animation:modalIn .28s ease both}
+@keyframes modalIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+
+/* chart container */
+.chartWrap{display:flex;gap:12px;align-items:center}
+
+/* responsive */
+@media (max-width:900px){ .card{flex-direction:column} .left,.right{padding:20px} .sidebar{display:none} .chartWrap{flex-direction:column} }
+
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <h1>MaBoutique</h1>
-                </div>
-                <nav class="nav">
-                    <ul>
-                        <li><a href="#" onclick="showSection('dashboard')">Tableau de bord</a></li>
-                        <li><a href="#" onclick="showSection('products')">Produits</a></li>
-                        <li><a href="#" onclick="showSection('users')" id="usersLink" style="display: none;">Utilisateurs</a></li>
-                        <li><a href="#" onclick="showSection('purchases')" id="purchasesLink" style="display: none;">Achats</a></li>
-                    </ul>
-                </nav>
-                <div class="user-menu">
-                    <span id="currentUser" style="display: none;">Utilisateur</span>
-                    <select id="userRole" onchange="changeRole()" style="display: none;">
-                        <option value="user">Utilisateur</option>
-                        <option value="admin">Administrateur</option>
-                    </select>
-                    <button id="loginBtn" onclick="showLoginModal()">Connexion</button>
-                    <button id="logoutBtn" onclick="logout()" style="display: none;">Déconnexion</button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <!-- Login Section -->
-            <section id="loginSection" class="section">
-                <div class="login-container">
-                    <div class="login-form">
-                        <h2>Connexion</h2>
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label for="username">Nom d'utilisateur</label>
-                                <input type="text" id="username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Mot de passe</label>
-                                <input type="password" id="password" required>
-                            </div>
-                            <button type="submit" class="btn-primary">Se connecter</button>
-                        </form>
-                        <div class="login-info">
-                            <h3>Comptes de démonstration:</h3>
-                            <p><strong>Administrateur:</strong> admin / admin123</p>
-                            <p><strong>Utilisateur test:</strong> test / test123</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Dashboard Section -->
-            <section id="dashboardSection" class="section" style="display: none;">
-                <h2>Tableau de bord</h2>
-                <div class="dashboard-grid">
-                    <div class="card">
-                        <h3>Solde Actuel</h3>
-                        <div class="balance-display">
-                            <span id="userBalance">0.00</span> MAD
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3>Total des Achats</h3>
-                        <div class="purchases-display">
-                            <span id="totalPurchases">0.00</span> MAD
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Monthly Purchases Chart -->
-                <div class="chart-container">
-                    <h3>Achats par Mois</h3>
-                    <canvas id="purchasesChart"></canvas>
-                </div>
-            </section>
-
-            <!-- Products Section -->
-            <section id="productsSection" class="section" style="display: none;">
-                <h2>Gestion des Produits</h2>
-
-                <!-- Add Product Modal -->
-                <div id="addProductModal" class="modal" style="display: none;">
-                    <div class="modal-content">
-                        <h3>Ajouter un Nouveau Produit</h3>
-                        <form id="addProductForm" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="productName">Nom du produit</label>
-                                <input type="text" id="productName" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productCategory">Catégorie</label>
-                                <select id="productCategory" required>
-                                    <option value="">Sélectionner une catégorie</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productDescription">Description</label>
-                                <textarea id="productDescription" rows="3"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productPrice">Prix (MAD)</label>
-                                <input type="number" id="productPrice" step="0.01" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productEmoji">Emoji</label>
-                                <input type="text" id="productEmoji" placeholder="📦" maxlength="2">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productStock">Quantité</label>
-                                <input type="number" id="productStock" min="0" value="100">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productImage">Photo du produit</label>
-                                <input type="file" id="productImage" accept="image/*">
-                                <div id="imagePreview" style="max-width: 200px; margin-top: 10px;"></div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="submit" class="btn-primary">Ajouter le produit</button>
-                                <button type="button" onclick="closeAddProductModal()" class="btn-secondary">Annuler</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="products-header">
-                    <button onclick="showAddProductModal()" class="btn-primary">+ Ajouter un produit</button>
-                </div>
-
-                <div class="products-grid" id="productsGrid">
-                    <!-- Products will be loaded here -->
-                </div>
-            </section>
-
-            <!-- Users Section (Admin only) -->
-            <section id="usersSection" class="section" style="display: none;">
-                <h2>Gestion des Utilisateurs</h2>
-                <div class="admin-actions">
-                    <button class="btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
-                </div>
-                <div class="users-table-container">
-                    <table id="usersTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom d'utilisateur</th>
-                                <th>Rôle</th>
-                                <th>Solde (MAD)</th>
-                                <th>Total Achats (MAD)</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody">
-                            <!-- Users will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Purchases Section -->
-            <section id="purchasesSection" class="section" style="display: none;">
-                <h2>Historique des Achats</h2>
-                <div class="purchases-table-container">
-                    <table id="purchasesTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Date</th>
-                                <th>Produit</th>
-                                <th>Prix (MAD)</th>
-                                <th>Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody id="purchasesTableBody">
-                            <!-- Purchases will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Add User Modal -->
-    <div id="addUserModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddUserModal()">&times;</span>
-            <h3>Ajouter un Nouvel Utilisateur</h3>
-            <form id="addUserForm" onsubmit="addUser(event)">
-                <div class="form-group">
-                    <label for="newUsername">Nom d'utilisateur</label>
-                    <input type="text" id="newUsername" required>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Mot de passe</label>
-                    <input type="password" id="newPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="newRole">Rôle</label>
-                    <select id="newRole" required>
-                        <option value="user">Utilisateur</option>
-                        <option value="admin">Administrateur</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="newBalance">Solde Initial (MAD)</label>
-                    <input type="number" id="newBalance" step="0.01" min="0" value="0" required>
-                </div>
-                <button type="submit" class="btn-primary">Ajouter</button>
-            </form>
-        </div>
+<div class="container" id="loginContainer">
+  <div class="card">
+    <div class="left">
+      <div class="logo"><div class="logoBadge">S4</div><div><div class="logoTitle">SHOP 4 PANEL</div><div style="opacity:0.9">Vente IPTV Premium</div></div></div>
+      <div style="margin-top:12px;font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent3));-webkit-background-clip:text;color:transparent">Recharge et gagne plus avec les points de fidélité</div>
+      <div style="margin-top:6px;font-weight:600;color:rgba(255,255,255,0.95);direction:rtl">اشحن واربح أكثر مع نقاط الولاء</div>
+      <div style="margin-top:18px;color:rgba(255,255,255,0.9);font-size:13px">Support 24/7 • USDT (TRC20), Wafa Cash, Virement, Cash</div>
     </div>
-
-    <style>
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .products-header {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            background: #fff;
-            transition: transform 0.2s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .product-info {
-            text-align: center;
-        }
-
-        .product-name {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .product-category {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .product-price {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .product-stock {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .form-actions button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #545b62;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-
-        #imagePreview {
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #imagePreview img {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 4px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-    </style>
-
-    <script src="script.js"></script>
-
-    <!-- Test script directly in HTML -->
-    <script>
-        console.log('🚀 Script HTML chargé!');
-
-        // Test simple bouton connexion
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📱 DOM Content Loaded depuis HTML!');
-
-            const loginForm = document.getElementById('loginForm');
-            if (loginForm) {
-                console.log('✅ Formulaire trouvé depuis HTML!');
-
-                // Remplacer complètement le gestionnaire d'événements
-                loginForm.onsubmit = function(event) {
-                    console.log('🎯 onsubmit depuis HTML!');
-                    event.preventDefault();
-                    alert('ONSUBMIT depuis HTML fonctionne!');
-
-                    const username = document.getElementById('username').value;
-                    const password = document.getElementById('password').value;
-
-                    alert('Username: ' + username);
-
-                    if (username === 'admin' && password === 'admin123') {
-                        alert('Connexion réussie depuis HTML!');
-
-                        // Set authentication variables
-                        window.authToken = 'test-token-admin';
-                        window.currentUser = username;
-                        window.currentRole = 'admin';
-
-                        // Save to localStorage
-                        localStorage.setItem('authToken', window.authToken);
-                        localStorage.setItem('currentUser', window.currentUser);
-                        localStorage.setItem('currentRole', window.currentRole);
-
-                        // Update UI for logged in user
-                        const currentUserElement = document.getElementById('currentUser');
-                        const loginBtnElement = document.getElementById('loginBtn');
-                        const logoutBtnElement = document.getElementById('logoutBtn');
-
-                        if (currentUserElement) currentUserElement.textContent = username;
-                        if (currentUserElement) currentUserElement.style.display = 'block';
-                        if (loginBtnElement) loginBtnElement.style.display = 'none';
-                        if (logoutBtnElement) logoutBtnElement.style.display = 'block';
-
-                        // Show admin-specific links
-                        const manageProductsLink = document.getElementById('manageProductsLink');
-                        const usersLink = document.getElementById('usersLink');
-                        const purchasesLink = document.getElementById('purchasesLink');
-
-                        if (manageProductsLink) manageProductsLink.style.display = 'block';
-                        if (usersLink) usersLink.style.display = 'block';
-                        if (purchasesLink) purchasesLink.style.display = 'block';
-
-                        // Show dashboard and hide login
-                        const loginSection = document.getElementById('loginSection');
-                        const dashboardSection = document.getElementById('dashboardSection');
-
-                        if (loginSection) loginSection.style.display = 'none';
-                        if (dashboardSection) dashboardSection.style.display = 'block';
-
-                        alert('Dashboard admin initialisé!');
-
-                    } else if (username === 'test' && password === 'test123') {
-                        alert('Connexion réussie en tant qu\'utilisateur!');
-
-                        // Set authentication variables
-                        window.authToken = 'test-token-user';
-                        window.currentUser = username;
-                        window.currentRole = 'user';
-
-                        // Save to localStorage
-                        localStorage.setItem('authToken', window.authToken);
-                        localStorage.setItem('currentUser', window.currentUser);
-                        localStorage.setItem('currentRole', window.currentRole);
-
-                        // Update UI for logged in user
-                        const currentUserElement = document.getElementById('currentUser');
-                        const loginBtnElement = document.getElementById('loginBtn');
-                        const logoutBtnElement = document.getElementById('logoutBtn');
-
-                        if (currentUserElement) currentUserElement.textContent = username;
-                        if (currentUserElement) currentUserElement.style.display = 'block';
-                        if (loginBtnElement) loginBtnElement.style.display = 'none';
-                        if (logoutBtnElement) logoutBtnElement.style.display = 'block';
-
-                        // Show dashboard and hide login
-                        const loginSection = document.getElementById('loginSection');
-                        const dashboardSection = document.getElementById('dashboardSection');
-
-                        if (loginSection) loginSection.style.display = 'none';
-                        if (dashboardSection) dashboardSection.style.display = 'block';
-
-                        alert('Dashboard utilisateur initialisé!');
-
-                    } else {
-                        alert('Identifiants incorrects! Essayez admin/admin123 ou test/test123');
-                    }
-
-                    return false;
-                };
-            } else {
-                console.log('❌ Formulaire PAS trouvé depuis HTML!');
-            }
-        });
-
-        // Load dashboard data function
-        window.loadDashboardData = function() {
-            alert('Chargement des données du dashboard...');
-
-            // Load sample products
-            fetch('http://144.76.81.118:2537/api/products')
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Products loaded:', data);
-                    alert('Produits chargés: ' + data.length + ' trouvés');
-                })
-                .catch(error => {
-                    console.error('Error loading products:', error);
-                    alert('Erreur de chargement des produits: ' + error.message);
-                });
-        };
-
-        // Show section function
-        window.showSection = function(sectionName) {
-            console.log('🎯 CLICK - Showing section:', sectionName);
-            alert('Navigation vers: ' + sectionName);
-
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Show selected section
-            const selectedSection = document.getElementById(sectionName + 'Section');
-            if (selectedSection) {
-                selectedSection.style.display = 'block';
-                console.log('✅ Section displayed:', sectionName);
-                alert('✅ Section ' + sectionName + ' affichée avec succès!');
-            } else {
-                console.log('❌ Section not found:', sectionName + 'Section');
-                alert('❌ Section ' + sectionName + ' non trouvée!');
-            }
-        };
-
-        // Product management functions
-        function showAddProductModal() {
-            alert('Ouverture modal ajouter produit...');
-
-            // Load categories
-            fetch('http://144.76.81.118:2537/api/categories')
-                .then(response => response.json())
-                .then(categories => {
-                    const categorySelect = document.getElementById('productCategory');
-                    categorySelect.innerHTML = '<option value="">Sélectionner une catégorie</option>';
-
-                    categories.forEach(category => {
-                        const option = document.createElement('option');
-                        option.value = category.id;
-                        option.textContent = category.name;
-                        categorySelect.appendChild(option);
-                    });
-
-                    document.getElementById('addProductModal').style.display = 'block';
-                })
-                .catch(error => {
-                    console.error('Error loading categories:', error);
-                    alert('Erreur de chargement des catégories: ' + error.message);
-                });
-        }
-
-        function closeAddProductModal() {
-            document.getElementById('addProductModal').style.display = 'none';
-            document.getElementById('addProductForm').reset();
-            document.getElementById('imagePreview').innerHTML = '';
-        }
-
-        // Image preview
-        document.addEventListener('DOMContentLoaded', function() {
-            const productImageInput = document.getElementById('productImage');
-            if (productImageInput) {
-                productImageInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    const preview = document.getElementById('imagePreview');
-
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        preview.innerHTML = '';
-                    }
-                });
-            }
-
-            // Product form submission
-            const addProductForm = document.getElementById('addProductForm');
-            if (addProductForm) {
-                addProductForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    const name = document.getElementById('productName').value;
-                    const category_id = document.getElementById('productCategory').value;
-                    const description = document.getElementById('productDescription').value;
-                    const price = document.getElementById('productPrice').value;
-                    const emoji = document.getElementById('productEmoji').value || '📦';
-                    const stock = document.getElementById('productStock').value;
-                    const imageFile = document.getElementById('productImage').files[0];
-
-                    alert('Envoi des données...');
-
-                    // Handle image upload
-                    let imageUrl = '';
-                    let formData = new FormData();
-
-                    if (imageFile) {
-                        formData.append('image', imageFile);
-
-                        // Upload image first
-                        fetch('http://144.76.81.118:2537/api/upload-product-image', {
-                            method: 'POST',
-                            headers: {
-                                'Authorization': 'Bearer test-token-admin'
-                            },
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.imageUrl) {
-                                imageUrl = data.imageUrl;
-                                createProduct();
-                            } else {
-                                alert('Erreur de téléchargement de l\'image');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Upload error:', error);
-                            alert('Erreur de téléchargement: ' + error.message);
-                        });
-                    } else {
-                        createProduct();
-                    }
-
-                    function createProduct() {
-                        fetch('http://144.76.81.118:2537/api/products', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer test-token-admin'
-                            },
-                            body: JSON.stringify({
-                                name,
-                                description,
-                                price,
-                                emoji,
-                                stock,
-                                category_id,
-                                image_url: imageUrl
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            alert('Produit créé avec succès!');
-                            closeAddProductModal();
-                            // Reload products
-                            loadProducts();
-                        })
-                        .catch(error => {
-                            console.error('Create product error:', error);
-                            alert('Erreur de création du produit: ' + error.message);
-                        });
-                    }
-                });
-            }
-
-            // Load products when products section is shown
-            window.originalShowSection = window.showSection;
-            window.showSection = function(sectionName) {
-                window.originalShowSection(sectionName);
-
-                if (sectionName === 'products') {
-                    loadProducts();
-                }
-            };
-
-            function loadProducts() {
-                alert('Chargement des produits...');
-
-                fetch('http://144.76.81.118:2537/api/products')
-                    .then(response => response.json())
-                    .then(products => {
-                        const productsGrid = document.getElementById('productsGrid');
-                        productsGrid.innerHTML = '';
-
-                        if (products.length === 0) {
-                            productsGrid.innerHTML = '<p>Aucun produit trouvé.</p>';
-                            return;
-                        }
-
-                        products.forEach(product => {
-                            const productCard = document.createElement('div');
-                            productCard.className = 'product-card';
-
-                            productCard.innerHTML = `
-                                ${product.image_url ? `<img src="${product.image_url}" alt="${product.name}" class="product-image">` : `<div class="product-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;">${product.emoji}</div>`}
-                                <div class="product-info">
-                                    <div class="product-name">${product.name}</div>
-                                    <div class="product-category">${product.category_name || 'Sans catégorie'}</div>
-                                    <div class="product-price">${product.price} MAD</div>
-                                    <div class="product-stock">Stock: ${product.stock}</div>
-                                </div>
-                            `;
-
-                            productsGrid.appendChild(productCard);
-                        });
-
-                        alert('Produits chargés: ' + products.length);
-                    })
-                    .catch(error => {
-                        console.error('Error loading products:', error);
-                        alert('Erreur de chargement des produits: ' + error.message);
-                    });
-            }
-        });
-
-    </script>
+    <div class="right">
+      <form id="loginForm" class="form" autocomplete="on" novalidate>
+        <div class="field"><div class="icon"><i class="fa fa-envelope"></i></div><input id="email" type="email" placeholder="Email"></div>
+        <div class="field"><div class="icon"><i class="fa fa-lock"></i></div><input id="password" type="password" placeholder="Mot de passe"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><label><input id="remember" type="checkbox"> Se souvenir</label><div><a href="#" id="langFR">FR</a> · <a href="#" id="langAR">AR</a></div></div>
+        <div id="err" style="display:none;color:#b00020;font-weight:700"></div>
+        <button type="submit" class="btn" id="btnLogin">Se connecter</button>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button type="button" class="smallBtn" id="demoAdmin">Admin demo</button>
+          <button type="button" class="smallBtn" id="demoUser">User demo</button>
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+          <div><strong>Admin:</strong> ogharbi1988@shop4panel.com / admin1988</div>
+          <div><strong>User:</strong> user@shop4panel.com / admin1988</div>
+          <div><strong>Test:</strong> test@shop4panel.com / test123</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard (hidden until login) -->
+<div class="app" id="app" style="display:none">
+  <div class="topbar">
+    <div><span style="font-weight:800;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white">SHOP 4 PANEL</span></div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div id="langDisplay" style="font-weight:700"></div>
+      <div id="userInfo" style="text-align:right">
+        <div id="uName" style="font-weight:800">Invité</div>
+        <div id="uRole" style="font-size:13px;color:var(--muted)">Non connecté</div>
+      </div>
+      <div id="uAvatar" style="width:44px;height:44;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800">S4</div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div style="font-weight:800;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent3));color:white;display:inline-block">SHOP 4 PANEL</div>
+      <div class="menu" style="margin-top:18px">
+        <div class="item" data-page="dashboard-home"><i class="fa fa-home"></i> Tableau de bord</div>
+        <div class="item" data-page="products"><i class="fa fa-box-open"></i> Produits</div>
+        <div class="item" data-page="balance"><i class="fa fa-wallet"></i> Mon solde</div>
+        <div class="item" data-page="history"><i class="fa fa-history"></i> Historique</div>
+        <div class="item" data-page="tickets"><i class="fa fa-ticket-alt"></i> Tickets</div>
+        <div class="item" data-page="generator"><i class="fa fa-key"></i> Générateur</div>
+        <div class="item" data-page="admin" id="adminMenu" style="display:none"><i class="fa fa-cogs"></i> Administration</div>
+        <div class="item" data-page="settings"><i class="fa fa-cog"></i> Paramètres</div>
+        <div style="margin-top:16px"><button id="logoutBtn" class="btn" style="background:white;color:#05212a">Déconnexion</button></div>
+      </div>
+    </aside>
+
+    <main class="content" id="content">
+      <div style="padding:12px;border-radius:10px;background:linear-gradient(90deg,white,rgba(255,255,255,0.95));margin-bottom:12px">⚠️ Le montant minimum pour la recharge est de 500 DH — الحد الأدنى لإعادة الشحن هو 500 درهم</div>
+
+      <section id="dashboard-home" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h3 style="margin:0">Tableau de bord</h3>
+            <div style="color:var(--muted)">Aperçu</div>
+          </div>
+          <div id="adminTopProduct" style="font-weight:700;display:none">🥇 Top produit: —</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;align-items:flex-start">
+          <div style="flex:1;min-width:320px">
+            <div class="tiles">
+              <div class="tile"><strong>Solde actuel</strong><div id="userBalance" style="font-weight:800;font-size:20px;margin-top:8px">0.00 MAD</div></div>
+              <div class="tile"><strong>Produits disponibles</strong><div id="prodCount" style="font-weight:800;font-size:20px;margin-top:8px">0</div></div>
+              <div class="tile"><strong>Tickets ouverts</strong><div style="font-weight:800;font-size:20px;margin-top:8px">0</div></div>
+            </div>
+          </div>
+
+          <div style="width:420px">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div><strong>Produits les plus vendus</strong><div style="font-size:13px;color:var(--muted)">Distribution des ventes</div></div>
+                <div id="legendSmall" style="font-size:13px;color:var(--muted)"></div>
+              </div>
+              <div class="chartWrap" style="margin-top:12px;align-items:center">
+                <canvas id="salesPie" width="300" height="300" style="max-width:300px"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="products" class="page" style="display:none;margin-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h3>Produits</h3>
+          <div id="prodCountTop">0</div>
+        </div>
+        <div id="productsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px"></div>
+        <div style="margin-top:12px"><button id="openAddProduct" class="btn">Ajouter produit</button></div>
+      </section>
+
+      <section id="balance" class="page" style="display:none;margin-top:12px">
+        <h3>Rechargement</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://cdn-icons-png.flaticon.com/512/8043/8043680.png" alt="usdt" width="42">
+                <div><strong>USDT (TRC20)</strong><div style="font-size:13px;color:var(--muted)">Adresse TRC20 + QR</div></div>
+                <div style="margin-left:auto"><button id="payUsdtBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://cdn-icons-png.flaticon.com/512/6404/6404655.png" alt="virement" width="42">
+                <div><strong>Virement bancaire</strong><div style="font-size:13px;color:var(--muted)">IBAN et instructions</div></div>
+                <div style="margin-left:auto"><button id="payWireBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://images.seeklogo.com/logo-png/25/1/wafacash-logo-png_seeklogo-251985.png" alt="wafacash" width="42">
+                <div><strong>Wafa Cash</strong><div style="font-size:13px;color:var(--muted)">Nom + référence</div></div>
+                <div style="margin-left:auto"><button id="payWafaBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="min-width:220px;flex:1">
+            <div style="background:white;padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://cdn-icons-png.flaticon.com/512/3081/3081015.png" alt="cash" width="42">
+                <div><strong>Cash</strong><div style="font-size:13px;color:var(--muted)">Remise en main propre</div></div>
+                <div style="margin-left:auto"><button id="payCashBtn" class="btn">Payer</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="history" class="page" style="display:none;margin-top:12px">
+        <h3>Historique</h3>
+        <div id="historyList" class="table" style="margin-top:12px"></div>
+      </section>
+
+      <section id="tickets" class="page" style="display:none;margin-top:12px">
+        <h3>Tickets</h3>
+        <div style="margin-top:12px"><button id="newTicketBtn" class="btn">Nouveau ticket</button></div>
+      </section>
+
+      <section id="generator" class="page" style="display:none;margin-top:12px">
+        <h3>Générateur</h3>
+        <form id="genForm" style="display:flex;gap:8px;align-items:center;margin-top:12px">
+          <select id="genProduct" style="padding:8px;border-radius:8px"><option value="">Choisir produit</option></select>
+          <input id="genQty" type="number" min="1" value="1" style="padding:8px;border-radius:8px;width:80px">
+          <button class="btn">Générer</button>
+        </form>
+        <div id="generated" style="margin-top:12px"></div>
+      </section>
+
+      <section id="admin" class="page" style="display:none;margin-top:12px">
+        <h3>Administration</h3>
+        <div class="table" style="margin-top:12px">
+          <table style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left"><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Durée</th><th>Statut</th><th>Solde</th><th>Ventes</th></tr></thead><tbody id="adminUsersTable"></tbody></table>
+        </div>
+        <div style="margin-top:12px"><button id="openAddUser" class="btn">Ajouter utilisateur</button></div>
+      </section>
+
+      <section id="settings" class="page" style="display:none;margin-top:12px">
+        <h3>Paramètres</h3>
+        <div style="margin-top:12px">Langue : <select id="langSelect"><option value="fr">Français</option><option value="ar">العربية</option></select></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Modals -->
+<div class="modal" id="modalAddUser"><div class="modalInner">
+  <h4>Ajouter un utilisateur</h4>
+  <div style="margin-top:8px"><input id="newName" placeholder="Nom complet"></div>
+  <div style="margin-top:8px"><input id="newEmail" placeholder="Email"></div>
+  <div style="margin-top:8px"><input id="newPassword" placeholder="Mot de passe"></div>
+  <div style="margin-top:8px"><select id="newRole"><option value="user">Utilisateur</option><option value="test">Test (12h)</option><option value="admin">Administrateur</option></select></div>
+  <div style="margin-top:8px"><input id="newBalance" type="number" placeholder="Solde initial (MAD)" value="0"></div>
+  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelAddUser" class="smallBtn">Annuler</button><button id="confirmAddUser" class="btn">Créer</button></div>
+</div></div>
+
+<div class="modal" id="modalAddProduct"><div class="modalInner">
+  <h4>Ajouter un produit</h4>
+  <div style="margin-top:8px"><input id="pName" placeholder="Nom du produit"></div>
+  <div style="margin-top:8px"><input id="pPrice" type="number" placeholder="Prix (MAD)"></div>
+  <div style="margin-top:8px"><input id="pCategory" placeholder="Catégorie"></div>
+  <div style="margin-top:8px"><input id="pStock" type="number" placeholder="Stock" value="10"></div>
+  <div style="margin-top:8px"><label>Image (URL ou fichier)</label><input id="pImageUrl" placeholder="https://..."><input id="pImageFile" type="file" accept="image/*"></div>
+  <div style="margin-top:8px"><img id="pPreview" src="" alt="Aperçu" style="width:160px;height:90px;object-fit:cover;border-radius:8px;display:none"></div>
+  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelAddProduct" class="smallBtn">Annuler</button><button id="confirmAddProduct" class="btn">Créer</button></div>
+</div></div>
+
+<div class="modal" id="modalPay"><div class="modalInner">
+  <h4 id="modalPayTitle">Paiement</h4>
+  <div id="modalPayBody" style="margin-top:8px"></div>
+  <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px"><button id="cancelPay" class="smallBtn">Annuler</button><button id="confirmPay" class="btn">Confirmer paiement</button></div>
+</div></div>
+
+<script>
+/* ---------- Data and storage ---------- */
+const defaultProducts = [
+  {id:1,name:"LPTV M3U 12 Mois",category:"M3U",price:350,stock:10,image:""},
+  {id:2,name:"CODE HTV 6 Mois",category:"CODE",price:250,stock:12,image:""},
+  {id:3,name:"LPTV Test 24h",category:"TEST",price:0,stock:50,image:""}
+];
+const defaultUsers = [
+  {id:1,name:"Admin Ogharbi",email:"ogharbi1988@shop4panel.com",password:"admin1988",role:"admin",balance:1500,sales:45,lastLogin:null,sessionStart:null,isOnline:false},
+  {id:2,name:"User Demo",email:"user@shop4panel.com",password:"admin1988",role:"user",balance:500,sales:8,lastLogin:null,sessionStart:null,isOnline:false},
+  {id:3,name:"Test User",email:"test@shop4panel.com",password:"test123",role:"test",balance:0,sales:2,lastLogin:null,sessionStart:null,isOnline:false}
+];
+
+function save(key,val){ try{ localStorage.setItem('s4p_'+key,JSON.stringify(val)); }catch(e){console.warn(e);} }
+function load(key){ try{ const v=localStorage.getItem('s4p_'+key); return v?JSON.parse(v):null;}catch(e){return null;} }
+
+if(!load('products')) save('products', defaultProducts);
+if(!load('users')) save('users', defaultUsers);
+
+/* ---------- Helpers ---------- */
+const el = id => document.getElementById(id);
+function openModal(id){ el(id).style.display='flex'; }
+function closeModal(id){ el(id).style.display='none'; }
+
+/* ---------- Language ---------- */
+function applyLanguage(lang){
+  sessionStorage.setItem('s4p_lang', lang);
+  if(lang==='ar'){ document.body.classList.add('rtl'); el('langDisplay').textContent='العربية'; el('sidebar').classList.add('rtl'); el('langSelect').value='ar'; }
+  else { document.body.classList.remove('rtl'); el('langDisplay').textContent='Français'; el('sidebar').classList.remove('rtl'); el('langSelect').value='fr'; }
+}
+el('langFR').addEventListener('click',(e)=>{e.preventDefault();applyLanguage('fr');});
+el('langAR').addEventListener('click',(e)=>{e.preventDefault();applyLanguage('ar');});
+el('langSelect').addEventListener('change',()=>applyLanguage(el('langSelect').value));
+applyLanguage(sessionStorage.getItem('s4p_lang')||'fr');
+
+/* ---------- Login same-tab ---------- */
+const users = load('users') || defaultUsers;
+el('demoAdmin').addEventListener('click', ()=>{ el('email').value='ogharbi1988@shop4panel.com'; el('password').value='admin1988'; el('remember').checked=true; });
+el('demoUser').addEventListener('click', ()=>{ el('email').value='user@shop4panel.com'; el('password').value='admin1988'; el('remember').checked=true; });
+
+el('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  el('err').style.display='none';
+  const email = el('email').value.trim(), password = el('password').value.trim();
+  if(!email||!password){ el('err').textContent='Veuillez remplir tous les champs'; el('err').style.display='block'; return; }
+  el('btnLogin').disabled = true;
+  setTimeout(()=>{
+    el('btnLogin').disabled = false;
+    const u = users.find(x=>x.email===email && x.password===password);
+    if(!u){ el('err').textContent='Email ou mot de passe incorrect'; el('err').style.display='block'; return; }
+    if(el('remember').checked) save('s4p_user', u); else localStorage.removeItem('s4p_user');
+    save('session', u);
+    document.querySelector('.container').style.display='none';
+    document.getElementById('app').style.display='block';
+    initDashboard();
+  },900);
+});
+
+/* ---------- Dashboard init ---------- */
+function initDashboard(){
+  const session = load('session') || load('s4p_user');
+  if(!session) return;
+  el('uName').textContent = session.name;
+  el('uRole').textContent = session.role==='admin'?'Administrateur':(session.role==='test'?'Utilisateur test':'Utilisateur');
+  el('uAvatar').textContent = session.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  el('userBalance').textContent = (session.balance||0).toFixed(2)+' MAD';
+  if(session.role==='admin') el('adminMenu').style.display='block'; else el('adminMenu').style.display='none';
+  renderProducts(); renderUsersTable(); renderHistory(); updateSalesChart(); showPage('dashboard-home');
+}
+
+/* ---------- Navigation ---------- */
+const pages = ['dashboard-home','products','balance','history','tickets','generator','admin','settings'];
+function showPage(id){ pages.forEach(p=> document.getElementById(p).style.display = (p===id?'block':'none')); }
+document.querySelectorAll('.menu .item').forEach(it=> it.addEventListener('click', ()=>{
+  const page = it.dataset.page; const s = load('session') || load('s4p_user');
+  if(page==='admin' && (!s || s.role!=='admin')){ alert('Accès réservé aux administrateurs'); return; }
+  showPage(page);
+}));
+el('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem('s4p_user'); localStorage.removeItem('session'); location.reload(); });
+
+/* ---------- Products ---------- */
+function renderProducts(){
+  const products = load('products')||[]; const container = el('productsContainer'); container.innerHTML='';
+  products.forEach(p=>{
+    const div = document.createElement('div'); div.className='productCard';
+    const img = p.image ? `<img src="${p.image}" alt="${p.name}">` : `<img src="https://via.placeholder.com/300x150/10b981/ffffff?text=Produit" alt="placeholder">`;
+    div.innerHTML = `${img}<div style="flex:1"><div style="font-weight:800">${p.name}</div><div style="color:var(--muted)">${p.category} • ${p.stock} en stock</div><div style="margin-top:6px;font-weight:700">${p.price>0?p.price.toFixed(2)+' MAD':'GRATUIT'}</div><div style="margin-top:8px"><button class="btn buyBtn" data-id="${p.id}">Acheter</button></div></div>`;
+    container.appendChild(div);
+  });
+  el('prodCount').textContent = products.length; el('prodCountTop').textContent = products.length;
+  // fill generator select
+  const sel = el('genProduct'); sel.innerHTML = '<option value="">Choisir produit</option>';
+  products.forEach(p=> sel.insertAdjacentHTML('beforeend', `<option value="${p.id}">${p.name}</option>`));
+  updateSalesChart();
+}
+
+/* ---------- Add product modal (image handling) ---------- */
+el('openAddProduct').addEventListener('click', ()=>{ el('pName').value=''; el('pPrice').value=''; el('pCategory').value=''; el('pStock').value='10'; el('pImageUrl').value=''; el('pImageFile').value=''; el('pPreview').style.display='none'; openModal('modalAddProduct'); });
+el('cancelAddProduct').addEventListener('click', ()=> closeModal('modalAddProduct'));
+
+el('pImageFile').addEventListener('change', function(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader(); reader.onload = function(ev){ el('pPreview').src = ev.target.result; el('pPreview').style.display='block'; el('pImageUrl').value = ev.target.result; }; reader.readAsDataURL(file);
+});
+
+el('confirmAddProduct').addEventListener('click', ()=>{
+  const name = el('pName').value.trim(); const price = parseFloat(el('pPrice').value)||0; const cat = el('pCategory').value.trim(); const stock = parseInt(el('pStock').value)||0; const img = el('pImageUrl').value.trim();
+  if(!name){ alert('Nom requis'); return; }
+  const products = load('products')||[]; const id = (products.reduce((m,x)=>Math.max(m,x.id),0)||0)+1;
+  products.push({id,name,category:cat,price,stock,image:img}); save('products', products); renderProducts(); closeModal('modalAddProduct'); alert('Produit ajouté');
+});
+
+/* ---------- Users table ---------- */
+function renderUsersTable(){
+  const users = load('users')||[]; const tbody = el('adminUsersTable'); tbody.innerHTML='';
+  users.forEach(u=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>${u.lastLogin?new Date(u.lastLogin).toLocaleString():'Jamais'}</td><td>-</td><td>${u.isOnline?'<span style="color:green">En ligne</span>':'<span style="color:#94a3b8">Hors ligne</span>'}</td><td>${(u.balance||0).toFixed(2)} MAD</td><td>${u.sales||0}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ---------- History ---------- */
+function renderHistory(){ const h = load('history')||[]; const elh = el('historyList'); elh.innerHTML=''; h.forEach(it=> elh.insertAdjacentHTML('beforeend', `<div style="padding:8px;border-bottom:1px solid #f3f4f6">${it}</div>`)); }
+function addHistory(item){ const h = load('history')||[]; h.unshift(item); save('history', h); renderHistory(); }
+
+/* ---------- Purchase handling & sales tracking ---------- */
+document.body.addEventListener('click', function(e){
+  if(e.target.classList.contains('buyBtn')){
+    const pid = parseInt(e.target.dataset.id); const products = load('products')||[]; const p = products.find(x=>x.id===pid);
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Connectez-vous'); return; }
+    if(u.balance < p.price){ alert('Solde insuffisant'); return; }
+    // debit and update user & sales
+    u.balance = (u.balance||0) - p.price;
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email);
+    if(idx!==-1){ users[idx].balance = u.balance; users[idx].sales = (users[idx].sales||0) + 1; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); }
+    // increment product sale count stored in products as sales property
+    const prodIdx = products.findIndex(x=>x.id===pid); products[prodIdx].sales = (products[prodIdx].sales||0) + 1; save('products', products);
+    el('userBalance').textContent = u.balance.toFixed(2)+' MAD';
+    addHistory(`Achat: ${p.name} - ${p.price} MAD`);
+    alert('Achat effectué : ' + p.name);
+    renderProducts(); renderUsersTable(); updateSalesChart();
+  }
+});
+
+/* ---------- Payments modals (USDT, Wire, Wafa, Cash) ---------- */
+const usdtAddr = 'TJ6Xw1hTE3aEaDhqGjS5xpg3M4svRihiA5';
+function openPayModal(title, htmlContent, onConfirm){
+  el('modalPayTitle').textContent = title; el('modalPayBody').innerHTML = htmlContent; openModal('modalPay');
+  el('confirmPay').onclick = function(){ try{ onConfirm(); } catch(e){console.warn(e);} closeModal('modalPay'); };
+  el('cancelPay').onclick = function(){ closeModal('modalPay'); };
+}
+
+el('payUsdtBtn').addEventListener('click', ()=>{
+  const qr = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(usdtAddr);
+  const html = `<div style="display:flex;gap:12px;align-items:center"><div style="width:160px;height:160px"><img src="${qr}" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div><div style="font-weight:700">Adresse TRC20</div><div style="font-family:monospace;margin-top:8px">${usdtAddr}</div></div></div>`;
+  openPayModal('Payer en USDT (TRC20)', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge USDT: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+el('payWireBtn').addEventListener('click', ()=>{
+  const html = `<div><div><strong>Virement bancaire</strong></div><div style="margin-top:8px">IBAN: <span style="font-family:monospace">MA00 0000 0000 0000</span></div><div style="margin-top:8px">Nom: SHOP 4 PANEL</div></div>`;
+  openPayModal('Virement bancaire', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Virement: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+el('payWafaBtn').addEventListener('click', ()=>{
+  const ref = 'WF-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  const html = `<div><div><strong>Wafa Cash</strong></div><div style="margin-top:8px">Référence: <span style="font-family:monospace">${ref}</span></div><div style="margin-top:8px">Nom: SHOP 4 PANEL</div></div>`;
+  openPayModal('Wafa Cash', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Wafa: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+el('payCashBtn').addEventListener('click', ()=>{
+  const html = `<div><div><strong>Cash</strong></div><div style="margin-top:8px">Remise en main propre - Confirmer la réception</div></div>`;
+  openPayModal('Paiement Cash', html, ()=>{
+    const amt = parseFloat(prompt('Montant (MAD) reçu (min 500):','500'))||0; if(amt<500){ alert('Montant invalide (min 500)'); return; }
+    const u = load('session') || load('s4p_user'); if(!u){ alert('Utilisateur introuvable'); return; }
+    const users = load('users')||[]; const idx = users.findIndex(x=>x.email===u.email); if(idx!==-1){ users[idx].balance = (users[idx].balance||0) + amt; save('users', users); save('s4p_user', users[idx]); save('session', users[idx]); el('userBalance').textContent = users[idx].balance.toFixed(2)+' MAD'; addHistory(`Recharge Cash: ${amt} MAD`); alert('Recharge confirmée'); }
+  });
+});
+
+/* ---------- Generator ---------- */
+el('genForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const session = load('session') || load('s4p_user'); if(!session || session.role!=='admin'){ alert('Accès réservé aux administrateurs'); return; }
+  const pid = el('genProduct').value; const qty = parseInt(el('genQty').value)||1; if(!pid){ alert('Choisir un produit'); return; }
+  let codes=''; for(let i=0;i<qty;i++) codes += 'CODE-'+Math.random().toString(36).slice(2,10).toUpperCase()+'<br>';
+  el('generated').innerHTML = `<div class="table" style="padding:12px"><strong>Codes générés:</strong><div style="margin-top:8px;font-family:monospace">${codes}</div></div>`;
+});
+
+/* ---------- Chart.js: Sales pie (user / global) ---------- */
+let salesPieChart = null;
+function updateSalesChart(){
+  const products = load('products')||[];
+  // aggregate sales per product
+  const labels = products.map(p=>p.name);
+  const data = products.map(p=>p.sales||0);
+  const colors = products.map((_,i)=>['#0bb7a0','#10b981','#ff8a00','#6366f1'][i%4]);
+  const ctx = document.getElementById('salesPie').getContext('2d');
+  if(salesPieChart) salesPieChart.destroy();
+  salesPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: { labels, datasets:[{data, backgroundColor: colors}] },
+    options: { responsive:true, animation:{animateScale:true, duration:1000} }
+  });
+  // legend
+  const legend = document.getElementById('legendSmall'); legend.innerHTML = products.map((p,i)=>`<div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:${colors[i]};display:inline-block;border-radius:3px"></span> ${p.name} (${p.sales||0})</div>`).join('');
+  // admin top product
+  const session = load('session') || load('s4p_user');
+  if(session && session.role==='admin'){ const top = products.slice().sort((a,b)=>(b.sales||0)-(a.sales||0))[0]; if(top) el('adminTopProduct').textContent = `🥇 Top produit : ${top.name} – ${top.sales||0} ventes`; el('adminTopProduct').style.display='block'; }
+}
+
+/* ---------- Users table refresh on init ---------- */
+function renderUsersTable(){ const users = load('users')||[]; const tbody = el('adminUsersTable'); tbody.innerHTML=''; users.forEach(u=>{ const tr = document.createElement('tr'); tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>${u.lastLogin?new Date(u.lastLogin).toLocaleString():'Jamais'}</td><td>-</td><td>${u.isOnline?'<span style="color:green">En ligne</span>':'<span style="color:#94a3b8">Hors ligne</span>'}</td><td>${(u.balance||0).toFixed(2)} MAD</td><td>${u.sales||0}</td>`; tbody.appendChild(tr); }); updateSalesChart(); }
+
+/* ---------- Add user modal ---------- */
+el('openAddUser').addEventListener('click', ()=>{ el('newName').value=''; el('newEmail').value=''; el('newPassword').value=''; el('newBalance').value='0'; openModal('modalAddUser'); });
+el('cancelAddUser').addEventListener('click', ()=> closeModal('modalAddUser'));
+el('confirmAddUser').addEventListener('click', ()=>{
+  const name = el('newName').value.trim(), email = el('newEmail').value.trim(), password = el('newPassword').value.trim();
+  const role = el('newRole').value, bal = parseFloat(el('newBalance').value)||0;
+  if(!name||!email||!password){ alert('Tous les champs sont requis'); return; }
+  const users = load('users')||[]; if(users.find(u=>u.email===email)){ alert('Email déjà utilisé'); return; }
+  const id = (users.reduce((m,x)=>Math.max(m,x.id),0)||0)+1;
+  users.push({id,name,email,password,role,balance:bal,sales:0,lastLogin:null,sessionStart:null,isOnline:false}); save('users', users); renderUsersTable(); closeModal('modalAddUser'); alert('Utilisateur ajouté');
+});
+
+/* ---------- Initial setup if session exists ---------- */
+(function init(){
+  if(!load('products')) save('products', defaultProducts);
+  if(!load('users')) save('users', defaultUsers);
+  const session = load('session') || load('s4p_user');
+  if(session){ document.querySelector('.container').style.display='none'; document.getElementById('app').style.display='block'; initDashboard(); }
+})();
+
+</script>
 </body>
 </html>
