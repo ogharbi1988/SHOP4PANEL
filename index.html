@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel 4 ALL - Votre Boutique Premium</title>
+    <title>Panel 4 ALL - Boutique Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #00C9B1;
+            --primary: #00C9B1; /* Turquoise */
             --primary-dark: #00A895;
-            --secondary: #FF7A5A;
+            --secondary: #FF7A5A; /* Corail */
             --secondary-dark: #E8694C;
-            --accent: #4CD964;
+            --accent: #4CD964; /* Vert */
             --accent-dark: #3DB853;
             --dark: #2d3436;
             --light: #f5f6fa;
@@ -47,6 +47,7 @@
             padding: 0 20px;
         }
 
+        /* Header Styles */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -54,6 +55,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-wrapper {
@@ -123,6 +125,14 @@
             gap: 15px;
         }
 
+        #currentUser {
+            font-weight: 500;
+            color: var(--primary);
+            background: rgba(0, 201, 177, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
         .btn {
             padding: 10px 20px;
             border-radius: 8px;
@@ -144,6 +154,10 @@
         .btn-secondary {
             background: var(--secondary);
             color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-dark);
         }
 
         .section {
@@ -295,6 +309,43 @@
             font-weight: 600;
             margin-left: 5px;
         }
+
+        .file-upload-container {
+            position: relative;
+            margin-top: 8px;
+        }
+
+        .file-upload-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            padding: 15px;
+            border: 2px dashed var(--gray);
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--primary);
+            background: rgba(0, 201, 177, 0.05);
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--gray);
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -328,12 +379,8 @@
                 </nav>
                 <div class="user-menu">
                     <span id="currentUser" style="display: none;"></span>
-                    <select id="userRole" onchange="changeRole()" style="display: none;">
-                        <option value="user">Utilisateur</option>
-                        <option value="admin">Administrateur</option>
-                    </select>
-                    <button id="loginBtn" class="btn btn-primary" onclick="showLoginModal()">Connexion</button>
-                    <button id="logoutBtn" class="btn btn-secondary" onclick="logout()" style="display: none;">Déconnexion</button>
+                    <button id="loginBtn" class="btn btn-primary">Connexion</button>
+                    <button id="logoutBtn" class="btn btn-secondary" style="display: none;">Déconnexion</button>
                 </div>
             </div>
         </div>
@@ -391,7 +438,7 @@
                 <div class="section-header">
                     <h2>Catalogue des Produits</h2>
                     <div class="admin-actions" id="adminProductActions" style="display: none;">
-                        <button class="btn btn-primary" onclick="showAddProductModal()">
+                        <button class="btn btn-primary" id="showAddProductBtn">
                             <i class="fas fa-plus"></i> Ajouter un Produit
                         </button>
                     </div>
@@ -407,32 +454,6 @@
 
                 <div id="productsGrid" class="products-grid">
                     <!-- Products will be loaded here -->
-                </div>
-            </section>
-
-            <!-- Manage Products Section -->
-            <section id="manageProductsSection" class="section">
-                <h2>Gestion des Produits</h2>
-                <div class="admin-actions">
-                    <button class="btn btn-primary" onclick="showAddProductModal()">Ajouter un produit</button>
-                </div>
-                <div class="products-table-container">
-                    <table id="manageProductsTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Image</th>
-                                <th>Nom</th>
-                                <th>Catégorie</th>
-                                <th>Prix (MAD)</th>
-                                <th>Stock</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="manageProductsTableBody">
-                            <!-- Products will be loaded here -->
-                        </tbody>
-                    </table>
                 </div>
             </section>
 
@@ -469,8 +490,8 @@
             <section id="usersSection" class="section">
                 <h2>Gestion des Utilisateurs</h2>
                 <div class="admin-actions">
-                    <button class="btn btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
-                    <button class="btn btn-accent" onclick="showAddTestUserModal()">Créer un utilisateur test</button>
+                    <button class="btn btn-primary" id="showAddUserBtn">Ajouter un utilisateur</button>
+                    <button class="btn btn-secondary" id="showAddTestUserBtn">Créer un utilisateur test</button>
                 </div>
                 <div class="users-table-container">
                     <table id="usersTable">
@@ -551,6 +572,18 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="productImage">Image du produit</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="productImage" accept="image/*">
+                        <div class="file-upload-label">
+                            <span><i class="fas fa-upload"></i> Choisir une image</span>
+                            <small>Formats acceptés: JPG, PNG, GIF (max 5MB)</small>
+                        </div>
+                    </div>
+                    <div id="imagePreview"></div>
+                </div>
+
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeAddProductModal()">Annuler</button>
                     <button type="submit" class="btn btn-primary">Ajouter le Produit</button>
@@ -559,69 +592,14 @@
         </div>
     </div>
 
-    <!-- Add User Modal -->
-    <div id="addUserModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddUserModal()">&times;</span>
-            <h3>Ajouter un Nouvel Utilisateur</h3>
-            <form id="addUserForm">
-                <div class="form-group">
-                    <label for="newUsername">Nom d'utilisateur</label>
-                    <input type="text" id="newUsername" required>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Mot de passe</label>
-                    <input type="password" id="newPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="newRole">Rôle</label>
-                    <select id="newRole" required>
-                        <option value="user">Utilisateur</option>
-                        <option value="admin">Administrateur</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="newBalance">Solde Initial (MAD)</label>
-                    <input type="number" id="newBalance" step="0.01" min="0" value="0" required>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Add Test User Modal -->
-    <div id="addTestUserModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddTestUserModal()">&times;</span>
-            <h3>Créer un Utilisateur Test</h3>
-            <form id="addTestUserForm">
-                <div class="form-group">
-                    <label for="testUsername">Nom d'utilisateur</label>
-                    <input type="text" id="testUsername" required>
-                </div>
-                <div class="form-group">
-                    <label>Mot de passe: test2025</label>
-                    <small style="color: var(--secondary);">Ce compte expirera automatiquement après 24 heures</small>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeAddTestUserModal()">Annuler</button>
-                    <button type="submit" class="btn btn-accent">Créer l'utilisateur test</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
         // Données initiales
-        let users = JSON.parse(localStorage.getItem('users')) || [
+        let users = [
             { id: 1, username: 'admin', password: 'admin123', role: 'admin', balance: 1000, totalPurchases: 0, isTest: false, expirationDate: null },
             { id: 2, username: 'test', password: 'test123', role: 'user', balance: 500, totalPurchases: 0, isTest: false, expirationDate: null }
         ];
 
-        let products = JSON.parse(localStorage.getItem('products')) || [
+        let products = [
             {
                 id: 1,
                 name: "M3U Premium",
@@ -638,7 +616,7 @@
             }
         ];
 
-        let purchases = JSON.parse(localStorage.getItem('purchases')) || [];
+        let purchases = [];
         let currentUser = null;
 
         // Initialisation
@@ -647,9 +625,8 @@
         });
 
         function initApp() {
-            updateLocalStorage();
             setupEventListeners();
-            checkExpiredUsers();
+            loadProducts();
         }
 
         function setupEventListeners() {
@@ -674,22 +651,14 @@
                 addProduct();
             });
 
-            // Add user form
-            document.getElementById('addUserForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addUser();
+            // Show add product modal
+            document.getElementById('showAddProductBtn').addEventListener('click', function() {
+                showAddProductModal();
             });
 
-            // Add test user form
-            document.getElementById('addTestUserForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addTestUser();
-            });
-
-            // Recharge form
-            document.getElementById('rechargeForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                rechargeBalance();
+            // Image preview
+            document.getElementById('productImage').addEventListener('change', function(e) {
+                previewImage(e);
             });
 
             // Category filter
@@ -703,24 +672,6 @@
             });
         }
 
-        function updateLocalStorage() {
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('products', JSON.stringify(products));
-            localStorage.setItem('purchases', JSON.stringify(purchases));
-        }
-
-        function checkExpiredUsers() {
-            const now = new Date();
-            users = users.filter(user => {
-                if (user.isTest && user.expirationDate) {
-                    const expirationDate = new Date(user.expirationDate);
-                    return expirationDate > now;
-                }
-                return true;
-            });
-            updateLocalStorage();
-        }
-
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
@@ -732,19 +683,6 @@
 
             document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
             document.getElementById(sectionId).classList.add('active');
-
-            // Charger le contenu spécifique à la section
-            if (sectionId === 'productsSection') {
-                loadProducts();
-            } else if (sectionId === 'dashboardSection') {
-                updateDashboard();
-            } else if (sectionId === 'paymentSection') {
-                document.getElementById('currentBalanceDisplay').textContent = currentUser ? currentUser.balance.toFixed(2) : '0.00';
-            } else if (sectionId === 'usersSection' && currentUser && currentUser.role === 'admin') {
-                loadUsers();
-            } else if (sectionId === 'manageProductsSection' && currentUser && currentUser.role === 'admin') {
-                loadManageProducts();
-            }
         }
 
         function login() {
@@ -754,22 +692,12 @@
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
-                if (user.isTest && user.expirationDate) {
-                    const expirationDate = new Date(user.expirationDate);
-                    if (expirationDate < new Date()) {
-                        alert('Ce compte test a expiré.');
-                        return;
-                    }
-                }
-
                 currentUser = user;
                 document.getElementById('loginSection').classList.remove('active');
                 document.getElementById('loginBtn').style.display = 'none';
                 document.getElementById('logoutBtn').style.display = 'inline-block';
                 document.getElementById('currentUser').textContent = user.username;
                 document.getElementById('currentUser').style.display = 'inline-block';
-                document.getElementById('userRole').value = user.role;
-                document.getElementById('userRole').style.display = 'inline-block';
 
                 if (user.role === 'admin') {
                     document.querySelectorAll('.admin-only').forEach(el => {
@@ -779,22 +707,10 @@
                 }
 
                 showSection('dashboardSection');
+                alert('Connexion réussie!');
             } else {
                 alert('Nom d\'utilisateur ou mot de passe incorrect');
             }
-        }
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('loginSection').classList.add('active');
-            document.getElementById('logoutBtn').style.display = 'none';
-            document.getElementById('loginBtn').style.display = 'inline-block';
-            document.getElementById('currentUser').style.display = 'none';
-            document.getElementById('userRole').style.display = 'none';
-            document.querySelectorAll('.admin-only').forEach(el => {
-                el.style.display = 'none';
-            });
-            document.getElementById('adminProductActions').style.display = 'none';
         }
 
         function showAddProductModal() {
@@ -804,6 +720,22 @@
         function closeAddProductModal() {
             document.getElementById('addProductModal').classList.remove('active');
             document.getElementById('addProductForm').reset();
+            document.getElementById('imagePreview').innerHTML = '';
+        }
+
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" class="image-preview" alt="Aperçu de l'image">`;
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         function addProduct() {
@@ -827,23 +759,39 @@
             if (price6Months) prices["6months"] = price6Months;
             prices["12months"] = price12Months;
 
+            // Gérer l'image
+            const imageInput = document.getElementById('productImage');
+            let imageUrl = "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name);
+            
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageUrl = e.target.result;
+                    completeAddProduct(name, category, description, prices, stock, imageUrl);
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                completeAddProduct(name, category, description, prices, stock, imageUrl);
+            }
+        }
+
+        function completeAddProduct(name, category, description, prices, stock, imageUrl) {
             const newProduct = {
-                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                id: products.length + 1,
                 name,
                 category,
                 description,
                 prices,
                 stock,
-                image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name)
+                image: imageUrl
             };
 
             products.push(newProduct);
-            updateLocalStorage();
             loadProducts();
-            loadManageProducts();
             closeAddProductModal();
             
             alert('Produit ajouté avec succès!');
+            console.log('Nouveau produit:', newProduct);
         }
 
         function loadProducts() {
@@ -937,298 +885,23 @@
                 return;
             }
             
-            const product = products.find(p => p.id === productId);
-            if (!product) {
-                alert('Produit non trouvé');
-                return;
-            }
-            
-            if (product.stock <= 0) {
-                alert('Ce produit est en rupture de stock');
-                return;
-            }
-            
-            const price = product.prices[duration];
-            if (!price) {
-                alert('Cette durée n\'est pas disponible');
-                return;
-            }
-            
-            if (currentUser.balance < price) {
-                alert('Solde insuffisant. Veuillez recharger votre compte.');
-                showSection('paymentSection');
-                return;
-            }
-            
-            // Traiter l'achat
-            currentUser.balance -= price;
-            currentUser.totalPurchases += price;
-            product.stock -= 1;
-            
-            const purchase = {
-                id: purchases.length + 1,
-                userId: currentUser.id,
-                productId: product.id,
-                productName: product.name,
-                duration: duration,
-                price: price,
-                date: new Date().toISOString(),
-                status: 'Completed'
-            };
-            
-            purchases.push(purchase);
-            
-            // Mettre à jour l'utilisateur dans le tableau
-            const userIndex = users.findIndex(u => u.id === currentUser.id);
-            if (userIndex !== -1) {
-                users[userIndex] = currentUser;
-            }
-            
-            updateLocalStorage();
-            updateDashboard();
-            loadProducts();
-            
-            alert(`Achat réussi! ${product.name} - ${getDurationText(duration)} pour ${price.toFixed(2)} MAD.`);
+            alert(`Achat de produit ${productId} - ${duration} effectué!`);
         }
 
-        function updateDashboard() {
-            if (currentUser) {
-                document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2);
-                document.getElementById('totalPurchases').textContent = currentUser.totalPurchases.toFixed(2);
-            }
-        }
-
-        function showAddUserModal() {
-            document.getElementById('addUserModal').classList.add('active');
-        }
-
-        function closeAddUserModal() {
-            document.getElementById('addUserModal').classList.remove('active');
-            document.getElementById('addUserForm').reset();
-        }
-
-        function addUser() {
-            const username = document.getElementById('newUsername').value;
-            const password = document.getElementById('newPassword').value;
-            const role = document.getElementById('newRole').value;
-            const balance = parseFloat(document.getElementById('newBalance').value);
-            
-            if (users.find(u => u.username === username)) {
-                alert('Ce nom d\'utilisateur existe déjà');
-                return;
-            }
-            
-            const newUser = {
-                id: users.length + 1,
-                username,
-                password,
-                role,
-                balance,
-                totalPurchases: 0,
-                isTest: false,
-                expirationDate: null
-            };
-            
-            users.push(newUser);
-            updateLocalStorage();
-            loadUsers();
-            closeAddUserModal();
-            
-            alert('Utilisateur ajouté avec succès!');
-        }
-
-        function showAddTestUserModal() {
-            document.getElementById('addTestUserModal').classList.add('active');
-        }
-
-        function closeAddTestUserModal() {
-            document.getElementById('addTestUserModal').classList.remove('active');
-            document.getElementById('addTestUserForm').reset();
-        }
-
-        function addTestUser() {
-            const username = document.getElementById('testUsername').value;
-            const password = "test2025";
-            
-            if (users.find(u => u.username === username)) {
-                alert('Ce nom d\'utilisateur existe déjà');
-                return;
-            }
-            
-            const expirationDate = new Date();
-            expirationDate.setHours(expirationDate.getHours() + 24);
-            
-            const newUser = {
-                id: users.length + 1,
-                username,
-                password,
-                role: 'user',
-                balance: 0,
-                totalPurchases: 0,
-                isTest: true,
-                expirationDate: expirationDate.toISOString()
-            };
-            
-            users.push(newUser);
-            updateLocalStorage();
-            loadUsers();
-            closeAddTestUserModal();
-            
-            alert('Utilisateur test créé avec succès! Expire le ' + expirationDate.toLocaleString());
-        }
-
-        function loadUsers() {
-            const tableBody = document.getElementById('usersTableBody');
-            tableBody.innerHTML = '';
-            
-            users.forEach(user => {
-                let expirationText = '-';
-                if (user.isTest && user.expirationDate) {
-                    const expirationDate = new Date(user.expirationDate);
-                    expirationText = expirationDate.toLocaleString();
-                }
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.username} ${user.isTest ? '<span class="test-user-badge">TEST</span>' : ''}</td>
-                    <td>${user.role === 'admin' ? 'Administrateur' : 'Utilisateur'}</td>
-                    <td>${user.balance.toFixed(2)}</td>
-                    <td>${user.totalPurchases.toFixed(2)}</td>
-                    <td>${expirationText}</td>
-                    <td>
-                        <button class="btn btn-danger" onclick="deleteUser(${user.id})" ${user.id === currentUser?.id ? 'disabled' : ''}>
-                            Supprimer
-                        </button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginSection').classList.add('active');
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('loginBtn').style.display = 'inline-block';
+            document.getElementById('currentUser').style.display = 'none';
+            document.querySelectorAll('.admin-only').forEach(el => {
+                el.style.display = 'none';
             });
+            document.getElementById('adminProductActions').style.display = 'none';
         }
 
-        function deleteUser(id) {
-            if (id === currentUser?.id) {
-                alert('Vous ne pouvez pas supprimer votre propre compte');
-                return;
-            }
-            
-            if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')) {
-                users = users.filter(u => u.id !== id);
-                updateLocalStorage();
-                loadUsers();
-                alert('Utilisateur supprimé avec succès!');
-            }
-        }
-
-        function loadManageProducts() {
-            const tableBody = document.getElementById('manageProductsTableBody');
-            tableBody.innerHTML = '';
-
-            products.forEach(product => {
-                Object.keys(product.prices).forEach(duration => {
-                    const durationText = getDurationText(duration);
-                    const price = product.prices[duration];
-                    
-                    const row = document.createElement('tr');
-                    
-                    let categoryBadge = '';
-                    let categoryClass = '';
-                    if (product.category === 'm3u') {
-                        categoryBadge = 'M3U';
-                        categoryClass = 'category-m3u';
-                    } else if (product.category === 'code') {
-                        categoryBadge = 'CODE';
-                        categoryClass = 'category-code';
-                    } else if (product.category === 'bein') {
-                        categoryBadge = 'BEIN SPORT';
-                        categoryClass = 'category-bein';
-                    } else if (product.category === 'shahid') {
-                        categoryBadge = 'SHAHID';
-                        categoryClass = 'category-shahid';
-                    }
-
-                    row.innerHTML = `
-                        <td>${product.id}</td>
-                        <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;"></td>
-                        <td>${product.name}</td>
-                        <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
-                        <td>${price.toFixed(2)} (${durationText})</td>
-                        <td>${product.stock}</td>
-                        <td>
-                            <button class="btn btn-danger" onclick="deleteProduct(${product.id})">
-                                Supprimer
-                            </button>
-                        </td>
-                    `;
-                    
-                    tableBody.appendChild(row);
-                });
-            });
-        }
-
-        function deleteProduct(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer ce produit?')) {
-                products = products.filter(p => p.id !== id);
-                updateLocalStorage();
-                loadProducts();
-                loadManageProducts();
-                alert('Produit supprimé avec succès!');
-            }
-        }
-
-        function rechargeBalance() {
-            if (!currentUser) {
-                alert('Veuillez vous connecter');
-                return;
-            }
-
-            const amount = parseFloat(document.getElementById('rechargeAmount').value);
-            const method = document.getElementById('paymentMethod').value;
-
-            if (amount < 500) {
-                alert('Le montant minimum de recharge est de 500 MAD');
-                return;
-            }
-
-            currentUser.balance += amount;
-            
-            const userIndex = users.findIndex(u => u.id === currentUser.id);
-            if (userIndex !== -1) {
-                users[userIndex] = currentUser;
-            }
-            
-            updateLocalStorage();
-            updateDashboard();
-            document.getElementById('currentBalanceDisplay').textContent = currentUser.balance.toFixed(2);
-            document.getElementById('rechargeForm').reset();
-            
-            alert(`Recharge de ${amount.toFixed(2)} MAD effectuée avec succès!`);
-        }
-
-        function changeRole() {
-            if (currentUser) {
-                const newRole = document.getElementById('userRole').value;
-                currentUser.role = newRole;
-                
-                const userIndex = users.findIndex(u => u.id === currentUser.id);
-                if (userIndex !== -1) {
-                    users[userIndex].role = newRole;
-                    updateLocalStorage();
-                }
-
-                if (newRole === 'admin') {
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'block';
-                    });
-                    document.getElementById('adminProductActions').style.display = 'flex';
-                } else {
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                    document.getElementById('adminProductActions').style.display = 'none';
-                }
-            }
-        }
+        // Ajouter l'événement de déconnexion
+        document.getElementById('logoutBtn').addEventListener('click', logout);
     </script>
 </body>
 </html>
