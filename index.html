@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #00C9B1; /* Turquoise */
+            --primary: #00C9B1;
             --primary-dark: #00A895;
-            --secondary: #FF7A5A; /* Corail */
+            --secondary: #FF7A5A;
             --secondary-dark: #E8694C;
-            --accent: #4CD964; /* Vert */
+            --accent: #4CD964;
             --accent-dark: #3DB853;
             --dark: #2d3436;
             --light: #f5f6fa;
@@ -55,7 +55,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-wrapper {
@@ -299,17 +298,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        .test-user-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 5px;
-        }
-
         .file-upload-container {
             position: relative;
             margin-top: 8px;
@@ -346,6 +334,164 @@
             border: 1px solid var(--gray);
             margin-top: 10px;
         }
+
+        /* Login Page Styles */
+        .login-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo .logo {
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .login-slogan {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .login-slogan-arabic {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+            direction: rtl;
+        }
+
+        .form-group input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 201, 177, 0.1);
+        }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .balance-display, .purchases-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Premium Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .premium-card {
+            animation: fadeInUp 0.6s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glow-effect:hover::before {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -362,7 +508,7 @@
             <div class="nav-wrapper">
                 <div class="logo-section">
                     <div class="logo">
-                        <i class="fas fa-tv logo-icon"></i>
+                        <i class="fas fa-crown logo-icon"></i>
                         <h1>Panel 4 ALL</h1>
                     </div>
                     <div class="slogan">Votre boutique premium de services numériques</div>
@@ -391,24 +537,45 @@
         <div class="container">
             <!-- Login Section -->
             <section id="loginSection" class="section active">
-                <div class="login-container">
-                    <div class="login-form">
-                        <h2>Connexion à Panel 4 ALL</h2>
+                <div class="login-hero">
+                    <div class="login-container">
+                        <div class="login-logo">
+                            <div class="logo">
+                                <i class="fas fa-crown logo-icon"></i>
+                                <h1 style="font-size: 2.5rem;">Panel 4 ALL</h1>
+                            </div>
+                            <div class="login-slogan">
+                                Nous offrons la meilleure expérience client
+                            </div>
+                            <div class="login-slogan-arabic">
+                                نقدم أفضل تجربة للعميل
+                            </div>
+                        </div>
                         <form id="loginForm">
                             <div class="form-group">
-                                <label for="username">Nom d'utilisateur</label>
-                                <input type="text" id="username" required>
+                                <label for="username"><i class="fas fa-user"></i> Nom d'utilisateur</label>
+                                <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Mot de passe</label>
-                                <input type="password" id="password" required>
+                                <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
+                                <input type="password" id="password" placeholder="Entrez votre mot de passe" required>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Se connecter</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                                <i class="fas fa-sign-in-alt"></i> Se connecter
+                            </button>
                         </form>
-                        <div class="login-info">
-                            <h3>Comptes de démonstration:</h3>
-                            <p><strong>Administrateur:</strong> admin / admin123</p>
-                            <p><strong>Utilisateur test:</strong> test / test123</p>
+                        <div class="login-info" style="margin-top: 25px; padding: 20px; background: rgba(0, 201, 177, 0.05); border-radius: 12px;">
+                            <h3 style="color: var(--primary); margin-bottom: 15px; text-align: center;">Comptes de démonstration</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div style="text-align: center;">
+                                    <strong>Administrateur</strong>
+                                    <div>admin / admin123</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <strong>Utilisateur</strong>
+                                    <div>test / test123</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -416,18 +583,57 @@
 
             <!-- Dashboard Section -->
             <section id="dashboardSection" class="section">
-                <h2>Tableau de bord</h2>
+                <h2>Tableau de bord Premium</h2>
                 <div class="dashboard-grid">
-                    <div class="card">
-                        <h3>Solde Actuel</h3>
+                    <div class="card premium-card glow-effect">
+                        <h3><i class="fas fa-wallet"></i> Solde Actuel</h3>
                         <div class="balance-display">
                             <span id="userBalance">0.00</span> MAD
                         </div>
                     </div>
-                    <div class="card">
-                        <h3>Total des Achats</h3>
+                    <div class="card premium-card glow-effect">
+                        <h3><i class="fas fa-shopping-cart"></i> Total des Achats</h3>
                         <div class="purchases-display">
                             <span id="totalPurchases">0.00</span> MAD
+                        </div>
+                    </div>
+                    <div class="card premium-card glow-effect">
+                        <h3><i class="fas fa-chart-line"></i> Achats ce Mois</h3>
+                        <div class="balance-display">
+                            <span id="monthlyPurchases">0.00</span> MAD
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Grid -->
+                <div class="chart-grid">
+                    <!-- User Sales Chart -->
+                    <div class="chart-container premium-card">
+                        <h3><i class="fas fa-chart-bar"></i> Mes Achats par Mois</h3>
+                        <canvas id="userSalesChart"></canvas>
+                    </div>
+
+                    <!-- Top Products Chart (Admin only) -->
+                    <div class="chart-container premium-card admin-only" style="display: none;">
+                        <h3><i class="fas fa-trophy"></i> Top Produits</h3>
+                        <canvas id="topProductsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Admin Stats -->
+                <div id="adminStats" class="admin-only" style="display: none;">
+                    <div class="dashboard-grid">
+                        <div class="card premium-card glow-effect">
+                            <h3><i class="fas fa-users"></i> Total Utilisateurs</h3>
+                            <div class="balance-display" id="totalUsers">0</div>
+                        </div>
+                        <div class="card premium-card glow-effect">
+                            <h3><i class="fas fa-box"></i> Total Produits</h3>
+                            <div class="balance-display" id="totalProducts">0</div>
+                        </div>
+                        <div class="card premium-card glow-effect">
+                            <h3><i class="fas fa-money-bill-wave"></i> Revenus Totaux</h3>
+                            <div class="balance-display" id="totalRevenue">0.00</div>
                         </div>
                     </div>
                 </div>
@@ -436,7 +642,7 @@
             <!-- Products Section -->
             <section id="productsSection" class="section">
                 <div class="section-header">
-                    <h2>Catalogue des Produits</h2>
+                    <h2>Catalogue Premium des Produits</h2>
                     <div class="admin-actions" id="adminProductActions" style="display: none;">
                         <button class="btn btn-primary" id="showAddProductBtn">
                             <i class="fas fa-plus"></i> Ajouter un Produit
@@ -683,6 +889,11 @@
 
             document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
             document.getElementById(sectionId).classList.add('active');
+
+            // Update charts when showing dashboard
+            if (sectionId === 'dashboardSection') {
+                updateDashboard();
+            }
         }
 
         function login() {
@@ -699,11 +910,17 @@
                 document.getElementById('currentUser').textContent = user.username;
                 document.getElementById('currentUser').style.display = 'inline-block';
 
+                // Hide all admin elements for regular users
                 if (user.role === 'admin') {
                     document.querySelectorAll('.admin-only').forEach(el => {
                         el.style.display = 'block';
                     });
                     document.getElementById('adminProductActions').style.display = 'flex';
+                } else {
+                    // Hide all admin features for regular users
+                    document.querySelectorAll('.admin-only').forEach(el => {
+                        el.style.display = 'none';
+                    });
                 }
 
                 showSection('dashboardSection');
@@ -791,7 +1008,6 @@
             closeAddProductModal();
             
             alert('Produit ajouté avec succès!');
-            console.log('Nouveau produit:', newProduct);
         }
 
         function loadProducts() {
@@ -804,7 +1020,7 @@
                     const price = product.prices[duration];
                     
                     const productCard = document.createElement('div');
-                    productCard.className = 'product-card';
+                    productCard.className = 'product-card premium-card';
                     
                     let stockClass = 'in-stock';
                     let stockText = `En stock: ${product.stock}`;
@@ -838,10 +1054,10 @@
                             <div class="category-badge ${categoryClass}">${categoryBadge}</div>
                             <h3 class="product-name">${product.name} - ${durationText}</h3>
                             <p class="product-description">${product.description}</p>
-                            <div class="product-price">${price.toFixed(2)} MAD</div>
-                            <div class="product-stock ${stockClass}">${stockText}</div>
-                            <button class="btn btn-primary" onclick="buyProduct(${product.id}, '${duration}')" style="width: 100%; margin-top: 10px;">
-                                Acheter
+                            <div class="product-price" style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;">${price.toFixed(2)} MAD</div>
+                            <div class="product-stock ${stockClass}" style="margin-bottom: 15px;">${stockText}</div>
+                            <button class="btn btn-primary" onclick="buyProduct(${product.id}, '${duration}')" style="width: 100%;">
+                                Acheter Maintenant
                             </button>
                         </div>
                     `;
@@ -886,6 +1102,107 @@
             }
             
             alert(`Achat de produit ${productId} - ${duration} effectué!`);
+        }
+
+        function updateDashboard() {
+            if (currentUser) {
+                // Update user balance and purchases
+                document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2);
+                document.getElementById('totalPurchases').textContent = currentUser.totalPurchases.toFixed(2);
+                
+                // Calculate monthly purchases
+                const currentMonth = new Date().getMonth();
+                const monthlyTotal = purchases
+                    .filter(p => p.userId === currentUser.id && new Date(p.date).getMonth() === currentMonth)
+                    .reduce((sum, p) => sum + p.price, 0);
+                document.getElementById('monthlyPurchases').textContent = monthlyTotal.toFixed(2);
+
+                // Update charts
+                updateUserSalesChart();
+                
+                // Admin specific updates
+                if (currentUser.role === 'admin') {
+                    updateAdminStats();
+                    updateTopProductsChart();
+                }
+            }
+        }
+
+        function updateUserSalesChart() {
+            const ctx = document.getElementById('userSalesChart').getContext('2d');
+            
+            // Sample data for user sales
+            const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+            const salesData = months.map(() => Math.floor(Math.random() * 1000));
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Ventes (MAD)',
+                        data: salesData,
+                        borderColor: '#00C9B1',
+                        backgroundColor: 'rgba(0, 201, 177, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Évolution de vos achats mensuels'
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTopProductsChart() {
+            const ctx = document.getElementById('topProductsChart').getContext('2d');
+            
+            // Sample data for top products
+            const topProducts = ['M3U Premium', 'BEIN SPORT', 'CODE IPTV', 'SHAHID VIP', 'M3U Standard'];
+            const salesData = [150, 120, 90, 75, 60];
+            const colors = ['#00C9B1', '#FF7A5A', '#4CD964', '#FDCB6E', '#6c5ce7'];
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: topProducts,
+                    datasets: [{
+                        data: salesData,
+                        backgroundColor: colors,
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Top des produits vendus'
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateAdminStats() {
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalProducts').textContent = products.length;
+            const totalRevenue = users.reduce((sum, user) => sum + user.totalPurchases, 0);
+            document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2);
         }
 
         function logout() {
