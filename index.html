@@ -9,11 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #00C9B1; /* Turquoise */
+            --primary: #00C9B1;
             --primary-dark: #00A895;
-            --secondary: #FF7A5A; /* Corail */
+            --secondary: #FF7A5A;
             --secondary-dark: #E8694C;
-            --accent: #4CD964; /* Vert */
+            --accent: #4CD964;
             --accent-dark: #3DB853;
             --dark: #2d3436;
             --light: #f5f6fa;
@@ -47,7 +47,6 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -55,7 +54,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-wrapper {
@@ -69,7 +67,6 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            text-align: center;
         }
 
         .logo {
@@ -83,8 +80,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
         }
 
         .logo-icon {
@@ -97,11 +92,6 @@
             font-size: 0.9rem;
             color: var(--dark);
             margin-top: 5px;
-            font-weight: 500;
-        }
-
-        .nav {
-            margin-left: auto;
         }
 
         .nav ul {
@@ -120,50 +110,17 @@
             padding: 8px 15px;
             border-radius: 8px;
             transition: var(--transition);
-            position: relative;
         }
 
-        .nav a:hover {
-            color: var(--primary);
-            background: rgba(0, 201, 177, 0.08);
-        }
-
-        .nav a.active {
+        .nav a:hover, .nav a.active {
             color: var(--primary);
             background: rgba(0, 201, 177, 0.1);
-        }
-
-        .nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 15px;
-            right: 15px;
-            height: 2px;
-            background: var(--primary);
-            border-radius: 2px;
         }
 
         .user-menu {
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-
-        #currentUser {
-            font-weight: 500;
-            color: var(--primary);
-            background: rgba(0, 201, 177, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        #userRole {
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--gray);
-            background: white;
-            font-weight: 500;
         }
 
         .btn {
@@ -173,10 +130,6 @@
             cursor: pointer;
             transition: var(--transition);
             border: none;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .btn-primary {
@@ -186,8 +139,6 @@
 
         .btn-primary:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 201, 177, 0.3);
         }
 
         .btn-secondary {
@@ -195,46 +146,8 @@
             color: white;
         }
 
-        .btn-secondary:hover {
-            background: var(--secondary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 122, 90, 0.3);
-        }
-
-        .btn-accent {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-accent:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 217, 100, 0.3);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #c23616;
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
-        .main {
-            padding: 30px 0;
-        }
-
         .section {
             display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .section.active {
@@ -248,71 +161,6 @@
             margin-bottom: 30px;
         }
 
-        .section h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px;
-        }
-
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        /* Dashboard */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .balance-display, .purchases-display {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .chart-container {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            margin-top: 30px;
-        }
-
-        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -325,11 +173,10 @@
             overflow: hidden;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
-            position: relative;
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: var(--hover-shadow);
         }
 
@@ -337,176 +184,53 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
-            border-bottom: 1px solid var(--gray);
         }
 
         .product-info {
             padding: 20px;
         }
 
-        .product-name {
-            font-size: 1.2rem;
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: var(--dark);
         }
 
-        .product-description {
-            color: #636e72;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+        .category-m3u { background: rgba(0, 201, 177, 0.1); color: var(--primary); }
+        .category-code { background: rgba(255, 122, 90, 0.1); color: var(--secondary); }
+        .category-bein { background: rgba(76, 217, 100, 0.1); color: var(--accent); }
+        .category-shahid { background: rgba(253, 203, 110, 0.1); color: #e17055; }
 
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .product-stock {
-            font-size: 0.85rem;
-            color: #636e72;
-            margin-bottom: 15px;
-        }
-
-        .product-stock.in-stock {
-            color: var(--success);
-        }
-
-        .product-stock.low-stock {
-            color: var(--warning);
-        }
-
-        .product-stock.out-of-stock {
-            color: var(--danger);
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-buy {
-            flex: 1;
-            text-align: center;
-            background: var(--primary);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-buy:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-buy:disabled {
-            background: var(--gray);
-            cursor: not-allowed;
-        }
-
-        /* Category Filter */
-        .category-filter {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            padding: 8px 16px;
-            background: white;
-            border: 1px solid var(--gray);
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .category-btn:hover, .category-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Tables */
-        .products-table-container, .users-table-container, .purchases-table-container {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-        }
-
-        table {
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
 
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--gray);
-        }
-
-        th {
-            background: rgba(0, 201, 177, 0.05);
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        tr:hover {
-            background: rgba(0, 201, 177, 0.02);
-        }
-
-        .table-image {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .table-actions {
+        .modal.active {
             display: flex;
-            gap: 8px;
         }
 
-        .action-btn {
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            font-size: 0.8rem;
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        .edit-btn {
-            background: rgba(0, 201, 177, 0.1);
-            color: var(--primary);
-        }
-
-        .edit-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .delete-btn {
-            background: rgba(214, 48, 49, 0.1);
-            color: var(--danger);
-        }
-
-        .delete-btn:hover {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* Forms */
         .form-group {
             margin-bottom: 20px;
         }
@@ -524,7 +248,6 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--dark);
         }
 
         input, select, textarea {
@@ -533,199 +256,15 @@
             border: 1px solid var(--gray);
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            transition: var(--transition);
         }
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 201, 177, 0.1);
-        }
-
-        /* Login Section */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 70vh;
-        }
-
-        .login-form {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--card-shadow);
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .login-form h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-info {
-            margin-top: 25px;
-            padding: 20px;
-            background: rgba(0, 201, 177, 0.05);
-            border-radius: 12px;
-        }
-
-        .login-info h3 {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .login-info p {
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        /* Payment Section */
-        .payment-container {
+        .price-inputs {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .current-balance {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .payment-form {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .payment-info {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .payment-method-info {
-            padding: 20px;
-            background: rgba(0, 201, 177, 0.05);
-            border-radius: 12px;
-            margin-top: 15px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            position: relative;
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark);
-            transition: var(--transition);
-        }
-
-        .close:hover {
-            color: var(--danger);
-        }
-
-        .modal h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .form-actions {
-            display: flex;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            justify-content: flex-end;
-            margin-top: 25px;
-        }
-
-        /* File Upload */
-        .file-upload-container {
-            position: relative;
-            margin-top: 8px;
-        }
-
-        .file-upload-container input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload-label {
-            padding: 15px;
-            border: 2px dashed var(--gray);
-            border-radius: 8px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .file-upload-label:hover {
-            border-color: var(--primary);
-            background: rgba(0, 201, 177, 0.05);
-        }
-
-        .image-preview-container {
             margin-top: 15px;
         }
 
-        .image-preview {
-            max-width: 200px;
-            max-height: 150px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid var(--gray);
-        }
-
-        /* Scrolling Message */
         .scrolling-message {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
@@ -733,7 +272,6 @@
             text-align: center;
             font-weight: 500;
             overflow: hidden;
-            position: relative;
         }
 
         .scrolling-text {
@@ -747,125 +285,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .payment-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-wrapper {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .nav li {
-                margin: 5px;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
-
-        /* New Category Styles */
-        .category-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .category-m3u {
-            background: rgba(0, 201, 177, 0.1);
-            color: var(--primary);
-        }
-
-        .category-code {
-            background: rgba(255, 122, 90, 0.1);
-            color: var(--secondary);
-        }
-
-        .category-bein {
-            background: rgba(76, 217, 100, 0.1);
-            color: var(--accent);
-        }
-
-        .category-shahid {
-            background: rgba(253, 203, 110, 0.1);
-            color: #e17055;
-        }
-
-        /* Duration Options */
-        .duration-options {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .duration-option {
-            padding: 8px 15px;
-            background: rgba(0, 201, 177, 0.08);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .duration-option:hover, .duration-option.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Price Inputs for Admin */
-        .price-inputs {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .price-input-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-input-group label {
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-        }
-
-        .price-input-group input {
-            padding: 8px 10px;
-            font-size: 0.9rem;
-        }
-
-        /* Test User Badge */
         .test-user-badge {
             display: inline-block;
             padding: 3px 8px;
@@ -882,7 +301,7 @@
     <!-- Scrolling Message -->
     <div class="scrolling-message">
         <div class="scrolling-text">
-            <span>Le minimum de recharge est de 500 MAD | الحد الأدنى لإعادة الشحن هو 500 درهم</span>
+            Le minimum de recharge est de 500 MAD | الحد الأدنى لإعادة الشحن هو 500 درهم
         </div>
     </div>
 
@@ -908,7 +327,7 @@
                     </ul>
                 </nav>
                 <div class="user-menu">
-                    <span id="currentUser" style="display: none;">Utilisateur</span>
+                    <span id="currentUser" style="display: none;"></span>
                     <select id="userRole" onchange="changeRole()" style="display: none;">
                         <option value="user">Utilisateur</option>
                         <option value="admin">Administrateur</option>
@@ -928,7 +347,7 @@
                 <div class="login-container">
                     <div class="login-form">
                         <h2>Connexion à Panel 4 ALL</h2>
-                        <form id="loginForm" onsubmit="login(event)">
+                        <form id="loginForm">
                             <div class="form-group">
                                 <label for="username">Nom d'utilisateur</label>
                                 <input type="text" id="username" required>
@@ -964,15 +383,6 @@
                             <span id="totalPurchases">0.00</span> MAD
                         </div>
                     </div>
-                    <div class="card" id="adminStatsCard" style="display: none;">
-                        <button class="btn btn-primary" onclick="showAdminDashboard()" style="width: 100%;">Voir les Statistiques Admin</button>
-                    </div>
-                </div>
-
-                <!-- Monthly Purchases Chart -->
-                <div class="chart-container">
-                    <h3>Achats par Mois</h3>
-                    <canvas id="purchasesChart"></canvas>
                 </div>
             </section>
 
@@ -980,18 +390,13 @@
             <section id="productsSection" class="section">
                 <div class="section-header">
                     <h2>Catalogue des Produits</h2>
-                    <!-- Admin actions only visible to admin users -->
                     <div class="admin-actions" id="adminProductActions" style="display: none;">
                         <button class="btn btn-primary" onclick="showAddProductModal()">
                             <i class="fas fa-plus"></i> Ajouter un Produit
                         </button>
-                        <button class="btn btn-secondary" onclick="toggleProductView()">
-                            <i class="fas fa-cog"></i> Vue Administration
-                        </button>
                     </div>
                 </div>
 
-                <!-- Category Filter -->
                 <div class="category-filter">
                     <button class="category-btn active" data-category="all">Tous</button>
                     <button class="category-btn" data-category="m3u">M3U</button>
@@ -1000,27 +405,31 @@
                     <button class="category-btn" data-category="shahid">SHAHID</button>
                 </div>
 
-                <!-- Products Grid (Normal View) -->
                 <div id="productsGrid" class="products-grid">
                     <!-- Products will be loaded here -->
                 </div>
+            </section>
 
-                <!-- Products Table (Admin View) -->
-                <div id="productsTableContainer" class="products-table-container" style="display: none;">
-                    <table id="productsTable">
+            <!-- Manage Products Section -->
+            <section id="manageProductsSection" class="section">
+                <h2>Gestion des Produits</h2>
+                <div class="admin-actions">
+                    <button class="btn btn-primary" onclick="showAddProductModal()">Ajouter un produit</button>
+                </div>
+                <div class="products-table-container">
+                    <table id="manageProductsTable">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Image</th>
                                 <th>Nom</th>
                                 <th>Catégorie</th>
-                                <th>Durée</th>
                                 <th>Prix (MAD)</th>
                                 <th>Stock</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="productsTableBody">
+                        <tbody id="manageProductsTableBody">
                             <!-- Products will be loaded here -->
                         </tbody>
                     </table>
@@ -1053,39 +462,15 @@
                             <button type="submit" class="btn btn-primary" style="width: 100%;">Valider la recharge</button>
                         </form>
                     </div>
-                    <div class="payment-info">
-                        <h3>Instructions de paiement</h3>
-                        <div id="CIHinfo" class="payment-method-info" style="display: none;">
-                            <h4>Instructions Virement CIH:</h4>
-                            <p><strong>Compte:</strong> CIH Bank</p>
-                            <p><strong>RIB:</strong> 230 780 12345678901234 56</p>
-                            <p><strong>Titulaire:</strong> Panel 4 ALL</p>
-                            <p><strong>Important:</strong> Mettez votre nom d'utilisateur en référence du virement</p>
-                        </div>
-                        <div id="CASH_PLUSinfo" class="payment-method-info" style="display: none;">
-                            <h4>Instructions CASH PLUS:</h4>
-                            <p><strong>Numéro:</strong> 06-12-34-56-78</p>
-                            <p><strong>Titulaire:</strong> Panel 4 ALL</p>
-                            <p><strong>Important:</strong> Envoyez le montant avec votre nom d'utilisateur en référence</p>
-                        </div>
-                        <div id="WAFACASHinfo" class="payment-method-info" style="display: none;">
-                            <h4>Instructions WAFACASH:</h4>
-                            <p><strong>Code WAFACASH:</strong> 123456789</p>
-                            <p><strong>Titulaire:</strong> Panel 4 ALL</p>
-                            <p><strong>Important:</strong> Utilisez votre nom d'utilisateur comme référence</p>
-                        </div>
-                    </div>
                 </div>
             </section>
 
-            <!-- Users Section (Admin only) -->
+            <!-- Users Section -->
             <section id="usersSection" class="section">
-                <div class="section-header">
-                    <h2>Gestion des Utilisateurs</h2>
-                    <div class="admin-actions">
-                        <button class="btn btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
-                        <button class="btn btn-accent" onclick="showAddTestUserModal()">Créer un utilisateur test</button>
-                    </div>
+                <h2>Gestion des Utilisateurs</h2>
+                <div class="admin-actions">
+                    <button class="btn btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
+                    <button class="btn btn-accent" onclick="showAddTestUserModal()">Créer un utilisateur test</button>
                 </div>
                 <div class="users-table-container">
                     <table id="usersTable">
@@ -1106,37 +491,80 @@
                     </table>
                 </div>
             </section>
-
-            <!-- Purchases Section -->
-            <section id="purchasesSection" class="section">
-                <h2>Historique des Achats</h2>
-                <div class="purchases-table-container">
-                    <table id="purchasesTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Date</th>
-                                <th>Produit</th>
-                                <th>Durée</th>
-                                <th>Prix (MAD)</th>
-                                <th>Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody id="purchasesTableBody">
-                            <!-- Purchases will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
         </div>
     </main>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddProductModal()">&times;</span>
+            <h3><i class="fas fa-plus"></i> Ajouter un Nouveau Produit</h3>
+            <form id="addProductForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productName">Nom du produit</label>
+                        <input type="text" id="productName" placeholder="Entrez le nom du produit" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Catégorie</label>
+                        <select id="productCategory" required>
+                            <option value="">Sélectionner une catégorie</option>
+                            <option value="m3u">M3U</option>
+                            <option value="code">CODE</option>
+                            <option value="bein">BEIN SPORT</option>
+                            <option value="shahid">SHAHID</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description détaillée</label>
+                    <textarea id="productDescription" rows="4" placeholder="Décrivez votre produit en détail..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Prix par durée (MAD)</label>
+                    <div class="price-inputs">
+                        <div class="price-input-group">
+                            <label for="price1Month">1 Mois</label>
+                            <input type="number" id="price1Month" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                        <div class="price-input-group">
+                            <label for="price3Months">3 Mois</label>
+                            <input type="number" id="price3Months" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="price-input-group">
+                            <label for="price6Months">6 Mois</label>
+                            <input type="number" id="price6Months" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="price-input-group">
+                            <label for="price12Months">12 Mois</label>
+                            <input type="number" id="price12Months" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productStock">Quantité en stock</label>
+                        <input type="number" id="productStock" min="0" value="0" placeholder="0" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddProductModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Ajouter le Produit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Add User Modal -->
     <div id="addUserModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddUserModal()">&times;</span>
             <h3>Ajouter un Nouvel Utilisateur</h3>
-            <form id="addUserForm" onsubmit="addUser(event)">
+            <form id="addUserForm">
                 <div class="form-group">
                     <label for="newUsername">Nom d'utilisateur</label>
                     <input type="text" id="newUsername" required>
@@ -1169,17 +597,13 @@
         <div class="modal-content">
             <span class="close" onclick="closeAddTestUserModal()">&times;</span>
             <h3>Créer un Utilisateur Test</h3>
-            <form id="addTestUserForm" onsubmit="addTestUser(event)">
+            <form id="addTestUserForm">
                 <div class="form-group">
                     <label for="testUsername">Nom d'utilisateur</label>
                     <input type="text" id="testUsername" required>
                 </div>
                 <div class="form-group">
-                    <label for="testPassword">Mot de passe (par défaut: test2025)</label>
-                    <input type="text" id="testPassword" value="test2025" readonly>
-                </div>
-                <div class="form-group">
-                    <label>Durée de validité: 24 heures</label>
+                    <label>Mot de passe: test2025</label>
                     <small style="color: var(--secondary);">Ce compte expirera automatiquement après 24 heures</small>
                 </div>
                 <div class="form-actions">
@@ -1190,163 +614,8 @@
         </div>
     </div>
 
-    <!-- Add Product Modal -->
-    <div id="addProductModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddProductModal()">&times;</span>
-            <h3><i class="fas fa-plus"></i> Ajouter un Nouveau Produit</h3>
-            <form id="addProductForm" onsubmit="addProduct(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="productName"><i class="fas fa-box"></i> Nom du produit</label>
-                        <input type="text" id="productName" placeholder="Entrez le nom du produit" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="productCategory"><i class="fas fa-tag"></i> Catégorie</label>
-                        <select id="productCategory" required>
-                            <option value="">Sélectionner une catégorie</option>
-                            <option value="m3u">M3U</option>
-                            <option value="code">CODE</option>
-                            <option value="bein">BEIN SPORT</option>
-                            <option value="shahid">SHAHID</option>
-                            <option value="other">Autre</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="productDescription"><i class="fas fa-align-left"></i> Description détaillée</label>
-                    <textarea id="productDescription" rows="4" placeholder="Décrivez votre produit en détail..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-money-bill-wave"></i> Prix par durée (MAD)</label>
-                    <div class="price-inputs">
-                        <div class="price-input-group">
-                            <label for="price1Month">1 Mois</label>
-                            <input type="number" id="price1Month" step="0.01" min="0" placeholder="0.00" required>
-                        </div>
-                        <div class="price-input-group">
-                            <label for="price3Months">3 Mois</label>
-                            <input type="number" id="price3Months" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="price-input-group">
-                            <label for="price6Months">6 Mois</label>
-                            <input type="number" id="price6Months" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="price-input-group">
-                            <label for="price12Months">12 Mois</label>
-                            <input type="number" id="price12Months" step="0.01" min="0" placeholder="0.00" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="productStock"><i class="fas fa-boxes"></i> Quantité en stock</label>
-                        <input type="number" id="productStock" min="0" value="0" placeholder="0" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="productImage"><i class="fas fa-image"></i> Image du produit</label>
-                    <div class="file-upload-container">
-                        <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)" required>
-                        <div class="file-upload-label">
-                            <span><i class="fas fa-upload"></i> Choisir une image</span>
-                            <small>Formats acceptés: JPG, PNG, GIF (max 5MB)</small>
-                        </div>
-                    </div>
-                    <div id="imagePreview" class="image-preview-container"></div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeAddProductModal()">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Ajouter le Produit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit Product Modal -->
-    <div id="editProductModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEditProductModal()">&times;</span>
-            <h3><i class="fas fa-edit"></i> Modifier le Produit</h3>
-            <form id="editProductForm" onsubmit="updateProduct(event)">
-                <input type="hidden" id="editProductId">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editProductName"><i class="fas fa-box"></i> Nom du produit</label>
-                        <input type="text" id="editProductName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editProductCategory"><i class="fas fa-tag"></i> Catégorie</label>
-                        <select id="editProductCategory" required>
-                            <option value="m3u">M3U</option>
-                            <option value="code">CODE</option>
-                            <option value="bein">BEIN SPORT</option>
-                            <option value="shahid">SHAHID</option>
-                            <option value="other">Autre</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="editProductDescription"><i class="fas fa-align-left"></i> Description</label>
-                    <textarea id="editProductDescription" rows="4" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-money-bill-wave"></i> Prix par durée (MAD)</label>
-                    <div class="price-inputs">
-                        <div class="price-input-group">
-                            <label for="editPrice1Month">1 Mois</label>
-                            <input type="number" id="editPrice1Month" step="0.01" min="0" required>
-                        </div>
-                        <div class="price-input-group">
-                            <label for="editPrice3Months">3 Mois</label>
-                            <input type="number" id="editPrice3Months" step="0.01" min="0">
-                        </div>
-                        <div class="price-input-group">
-                            <label for="editPrice6Months">6 Mois</label>
-                            <input type="number" id="editPrice6Months" step="0.01" min="0">
-                        </div>
-                        <div class="price-input-group">
-                            <label for="editPrice12Months">12 Mois</label>
-                            <input type="number" id="editPrice12Months" step="0.01" min="0" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editProductStock"><i class="fas fa-boxes"></i> Quantité en stock</label>
-                        <input type="number" id="editProductStock" min="0" required>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeEditProductModal()">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Admin Dashboard Modal -->
-    <div id="adminDashboardModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAdminDashboardModal()">&times;</span>
-            <h3>Tableau de bord Administrateur</h3>
-            <div id="adminStatsContainer">
-                <!-- Stats will be loaded here -->
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Données de démonstration
+        // Données initiales
         let users = JSON.parse(localStorage.getItem('users')) || [
             { id: 1, username: 'admin', password: 'admin123', role: 'admin', balance: 1000, totalPurchases: 0, isTest: false, expirationDate: null },
             { id: 2, username: 'test', password: 'test123', role: 'user', balance: 500, totalPurchases: 0, isTest: false, expirationDate: null }
@@ -1366,73 +635,22 @@
                 },
                 stock: 50,
                 image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=M3U+Premium"
-            },
-            {
-                id: 2,
-                name: "M3U Standard",
-                category: "m3u",
-                description: "Accès à 5 000 chaînes populaires",
-                prices: {
-                    "1month": 59.99,
-                    "3months": 149.99,
-                    "6months": 269.99,
-                    "12months": 499.99
-                },
-                stock: 100,
-                image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=M3U+Standard"
-            },
-            {
-                id: 3,
-                name: "CODE IPTV",
-                category: "code",
-                description: "Code d'activation pour service IPTV premium",
-                prices: {
-                    "1month": 79.99,
-                    "3months": 199.99,
-                    "6months": 359.99,
-                    "12months": 649.99
-                },
-                stock: 75,
-                image: "https://via.placeholder.com/300x200/FF7A5A/FFFFFF?text=CODE+IPTV"
-            },
-            {
-                id: 4,
-                name: "BEIN SPORT Premium",
-                category: "bein",
-                description: "Accès à tous les événements sportifs BEIN SPORT",
-                prices: {
-                    "1month": 129.99,
-                    "3months": 349.99,
-                    "6months": 629.99,
-                    "12months": 1149.99
-                },
-                stock: 30,
-                image: "https://via.placeholder.com/300x200/4CD964/FFFFFF?text=BEIN+SPORT"
-            },
-            {
-                id: 5,
-                name: "SHAHID VIP",
-                category: "shahid",
-                description: "Accès VIP à la plateforme SHAHID",
-                prices: {
-                    "1month": 89.99,
-                    "12months": 899.99
-                },
-                stock: 60,
-                image: "https://via.placeholder.com/300x200/FDCB6E/FFFFFF?text=SHAHID+VIP"
             }
         ];
 
         let purchases = JSON.parse(localStorage.getItem('purchases')) || [];
         let currentUser = null;
-        let isAdminView = false;
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+        });
+
+        function initApp() {
             updateLocalStorage();
             setupEventListeners();
             checkExpiredUsers();
-        });
+        }
 
         function setupEventListeners() {
             // Navigation
@@ -1444,6 +662,36 @@
                 });
             });
 
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                login();
+            });
+
+            // Add product form
+            document.getElementById('addProductForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addProduct();
+            });
+
+            // Add user form
+            document.getElementById('addUserForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addUser();
+            });
+
+            // Add test user form
+            document.getElementById('addTestUserForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addTestUser();
+            });
+
+            // Recharge form
+            document.getElementById('rechargeForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                rechargeBalance();
+            });
+
             // Category filter
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1452,16 +700,6 @@
                     const category = this.getAttribute('data-category');
                     filterProducts(category);
                 });
-            });
-
-            // Payment method change
-            document.getElementById('paymentMethod').addEventListener('change', function() {
-                document.querySelectorAll('.payment-method-info').forEach(el => {
-                    el.style.display = 'none';
-                });
-                if (this.value) {
-                    document.getElementById(this.value + 'info').style.display = 'block';
-                }
             });
         }
 
@@ -1484,21 +722,18 @@
         }
 
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
 
-            // Update active nav link
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
 
-            // Show the selected section
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
             document.getElementById(sectionId).classList.add('active');
 
-            // Load section-specific content
+            // Charger le contenu spécifique à la section
             if (sectionId === 'productsSection') {
                 loadProducts();
             } else if (sectionId === 'dashboardSection') {
@@ -1507,33 +742,22 @@
                 document.getElementById('currentBalanceDisplay').textContent = currentUser ? currentUser.balance.toFixed(2) : '0.00';
             } else if (sectionId === 'usersSection' && currentUser && currentUser.role === 'admin') {
                 loadUsers();
-            } else if (sectionId === 'purchasesSection') {
-                loadPurchases();
             } else if (sectionId === 'manageProductsSection' && currentUser && currentUser.role === 'admin') {
                 loadManageProducts();
             }
         }
 
-        function showLoginModal() {
-            document.getElementById('loginSection').classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-        }
-
-        function login(event) {
-            event.preventDefault();
+        function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
-                // Check if test user has expired
                 if (user.isTest && user.expirationDate) {
                     const expirationDate = new Date(user.expirationDate);
                     if (expirationDate < new Date()) {
-                        alert('Ce compte test a expiré. Veuillez contacter l\'administrateur.');
+                        alert('Ce compte test a expiré.');
                         return;
                     }
                 }
@@ -1547,13 +771,11 @@
                 document.getElementById('userRole').value = user.role;
                 document.getElementById('userRole').style.display = 'inline-block';
 
-                // Show admin-only elements if user is admin
                 if (user.role === 'admin') {
                     document.querySelectorAll('.admin-only').forEach(el => {
                         el.style.display = 'block';
                     });
                     document.getElementById('adminProductActions').style.display = 'flex';
-                    document.getElementById('adminStatsCard').style.display = 'block';
                 }
 
                 showSection('dashboardSection');
@@ -1573,42 +795,55 @@
                 el.style.display = 'none';
             });
             document.getElementById('adminProductActions').style.display = 'none';
-            document.getElementById('adminStatsCard').style.display = 'none';
-            isAdminView = false;
-            document.getElementById('productsTableContainer').style.display = 'none';
-            document.getElementById('productsGrid').style.display = 'grid';
         }
 
-        function changeRole() {
-            if (currentUser) {
-                const newRole = document.getElementById('userRole').value;
-                currentUser.role = newRole;
-                
-                // Update in users array
-                const userIndex = users.findIndex(u => u.id === currentUser.id);
-                if (userIndex !== -1) {
-                    users[userIndex].role = newRole;
-                    updateLocalStorage();
-                }
+        function showAddProductModal() {
+            document.getElementById('addProductModal').classList.add('active');
+        }
 
-                // Update UI
-                if (newRole === 'admin') {
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'block';
-                    });
-                    document.getElementById('adminProductActions').style.display = 'flex';
-                    document.getElementById('adminStatsCard').style.display = 'block';
-                } else {
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                    document.getElementById('adminProductActions').style.display = 'none';
-                    document.getElementById('adminStatsCard').style.display = 'none';
-                    isAdminView = false;
-                    document.getElementById('productsTableContainer').style.display = 'none';
-                    document.getElementById('productsGrid').style.display = 'grid';
-                }
-            }
+        function closeAddProductModal() {
+            document.getElementById('addProductModal').classList.remove('active');
+            document.getElementById('addProductForm').reset();
+        }
+
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const description = document.getElementById('productDescription').value;
+            const stock = parseInt(document.getElementById('productStock').value);
+
+            // Récupérer les prix
+            const price1Month = parseFloat(document.getElementById('price1Month').value);
+            const price3Months = document.getElementById('price3Months').value ? parseFloat(document.getElementById('price3Months').value) : null;
+            const price6Months = document.getElementById('price6Months').value ? parseFloat(document.getElementById('price6Months').value) : null;
+            const price12Months = parseFloat(document.getElementById('price12Months').value);
+
+            // Construire l'objet prices
+            const prices = {
+                "1month": price1Month
+            };
+            
+            if (price3Months) prices["3months"] = price3Months;
+            if (price6Months) prices["6months"] = price6Months;
+            prices["12months"] = price12Months;
+
+            const newProduct = {
+                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                name,
+                category,
+                description,
+                prices,
+                stock,
+                image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name)
+            };
+
+            products.push(newProduct);
+            updateLocalStorage();
+            loadProducts();
+            loadManageProducts();
+            closeAddProductModal();
+            
+            alert('Produit ajouté avec succès!');
         }
 
         function loadProducts() {
@@ -1616,7 +851,6 @@
             productsGrid.innerHTML = '';
 
             products.forEach(product => {
-                // Create a product card for each duration
                 Object.keys(product.prices).forEach(duration => {
                     const durationText = getDurationText(duration);
                     const price = product.prices[duration];
@@ -1624,7 +858,6 @@
                     const productCard = document.createElement('div');
                     productCard.className = 'product-card';
                     
-                    // Determine stock status
                     let stockClass = 'in-stock';
                     let stockText = `En stock: ${product.stock}`;
                     if (product.stock === 0) {
@@ -1635,7 +868,6 @@
                         stockText = `Stock faible: ${product.stock}`;
                     }
 
-                    // Determine category badge
                     let categoryBadge = '';
                     let categoryClass = '';
                     if (product.category === 'm3u') {
@@ -1660,12 +892,9 @@
                             <p class="product-description">${product.description}</p>
                             <div class="product-price">${price.toFixed(2)} MAD</div>
                             <div class="product-stock ${stockClass}">${stockText}</div>
-                            
-                            <div class="product-actions">
-                                <button class="btn-buy" ${product.stock === 0 || !currentUser ? 'disabled' : ''} onclick="buyProduct(${product.id}, '${duration}')">
-                                    Acheter
-                                </button>
-                            </div>
+                            <button class="btn btn-primary" onclick="buyProduct(${product.id}, '${duration}')" style="width: 100%; margin-top: 10px;">
+                                Acheter
+                            </button>
                         </div>
                     `;
                     
@@ -1701,312 +930,10 @@
             });
         }
 
-        function toggleProductView() {
-            isAdminView = !isAdminView;
-            
-            if (isAdminView) {
-                document.getElementById('productsGrid').style.display = 'none';
-                document.getElementById('productsTableContainer').style.display = 'block';
-                loadProductsTable();
-            } else {
-                document.getElementById('productsGrid').style.display = 'grid';
-                document.getElementById('productsTableContainer').style.display = 'none';
-            }
-        }
-
-        function loadProductsTable() {
-            const tableBody = document.getElementById('productsTableBody');
-            tableBody.innerHTML = '';
-
-            products.forEach(product => {
-                // Create a row for each duration
-                Object.keys(product.prices).forEach(duration => {
-                    const durationText = getDurationText(duration);
-                    const price = product.prices[duration];
-                    
-                    const row = document.createElement('tr');
-                    
-                    // Determine category badge
-                    let categoryBadge = '';
-                    let categoryClass = '';
-                    if (product.category === 'm3u') {
-                        categoryBadge = 'M3U';
-                        categoryClass = 'category-m3u';
-                    } else if (product.category === 'code') {
-                        categoryBadge = 'CODE';
-                        categoryClass = 'category-code';
-                    } else if (product.category === 'bein') {
-                        categoryBadge = 'BEIN SPORT';
-                        categoryClass = 'category-bein';
-                    } else if (product.category === 'shahid') {
-                        categoryBadge = 'SHAHID';
-                        categoryClass = 'category-shahid';
-                    }
-
-                    row.innerHTML = `
-                        <td>${product.id}</td>
-                        <td><img src="${product.image}" alt="${product.name}" class="table-image"></td>
-                        <td>${product.name}</td>
-                        <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
-                        <td>${durationText}</td>
-                        <td>${price.toFixed(2)}</td>
-                        <td>${product.stock}</td>
-                        <td class="table-actions">
-                            <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
-                                <i class="fas fa-edit"></i> Modifier
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
-                                <i class="fas fa-trash"></i> Supprimer
-                            </button>
-                        </td>
-                    `;
-                    
-                    tableBody.appendChild(row);
-                });
-            });
-        }
-
-        function loadManageProducts() {
-            const tableBody = document.getElementById('manageProductsTableBody');
-            tableBody.innerHTML = '';
-
-            products.forEach(product => {
-                // Create a row for each duration
-                Object.keys(product.prices).forEach(duration => {
-                    const durationText = getDurationText(duration);
-                    const price = product.prices[duration];
-                    
-                    const row = document.createElement('tr');
-                    
-                    // Determine category badge
-                    let categoryBadge = '';
-                    let categoryClass = '';
-                    if (product.category === 'm3u') {
-                        categoryBadge = 'M3U';
-                        categoryClass = 'category-m3u';
-                    } else if (product.category === 'code') {
-                        categoryBadge = 'CODE';
-                        categoryClass = 'category-code';
-                    } else if (product.category === 'bein') {
-                        categoryBadge = 'BEIN SPORT';
-                        categoryClass = 'category-bein';
-                    } else if (product.category === 'shahid') {
-                        categoryBadge = 'SHAHID';
-                        categoryClass = 'category-shahid';
-                    }
-
-                    row.innerHTML = `
-                        <td>${product.id}</td>
-                        <td><img src="${product.image}" alt="${product.name}" class="table-image"></td>
-                        <td>${product.name}</td>
-                        <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
-                        <td>${durationText}</td>
-                        <td>${price.toFixed(2)}</td>
-                        <td>${product.stock}</td>
-                        <td class="table-actions">
-                            <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
-                                <i class="fas fa-edit"></i> Modifier
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
-                                <i class="fas fa-trash"></i> Supprimer
-                            </button>
-                        </td>
-                    `;
-                    
-                    tableBody.appendChild(row);
-                });
-            });
-        }
-
-        function showAddProductModal() {
-            document.getElementById('addProductModal').classList.add('active');
-        }
-
-        function closeAddProductModal() {
-            document.getElementById('addProductModal').classList.remove('active');
-            document.getElementById('addProductForm').reset();
-            document.getElementById('imagePreview').innerHTML = '';
-        }
-
-        function previewImage(event) {
-            const input = event.target;
-            const preview = document.getElementById('imagePreview');
-            
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.innerHTML = `<img src="${e.target.result}" class="image-preview" alt="Aperçu de l'image">`;
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function addProduct(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const description = document.getElementById('productDescription').value;
-            const stock = parseInt(document.getElementById('productStock').value);
-            const imageInput = document.getElementById('productImage');
-            
-            // Get prices for each duration
-            const price1Month = parseFloat(document.getElementById('price1Month').value);
-            const price3Months = document.getElementById('price3Months').value ? parseFloat(document.getElementById('price3Months').value) : null;
-            const price6Months = document.getElementById('price6Months').value ? parseFloat(document.getElementById('price6Months').value) : null;
-            const price12Months = parseFloat(document.getElementById('price12Months').value);
-            
-            // Build prices object
-            const prices = {
-                "1month": price1Month
-            };
-            
-            if (price3Months) prices["3months"] = price3Months;
-            if (price6Months) prices["6months"] = price6Months;
-            prices["12months"] = price12Months;
-            
-            // For demo purposes, we'll use a placeholder image
-            // In a real application, you would upload the image to a server
-            let imageUrl = "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name);
-            
-            if (imageInput.files && imageInput.files[0]) {
-                // In a real app, you would upload the file and get a URL
-                // For now, we'll create a local URL for preview
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imageUrl = e.target.result;
-                    completeAddProduct(name, category, description, prices, stock, imageUrl);
-                };
-                reader.readAsDataURL(imageInput.files[0]);
-            } else {
-                completeAddProduct(name, category, description, prices, stock, imageUrl);
-            }
-        }
-
-        function completeAddProduct(name, category, description, prices, stock, imageUrl) {
-            const newProduct = {
-                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
-                name,
-                category,
-                description,
-                prices,
-                stock,
-                image: imageUrl
-            };
-            
-            products.push(newProduct);
-            updateLocalStorage();
-            
-            // Update UI
-            if (isAdminView) {
-                loadProductsTable();
-            } else {
-                loadProducts();
-            }
-            
-            closeAddProductModal();
-            alert('Produit ajouté avec succès!');
-        }
-
-        function editProduct(id) {
-            const product = products.find(p => p.id === id);
-            if (product) {
-                document.getElementById('editProductId').value = product.id;
-                document.getElementById('editProductName').value = product.name;
-                document.getElementById('editProductCategory').value = product.category;
-                document.getElementById('editProductDescription').value = product.description;
-                document.getElementById('editProductStock').value = product.stock;
-                
-                // Set prices
-                document.getElementById('editPrice1Month').value = product.prices["1month"];
-                document.getElementById('editPrice3Months').value = product.prices["3months"] || '';
-                document.getElementById('editPrice6Months').value = product.prices["6months"] || '';
-                document.getElementById('editPrice12Months').value = product.prices["12months"];
-                
-                document.getElementById('editProductModal').classList.add('active');
-            }
-        }
-
-        function closeEditProductModal() {
-            document.getElementById('editProductModal').classList.remove('active');
-        }
-
-        function updateProduct(event) {
-            event.preventDefault();
-            
-            const id = parseInt(document.getElementById('editProductId').value);
-            const name = document.getElementById('editProductName').value;
-            const category = document.getElementById('editProductCategory').value;
-            const description = document.getElementById('editProductDescription').value;
-            const stock = parseInt(document.getElementById('editProductStock').value);
-            
-            // Get prices for each duration
-            const price1Month = parseFloat(document.getElementById('editPrice1Month').value);
-            const price3Months = document.getElementById('editPrice3Months').value ? parseFloat(document.getElementById('editPrice3Months').value) : null;
-            const price6Months = document.getElementById('editPrice6Months').value ? parseFloat(document.getElementById('editPrice6Months').value) : null;
-            const price12Months = parseFloat(document.getElementById('editPrice12Months').value);
-            
-            // Build prices object
-            const prices = {
-                "1month": price1Month
-            };
-            
-            if (price3Months) prices["3months"] = price3Months;
-            if (price6Months) prices["6months"] = price6Months;
-            prices["12months"] = price12Months;
-            
-            const productIndex = products.findIndex(p => p.id === id);
-            if (productIndex !== -1) {
-                products[productIndex].name = name;
-                products[productIndex].category = category;
-                products[productIndex].description = description;
-                products[productIndex].prices = prices;
-                products[productIndex].stock = stock;
-                
-                updateLocalStorage();
-                
-                // Update UI
-                if (isAdminView) {
-                    loadProductsTable();
-                } else {
-                    loadProducts();
-                }
-                
-                if (document.getElementById('manageProductsSection').classList.contains('active')) {
-                    loadManageProducts();
-                }
-                
-                closeEditProductModal();
-                alert('Produit modifié avec succès!');
-            }
-        }
-
-        function deleteProduct(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer ce produit?')) {
-                products = products.filter(p => p.id !== id);
-                updateLocalStorage();
-                
-                // Update UI
-                if (isAdminView) {
-                    loadProductsTable();
-                } else {
-                    loadProducts();
-                }
-                
-                if (document.getElementById('manageProductsSection').classList.contains('active')) {
-                    loadManageProducts();
-                }
-                
-                alert('Produit supprimé avec succès!');
-            }
-        }
-
         function buyProduct(productId, duration) {
             if (!currentUser) {
                 alert('Veuillez vous connecter pour acheter un produit');
-                showLoginModal();
+                showSection('loginSection');
                 return;
             }
             
@@ -2023,7 +950,7 @@
             
             const price = product.prices[duration];
             if (!price) {
-                alert('Cette durée n\'est pas disponible pour ce produit');
+                alert('Cette durée n\'est pas disponible');
                 return;
             }
             
@@ -2033,13 +960,13 @@
                 return;
             }
             
-            // Process purchase
+            // Traiter l'achat
             currentUser.balance -= price;
             currentUser.totalPurchases += price;
             product.stock -= 1;
             
             const purchase = {
-                id: purchases.length > 0 ? Math.max(...purchases.map(p => p.id)) + 1 : 1,
+                id: purchases.length + 1,
                 userId: currentUser.id,
                 productId: product.id,
                 productName: product.name,
@@ -2051,75 +978,24 @@
             
             purchases.push(purchase);
             
-            // Update user in users array
+            // Mettre à jour l'utilisateur dans le tableau
             const userIndex = users.findIndex(u => u.id === currentUser.id);
             if (userIndex !== -1) {
                 users[userIndex] = currentUser;
             }
             
             updateLocalStorage();
-            
-            // Update UI
             updateDashboard();
             loadProducts();
             
-            alert(`Achat réussi! Vous avez acheté "${product.name} - ${getDurationText(duration)}" pour ${price.toFixed(2)} MAD.`);
+            alert(`Achat réussi! ${product.name} - ${getDurationText(duration)} pour ${price.toFixed(2)} MAD.`);
         }
 
         function updateDashboard() {
             if (currentUser) {
                 document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2);
                 document.getElementById('totalPurchases').textContent = currentUser.totalPurchases.toFixed(2);
-                
-                // Update chart
-                updatePurchasesChart();
             }
-        }
-
-        function updatePurchasesChart() {
-            const ctx = document.getElementById('purchasesChart').getContext('2d');
-            
-            // Sample data for the chart
-            const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
-            const data = months.map(() => Math.floor(Math.random() * 1000));
-            
-            // Destroy existing chart if it exists
-            if (window.purchasesChartInstance) {
-                window.purchasesChartInstance.destroy();
-            }
-            
-            window.purchasesChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: months,
-                    datasets: [{
-                        label: 'Achats (MAD)',
-                        data: data,
-                        borderColor: '#00C9B1',
-                        backgroundColor: 'rgba(0, 201, 177, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Évolution des achats mensuels'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
         }
 
         function showAddUserModal() {
@@ -2131,22 +1007,19 @@
             document.getElementById('addUserForm').reset();
         }
 
-        function addUser(event) {
-            event.preventDefault();
-            
+        function addUser() {
             const username = document.getElementById('newUsername').value;
             const password = document.getElementById('newPassword').value;
             const role = document.getElementById('newRole').value;
             const balance = parseFloat(document.getElementById('newBalance').value);
             
-            // Check if username already exists
             if (users.find(u => u.username === username)) {
                 alert('Ce nom d\'utilisateur existe déjà');
                 return;
             }
             
             const newUser = {
-                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                id: users.length + 1,
                 username,
                 password,
                 role,
@@ -2173,24 +1046,20 @@
             document.getElementById('addTestUserForm').reset();
         }
 
-        function addTestUser(event) {
-            event.preventDefault();
-            
+        function addTestUser() {
             const username = document.getElementById('testUsername').value;
-            const password = "test2025"; // Fixed password for test users
+            const password = "test2025";
             
-            // Check if username already exists
             if (users.find(u => u.username === username)) {
                 alert('Ce nom d\'utilisateur existe déjà');
                 return;
             }
             
-            // Calculate expiration date (24 hours from now)
             const expirationDate = new Date();
             expirationDate.setHours(expirationDate.getHours() + 24);
             
             const newUser = {
-                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                id: users.length + 1,
                 username,
                 password,
                 role: 'user',
@@ -2205,7 +1074,7 @@
             loadUsers();
             closeAddTestUserModal();
             
-            alert('Utilisateur test créé avec succès! Ce compte expirera le ' + expirationDate.toLocaleString());
+            alert('Utilisateur test créé avec succès! Expire le ' + expirationDate.toLocaleString());
         }
 
         function loadUsers() {
@@ -2213,14 +1082,13 @@
             tableBody.innerHTML = '';
             
             users.forEach(user => {
-                const row = document.createElement('tr');
-                
                 let expirationText = '-';
                 if (user.isTest && user.expirationDate) {
                     const expirationDate = new Date(user.expirationDate);
                     expirationText = expirationDate.toLocaleString();
                 }
                 
+                const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${user.id}</td>
                     <td>${user.username} ${user.isTest ? '<span class="test-user-badge">TEST</span>' : ''}</td>
@@ -2229,8 +1097,8 @@
                     <td>${user.totalPurchases.toFixed(2)}</td>
                     <td>${expirationText}</td>
                     <td>
-                        <button class="action-btn delete-btn" onclick="deleteUser(${user.id})" ${user.id === currentUser.id ? 'disabled' : ''}>
-                            <i class="fas fa-trash"></i> Supprimer
+                        <button class="btn btn-danger" onclick="deleteUser(${user.id})" ${user.id === currentUser?.id ? 'disabled' : ''}>
+                            Supprimer
                         </button>
                     </td>
                 `;
@@ -2239,7 +1107,7 @@
         }
 
         function deleteUser(id) {
-            if (id === currentUser.id) {
+            if (id === currentUser?.id) {
                 alert('Vous ne pouvez pas supprimer votre propre compte');
                 return;
             }
@@ -2252,62 +1120,114 @@
             }
         }
 
-        function loadPurchases() {
-            const tableBody = document.getElementById('purchasesTableBody');
+        function loadManageProducts() {
+            const tableBody = document.getElementById('manageProductsTableBody');
             tableBody.innerHTML = '';
-            
-            let userPurchases = purchases;
-            
-            // If not admin, only show current user's purchases
-            if (!currentUser || currentUser.role !== 'admin') {
-                userPurchases = purchases.filter(p => p.userId === currentUser.id);
-            }
-            
-            userPurchases.forEach(purchase => {
-                const date = new Date(purchase.date);
-                const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${purchase.id}</td>
-                    <td>${formattedDate}</td>
-                    <td>${purchase.productName}</td>
-                    <td>${getDurationText(purchase.duration)}</td>
-                    <td>${purchase.price.toFixed(2)}</td>
-                    <td>${purchase.status}</td>
-                `;
-                tableBody.appendChild(row);
+
+            products.forEach(product => {
+                Object.keys(product.prices).forEach(duration => {
+                    const durationText = getDurationText(duration);
+                    const price = product.prices[duration];
+                    
+                    const row = document.createElement('tr');
+                    
+                    let categoryBadge = '';
+                    let categoryClass = '';
+                    if (product.category === 'm3u') {
+                        categoryBadge = 'M3U';
+                        categoryClass = 'category-m3u';
+                    } else if (product.category === 'code') {
+                        categoryBadge = 'CODE';
+                        categoryClass = 'category-code';
+                    } else if (product.category === 'bein') {
+                        categoryBadge = 'BEIN SPORT';
+                        categoryClass = 'category-bein';
+                    } else if (product.category === 'shahid') {
+                        categoryBadge = 'SHAHID';
+                        categoryClass = 'category-shahid';
+                    }
+
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;"></td>
+                        <td>${product.name}</td>
+                        <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
+                        <td>${price.toFixed(2)} (${durationText})</td>
+                        <td>${product.stock}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteProduct(${product.id})">
+                                Supprimer
+                            </button>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
             });
         }
 
-        function showAdminDashboard() {
-            document.getElementById('adminDashboardModal').classList.add('active');
-            
-            const container = document.getElementById('adminStatsContainer');
-            container.innerHTML = `
-                <div class="dashboard-grid">
-                    <div class="card">
-                        <h3>Total des Utilisateurs</h3>
-                        <div class="balance-display">${users.length}</div>
-                    </div>
-                    <div class="card">
-                        <h3>Total des Produits</h3>
-                        <div class="balance-display">${products.length}</div>
-                    </div>
-                    <div class="card">
-                        <h3>Revenus Totaux</h3>
-                        <div class="balance-display">${users.reduce((sum, user) => sum + user.totalPurchases, 0).toFixed(2)} MAD</div>
-                    </div>
-                    <div class="card">
-                        <h3>Produits en Stock</h3>
-                        <div class="balance-display">${products.reduce((sum, product) => sum + product.stock, 0)}</div>
-                    </div>
-                </div>
-            `;
+        function deleteProduct(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce produit?')) {
+                products = products.filter(p => p.id !== id);
+                updateLocalStorage();
+                loadProducts();
+                loadManageProducts();
+                alert('Produit supprimé avec succès!');
+            }
         }
 
-        function closeAdminDashboardModal() {
-            document.getElementById('adminDashboardModal').classList.remove('active');
+        function rechargeBalance() {
+            if (!currentUser) {
+                alert('Veuillez vous connecter');
+                return;
+            }
+
+            const amount = parseFloat(document.getElementById('rechargeAmount').value);
+            const method = document.getElementById('paymentMethod').value;
+
+            if (amount < 500) {
+                alert('Le montant minimum de recharge est de 500 MAD');
+                return;
+            }
+
+            currentUser.balance += amount;
+            
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex] = currentUser;
+            }
+            
+            updateLocalStorage();
+            updateDashboard();
+            document.getElementById('currentBalanceDisplay').textContent = currentUser.balance.toFixed(2);
+            document.getElementById('rechargeForm').reset();
+            
+            alert(`Recharge de ${amount.toFixed(2)} MAD effectuée avec succès!`);
+        }
+
+        function changeRole() {
+            if (currentUser) {
+                const newRole = document.getElementById('userRole').value;
+                currentUser.role = newRole;
+                
+                const userIndex = users.findIndex(u => u.id === currentUser.id);
+                if (userIndex !== -1) {
+                    users[userIndex].role = newRole;
+                    updateLocalStorage();
+                }
+
+                if (newRole === 'admin') {
+                    document.querySelectorAll('.admin-only').forEach(el => {
+                        el.style.display = 'block';
+                    });
+                    document.getElementById('adminProductActions').style.display = 'flex';
+                } else {
+                    document.querySelectorAll('.admin-only').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                    document.getElementById('adminProductActions').style.display = 'none';
+                }
+            }
         }
     </script>
 </body>
