@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel 4 ALL - Boutique Premium</title>
+    <title>Panel 4 ALL - Votre Boutique Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #6c5ce7;
-            --primary-dark: #5649c0;
-            --secondary: #00cec9;
+            --primary: #00C9B1; /* Turquoise */
+            --primary-dark: #00A895;
+            --secondary: #FF7A5A; /* Corail */
+            --secondary-dark: #E8694C;
+            --accent: #4CD964; /* Vert */
+            --accent-dark: #3DB853;
             --dark: #2d3436;
             --light: #f5f6fa;
             --gray: #dfe6e9;
@@ -62,6 +65,13 @@
             padding: 15px 0;
         }
 
+        .logo-section {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
         .logo {
             display: flex;
             align-items: center;
@@ -81,6 +91,17 @@
             margin-right: 10px;
             font-size: 2rem;
             color: var(--primary);
+        }
+
+        .slogan {
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .nav {
+            margin-left: auto;
         }
 
         .nav ul {
@@ -104,12 +125,12 @@
 
         .nav a:hover {
             color: var(--primary);
-            background: rgba(108, 92, 231, 0.08);
+            background: rgba(0, 201, 177, 0.08);
         }
 
         .nav a.active {
             color: var(--primary);
-            background: rgba(108, 92, 231, 0.1);
+            background: rgba(0, 201, 177, 0.1);
         }
 
         .nav a.active::after {
@@ -132,7 +153,7 @@
         #currentUser {
             font-weight: 500;
             color: var(--primary);
-            background: rgba(108, 92, 231, 0.1);
+            background: rgba(0, 201, 177, 0.1);
             padding: 6px 12px;
             border-radius: 20px;
         }
@@ -166,19 +187,29 @@
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 201, 177, 0.3);
         }
 
         .btn-secondary {
-            background: white;
-            color: var(--dark);
-            border: 1px solid var(--gray);
+            background: var(--secondary);
+            color: white;
         }
 
         .btn-secondary:hover {
-            background: var(--light);
+            background: var(--secondary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 5px 15px rgba(255, 122, 90, 0.3);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 217, 100, 0.3);
         }
 
         .btn-danger {
@@ -284,7 +315,7 @@
         /* Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
 
@@ -425,13 +456,13 @@
         }
 
         th {
-            background: rgba(108, 92, 231, 0.05);
+            background: rgba(0, 201, 177, 0.05);
             font-weight: 600;
             color: var(--dark);
         }
 
         tr:hover {
-            background: rgba(108, 92, 231, 0.02);
+            background: rgba(0, 201, 177, 0.02);
         }
 
         .table-image {
@@ -456,12 +487,12 @@
         }
 
         .edit-btn {
-            background: rgba(0, 206, 201, 0.1);
-            color: var(--secondary);
+            background: rgba(0, 201, 177, 0.1);
+            color: var(--primary);
         }
 
         .edit-btn:hover {
-            background: var(--secondary);
+            background: var(--primary);
             color: white;
         }
 
@@ -509,7 +540,7 @@
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 201, 177, 0.1);
         }
 
         /* Login Section */
@@ -537,7 +568,7 @@
         .login-info {
             margin-top: 25px;
             padding: 20px;
-            background: rgba(108, 92, 231, 0.05);
+            background: rgba(0, 201, 177, 0.05);
             border-radius: 12px;
         }
 
@@ -584,7 +615,7 @@
 
         .payment-method-info {
             padding: 20px;
-            background: rgba(108, 92, 231, 0.05);
+            background: rgba(0, 201, 177, 0.05);
             border-radius: 12px;
             margin-top: 15px;
         }
@@ -679,7 +710,7 @@
 
         .file-upload-label:hover {
             border-color: var(--primary);
-            background: rgba(108, 92, 231, 0.05);
+            background: rgba(0, 201, 177, 0.05);
         }
 
         .image-preview-container {
@@ -692,6 +723,28 @@
             border-radius: 8px;
             object-fit: cover;
             border: 1px solid var(--gray);
+        }
+
+        /* Scrolling Message */
+        .scrolling-message {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 500;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollText 20s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
         /* Responsive */
@@ -747,25 +800,26 @@
         }
 
         .category-m3u {
-            background: rgba(108, 92, 231, 0.1);
+            background: rgba(0, 201, 177, 0.1);
             color: var(--primary);
         }
 
         .category-code {
-            background: rgba(0, 206, 201, 0.1);
+            background: rgba(255, 122, 90, 0.1);
             color: var(--secondary);
         }
 
         .category-bein {
+            background: rgba(76, 217, 100, 0.1);
+            color: var(--accent);
+        }
+
+        .category-shahid {
             background: rgba(253, 203, 110, 0.1);
             color: #e17055;
         }
 
-        .category-shahid {
-            background: rgba(214, 48, 49, 0.1);
-            color: var(--danger);
-        }
-
+        /* Duration Options */
         .duration-options {
             display: flex;
             gap: 10px;
@@ -775,7 +829,7 @@
 
         .duration-option {
             padding: 8px 15px;
-            background: rgba(108, 92, 231, 0.08);
+            background: rgba(0, 201, 177, 0.08);
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 500;
@@ -787,16 +841,61 @@
             background: var(--primary);
             color: white;
         }
+
+        /* Price Inputs for Admin */
+        .price-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .price-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-input-group label {
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .price-input-group input {
+            padding: 8px 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Test User Badge */
+        .test-user-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
+    <!-- Scrolling Message -->
+    <div class="scrolling-message">
+        <div class="scrolling-text">
+            <span>Le minimum de recharge est de 500 MAD | الحد الأدنى لإعادة الشحن هو 500 درهم</span>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo">
-                    <i class="fas fa-tv logo-icon"></i>
-                    <h1>Panel 4 ALL</h1>
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-tv logo-icon"></i>
+                        <h1>Panel 4 ALL</h1>
+                    </div>
+                    <div class="slogan">Votre boutique premium de services numériques</div>
                 </div>
                 <nav class="nav">
                     <ul>
@@ -915,7 +1014,7 @@
                                 <th>Image</th>
                                 <th>Nom</th>
                                 <th>Catégorie</th>
-                                <th>Description</th>
+                                <th>Durée</th>
                                 <th>Prix (MAD)</th>
                                 <th>Stock</th>
                                 <th>Actions</th>
@@ -939,7 +1038,8 @@
                         <form id="rechargeForm">
                             <div class="form-group">
                                 <label for="rechargeAmount">Montant à recharger (MAD)</label>
-                                <input type="number" id="rechargeAmount" min="10" max="10000" step="10" required>
+                                <input type="number" id="rechargeAmount" min="500" max="10000" step="10" required>
+                                <small style="color: var(--secondary);">Le minimum de recharge est de 500 MAD</small>
                             </div>
                             <div class="form-group">
                                 <label for="paymentMethod">Méthode de paiement</label>
@@ -980,9 +1080,12 @@
 
             <!-- Users Section (Admin only) -->
             <section id="usersSection" class="section">
-                <h2>Gestion des Utilisateurs</h2>
-                <div class="admin-actions">
-                    <button class="btn btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
+                <div class="section-header">
+                    <h2>Gestion des Utilisateurs</h2>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
+                        <button class="btn btn-accent" onclick="showAddTestUserModal()">Créer un utilisateur test</button>
+                    </div>
                 </div>
                 <div class="users-table-container">
                     <table id="usersTable">
@@ -993,6 +1096,7 @@
                                 <th>Rôle</th>
                                 <th>Solde (MAD)</th>
                                 <th>Total Achats (MAD)</th>
+                                <th>Date d'expiration</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -1013,6 +1117,7 @@
                                 <th>ID</th>
                                 <th>Date</th>
                                 <th>Produit</th>
+                                <th>Durée</th>
                                 <th>Prix (MAD)</th>
                                 <th>Statut</th>
                             </tr>
@@ -1059,6 +1164,32 @@
         </div>
     </div>
 
+    <!-- Add Test User Modal -->
+    <div id="addTestUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddTestUserModal()">&times;</span>
+            <h3>Créer un Utilisateur Test</h3>
+            <form id="addTestUserForm" onsubmit="addTestUser(event)">
+                <div class="form-group">
+                    <label for="testUsername">Nom d'utilisateur</label>
+                    <input type="text" id="testUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="testPassword">Mot de passe (par défaut: test2025)</label>
+                    <input type="text" id="testPassword" value="test2025" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Durée de validité: 24 heures</label>
+                    <small style="color: var(--secondary);">Ce compte expirera automatiquement après 24 heures</small>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddTestUserModal()">Annuler</button>
+                    <button type="submit" class="btn btn-accent">Créer l'utilisateur test</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Add Product Modal -->
     <div id="addProductModal" class="modal">
         <div class="modal-content">
@@ -1088,11 +1219,29 @@
                     <textarea id="productDescription" rows="4" placeholder="Décrivez votre produit en détail..." required></textarea>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="productPrice"><i class="fas fa-money-bill-wave"></i> Prix (MAD)</label>
-                        <input type="number" id="productPrice" step="0.01" min="0" placeholder="0.00" required>
+                <div class="form-group">
+                    <label><i class="fas fa-money-bill-wave"></i> Prix par durée (MAD)</label>
+                    <div class="price-inputs">
+                        <div class="price-input-group">
+                            <label for="price1Month">1 Mois</label>
+                            <input type="number" id="price1Month" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                        <div class="price-input-group">
+                            <label for="price3Months">3 Mois</label>
+                            <input type="number" id="price3Months" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="price-input-group">
+                            <label for="price6Months">6 Mois</label>
+                            <input type="number" id="price6Months" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="price-input-group">
+                            <label for="price12Months">12 Mois</label>
+                            <input type="number" id="price12Months" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
                         <label for="productStock"><i class="fas fa-boxes"></i> Quantité en stock</label>
                         <input type="number" id="productStock" min="0" value="0" placeholder="0" required>
@@ -1148,11 +1297,29 @@
                     <textarea id="editProductDescription" rows="4" required></textarea>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editProductPrice"><i class="fas fa-money-bill-wave"></i> Prix (MAD)</label>
-                        <input type="number" id="editProductPrice" step="0.01" min="0" required>
+                <div class="form-group">
+                    <label><i class="fas fa-money-bill-wave"></i> Prix par durée (MAD)</label>
+                    <div class="price-inputs">
+                        <div class="price-input-group">
+                            <label for="editPrice1Month">1 Mois</label>
+                            <input type="number" id="editPrice1Month" step="0.01" min="0" required>
+                        </div>
+                        <div class="price-input-group">
+                            <label for="editPrice3Months">3 Mois</label>
+                            <input type="number" id="editPrice3Months" step="0.01" min="0">
+                        </div>
+                        <div class="price-input-group">
+                            <label for="editPrice6Months">6 Mois</label>
+                            <input type="number" id="editPrice6Months" step="0.01" min="0">
+                        </div>
+                        <div class="price-input-group">
+                            <label for="editPrice12Months">12 Mois</label>
+                            <input type="number" id="editPrice12Months" step="0.01" min="0" required>
+                        </div>
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
                         <label for="editProductStock"><i class="fas fa-boxes"></i> Quantité en stock</label>
                         <input type="number" id="editProductStock" min="0" required>
@@ -1181,8 +1348,8 @@
     <script>
         // Données de démonstration
         let users = JSON.parse(localStorage.getItem('users')) || [
-            { id: 1, username: 'admin', password: 'admin123', role: 'admin', balance: 1000, totalPurchases: 0 },
-            { id: 2, username: 'test', password: 'test123', role: 'user', balance: 500, totalPurchases: 0 }
+            { id: 1, username: 'admin', password: 'admin123', role: 'admin', balance: 1000, totalPurchases: 0, isTest: false, expirationDate: null },
+            { id: 2, username: 'test', password: 'test123', role: 'user', balance: 500, totalPurchases: 0, isTest: false, expirationDate: null }
         ];
 
         let products = JSON.parse(localStorage.getItem('products')) || [
@@ -1191,45 +1358,68 @@
                 name: "M3U Premium",
                 category: "m3u",
                 description: "Accès complet à plus de 10 000 chaînes internationales",
-                price: 99.99,
+                prices: {
+                    "1month": 99.99,
+                    "3months": 249.99,
+                    "6months": 449.99,
+                    "12months": 799.99
+                },
                 stock: 50,
-                image: "https://via.placeholder.com/300x200?text=M3U+Premium"
+                image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=M3U+Premium"
             },
             {
                 id: 2,
                 name: "M3U Standard",
                 category: "m3u",
                 description: "Accès à 5 000 chaînes populaires",
-                price: 59.99,
+                prices: {
+                    "1month": 59.99,
+                    "3months": 149.99,
+                    "6months": 269.99,
+                    "12months": 499.99
+                },
                 stock: 100,
-                image: "https://via.placeholder.com/300x200?text=M3U+Standard"
+                image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=M3U+Standard"
             },
             {
                 id: 3,
                 name: "CODE IPTV",
                 category: "code",
                 description: "Code d'activation pour service IPTV premium",
-                price: 79.99,
+                prices: {
+                    "1month": 79.99,
+                    "3months": 199.99,
+                    "6months": 359.99,
+                    "12months": 649.99
+                },
                 stock: 75,
-                image: "https://via.placeholder.com/300x200?text=CODE+IPTV"
+                image: "https://via.placeholder.com/300x200/FF7A5A/FFFFFF?text=CODE+IPTV"
             },
             {
                 id: 4,
                 name: "BEIN SPORT Premium",
                 category: "bein",
                 description: "Accès à tous les événements sportifs BEIN SPORT",
-                price: 129.99,
+                prices: {
+                    "1month": 129.99,
+                    "3months": 349.99,
+                    "6months": 629.99,
+                    "12months": 1149.99
+                },
                 stock: 30,
-                image: "https://via.placeholder.com/300x200?text=BEIN+SPORT"
+                image: "https://via.placeholder.com/300x200/4CD964/FFFFFF?text=BEIN+SPORT"
             },
             {
                 id: 5,
                 name: "SHAHID VIP",
                 category: "shahid",
                 description: "Accès VIP à la plateforme SHAHID",
-                price: 89.99,
+                prices: {
+                    "1month": 89.99,
+                    "12months": 899.99
+                },
                 stock: 60,
-                image: "https://via.placeholder.com/300x200?text=SHAHID+VIP"
+                image: "https://via.placeholder.com/300x200/FDCB6E/FFFFFF?text=SHAHID+VIP"
             }
         ];
 
@@ -1241,6 +1431,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateLocalStorage();
             setupEventListeners();
+            checkExpiredUsers();
         });
 
         function setupEventListeners() {
@@ -1278,6 +1469,18 @@
             localStorage.setItem('users', JSON.stringify(users));
             localStorage.setItem('products', JSON.stringify(products));
             localStorage.setItem('purchases', JSON.stringify(purchases));
+        }
+
+        function checkExpiredUsers() {
+            const now = new Date();
+            users = users.filter(user => {
+                if (user.isTest && user.expirationDate) {
+                    const expirationDate = new Date(user.expirationDate);
+                    return expirationDate > now;
+                }
+                return true;
+            });
+            updateLocalStorage();
         }
 
         function showSection(sectionId) {
@@ -1326,6 +1529,15 @@
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
+                // Check if test user has expired
+                if (user.isTest && user.expirationDate) {
+                    const expirationDate = new Date(user.expirationDate);
+                    if (expirationDate < new Date()) {
+                        alert('Ce compte test a expiré. Veuillez contacter l\'administrateur.');
+                        return;
+                    }
+                }
+
                 currentUser = user;
                 document.getElementById('loginSection').classList.remove('active');
                 document.getElementById('loginBtn').style.display = 'none';
@@ -1404,65 +1616,72 @@
             productsGrid.innerHTML = '';
 
             products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                
-                // Determine stock status
-                let stockClass = 'in-stock';
-                let stockText = `En stock: ${product.stock}`;
-                if (product.stock === 0) {
-                    stockClass = 'out-of-stock';
-                    stockText = 'Rupture de stock';
-                } else if (product.stock < 10) {
-                    stockClass = 'low-stock';
-                    stockText = `Stock faible: ${product.stock}`;
-                }
+                // Create a product card for each duration
+                Object.keys(product.prices).forEach(duration => {
+                    const durationText = getDurationText(duration);
+                    const price = product.prices[duration];
+                    
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    // Determine stock status
+                    let stockClass = 'in-stock';
+                    let stockText = `En stock: ${product.stock}`;
+                    if (product.stock === 0) {
+                        stockClass = 'out-of-stock';
+                        stockText = 'Rupture de stock';
+                    } else if (product.stock < 10) {
+                        stockClass = 'low-stock';
+                        stockText = `Stock faible: ${product.stock}`;
+                    }
 
-                // Determine category badge
-                let categoryBadge = '';
-                let categoryClass = '';
-                if (product.category === 'm3u') {
-                    categoryBadge = 'M3U';
-                    categoryClass = 'category-m3u';
-                } else if (product.category === 'code') {
-                    categoryBadge = 'CODE';
-                    categoryClass = 'category-code';
-                } else if (product.category === 'bein') {
-                    categoryBadge = 'BEIN SPORT';
-                    categoryClass = 'category-bein';
-                } else if (product.category === 'shahid') {
-                    categoryBadge = 'SHAHID';
-                    categoryClass = 'category-shahid';
-                }
+                    // Determine category badge
+                    let categoryBadge = '';
+                    let categoryClass = '';
+                    if (product.category === 'm3u') {
+                        categoryBadge = 'M3U';
+                        categoryClass = 'category-m3u';
+                    } else if (product.category === 'code') {
+                        categoryBadge = 'CODE';
+                        categoryClass = 'category-code';
+                    } else if (product.category === 'bein') {
+                        categoryBadge = 'BEIN SPORT';
+                        categoryClass = 'category-bein';
+                    } else if (product.category === 'shahid') {
+                        categoryBadge = 'SHAHID';
+                        categoryClass = 'category-shahid';
+                    }
 
-                productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <div class="category-badge ${categoryClass}">${categoryBadge}</div>
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-price">${product.price.toFixed(2)} MAD</div>
-                        <div class="product-stock ${stockClass}">${stockText}</div>
-                        
-                        ${product.category === 'm3u' || product.category === 'code' || product.category === 'bein' || product.category === 'shahid' ? `
-                        <div class="duration-options">
-                            <div class="duration-option ${product.category === 'shahid' ? '' : 'active'}">1 Mois</div>
-                            ${product.category === 'shahid' ? '' : '<div class="duration-option">3 Mois</div>'}
-                            ${product.category === 'shahid' ? '' : '<div class="duration-option">6 Mois</div>'}
-                            <div class="duration-option ${product.category === 'shahid' ? 'active' : ''}">12 Mois</div>
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <div class="category-badge ${categoryClass}">${categoryBadge}</div>
+                            <h3 class="product-name">${product.name} - ${durationText}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-price">${price.toFixed(2)} MAD</div>
+                            <div class="product-stock ${stockClass}">${stockText}</div>
+                            
+                            <div class="product-actions">
+                                <button class="btn-buy" ${product.stock === 0 || !currentUser ? 'disabled' : ''} onclick="buyProduct(${product.id}, '${duration}')">
+                                    Acheter
+                                </button>
+                            </div>
                         </div>
-                        ` : ''}
-                        
-                        <div class="product-actions">
-                            <button class="btn-buy" ${product.stock === 0 || !currentUser ? 'disabled' : ''} onclick="buyProduct(${product.id})">
-                                Acheter
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                productsGrid.appendChild(productCard);
+                    `;
+                    
+                    productsGrid.appendChild(productCard);
+                });
             });
+        }
+
+        function getDurationText(duration) {
+            switch(duration) {
+                case '1month': return '1 Mois';
+                case '3months': return '3 Mois';
+                case '6months': return '6 Mois';
+                case '12months': return '12 Mois';
+                default: return duration;
+            }
         }
 
         function filterProducts(category) {
@@ -1500,44 +1719,50 @@
             tableBody.innerHTML = '';
 
             products.forEach(product => {
-                const row = document.createElement('tr');
-                
-                // Determine category badge
-                let categoryBadge = '';
-                let categoryClass = '';
-                if (product.category === 'm3u') {
-                    categoryBadge = 'M3U';
-                    categoryClass = 'category-m3u';
-                } else if (product.category === 'code') {
-                    categoryBadge = 'CODE';
-                    categoryClass = 'category-code';
-                } else if (product.category === 'bein') {
-                    categoryBadge = 'BEIN SPORT';
-                    categoryClass = 'category-bein';
-                } else if (product.category === 'shahid') {
-                    categoryBadge = 'SHAHID';
-                    categoryClass = 'category-shahid';
-                }
+                // Create a row for each duration
+                Object.keys(product.prices).forEach(duration => {
+                    const durationText = getDurationText(duration);
+                    const price = product.prices[duration];
+                    
+                    const row = document.createElement('tr');
+                    
+                    // Determine category badge
+                    let categoryBadge = '';
+                    let categoryClass = '';
+                    if (product.category === 'm3u') {
+                        categoryBadge = 'M3U';
+                        categoryClass = 'category-m3u';
+                    } else if (product.category === 'code') {
+                        categoryBadge = 'CODE';
+                        categoryClass = 'category-code';
+                    } else if (product.category === 'bein') {
+                        categoryBadge = 'BEIN SPORT';
+                        categoryClass = 'category-bein';
+                    } else if (product.category === 'shahid') {
+                        categoryBadge = 'SHAHID';
+                        categoryClass = 'category-shahid';
+                    }
 
-                row.innerHTML = `
-                    <td>${product.id}</td>
-                    <td><img src="${product.image}" alt="${product.name}" class="table-image"></td>
-                    <td>${product.name}</td>
-                    <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
-                    <td>${product.description}</td>
-                    <td>${product.price.toFixed(2)}</td>
-                    <td>${product.stock}</td>
-                    <td class="table-actions">
-                        <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
-                            <i class="fas fa-edit"></i> Modifier
-                        </button>
-                        <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
-                            <i class="fas fa-trash"></i> Supprimer
-                        </button>
-                    </td>
-                `;
-                
-                tableBody.appendChild(row);
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td><img src="${product.image}" alt="${product.name}" class="table-image"></td>
+                        <td>${product.name}</td>
+                        <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
+                        <td>${durationText}</td>
+                        <td>${price.toFixed(2)}</td>
+                        <td>${product.stock}</td>
+                        <td class="table-actions">
+                            <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
+                                <i class="fas fa-edit"></i> Modifier
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </button>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
             });
         }
 
@@ -1546,44 +1771,50 @@
             tableBody.innerHTML = '';
 
             products.forEach(product => {
-                const row = document.createElement('tr');
-                
-                // Determine category badge
-                let categoryBadge = '';
-                let categoryClass = '';
-                if (product.category === 'm3u') {
-                    categoryBadge = 'M3U';
-                    categoryClass = 'category-m3u';
-                } else if (product.category === 'code') {
-                    categoryBadge = 'CODE';
-                    categoryClass = 'category-code';
-                } else if (product.category === 'bein') {
-                    categoryBadge = 'BEIN SPORT';
-                    categoryClass = 'category-bein';
-                } else if (product.category === 'shahid') {
-                    categoryBadge = 'SHAHID';
-                    categoryClass = 'category-shahid';
-                }
+                // Create a row for each duration
+                Object.keys(product.prices).forEach(duration => {
+                    const durationText = getDurationText(duration);
+                    const price = product.prices[duration];
+                    
+                    const row = document.createElement('tr');
+                    
+                    // Determine category badge
+                    let categoryBadge = '';
+                    let categoryClass = '';
+                    if (product.category === 'm3u') {
+                        categoryBadge = 'M3U';
+                        categoryClass = 'category-m3u';
+                    } else if (product.category === 'code') {
+                        categoryBadge = 'CODE';
+                        categoryClass = 'category-code';
+                    } else if (product.category === 'bein') {
+                        categoryBadge = 'BEIN SPORT';
+                        categoryClass = 'category-bein';
+                    } else if (product.category === 'shahid') {
+                        categoryBadge = 'SHAHID';
+                        categoryClass = 'category-shahid';
+                    }
 
-                row.innerHTML = `
-                    <td>${product.id}</td>
-                    <td><img src="${product.image}" alt="${product.name}" class="table-image"></td>
-                    <td>${product.name}</td>
-                    <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
-                    <td>${product.description}</td>
-                    <td>${product.price.toFixed(2)}</td>
-                    <td>${product.stock}</td>
-                    <td class="table-actions">
-                        <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
-                            <i class="fas fa-edit"></i> Modifier
-                        </button>
-                        <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
-                            <i class="fas fa-trash"></i> Supprimer
-                        </button>
-                    </td>
-                `;
-                
-                tableBody.appendChild(row);
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td><img src="${product.image}" alt="${product.name}" class="table-image"></td>
+                        <td>${product.name}</td>
+                        <td><span class="category-badge ${categoryClass}">${categoryBadge}</span></td>
+                        <td>${durationText}</td>
+                        <td>${price.toFixed(2)}</td>
+                        <td>${product.stock}</td>
+                        <td class="table-actions">
+                            <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
+                                <i class="fas fa-edit"></i> Modifier
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </button>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
             });
         }
 
@@ -1618,13 +1849,27 @@
             const name = document.getElementById('productName').value;
             const category = document.getElementById('productCategory').value;
             const description = document.getElementById('productDescription').value;
-            const price = parseFloat(document.getElementById('productPrice').value);
             const stock = parseInt(document.getElementById('productStock').value);
             const imageInput = document.getElementById('productImage');
             
+            // Get prices for each duration
+            const price1Month = parseFloat(document.getElementById('price1Month').value);
+            const price3Months = document.getElementById('price3Months').value ? parseFloat(document.getElementById('price3Months').value) : null;
+            const price6Months = document.getElementById('price6Months').value ? parseFloat(document.getElementById('price6Months').value) : null;
+            const price12Months = parseFloat(document.getElementById('price12Months').value);
+            
+            // Build prices object
+            const prices = {
+                "1month": price1Month
+            };
+            
+            if (price3Months) prices["3months"] = price3Months;
+            if (price6Months) prices["6months"] = price6Months;
+            prices["12months"] = price12Months;
+            
             // For demo purposes, we'll use a placeholder image
             // In a real application, you would upload the image to a server
-            let imageUrl = "https://via.placeholder.com/300x200?text=" + encodeURIComponent(name);
+            let imageUrl = "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name);
             
             if (imageInput.files && imageInput.files[0]) {
                 // In a real app, you would upload the file and get a URL
@@ -1632,21 +1877,21 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     imageUrl = e.target.result;
-                    completeAddProduct(name, category, description, price, stock, imageUrl);
+                    completeAddProduct(name, category, description, prices, stock, imageUrl);
                 };
                 reader.readAsDataURL(imageInput.files[0]);
             } else {
-                completeAddProduct(name, category, description, price, stock, imageUrl);
+                completeAddProduct(name, category, description, prices, stock, imageUrl);
             }
         }
 
-        function completeAddProduct(name, category, description, price, stock, imageUrl) {
+        function completeAddProduct(name, category, description, prices, stock, imageUrl) {
             const newProduct = {
                 id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
                 name,
                 category,
                 description,
-                price,
+                prices,
                 stock,
                 image: imageUrl
             };
@@ -1672,8 +1917,13 @@
                 document.getElementById('editProductName').value = product.name;
                 document.getElementById('editProductCategory').value = product.category;
                 document.getElementById('editProductDescription').value = product.description;
-                document.getElementById('editProductPrice').value = product.price;
                 document.getElementById('editProductStock').value = product.stock;
+                
+                // Set prices
+                document.getElementById('editPrice1Month').value = product.prices["1month"];
+                document.getElementById('editPrice3Months').value = product.prices["3months"] || '';
+                document.getElementById('editPrice6Months').value = product.prices["6months"] || '';
+                document.getElementById('editPrice12Months').value = product.prices["12months"];
                 
                 document.getElementById('editProductModal').classList.add('active');
             }
@@ -1690,15 +1940,29 @@
             const name = document.getElementById('editProductName').value;
             const category = document.getElementById('editProductCategory').value;
             const description = document.getElementById('editProductDescription').value;
-            const price = parseFloat(document.getElementById('editProductPrice').value);
             const stock = parseInt(document.getElementById('editProductStock').value);
+            
+            // Get prices for each duration
+            const price1Month = parseFloat(document.getElementById('editPrice1Month').value);
+            const price3Months = document.getElementById('editPrice3Months').value ? parseFloat(document.getElementById('editPrice3Months').value) : null;
+            const price6Months = document.getElementById('editPrice6Months').value ? parseFloat(document.getElementById('editPrice6Months').value) : null;
+            const price12Months = parseFloat(document.getElementById('editPrice12Months').value);
+            
+            // Build prices object
+            const prices = {
+                "1month": price1Month
+            };
+            
+            if (price3Months) prices["3months"] = price3Months;
+            if (price6Months) prices["6months"] = price6Months;
+            prices["12months"] = price12Months;
             
             const productIndex = products.findIndex(p => p.id === id);
             if (productIndex !== -1) {
                 products[productIndex].name = name;
                 products[productIndex].category = category;
                 products[productIndex].description = description;
-                products[productIndex].price = price;
+                products[productIndex].prices = prices;
                 products[productIndex].stock = stock;
                 
                 updateLocalStorage();
@@ -1739,7 +2003,7 @@
             }
         }
 
-        function buyProduct(productId) {
+        function buyProduct(productId, duration) {
             if (!currentUser) {
                 alert('Veuillez vous connecter pour acheter un produit');
                 showLoginModal();
@@ -1757,15 +2021,21 @@
                 return;
             }
             
-            if (currentUser.balance < product.price) {
+            const price = product.prices[duration];
+            if (!price) {
+                alert('Cette durée n\'est pas disponible pour ce produit');
+                return;
+            }
+            
+            if (currentUser.balance < price) {
                 alert('Solde insuffisant. Veuillez recharger votre compte.');
                 showSection('paymentSection');
                 return;
             }
             
             // Process purchase
-            currentUser.balance -= product.price;
-            currentUser.totalPurchases += product.price;
+            currentUser.balance -= price;
+            currentUser.totalPurchases += price;
             product.stock -= 1;
             
             const purchase = {
@@ -1773,7 +2043,8 @@
                 userId: currentUser.id,
                 productId: product.id,
                 productName: product.name,
-                price: product.price,
+                duration: duration,
+                price: price,
                 date: new Date().toISOString(),
                 status: 'Completed'
             };
@@ -1792,7 +2063,7 @@
             updateDashboard();
             loadProducts();
             
-            alert(`Achat réussi! Vous avez acheté "${product.name}" pour ${product.price.toFixed(2)} MAD.`);
+            alert(`Achat réussi! Vous avez acheté "${product.name} - ${getDurationText(duration)}" pour ${price.toFixed(2)} MAD.`);
         }
 
         function updateDashboard() {
@@ -1824,8 +2095,8 @@
                     datasets: [{
                         label: 'Achats (MAD)',
                         data: data,
-                        borderColor: '#6c5ce7',
-                        backgroundColor: 'rgba(108, 92, 231, 0.1)',
+                        borderColor: '#00C9B1',
+                        backgroundColor: 'rgba(0, 201, 177, 0.1)',
                         borderWidth: 2,
                         fill: true,
                         tension: 0.4
@@ -1880,7 +2151,9 @@
                 password,
                 role,
                 balance,
-                totalPurchases: 0
+                totalPurchases: 0,
+                isTest: false,
+                expirationDate: null
             };
             
             users.push(newUser);
@@ -1891,18 +2164,70 @@
             alert('Utilisateur ajouté avec succès!');
         }
 
+        function showAddTestUserModal() {
+            document.getElementById('addTestUserModal').classList.add('active');
+        }
+
+        function closeAddTestUserModal() {
+            document.getElementById('addTestUserModal').classList.remove('active');
+            document.getElementById('addTestUserForm').reset();
+        }
+
+        function addTestUser(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('testUsername').value;
+            const password = "test2025"; // Fixed password for test users
+            
+            // Check if username already exists
+            if (users.find(u => u.username === username)) {
+                alert('Ce nom d\'utilisateur existe déjà');
+                return;
+            }
+            
+            // Calculate expiration date (24 hours from now)
+            const expirationDate = new Date();
+            expirationDate.setHours(expirationDate.getHours() + 24);
+            
+            const newUser = {
+                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+                username,
+                password,
+                role: 'user',
+                balance: 0,
+                totalPurchases: 0,
+                isTest: true,
+                expirationDate: expirationDate.toISOString()
+            };
+            
+            users.push(newUser);
+            updateLocalStorage();
+            loadUsers();
+            closeAddTestUserModal();
+            
+            alert('Utilisateur test créé avec succès! Ce compte expirera le ' + expirationDate.toLocaleString());
+        }
+
         function loadUsers() {
             const tableBody = document.getElementById('usersTableBody');
             tableBody.innerHTML = '';
             
             users.forEach(user => {
                 const row = document.createElement('tr');
+                
+                let expirationText = '-';
+                if (user.isTest && user.expirationDate) {
+                    const expirationDate = new Date(user.expirationDate);
+                    expirationText = expirationDate.toLocaleString();
+                }
+                
                 row.innerHTML = `
                     <td>${user.id}</td>
-                    <td>${user.username}</td>
+                    <td>${user.username} ${user.isTest ? '<span class="test-user-badge">TEST</span>' : ''}</td>
                     <td>${user.role === 'admin' ? 'Administrateur' : 'Utilisateur'}</td>
                     <td>${user.balance.toFixed(2)}</td>
                     <td>${user.totalPurchases.toFixed(2)}</td>
+                    <td>${expirationText}</td>
                     <td>
                         <button class="action-btn delete-btn" onclick="deleteUser(${user.id})" ${user.id === currentUser.id ? 'disabled' : ''}>
                             <i class="fas fa-trash"></i> Supprimer
@@ -1947,6 +2272,7 @@
                     <td>${purchase.id}</td>
                     <td>${formattedDate}</td>
                     <td>${purchase.productName}</td>
+                    <td>${getDurationText(purchase.duration)}</td>
                     <td>${purchase.price.toFixed(2)}</td>
                     <td>${purchase.status}</td>
                 `;
