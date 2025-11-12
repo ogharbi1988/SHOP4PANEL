@@ -1,532 +1,39 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel 4 ALL - Boutique Premium</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Gestion de Boutique</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --primary: #00C9B1;
-            --primary-dark: #00A895;
-            --secondary: #FF7A5A;
-            --secondary-dark: #E8694C;
-            --accent: #4CD964;
-            --accent-dark: #3DB853;
-            --dark: #2d3436;
-            --light: #f5f6fa;
-            --gray: #dfe6e9;
-            --success: #00b894;
-            --danger: #d63031;
-            --warning: #fdcb6e;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-icon {
-            margin-right: 10px;
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        .slogan {
-            font-size: 0.9rem;
-            color: var(--dark);
-            margin-top: 5px;
-        }
-
-        .nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav li {
-            margin: 0 15px;
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .nav a:hover, .nav a.active {
-            color: var(--primary);
-            background: rgba(0, 201, 177, 0.1);
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        #currentUser {
-            font-weight: 500;
-            color: var(--primary);
-            background: rgba(0, 201, 177, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: var(--secondary-dark);
-        }
-
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .category-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .category-m3u { background: rgba(0, 201, 177, 0.1); color: var(--primary); }
-        .category-code { background: rgba(255, 122, 90, 0.1); color: var(--secondary); }
-        .category-bein { background: rgba(76, 217, 100, 0.1); color: var(--accent); }
-        .category-shahid { background: rgba(253, 203, 110, 0.1); color: #e17055; }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--gray);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .price-inputs {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .scrolling-message {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 500;
-            overflow: hidden;
-        }
-
-        .scrolling-text {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scrollText 20s linear infinite;
-        }
-
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        .file-upload-container {
-            position: relative;
-            margin-top: 8px;
-        }
-
-        .file-upload-container input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload-label {
-            padding: 15px;
-            border: 2px dashed var(--gray);
-            border-radius: 8px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .file-upload-label:hover {
-            border-color: var(--primary);
-            background: rgba(0, 201, 177, 0.05);
-        }
-
-        .image-preview {
-            max-width: 200px;
-            max-height: 150px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid var(--gray);
-            margin-top: 10px;
-        }
-
-        /* Login Page Styles */
-        .login-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
-        }
-
-        .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .login-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-logo .logo {
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .login-slogan {
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--dark);
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .login-slogan-arabic {
-            text-align: center;
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 30px;
-            direction: rtl;
-        }
-
-        .form-group input {
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(0, 201, 177, 0.1);
-        }
-
-        /* Dashboard Styles */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .balance-display, .purchases-display {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .chart-container {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 30px;
-        }
-
-        .chart-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .chart-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Premium Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .premium-card {
-            animation: fadeInUp 0.6s ease-out;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-
-        .glow-effect {
-            position: relative;
-        }
-
-        .glow-effect::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            border-radius: 18px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .glow-effect:hover::before {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body>
-    <!-- Scrolling Message -->
-    <div class="scrolling-message">
-        <div class="scrolling-text">
-            Le minimum de recharge est de 500 MAD | الحد الأدنى لإعادة الشحن هو 500 درهم
-        </div>
-    </div>
-
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo-section">
-                    <div class="logo">
-                        <i class="fas fa-crown logo-icon"></i>
-                        <h1>Panel 4 ALL</h1>
-                    </div>
-                    <div class="slogan">Votre boutique premium de services numériques</div>
+                <div class="logo">
+                    <h1>MaBoutique</h1>
                 </div>
                 <nav class="nav">
                     <ul>
-                        <li><a href="#" class="nav-link active" data-section="dashboardSection">Tableau de bord</a></li>
-                        <li><a href="#" class="nav-link" data-section="productsSection">Produits</a></li>
-                        <li><a href="#" class="nav-link admin-only" data-section="manageProductsSection" style="display: none;">Gérer Produits</a></li>
-                        <li><a href="#" class="nav-link admin-only" data-section="usersSection" style="display: none;">Utilisateurs</a></li>
-                        <li><a href="#" class="nav-link admin-only" data-section="purchasesSection" style="display: none;">Achats</a></li>
-                        <li><a href="#" class="nav-link" data-section="paymentSection">Recharger</a></li>
+                        <li><a href="#" onclick="showSection('dashboard')">Tableau de bord</a></li>
+                        <li><a href="#" onclick="showSection('products')">Produits</a></li>
+                        <li><a href="#" onclick="showSection('manageProducts')" id="manageProductsLink" style="display: none;">Gérer Produits</a></li>
+                        <li><a href="#" onclick="showSection('users')" id="usersLink" style="display: none;">Utilisateurs</a></li>
+                        <li><a href="#" onclick="showSection('purchases')" id="purchasesLink" style="display: none;">Achats</a></li>
+                        <li><a href="#" onclick="showSection('payment')" id="paymentLink">Recharger</a></li>
                     </ul>
                 </nav>
                 <div class="user-menu">
-                    <span id="currentUser" style="display: none;"></span>
-                    <button id="loginBtn" class="btn btn-primary">Connexion</button>
-                    <button id="logoutBtn" class="btn btn-secondary" style="display: none;">Déconnexion</button>
+                    <span id="currentUser" style="display: none;">Utilisateur</span>
+                    <select id="userRole" onchange="changeRole()" style="display: none;">
+                        <option value="user">Utilisateur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+                    <button id="loginBtn" onclick="showLoginModal()">Connexion</button>
+                    <button id="logoutBtn" onclick="logout()" style="display: none;">Déconnexion</button>
                 </div>
             </div>
         </div>
@@ -536,146 +43,104 @@
     <main class="main">
         <div class="container">
             <!-- Login Section -->
-            <section id="loginSection" class="section active">
-                <div class="login-hero">
-                    <div class="login-container">
-                        <div class="login-logo">
-                            <div class="logo">
-                                <i class="fas fa-crown logo-icon"></i>
-                                <h1 style="font-size: 2.5rem;">Panel 4 ALL</h1>
-                            </div>
-                            <div class="login-slogan">
-                                Nous offrons la meilleure expérience client
-                            </div>
-                            <div class="login-slogan-arabic">
-                                نقدم أفضل تجربة للعميل
-                            </div>
-                        </div>
-                        <form id="loginForm">
+            <section id="loginSection" class="section">
+                <div class="login-container">
+                    <div class="login-form">
+                        <h2>Connexion</h2>
+                        <form id="loginForm" onsubmit="login(event)">
                             <div class="form-group">
-                                <label for="username"><i class="fas fa-user"></i> Nom d'utilisateur</label>
-                                <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur" required>
+                                <label for="username">Nom d'utilisateur</label>
+                                <input type="text" id="username" required>
                             </div>
                             <div class="form-group">
-                                <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
-                                <input type="password" id="password" placeholder="Entrez votre mot de passe" required>
+                                <label for="password">Mot de passe</label>
+                                <input type="password" id="password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
-                                <i class="fas fa-sign-in-alt"></i> Se connecter
-                            </button>
+                            <button type="submit" class="btn-primary">Se connecter</button>
                         </form>
-                        <div class="login-info" style="margin-top: 25px; padding: 20px; background: rgba(0, 201, 177, 0.05); border-radius: 12px;">
-                            <h3 style="color: var(--primary); margin-bottom: 15px; text-align: center;">Comptes de démonstration</h3>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <div style="text-align: center;">
-                                    <strong>Administrateur</strong>
-                                    <div>admin / admin123</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <strong>Utilisateur</strong>
-                                    <div>test / test123</div>
-                                </div>
-                            </div>
+                        <div class="login-info">
+                            <h3>Comptes de démonstration:</h3>
+                            <p><strong>Administrateur:</strong> admin / admin123</p>
+                            <p><strong>Utilisateur test:</strong> test / test123</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Dashboard Section -->
-            <section id="dashboardSection" class="section">
-                <h2>Tableau de bord Premium</h2>
+            <section id="dashboardSection" class="section" style="display: none;">
+                <h2>Tableau de bord</h2>
                 <div class="dashboard-grid">
-                    <div class="card premium-card glow-effect">
-                        <h3><i class="fas fa-wallet"></i> Solde Actuel</h3>
+                    <div class="card">
+                        <h3>Solde Actuel</h3>
                         <div class="balance-display">
                             <span id="userBalance">0.00</span> MAD
                         </div>
                     </div>
-                    <div class="card premium-card glow-effect">
-                        <h3><i class="fas fa-shopping-cart"></i> Total des Achats</h3>
+                    <div class="card">
+                        <h3>Total des Achats</h3>
                         <div class="purchases-display">
                             <span id="totalPurchases">0.00</span> MAD
                         </div>
                     </div>
-                    <div class="card premium-card glow-effect">
-                        <h3><i class="fas fa-chart-line"></i> Achats ce Mois</h3>
-                        <div class="balance-display">
-                            <span id="monthlyPurchases">0.00</span> MAD
-                        </div>
+                    <div class="card" id="adminStatsCard" style="display: none;">
+                        <button class="btn-primary" onclick="showAdminDashboard()" style="width: 100%;">Voir les Statistiques Admin</button>
                     </div>
                 </div>
 
-                <!-- Charts Grid -->
-                <div class="chart-grid">
-                    <!-- User Sales Chart -->
-                    <div class="chart-container premium-card">
-                        <h3><i class="fas fa-chart-bar"></i> Mes Achats par Mois</h3>
-                        <canvas id="userSalesChart"></canvas>
-                    </div>
-
-                    <!-- Top Products Chart (Admin only) -->
-                    <div class="chart-container premium-card admin-only" style="display: none;">
-                        <h3><i class="fas fa-trophy"></i> Top Produits</h3>
-                        <canvas id="topProductsChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Admin Stats -->
-                <div id="adminStats" class="admin-only" style="display: none;">
-                    <div class="dashboard-grid">
-                        <div class="card premium-card glow-effect">
-                            <h3><i class="fas fa-users"></i> Total Utilisateurs</h3>
-                            <div class="balance-display" id="totalUsers">0</div>
-                        </div>
-                        <div class="card premium-card glow-effect">
-                            <h3><i class="fas fa-box"></i> Total Produits</h3>
-                            <div class="balance-display" id="totalProducts">0</div>
-                        </div>
-                        <div class="card premium-card glow-effect">
-                            <h3><i class="fas fa-money-bill-wave"></i> Revenus Totaux</h3>
-                            <div class="balance-display" id="totalRevenue">0.00</div>
-                        </div>
-                    </div>
+                <!-- Monthly Purchases Chart -->
+                <div class="chart-container">
+                    <h3>Achats par Mois</h3>
+                    <canvas id="purchasesChart"></canvas>
                 </div>
             </section>
 
             <!-- Products Section -->
-            <section id="productsSection" class="section">
-                <div class="section-header">
-                    <h2>Catalogue Premium des Produits</h2>
-                    <div class="admin-actions" id="adminProductActions" style="display: none;">
-                        <button class="btn btn-primary" id="showAddProductBtn">
-                            <i class="fas fa-plus"></i> Ajouter un Produit
-                        </button>
-                    </div>
-                </div>
-
-                <div class="category-filter">
-                    <button class="category-btn active" data-category="all">Tous</button>
-                    <button class="category-btn" data-category="m3u">M3U</button>
-                    <button class="category-btn" data-category="code">CODE</button>
-                    <button class="category-btn" data-category="bein">BEIN SPORT</button>
-                    <button class="category-btn" data-category="shahid">SHAHID</button>
-                </div>
-
+            <section id="productsSection" class="section" style="display: none;">
+                <h2>Catalogue des Produits</h2>
                 <div id="productsGrid" class="products-grid">
                     <!-- Products will be loaded here -->
                 </div>
             </section>
 
+            <!-- Manage Products Section (Admin only) -->
+            <section id="manageProductsSection" class="section" style="display: none;">
+                <h2>Gestion des Produits</h2>
+                <div class="admin-actions">
+                    <button class="btn-primary" onclick="showAddProductModal()">Ajouter un produit</button>
+                </div>
+                <div class="products-table-container">
+                    <table id="manageProductsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>Prix (MAD)</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manageProductsTableBody">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
             <!-- Payment Section -->
-            <section id="paymentSection" class="section">
+            <section id="paymentSection" class="section" style="display: none;">
                 <h2>Recharger votre Solde</h2>
                 <div class="payment-container">
+                    <div class="current-balance">
+                        <h3>Solde actuel: <span id="currentBalanceDisplay">0.00</span> MAD</h3>
+                    </div>
                     <div class="payment-form">
-                        <div class="current-balance">
-                            <h3>Solde actuel: <span id="currentBalanceDisplay">0.00</span> MAD</h3>
-                        </div>
                         <form id="rechargeForm">
                             <div class="form-group">
                                 <label for="rechargeAmount">Montant à recharger (MAD)</label>
-                                <input type="number" id="rechargeAmount" min="500" max="10000" step="10" required>
-                                <small style="color: var(--secondary);">Le minimum de recharge est de 500 MAD</small>
+                                <input type="number" id="rechargeAmount" min="10" max="10000" step="10" required>
                             </div>
                             <div class="form-group">
                                 <label for="paymentMethod">Méthode de paiement</label>
@@ -686,18 +151,38 @@
                                     <option value="WAFACASH">WAFACASH</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Valider la recharge</button>
+                            <button type="submit" class="btn-primary">Valider la recharge</button>
                         </form>
+                    </div>
+                    <div class="payment-info">
+                        <div id="CIHinfo" class="payment-method-info" style="display: none;">
+                            <h4>Instructions Virement CIH:</h4>
+                            <p><strong>Compte:</strong> CIH Bank</p>
+                            <p><strong>RIB:</strong> 230 780 12345678901234 56</p>
+                            <p><strong>Titulaire:</strong> MaBoutique</p>
+                            <p><strong>Important:</strong> Mettez votre nom d'utilisateur en référence du virement</p>
+                        </div>
+                        <div id="CASH_PLUSinfo" class="payment-method-info" style="display: none;">
+                            <h4>Instructions CASH PLUS:</h4>
+                            <p><strong>Numéro:</strong> 06-12-34-56-78</p>
+                            <p><strong>Titulaire:</strong> MaBoutique</p>
+                            <p><strong>Important:</strong> Envoyez le montant avec votre nom d'utilisateur en référence</p>
+                        </div>
+                        <div id="WAFACASHinfo" class="payment-method-info" style="display: none;">
+                            <h4>Instructions WAFACASH:</h4>
+                            <p><strong>Code WAFACASH:</strong> 123456789</p>
+                            <p><strong>Titulaire:</strong> MaBoutique</p>
+                            <p><strong>Important:</strong> Utilisez votre nom d'utilisateur comme référence</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Users Section -->
-            <section id="usersSection" class="section">
+            <!-- Users Section (Admin only) -->
+            <section id="usersSection" class="section" style="display: none;">
                 <h2>Gestion des Utilisateurs</h2>
                 <div class="admin-actions">
-                    <button class="btn btn-primary" id="showAddUserBtn">Ajouter un utilisateur</button>
-                    <button class="btn btn-secondary" id="showAddTestUserBtn">Créer un utilisateur test</button>
+                    <button class="btn-primary" onclick="showAddUserModal()">Ajouter un utilisateur</button>
                 </div>
                 <div class="users-table-container">
                     <table id="usersTable">
@@ -708,7 +193,6 @@
                                 <th>Rôle</th>
                                 <th>Solde (MAD)</th>
                                 <th>Total Achats (MAD)</th>
-                                <th>Date d'expiration</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -718,507 +202,103 @@
                     </table>
                 </div>
             </section>
+
+            <!-- Purchases Section -->
+            <section id="purchasesSection" class="section" style="display: none;">
+                <h2>Historique des Achats</h2>
+                <div class="purchases-table-container">
+                    <table id="purchasesTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Produit</th>
+                                <th>Prix (MAD)</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="purchasesTableBody">
+                            <!-- Purchases will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- Add Product Modal -->
-    <div id="addProductModal" class="modal">
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close" onclick="closeAddProductModal()">&times;</span>
-            <h3><i class="fas fa-plus"></i> Ajouter un Nouveau Produit</h3>
-            <form id="addProductForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="productName">Nom du produit</label>
-                        <input type="text" id="productName" placeholder="Entrez le nom du produit" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="productCategory">Catégorie</label>
-                        <select id="productCategory" required>
-                            <option value="">Sélectionner une catégorie</option>
-                            <option value="m3u">M3U</option>
-                            <option value="code">CODE</option>
-                            <option value="bein">BEIN SPORT</option>
-                            <option value="shahid">SHAHID</option>
-                        </select>
-                    </div>
-                </div>
-
+            <span class="close" onclick="closeAddUserModal()">&times;</span>
+            <h3>Ajouter un Nouvel Utilisateur</h3>
+            <form id="addUserForm" onsubmit="addUser(event)">
                 <div class="form-group">
-                    <label for="productDescription">Description détaillée</label>
-                    <textarea id="productDescription" rows="4" placeholder="Décrivez votre produit en détail..." required></textarea>
+                    <label for="newUsername">Nom d'utilisateur</label>
+                    <input type="text" id="newUsername" required>
                 </div>
-
                 <div class="form-group">
-                    <label>Prix par durée (MAD)</label>
-                    <div class="price-inputs">
-                        <div class="price-input-group">
-                            <label for="price1Month">1 Mois</label>
-                            <input type="number" id="price1Month" step="0.01" min="0" placeholder="0.00" required>
-                        </div>
-                        <div class="price-input-group">
-                            <label for="price3Months">3 Mois</label>
-                            <input type="number" id="price3Months" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="price-input-group">
-                            <label for="price6Months">6 Mois</label>
-                            <input type="number" id="price6Months" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="price-input-group">
-                            <label for="price12Months">12 Mois</label>
-                            <input type="number" id="price12Months" step="0.01" min="0" placeholder="0.00" required>
-                        </div>
-                    </div>
+                    <label for="newPassword">Mot de passe</label>
+                    <input type="password" id="newPassword" required>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="productStock">Quantité en stock</label>
-                        <input type="number" id="productStock" min="0" value="0" placeholder="0" required>
-                    </div>
-                </div>
-
                 <div class="form-group">
-                    <label for="productImage">Image du produit</label>
-                    <div class="file-upload-container">
-                        <input type="file" id="productImage" accept="image/*">
-                        <div class="file-upload-label">
-                            <span><i class="fas fa-upload"></i> Choisir une image</span>
-                            <small>Formats acceptés: JPG, PNG, GIF (max 5MB)</small>
-                        </div>
-                    </div>
-                    <div id="imagePreview"></div>
+                    <label for="newRole">Rôle</label>
+                    <select id="newRole" required>
+                        <option value="user">Utilisateur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
                 </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeAddProductModal()">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Ajouter le Produit</button>
+                <div class="form-group">
+                    <label for="newBalance">Solde Initial (MAD)</label>
+                    <input type="number" id="newBalance" step="0.01" min="0" value="0" required>
                 </div>
+                <button type="submit" class="btn-primary">Ajouter</button>
             </form>
         </div>
     </div>
 
-    <script>
-        // Données initiales
-        let users = [
-            { id: 1, username: 'admin', password: 'admin123', role: 'admin', balance: 1000, totalPurchases: 0, isTest: false, expirationDate: null },
-            { id: 2, username: 'test', password: 'test123', role: 'user', balance: 500, totalPurchases: 0, isTest: false, expirationDate: null }
-        ];
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddProductModal()">&times;</span>
+            <h3>Ajouter un Nouveau Produit</h3>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productName">Nom du produit</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <textarea id="productDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Prix (MAD)</label>
+                    <input type="number" id="productPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="productStock">Quantité en stock</label>
+                    <input type="number" id="productStock" min="0" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="productImage">Image du produit</label>
+                    <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
+                    <div id="imagePreview" style="margin-top: 10px;"></div>
+                </div>
+                <button type="submit" class="btn-primary">Ajouter</button>
+            </form>
+        </div>
+    </div>
 
-        let products = [
-            {
-                id: 1,
-                name: "M3U Premium",
-                category: "m3u",
-                description: "Accès complet à plus de 10 000 chaînes internationales",
-                prices: {
-                    "1month": 99.99,
-                    "3months": 249.99,
-                    "6months": 449.99,
-                    "12months": 799.99
-                },
-                stock: 50,
-                image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=M3U+Premium"
-            }
-        ];
+    <!-- Admin Dashboard Modal -->
+    <div id="adminDashboardModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminDashboardModal()">&times;</span>
+            <h3>Tableau de bord Administrateur</h3>
+            <div id="adminStatsContainer">
+                <!-- Stats will be loaded here -->
+            </div>
+        </div>
+    </div>
 
-        let purchases = [];
-        let currentUser = null;
-
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            initApp();
-        });
-
-        function initApp() {
-            setupEventListeners();
-            loadProducts();
-        }
-
-        function setupEventListeners() {
-            // Navigation
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const sectionId = this.getAttribute('data-section');
-                    showSection(sectionId);
-                });
-            });
-
-            // Login form
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                login();
-            });
-
-            // Add product form
-            document.getElementById('addProductForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addProduct();
-            });
-
-            // Show add product modal
-            document.getElementById('showAddProductBtn').addEventListener('click', function() {
-                showAddProductModal();
-            });
-
-            // Image preview
-            document.getElementById('productImage').addEventListener('change', function(e) {
-                previewImage(e);
-            });
-
-            // Category filter
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    const category = this.getAttribute('data-category');
-                    filterProducts(category);
-                });
-            });
-        }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
-            document.getElementById(sectionId).classList.add('active');
-
-            // Update charts when showing dashboard
-            if (sectionId === 'dashboardSection') {
-                updateDashboard();
-            }
-        }
-
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const user = users.find(u => u.username === username && u.password === password);
-
-            if (user) {
-                currentUser = user;
-                document.getElementById('loginSection').classList.remove('active');
-                document.getElementById('loginBtn').style.display = 'none';
-                document.getElementById('logoutBtn').style.display = 'inline-block';
-                document.getElementById('currentUser').textContent = user.username;
-                document.getElementById('currentUser').style.display = 'inline-block';
-
-                // Hide all admin elements for regular users
-                if (user.role === 'admin') {
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'block';
-                    });
-                    document.getElementById('adminProductActions').style.display = 'flex';
-                } else {
-                    // Hide all admin features for regular users
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                }
-
-                showSection('dashboardSection');
-                alert('Connexion réussie!');
-            } else {
-                alert('Nom d\'utilisateur ou mot de passe incorrect');
-            }
-        }
-
-        function showAddProductModal() {
-            document.getElementById('addProductModal').classList.add('active');
-        }
-
-        function closeAddProductModal() {
-            document.getElementById('addProductModal').classList.remove('active');
-            document.getElementById('addProductForm').reset();
-            document.getElementById('imagePreview').innerHTML = '';
-        }
-
-        function previewImage(event) {
-            const input = event.target;
-            const preview = document.getElementById('imagePreview');
-            
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.innerHTML = `<img src="${e.target.result}" class="image-preview" alt="Aperçu de l'image">`;
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function addProduct() {
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const description = document.getElementById('productDescription').value;
-            const stock = parseInt(document.getElementById('productStock').value);
-
-            // Récupérer les prix
-            const price1Month = parseFloat(document.getElementById('price1Month').value);
-            const price3Months = document.getElementById('price3Months').value ? parseFloat(document.getElementById('price3Months').value) : null;
-            const price6Months = document.getElementById('price6Months').value ? parseFloat(document.getElementById('price6Months').value) : null;
-            const price12Months = parseFloat(document.getElementById('price12Months').value);
-
-            // Construire l'objet prices
-            const prices = {
-                "1month": price1Month
-            };
-            
-            if (price3Months) prices["3months"] = price3Months;
-            if (price6Months) prices["6months"] = price6Months;
-            prices["12months"] = price12Months;
-
-            // Gérer l'image
-            const imageInput = document.getElementById('productImage');
-            let imageUrl = "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name);
-            
-            if (imageInput.files && imageInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imageUrl = e.target.result;
-                    completeAddProduct(name, category, description, prices, stock, imageUrl);
-                };
-                reader.readAsDataURL(imageInput.files[0]);
-            } else {
-                completeAddProduct(name, category, description, prices, stock, imageUrl);
-            }
-        }
-
-        function completeAddProduct(name, category, description, prices, stock, imageUrl) {
-            const newProduct = {
-                id: products.length + 1,
-                name,
-                category,
-                description,
-                prices,
-                stock,
-                image: imageUrl
-            };
-
-            products.push(newProduct);
-            loadProducts();
-            closeAddProductModal();
-            
-            alert('Produit ajouté avec succès!');
-        }
-
-        function loadProducts() {
-            const productsGrid = document.getElementById('productsGrid');
-            productsGrid.innerHTML = '';
-
-            products.forEach(product => {
-                Object.keys(product.prices).forEach(duration => {
-                    const durationText = getDurationText(duration);
-                    const price = product.prices[duration];
-                    
-                    const productCard = document.createElement('div');
-                    productCard.className = 'product-card premium-card';
-                    
-                    let stockClass = 'in-stock';
-                    let stockText = `En stock: ${product.stock}`;
-                    if (product.stock === 0) {
-                        stockClass = 'out-of-stock';
-                        stockText = 'Rupture de stock';
-                    } else if (product.stock < 10) {
-                        stockClass = 'low-stock';
-                        stockText = `Stock faible: ${product.stock}`;
-                    }
-
-                    let categoryBadge = '';
-                    let categoryClass = '';
-                    if (product.category === 'm3u') {
-                        categoryBadge = 'M3U';
-                        categoryClass = 'category-m3u';
-                    } else if (product.category === 'code') {
-                        categoryBadge = 'CODE';
-                        categoryClass = 'category-code';
-                    } else if (product.category === 'bein') {
-                        categoryBadge = 'BEIN SPORT';
-                        categoryClass = 'category-bein';
-                    } else if (product.category === 'shahid') {
-                        categoryBadge = 'SHAHID';
-                        categoryClass = 'category-shahid';
-                    }
-
-                    productCard.innerHTML = `
-                        <img src="${product.image}" alt="${product.name}" class="product-image">
-                        <div class="product-info">
-                            <div class="category-badge ${categoryClass}">${categoryBadge}</div>
-                            <h3 class="product-name">${product.name} - ${durationText}</h3>
-                            <p class="product-description">${product.description}</p>
-                            <div class="product-price" style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;">${price.toFixed(2)} MAD</div>
-                            <div class="product-stock ${stockClass}" style="margin-bottom: 15px;">${stockText}</div>
-                            <button class="btn btn-primary" onclick="buyProduct(${product.id}, '${duration}')" style="width: 100%;">
-                                Acheter Maintenant
-                            </button>
-                        </div>
-                    `;
-                    
-                    productsGrid.appendChild(productCard);
-                });
-            });
-        }
-
-        function getDurationText(duration) {
-            switch(duration) {
-                case '1month': return '1 Mois';
-                case '3months': return '3 Mois';
-                case '6months': return '6 Mois';
-                case '12months': return '12 Mois';
-                default: return duration;
-            }
-        }
-
-        function filterProducts(category) {
-            const productCards = document.querySelectorAll('.product-card');
-            
-            productCards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const productCategory = card.querySelector('.category-badge').textContent.toLowerCase();
-                    if (productCategory.includes(category)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-        }
-
-        function buyProduct(productId, duration) {
-            if (!currentUser) {
-                alert('Veuillez vous connecter pour acheter un produit');
-                showSection('loginSection');
-                return;
-            }
-            
-            alert(`Achat de produit ${productId} - ${duration} effectué!`);
-        }
-
-        function updateDashboard() {
-            if (currentUser) {
-                // Update user balance and purchases
-                document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2);
-                document.getElementById('totalPurchases').textContent = currentUser.totalPurchases.toFixed(2);
-                
-                // Calculate monthly purchases
-                const currentMonth = new Date().getMonth();
-                const monthlyTotal = purchases
-                    .filter(p => p.userId === currentUser.id && new Date(p.date).getMonth() === currentMonth)
-                    .reduce((sum, p) => sum + p.price, 0);
-                document.getElementById('monthlyPurchases').textContent = monthlyTotal.toFixed(2);
-
-                // Update charts
-                updateUserSalesChart();
-                
-                // Admin specific updates
-                if (currentUser.role === 'admin') {
-                    updateAdminStats();
-                    updateTopProductsChart();
-                }
-            }
-        }
-
-        function updateUserSalesChart() {
-            const ctx = document.getElementById('userSalesChart').getContext('2d');
-            
-            // Sample data for user sales
-            const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
-            const salesData = months.map(() => Math.floor(Math.random() * 1000));
-            
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: months,
-                    datasets: [{
-                        label: 'Ventes (MAD)',
-                        data: salesData,
-                        borderColor: '#00C9B1',
-                        backgroundColor: 'rgba(0, 201, 177, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Évolution de vos achats mensuels'
-                        }
-                    }
-                }
-            });
-        }
-
-        function updateTopProductsChart() {
-            const ctx = document.getElementById('topProductsChart').getContext('2d');
-            
-            // Sample data for top products
-            const topProducts = ['M3U Premium', 'BEIN SPORT', 'CODE IPTV', 'SHAHID VIP', 'M3U Standard'];
-            const salesData = [150, 120, 90, 75, 60];
-            const colors = ['#00C9B1', '#FF7A5A', '#4CD964', '#FDCB6E', '#6c5ce7'];
-            
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: topProducts,
-                    datasets: [{
-                        data: salesData,
-                        backgroundColor: colors,
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Top des produits vendus'
-                        }
-                    }
-                }
-            });
-        }
-
-        function updateAdminStats() {
-            document.getElementById('totalUsers').textContent = users.length;
-            document.getElementById('totalProducts').textContent = products.length;
-            const totalRevenue = users.reduce((sum, user) => sum + user.totalPurchases, 0);
-            document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2);
-        }
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('loginSection').classList.add('active');
-            document.getElementById('logoutBtn').style.display = 'none';
-            document.getElementById('loginBtn').style.display = 'inline-block';
-            document.getElementById('currentUser').style.display = 'none';
-            document.querySelectorAll('.admin-only').forEach(el => {
-                el.style.display = 'none';
-            });
-            document.getElementById('adminProductActions').style.display = 'none';
-        }
-
-        // Ajouter l'événement de déconnexion
-        document.getElementById('logoutBtn').addEventListener('click', logout);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
