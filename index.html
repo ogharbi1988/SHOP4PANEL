@@ -47,14 +47,41 @@
             padding: 0 20px;
         }
 
+        /* Scrolling Message - EN HAUT DE LA PAGE */
+        .scrolling-message {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 500;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollText 20s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
         /* Header Styles */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             position: sticky;
-            top: 0;
+            top: 50px; /* Position sous la barre défilante */
             z-index: 1000;
+            margin-bottom: 30px;
         }
 
         .nav-wrapper {
@@ -122,6 +149,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
         }
 
         #currentUser {
@@ -130,6 +158,22 @@
             background: rgba(0, 201, 177, 0.1);
             padding: 6px 12px;
             border-radius: 20px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .btn {
@@ -159,6 +203,15 @@
             background: var(--secondary-dark);
         }
 
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c23616;
+        }
+
         .section {
             display: none;
         }
@@ -186,6 +239,7 @@
             overflow: hidden;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
+            position: relative;
         }
 
         .product-card:hover {
@@ -216,6 +270,18 @@
         .category-code { background: rgba(255, 122, 90, 0.1); color: var(--secondary); }
         .category-bein { background: rgba(76, 217, 100, 0.1); color: var(--accent); }
         .category-shahid { background: rgba(253, 203, 110, 0.1); color: #e17055; }
+
+        .out-of-stock-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--danger);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
 
         .modal {
             display: none;
@@ -278,26 +344,6 @@
             margin-top: 15px;
         }
 
-        .scrolling-message {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 500;
-            overflow: hidden;
-        }
-
-        .scrolling-text {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scrollText 20s linear infinite;
-        }
-
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
         .file-upload-container {
             position: relative;
             margin-top: 8px;
@@ -335,7 +381,7 @@
             margin-top: 10px;
         }
 
-        /* Login Page Styles */
+        /* Login Page Styles - CENTRÉ */
         .login-hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
@@ -370,17 +416,26 @@
 
         .login-logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .login-logo .logo {
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .login-logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
         .login-slogan {
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--dark);
             margin-bottom: 5px;
             font-weight: 500;
@@ -388,22 +443,101 @@
 
         .login-slogan-arabic {
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             direction: rtl;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: block;
         }
 
         .form-group input {
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--gray);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
             transition: var(--transition);
+            width: 100%;
         }
 
         .form-group input:focus {
             border-color: var(--primary);
             background: white;
             box-shadow: 0 0 0 3px rgba(0, 201, 177, 0.1);
+            outline: none;
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .login-info {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(0, 201, 177, 0.08);
+            border-radius: 16px;
+            border: 2px dashed rgba(0, 201, 177, 0.3);
+        }
+
+        .login-info h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .demo-accounts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .demo-account {
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray);
+        }
+
+        .demo-account strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .demo-account div {
+            color: var(--dark);
+            font-size: 0.85rem;
+            font-family: monospace;
         }
 
         /* Dashboard Styles */
@@ -447,9 +581,132 @@
             gap: 25px;
         }
 
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--gray);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Users Table */
+        .users-table-container {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        th {
+            background: rgba(0, 201, 177, 0.1);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: rgba(0, 201, 177, 0.05);
+        }
+
+        /* Notifications Panel */
+        .notifications-panel {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--hover-shadow);
+            width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .notifications-panel.active {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--gray);
+            transition: var(--transition);
+        }
+
+        .notification-item:hover {
+            background: rgba(0, 201, 177, 0.05);
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-type {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .notification-type.purchase {
+            color: var(--primary);
+        }
+
+        .notification-type.recharge {
+            color: var(--success);
+        }
+
+        .notification-date {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
         @media (max-width: 768px) {
             .chart-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .demo-accounts {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav ul {
+                flex-wrap: wrap;
+            }
+            
+            .nav li {
+                margin: 5px;
+            }
+
+            .notifications-panel {
+                width: 300px;
+                right: -50px;
             }
         }
 
@@ -495,233 +752,250 @@
     </style>
 </head>
 <body>
-    <!-- Scrolling Message -->
+    <!-- Scrolling Message - EN HAUT DE LA PAGE -->
     <div class="scrolling-message">
         <div class="scrolling-text">
             Le minimum de recharge est de 500 MAD | الحد الأدنى لإعادة الشحن هو 500 درهم
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo-section">
+    <!-- Login Section - SEULE SECTION VISIBLE AU DÉPART -->
+    <section id="loginSection" class="section active">
+        <div class="login-hero">
+            <div class="login-container">
+                <div class="login-logo">
                     <div class="logo">
                         <i class="fas fa-crown logo-icon"></i>
                         <h1>Panel 4 ALL</h1>
                     </div>
-                    <div class="slogan">Votre boutique premium de services numériques</div>
+                    <div class="login-slogan">
+                        Nous offrons la meilleure expérience client
+                    </div>
+                    <div class="login-slogan-arabic">
+                        نقدم أفضل تجربة للعميل
+                    </div>
                 </div>
-                <nav class="nav">
-                    <ul>
-                        <li><a href="#" class="nav-link active" data-section="dashboardSection">Tableau de bord</a></li>
-                        <li><a href="#" class="nav-link" data-section="productsSection">Produits</a></li>
-                        <li><a href="#" class="nav-link admin-only" data-section="manageProductsSection" style="display: none;">Gérer Produits</a></li>
-                        <li><a href="#" class="nav-link admin-only" data-section="usersSection" style="display: none;">Utilisateurs</a></li>
-                        <li><a href="#" class="nav-link admin-only" data-section="purchasesSection" style="display: none;">Achats</a></li>
-                        <li><a href="#" class="nav-link" data-section="paymentSection">Recharger</a></li>
-                    </ul>
-                </nav>
-                <div class="user-menu">
-                    <span id="currentUser" style="display: none;"></span>
-                    <button id="loginBtn" class="btn btn-primary">Connexion</button>
-                    <button id="logoutBtn" class="btn btn-secondary" style="display: none;">Déconnexion</button>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" placeholder="Entrez votre mot de passe" required>
+                    </div>
+                    <button type="submit" class="login-btn">
+                        Se connecter
+                    </button>
+                </form>
+
+                <div class="login-info">
+                    <h3>Comptes de démonstration</h3>
+                    <div class="demo-accounts">
+                        <div class="demo-account">
+                            <strong>Administrateur</strong>
+                            <div>admin / admin123</div>
+                        </div>
+                        <div class="demo-account">
+                            <strong>Utilisateur</strong>
+                            <div>test / test2025</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <!-- Login Section -->
-            <section id="loginSection" class="section active">
-                <div class="login-hero">
-                    <div class="login-container">
-                        <div class="login-logo">
-                            <div class="logo">
-                                <i class="fas fa-crown logo-icon"></i>
-                                <h1 style="font-size: 2.5rem;">Panel 4 ALL</h1>
-                            </div>
-                            <div class="login-slogan">
-                                Nous offrons la meilleure expérience client
-                            </div>
-                            <div class="login-slogan-arabic">
-                                نقدم أفضل تجربة للعميل
-                            </div>
+    <!-- Interface Principale (cachée au départ) -->
+    <div id="mainApp" style="display: none; margin-top: 50px;">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo-section">
+                        <div class="logo">
+                            <i class="fas fa-crown logo-icon"></i>
+                            <h1>Panel 4 ALL</h1>
                         </div>
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label for="username"><i class="fas fa-user"></i> Nom d'utilisateur</label>
-                                <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur" required>
+                        <div class="slogan">Votre boutique premium de services numériques</div>
+                    </div>
+                    <nav class="nav">
+                        <ul>
+                            <li><a href="#" class="nav-link active" data-section="dashboardSection">Tableau de bord</a></li>
+                            <li><a href="#" class="nav-link" data-section="productsSection">Produits</a></li>
+                            <li><a href="#" class="nav-link admin-only" data-section="usersSection" style="display: none;">Utilisateurs</a></li>
+                            <li><a href="#" class="nav-link" data-section="paymentSection">Recharger</a></li>
+                        </ul>
+                    </nav>
+                    <div class="user-menu">
+                        <span id="currentUser"></span>
+                        <button id="notificationsBtn" class="btn btn-primary" style="position: relative;">
+                            <i class="fas fa-bell"></i>
+                            <span id="notificationCount" class="notification-badge" style="display: none;">0</span>
+                        </button>
+                        <button id="logoutBtn" class="btn btn-secondary">Déconnexion</button>
+                        
+                        <!-- Notifications Panel -->
+                        <div class="notifications-panel" id="notificationsPanel">
+                            <div class="notification-header" style="padding: 15px; border-bottom: 1px solid var(--gray);">
+                                <h4 style="margin: 0;">Notifications</h4>
                             </div>
-                            <div class="form-group">
-                                <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
-                                <input type="password" id="password" placeholder="Entrez votre mot de passe" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
-                                <i class="fas fa-sign-in-alt"></i> Se connecter
-                            </button>
-                        </form>
-                        <div class="login-info" style="margin-top: 25px; padding: 20px; background: rgba(0, 201, 177, 0.05); border-radius: 12px;">
-                            <h3 style="color: var(--primary); margin-bottom: 15px; text-align: center;">Comptes de démonstration</h3>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <div style="text-align: center;">
-                                    <strong>Administrateur</strong>
-                                    <div>admin / admin123</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <strong>Utilisateur</strong>
-                                    <div>test / test123</div>
-                                </div>
+                            <div id="notificationsList">
+                                <!-- Notifications will be loaded here -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </header>
 
-            <!-- Dashboard Section -->
-            <section id="dashboardSection" class="section">
-                <h2>Tableau de bord Premium</h2>
-                <div class="dashboard-grid">
-                    <div class="card premium-card glow-effect">
-                        <h3><i class="fas fa-wallet"></i> Solde Actuel</h3>
-                        <div class="balance-display">
-                            <span id="userBalance">0.00</span> MAD
-                        </div>
-                    </div>
-                    <div class="card premium-card glow-effect">
-                        <h3><i class="fas fa-shopping-cart"></i> Total des Achats</h3>
-                        <div class="purchases-display">
-                            <span id="totalPurchases">0.00</span> MAD
-                        </div>
-                    </div>
-                    <div class="card premium-card glow-effect">
-                        <h3><i class="fas fa-chart-line"></i> Achats ce Mois</h3>
-                        <div class="balance-display">
-                            <span id="monthlyPurchases">0.00</span> MAD
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Grid -->
-                <div class="chart-grid">
-                    <!-- User Sales Chart -->
-                    <div class="chart-container premium-card">
-                        <h3><i class="fas fa-chart-bar"></i> Mes Achats par Mois</h3>
-                        <canvas id="userSalesChart"></canvas>
-                    </div>
-
-                    <!-- Top Products Chart (Admin only) -->
-                    <div class="chart-container premium-card admin-only" style="display: none;">
-                        <h3><i class="fas fa-trophy"></i> Top Produits</h3>
-                        <canvas id="topProductsChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Admin Stats -->
-                <div id="adminStats" class="admin-only" style="display: none;">
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="section active">
+                    <h2>Tableau de bord Premium</h2>
                     <div class="dashboard-grid">
                         <div class="card premium-card glow-effect">
-                            <h3><i class="fas fa-users"></i> Total Utilisateurs</h3>
-                            <div class="balance-display" id="totalUsers">0</div>
+                            <h3><i class="fas fa-wallet"></i> Solde Actuel</h3>
+                            <div class="balance-display">
+                                <span id="userBalance">0.00</span> MAD
+                            </div>
                         </div>
                         <div class="card premium-card glow-effect">
-                            <h3><i class="fas fa-box"></i> Total Produits</h3>
-                            <div class="balance-display" id="totalProducts">0</div>
+                            <h3><i class="fas fa-shopping-cart"></i> Total des Achats</h3>
+                            <div class="purchases-display">
+                                <span id="totalPurchases">0.00</span> MAD
+                            </div>
                         </div>
                         <div class="card premium-card glow-effect">
-                            <h3><i class="fas fa-money-bill-wave"></i> Revenus Totaux</h3>
-                            <div class="balance-display" id="totalRevenue">0.00</div>
+                            <h3><i class="fas fa-chart-line"></i> Achats ce Mois</h3>
+                            <div class="balance-display">
+                                <span id="monthlyPurchases">0.00</span> MAD
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Products Section -->
-            <section id="productsSection" class="section">
-                <div class="section-header">
-                    <h2>Catalogue Premium des Produits</h2>
-                    <div class="admin-actions" id="adminProductActions" style="display: none;">
-                        <button class="btn btn-primary" id="showAddProductBtn">
-                            <i class="fas fa-plus"></i> Ajouter un Produit
-                        </button>
-                    </div>
-                </div>
-
-                <div class="category-filter">
-                    <button class="category-btn active" data-category="all">Tous</button>
-                    <button class="category-btn" data-category="m3u">M3U</button>
-                    <button class="category-btn" data-category="code">CODE</button>
-                    <button class="category-btn" data-category="bein">BEIN SPORT</button>
-                    <button class="category-btn" data-category="shahid">SHAHID</button>
-                </div>
-
-                <div id="productsGrid" class="products-grid">
-                    <!-- Products will be loaded here -->
-                </div>
-            </section>
-
-            <!-- Payment Section -->
-            <section id="paymentSection" class="section">
-                <h2>Recharger votre Solde</h2>
-                <div class="payment-container">
-                    <div class="payment-form">
-                        <div class="current-balance">
-                            <h3>Solde actuel: <span id="currentBalanceDisplay">0.00</span> MAD</h3>
+                    <!-- Charts Grid -->
+                    <div class="chart-grid">
+                        <!-- User Sales Chart -->
+                        <div class="chart-container premium-card">
+                            <h3><i class="fas fa-chart-bar"></i> Mes Achats par Mois</h3>
+                            <canvas id="userSalesChart"></canvas>
                         </div>
-                        <form id="rechargeForm">
-                            <div class="form-group">
-                                <label for="rechargeAmount">Montant à recharger (MAD)</label>
-                                <input type="number" id="rechargeAmount" min="500" max="10000" step="10" required>
-                                <small style="color: var(--secondary);">Le minimum de recharge est de 500 MAD</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="paymentMethod">Méthode de paiement</label>
-                                <select id="paymentMethod" required>
-                                    <option value="">Sélectionnez une méthode</option>
-                                    <option value="CIH">Virement Bancaire CIH</option>
-                                    <option value="CASH_PLUS">CASH PLUS</option>
-                                    <option value="WAFACASH">WAFACASH</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Valider la recharge</button>
-                        </form>
+
+                        <!-- Top Products Chart (Admin only) -->
+                        <div class="chart-container premium-card admin-only" style="display: none;">
+                            <h3><i class="fas fa-trophy"></i> Top Produits</h3>
+                            <canvas id="topProductsChart"></canvas>
+                        </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Users Section -->
-            <section id="usersSection" class="section">
-                <h2>Gestion des Utilisateurs</h2>
-                <div class="admin-actions">
-                    <button class="btn btn-primary" id="showAddUserBtn">Ajouter un utilisateur</button>
-                    <button class="btn btn-secondary" id="showAddTestUserBtn">Créer un utilisateur test</button>
-                </div>
-                <div class="users-table-container">
-                    <table id="usersTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom d'utilisateur</th>
-                                <th>Rôle</th>
-                                <th>Solde (MAD)</th>
-                                <th>Total Achats (MAD)</th>
-                                <th>Date d'expiration</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody">
-                            <!-- Users will be loaded here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
-    </main>
+                    <!-- Admin Stats -->
+                    <div id="adminStats" class="admin-only" style="display: none;">
+                        <h3>Statistiques Administrateur</h3>
+                        <div class="dashboard-grid">
+                            <div class="card premium-card glow-effect">
+                                <h3><i class="fas fa-users"></i> Total Utilisateurs</h3>
+                                <div class="balance-display" id="totalUsers">0</div>
+                            </div>
+                            <div class="card premium-card glow-effect">
+                                <h3><i class="fas fa-box"></i> Total Produits</h3>
+                                <div class="balance-display" id="totalProducts">0</div>
+                            </div>
+                            <div class="card premium-card glow-effect">
+                                <h3><i class="fas fa-money-bill-wave"></i> Revenus Totaux</h3>
+                                <div class="balance-display" id="totalRevenue">0.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-    <!-- Add Product Modal -->
+                <!-- Products Section -->
+                <section id="productsSection" class="section">
+                    <div class="section-header">
+                        <h2>Catalogue Premium des Produits</h2>
+                        <div class="admin-actions" id="adminProductActions" style="display: none;">
+                            <button class="btn btn-primary" id="showAddProductBtn">
+                                <i class="fas fa-plus"></i> Ajouter un Produit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="category-filter">
+                        <button class="category-btn active" data-category="all">Tous</button>
+                        <button class="category-btn" data-category="m3u">M3U</button>
+                        <button class="category-btn" data-category="code">CODE</button>
+                        <button class="category-btn" data-category="bein">BEIN SPORT</button>
+                        <button class="category-btn" data-category="shahid">SHAHID</button>
+                    </div>
+
+                    <div id="productsGrid" class="products-grid">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Payment Section -->
+                <section id="paymentSection" class="section">
+                    <h2>Recharger votre Solde</h2>
+                    <div class="payment-container">
+                        <div class="payment-form">
+                            <div class="current-balance">
+                                <h3>Solde actuel: <span id="currentBalanceDisplay">0.00</span> MAD</h3>
+                            </div>
+                            <form id="rechargeForm">
+                                <div class="form-group">
+                                    <label for="rechargeAmount">Montant à recharger (MAD)</label>
+                                    <input type="number" id="rechargeAmount" min="500" max="10000" step="10" required>
+                                    <small style="color: var(--secondary);">Le minimum de recharge est de 500 MAD</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentMethod">Méthode de paiement</label>
+                                    <select id="paymentMethod" required>
+                                        <option value="">Sélectionnez une méthode</option>
+                                        <option value="CIH">Virement Bancaire CIH</option>
+                                        <option value="CASH_PLUS">CASH PLUS</option>
+                                        <option value="WAFACASH">WAFACASH</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Valider la recharge</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="usersSection" class="section">
+                    <h2>Gestion des Utilisateurs</h2>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="showAddUserBtn">Ajouter un utilisateur</button>
+                        <button class="btn btn-secondary" id="showAddTestUserBtn">Créer un utilisateur test</button>
+                    </div>
+                    <div class="users-table-container">
+                        <table id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom d'utilisateur</th>
+                                    <th>Rôle</th>
+                                    <th>Solde (MAD)</th>
+                                    <th>Total Achats (MAD)</th>
+                                    <th>Date d'expiration</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
     <div id="addProductModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddProductModal()">&times;</span>
@@ -798,11 +1072,85 @@
         </div>
     </div>
 
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddUserModal()">&times;</span>
+            <h3><i class="fas fa-user-plus"></i> Ajouter un Utilisateur</h3>
+            <form id="addUserForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newUsername">Nom d'utilisateur</label>
+                        <input type="text" id="newUsername" placeholder="Entrez le nom d'utilisateur" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newUserRole">Rôle</label>
+                        <select id="newUserRole" required>
+                            <option value="user">Utilisateur</option>
+                            <option value="admin">Administrateur</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newUserPassword">Mot de passe</label>
+                        <input type="password" id="newUserPassword" placeholder="Entrez le mot de passe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newUserBalance">Solde initial (MAD)</label>
+                        <input type="number" id="newUserBalance" min="0" step="0.01" value="0" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Ajouter l'Utilisateur</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePurchaseModal()">&times;</span>
+            <h3><i class="fas fa-shopping-cart"></i> Acheter le Produit</h3>
+            <form id="purchaseForm">
+                <div class="form-group">
+                    <label for="selectedProductName">Produit</label>
+                    <input type="text" id="selectedProductName" readonly style="background: #f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label for="selectedDuration">Durée</label>
+                    <input type="text" id="selectedDuration" readonly style="background: #f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label for="selectedPrice">Prix unitaire</label>
+                    <input type="text" id="selectedPrice" readonly style="background: #f5f5f5;">
+                </div>
+                <div class="form-group">
+                    <label for="purchaseQuantity">Quantité</label>
+                    <input type="number" id="purchaseQuantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseComment">Commentaire (optionnel)</label>
+                    <textarea id="purchaseComment" rows="3" placeholder="Ajoutez un commentaire pour votre commande..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="totalAmount">Montant total</label>
+                    <input type="text" id="totalAmount" readonly style="background: #f5f5f5; font-weight: bold; font-size: 1.1rem;">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closePurchaseModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Confirmer l'achat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Données initiales
         let users = [
             { id: 1, username: 'admin', password: 'admin123', role: 'admin', balance: 1000, totalPurchases: 0, isTest: false, expirationDate: null },
-            { id: 2, username: 'test', password: 'test123', role: 'user', balance: 500, totalPurchases: 0, isTest: false, expirationDate: null }
+            { id: 2, username: 'test', password: 'test2025', role: 'user', balance: 500, totalPurchases: 0, isTest: false, expirationDate: null }
         ];
 
         let products = [
@@ -819,11 +1167,28 @@
                 },
                 stock: 50,
                 image: "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=M3U+Premium"
+            },
+            {
+                id: 2,
+                name: "BEIN SPORT Premium",
+                category: "bein",
+                description: "Chaînes BEIN SPORT complètes avec tous les matchs",
+                prices: {
+                    "1month": 149.99,
+                    "3months": 399.99,
+                    "6months": 699.99,
+                    "12months": 1199.99
+                },
+                stock: 30,
+                image: "https://via.placeholder.com/300x200/FF7A5A/FFFFFF?text=BEIN+SPORT"
             }
         ];
 
         let purchases = [];
+        let notifications = [];
         let currentUser = null;
+        let currentProduct = null;
+        let currentDuration = null;
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -832,10 +1197,21 @@
 
         function initApp() {
             setupEventListeners();
-            loadProducts();
         }
 
         function setupEventListeners() {
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                login();
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+
+            // Notifications
+            document.getElementById('notificationsBtn').addEventListener('click', toggleNotifications);
+
             // Navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -845,27 +1221,38 @@
                 });
             });
 
-            // Login form
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                login();
-            });
-
             // Add product form
             document.getElementById('addProductForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 addProduct();
             });
 
-            // Show add product modal
-            document.getElementById('showAddProductBtn').addEventListener('click', function() {
-                showAddProductModal();
+            // Add user form
+            document.getElementById('addUserForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addUser();
             });
 
-            // Image preview
-            document.getElementById('productImage').addEventListener('change', function(e) {
-                previewImage(e);
+            // Purchase form
+            document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                confirmPurchase();
             });
+
+            // Quantity change
+            document.getElementById('purchaseQuantity').addEventListener('input', updateTotalAmount);
+
+            // Show add product modal
+            document.getElementById('showAddProductBtn')?.addEventListener('click', showAddProductModal);
+
+            // Show add user modal
+            document.getElementById('showAddUserBtn')?.addEventListener('click', showAddUserModal);
+
+            // Add test user
+            document.getElementById('showAddTestUserBtn')?.addEventListener('click', addTestUser);
+
+            // Image preview
+            document.getElementById('productImage')?.addEventListener('change', previewImage);
 
             // Category filter
             document.querySelectorAll('.category-btn').forEach(btn => {
@@ -878,24 +1265,6 @@
             });
         }
 
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
-            document.getElementById(sectionId).classList.add('active');
-
-            // Update charts when showing dashboard
-            if (sectionId === 'dashboardSection') {
-                updateDashboard();
-            }
-        }
-
         function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -904,32 +1273,76 @@
 
             if (user) {
                 currentUser = user;
-                document.getElementById('loginSection').classList.remove('active');
-                document.getElementById('loginBtn').style.display = 'none';
-                document.getElementById('logoutBtn').style.display = 'inline-block';
+                
+                // Cacher la page de login
+                document.getElementById('loginSection').style.display = 'none';
+                
+                // Afficher l'interface principale
+                document.getElementById('mainApp').style.display = 'block';
+                
+                // Mettre à jour l'interface utilisateur
                 document.getElementById('currentUser').textContent = user.username;
-                document.getElementById('currentUser').style.display = 'inline-block';
+                document.getElementById('userBalance').textContent = user.balance.toFixed(2);
+                document.getElementById('currentBalanceDisplay').textContent = user.balance.toFixed(2);
 
-                // Hide all admin elements for regular users
+                // Afficher/masquer les éléments admin
                 if (user.role === 'admin') {
                     document.querySelectorAll('.admin-only').forEach(el => {
                         el.style.display = 'block';
                     });
                     document.getElementById('adminProductActions').style.display = 'flex';
-                } else {
-                    // Hide all admin features for regular users
-                    document.querySelectorAll('.admin-only').forEach(el => {
-                        el.style.display = 'none';
-                    });
+                    updateAdminStats();
                 }
 
+                // Charger les données
+                loadProducts();
+                loadUsersTable();
+                loadNotifications();
+                
+                // Afficher le dashboard
                 showSection('dashboardSection');
-                alert('Connexion réussie!');
+                
             } else {
                 alert('Nom d\'utilisateur ou mot de passe incorrect');
             }
         }
 
+        function logout() {
+            currentUser = null;
+            
+            // Cacher l'interface principale
+            document.getElementById('mainApp').style.display = 'none';
+            
+            // Afficher la page de login
+            document.getElementById('loginSection').style.display = 'block';
+            
+            // Réinitialiser le formulaire
+            document.getElementById('loginForm').reset();
+        }
+
+        function showSection(sectionId) {
+            // Cacher toutes les sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Afficher la section demandée
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            // Mettre à jour les données si nécessaire
+            if (sectionId === 'dashboardSection') {
+                updateDashboard();
+            } else if (sectionId === 'usersSection') {
+                loadUsersTable();
+            }
+        }
+
+        // Fonctions pour les modals
         function showAddProductModal() {
             document.getElementById('addProductModal').classList.add('active');
         }
@@ -938,6 +1351,49 @@
             document.getElementById('addProductModal').classList.remove('active');
             document.getElementById('addProductForm').reset();
             document.getElementById('imagePreview').innerHTML = '';
+        }
+
+        function showAddUserModal() {
+            document.getElementById('addUserModal').classList.add('active');
+        }
+
+        function closeAddUserModal() {
+            document.getElementById('addUserModal').classList.remove('active');
+            document.getElementById('addUserForm').reset();
+        }
+
+        function showPurchaseModal(productId, duration) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            currentProduct = product;
+            currentDuration = duration;
+
+            const durationText = getDurationText(duration);
+            const price = product.prices[duration];
+
+            document.getElementById('selectedProductName').value = product.name;
+            document.getElementById('selectedDuration').value = durationText;
+            document.getElementById('selectedPrice').value = price.toFixed(2) + ' MAD';
+            document.getElementById('purchaseQuantity').value = 1;
+            document.getElementById('purchaseQuantity').max = product.stock;
+            document.getElementById('purchaseComment').value = '';
+            updateTotalAmount();
+
+            document.getElementById('purchaseModal').classList.add('active');
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').classList.remove('active');
+            currentProduct = null;
+            currentDuration = null;
+        }
+
+        function updateTotalAmount() {
+            const quantity = parseInt(document.getElementById('purchaseQuantity').value) || 1;
+            const price = currentProduct ? currentProduct.prices[currentDuration] : 0;
+            const total = price * quantity;
+            document.getElementById('totalAmount').value = total.toFixed(2) + ' MAD';
         }
 
         function previewImage(event) {
@@ -955,61 +1411,7 @@
             }
         }
 
-        function addProduct() {
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const description = document.getElementById('productDescription').value;
-            const stock = parseInt(document.getElementById('productStock').value);
-
-            // Récupérer les prix
-            const price1Month = parseFloat(document.getElementById('price1Month').value);
-            const price3Months = document.getElementById('price3Months').value ? parseFloat(document.getElementById('price3Months').value) : null;
-            const price6Months = document.getElementById('price6Months').value ? parseFloat(document.getElementById('price6Months').value) : null;
-            const price12Months = parseFloat(document.getElementById('price12Months').value);
-
-            // Construire l'objet prices
-            const prices = {
-                "1month": price1Month
-            };
-            
-            if (price3Months) prices["3months"] = price3Months;
-            if (price6Months) prices["6months"] = price6Months;
-            prices["12months"] = price12Months;
-
-            // Gérer l'image
-            const imageInput = document.getElementById('productImage');
-            let imageUrl = "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name);
-            
-            if (imageInput.files && imageInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imageUrl = e.target.result;
-                    completeAddProduct(name, category, description, prices, stock, imageUrl);
-                };
-                reader.readAsDataURL(imageInput.files[0]);
-            } else {
-                completeAddProduct(name, category, description, prices, stock, imageUrl);
-            }
-        }
-
-        function completeAddProduct(name, category, description, prices, stock, imageUrl) {
-            const newProduct = {
-                id: products.length + 1,
-                name,
-                category,
-                description,
-                prices,
-                stock,
-                image: imageUrl
-            };
-
-            products.push(newProduct);
-            loadProducts();
-            closeAddProductModal();
-            
-            alert('Produit ajouté avec succès!');
-        }
-
+        // Fonctions principales
         function loadProducts() {
             const productsGrid = document.getElementById('productsGrid');
             productsGrid.innerHTML = '';
@@ -1049,6 +1451,7 @@
                     }
 
                     productCard.innerHTML = `
+                        ${product.stock === 0 ? '<div class="out-of-stock-badge">Hors stock</div>' : ''}
                         <img src="${product.image}" alt="${product.name}" class="product-image">
                         <div class="product-info">
                             <div class="category-badge ${categoryClass}">${categoryBadge}</div>
@@ -1056,9 +1459,19 @@
                             <p class="product-description">${product.description}</p>
                             <div class="product-price" style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;">${price.toFixed(2)} MAD</div>
                             <div class="product-stock ${stockClass}" style="margin-bottom: 15px;">${stockText}</div>
-                            <button class="btn btn-primary" onclick="buyProduct(${product.id}, '${duration}')" style="width: 100%;">
-                                Acheter Maintenant
-                            </button>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-primary" onclick="showPurchaseModal(${product.id}, '${duration}')" style="flex: 1;" ${product.stock === 0 ? 'disabled' : ''}>
+                                    ${product.stock === 0 ? 'Hors stock' : 'Acheter'}
+                                </button>
+                                ${currentUser && currentUser.role === 'admin' ? `
+                                    <button class="btn btn-secondary" onclick="editProduct(${product.id})" style="padding: 10px;">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger" onclick="deleteProduct(${product.id})" style="padding: 10px;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                ` : ''}
+                            </div>
                         </div>
                     `;
                     
@@ -1067,54 +1480,253 @@
             });
         }
 
-        function getDurationText(duration) {
-            switch(duration) {
-                case '1month': return '1 Mois';
-                case '3months': return '3 Mois';
-                case '6months': return '6 Mois';
-                case '12months': return '12 Mois';
-                default: return duration;
-            }
-        }
+        function loadUsersTable() {
+            const usersTableBody = document.getElementById('usersTableBody');
+            usersTableBody.innerHTML = '';
 
-        function filterProducts(category) {
-            const productCards = document.querySelectorAll('.product-card');
-            
-            productCards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const productCategory = card.querySelector('.category-badge').textContent.toLowerCase();
-                    if (productCategory.includes(category)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.username} ${user.isTest ? '<small style="color: var(--secondary);">(test)</small>' : ''}</td>
+                    <td><span class="category-badge ${user.role === 'admin' ? 'category-m3u' : 'category-code'}">${user.role}</span></td>
+                    <td>${user.balance.toFixed(2)} MAD</td>
+                    <td>${user.totalPurchases.toFixed(2)} MAD</td>
+                    <td>${user.expirationDate || 'N/A'}</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="editUser(${user.id})" style="padding: 5px 10px; font-size: 0.8rem;">Modifier</button>
+                        ${!user.isTest ? `<button class="btn btn-secondary" onclick="deleteUser(${user.id})" style="padding: 5px 10px; font-size: 0.8rem;">Supprimer</button>` : ''}
+                    </td>
+                `;
+                usersTableBody.appendChild(row);
             });
         }
 
-        function buyProduct(productId, duration) {
-            if (!currentUser) {
-                alert('Veuillez vous connecter pour acheter un produit');
-                showSection('loginSection');
+        function loadNotifications() {
+            const notificationsList = document.getElementById('notificationsList');
+            const userNotifications = notifications.filter(n => n.userId === currentUser.id);
+            
+            notificationsList.innerHTML = '';
+
+            if (userNotifications.length === 0) {
+                notificationsList.innerHTML = '<div class="notification-item"><p>Aucune notification</p></div>';
+            } else {
+                userNotifications.forEach(notification => {
+                    const notificationItem = document.createElement('div');
+                    notificationItem.className = 'notification-item';
+                    notificationItem.innerHTML = `
+                        <div class="notification-type ${notification.type}">
+                            ${notification.type === 'purchase' ? '🛒 Achat effectué' : '💳 Recharge de solde'}
+                        </div>
+                        <p>${notification.message}</p>
+                        <div class="notification-date">${new Date(notification.date).toLocaleDateString()}</div>
+                    `;
+                    notificationsList.appendChild(notificationItem);
+                });
+            }
+
+            // Mettre à jour le badge
+            const unreadCount = userNotifications.length;
+            const badge = document.getElementById('notificationCount');
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationsPanel');
+            panel.classList.toggle('active');
+        }
+
+        function addNotification(userId, type, message) {
+            const notification = {
+                id: notifications.length + 1,
+                userId,
+                type,
+                message,
+                date: new Date().toISOString(),
+                read: false
+            };
+            notifications.push(notification);
+            
+            if (currentUser && currentUser.id === userId) {
+                loadNotifications();
+            }
+        }
+
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const description = document.getElementById('productDescription').value;
+            const stock = parseInt(document.getElementById('productStock').value);
+
+            const price1Month = parseFloat(document.getElementById('price1Month').value);
+            const price3Months = document.getElementById('price3Months').value ? parseFloat(document.getElementById('price3Months').value) : null;
+            const price6Months = document.getElementById('price6Months').value ? parseFloat(document.getElementById('price6Months').value) : null;
+            const price12Months = parseFloat(document.getElementById('price12Months').value);
+
+            const prices = {
+                "1month": price1Month
+            };
+            
+            if (price3Months) prices["3months"] = price3Months;
+            if (price6Months) prices["6months"] = price6Months;
+            prices["12months"] = price12Months;
+
+            const imageInput = document.getElementById('productImage');
+            let imageUrl = "https://via.placeholder.com/300x200/00C9B1/FFFFFF?text=" + encodeURIComponent(name);
+            
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageUrl = e.target.result;
+                    completeAddProduct(name, category, description, prices, stock, imageUrl);
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                completeAddProduct(name, category, description, prices, stock, imageUrl);
+            }
+        }
+
+        function completeAddProduct(name, category, description, prices, stock, imageUrl) {
+            const newProduct = {
+                id: products.length + 1,
+                name,
+                category,
+                description,
+                prices,
+                stock,
+                image: imageUrl
+            };
+
+            products.push(newProduct);
+            loadProducts();
+            closeAddProductModal();
+            updateAdminStats();
+            alert('Produit ajouté avec succès!');
+        }
+
+        function addUser() {
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newUserPassword').value;
+            const role = document.getElementById('newUserRole').value;
+            const balance = parseFloat(document.getElementById('newUserBalance').value);
+
+            if (users.find(u => u.username === username)) {
+                alert('Ce nom d\'utilisateur existe déjà');
                 return;
             }
-            
-            alert(`Achat de produit ${productId} - ${duration} effectué!`);
+
+            const newUser = {
+                id: users.length + 1,
+                username,
+                password,
+                role,
+                balance,
+                totalPurchases: 0,
+                isTest: false,
+                expirationDate: null
+            };
+
+            users.push(newUser);
+            loadUsersTable();
+            closeAddUserModal();
+            updateAdminStats();
+            alert('Utilisateur ajouté avec succès!');
+        }
+
+        function addTestUser() {
+            const testUsers = [
+                { username: 'user1', password: 'test2025', role: 'user' },
+                { username: 'user2', password: 'test2025', role: 'user' },
+                { username: 'user3', password: 'test2025', role: 'user' }
+            ];
+
+            testUsers.forEach(testUser => {
+                if (!users.find(u => u.username === testUser.username)) {
+                    users.push({
+                        id: users.length + 1,
+                        ...testUser,
+                        balance: 100,
+                        totalPurchases: 0,
+                        isTest: true,
+                        expirationDate: null
+                    });
+                }
+            });
+
+            loadUsersTable();
+            updateAdminStats();
+            alert('Utilisateurs test créés avec succès!');
+        }
+
+        function confirmPurchase() {
+            if (!currentUser || !currentProduct || !currentDuration) return;
+
+            const quantity = parseInt(document.getElementById('purchaseQuantity').value) || 1;
+            const comment = document.getElementById('purchaseComment').value;
+            const price = currentProduct.prices[currentDuration];
+            const totalAmount = price * quantity;
+
+            if (currentUser.balance < totalAmount) {
+                alert('Solde insuffisant');
+                return;
+            }
+
+            if (currentProduct.stock < quantity) {
+                alert('Stock insuffisant');
+                return;
+            }
+
+            // Effectuer l'achat
+            currentUser.balance -= totalAmount;
+            currentUser.totalPurchases += totalAmount;
+            currentProduct.stock -= quantity;
+
+            // Enregistrer l'achat
+            const purchase = {
+                id: purchases.length + 1,
+                userId: currentUser.id,
+                productId: currentProduct.id,
+                productName: currentProduct.name,
+                duration: currentDuration,
+                quantity: quantity,
+                price: price,
+                totalAmount: totalAmount,
+                comment: comment,
+                date: new Date().toISOString()
+            };
+            purchases.push(purchase);
+
+            // Ajouter une notification
+            addNotification(currentUser.id, 'purchase', 
+                `Achat de ${quantity} ${currentProduct.name} (${getDurationText(currentDuration)}) pour ${totalAmount.toFixed(2)} MAD`);
+
+            // Mettre à jour l'interface
+            document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2);
+            document.getElementById('currentBalanceDisplay').textContent = currentUser.balance.toFixed(2);
+            document.getElementById('totalPurchases').textContent = currentUser.totalPurchases.toFixed(2);
+
+            // Recharger les produits
+            loadProducts();
+            updateAdminStats();
+            closePurchaseModal();
+
+            alert(`Achat réussi! ${quantity} ${currentProduct.name} - ${getDurationText(currentDuration)} pour ${totalAmount.toFixed(2)} MAD`);
         }
 
         function updateDashboard() {
             if (currentUser) {
-                // Update user balance and purchases
                 document.getElementById('userBalance').textContent = currentUser.balance.toFixed(2);
                 document.getElementById('totalPurchases').textContent = currentUser.totalPurchases.toFixed(2);
                 
-                // Calculate monthly purchases
                 const currentMonth = new Date().getMonth();
                 const monthlyTotal = purchases
                     .filter(p => p.userId === currentUser.id && new Date(p.date).getMonth() === currentMonth)
-                    .reduce((sum, p) => sum + p.price, 0);
+                    .reduce((sum, p) => sum + p.totalAmount, 0);
                 document.getElementById('monthlyPurchases').textContent = monthlyTotal.toFixed(2);
 
                 // Update charts
@@ -1122,7 +1734,6 @@
                 
                 // Admin specific updates
                 if (currentUser.role === 'admin') {
-                    updateAdminStats();
                     updateTopProductsChart();
                 }
             }
@@ -1199,26 +1810,100 @@
         }
 
         function updateAdminStats() {
-            document.getElementById('totalUsers').textContent = users.length;
-            document.getElementById('totalProducts').textContent = products.length;
-            const totalRevenue = users.reduce((sum, user) => sum + user.totalPurchases, 0);
-            document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2);
+            if (currentUser && currentUser.role === 'admin') {
+                document.getElementById('totalUsers').textContent = users.length;
+                document.getElementById('totalProducts').textContent = products.length;
+                const totalRevenue = users.reduce((sum, user) => sum + user.totalPurchases, 0);
+                document.getElementById('totalRevenue').textContent = totalRevenue.toFixed(2);
+            }
         }
 
-        function logout() {
-            currentUser = null;
-            document.getElementById('loginSection').classList.add('active');
-            document.getElementById('logoutBtn').style.display = 'none';
-            document.getElementById('loginBtn').style.display = 'inline-block';
-            document.getElementById('currentUser').style.display = 'none';
-            document.querySelectorAll('.admin-only').forEach(el => {
-                el.style.display = 'none';
+        function filterProducts(category) {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const productCategory = card.querySelector('.category-badge').textContent.toLowerCase();
+                    if (productCategory.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
             });
-            document.getElementById('adminProductActions').style.display = 'none';
         }
 
-        // Ajouter l'événement de déconnexion
-        document.getElementById('logoutBtn').addEventListener('click', logout);
+        // Fonctions utilitaires
+        function getDurationText(duration) {
+            switch(duration) {
+                case '1month': return '1 Mois';
+                case '3months': return '3 Mois';
+                case '6months': return '6 Mois';
+                case '12months': return '12 Mois';
+                default: return duration;
+            }
+        }
+
+        // Fonctions pour la gestion des produits (Admin)
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Remplir le formulaire avec les données du produit
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productCategory').value = product.category;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productStock').value = product.stock;
+
+            // Remplir les prix
+            document.getElementById('price1Month').value = product.prices["1month"];
+            if (product.prices["3months"]) document.getElementById('price3Months').value = product.prices["3months"];
+            if (product.prices["6months"]) document.getElementById('price6Months').value = product.prices["6months"];
+            document.getElementById('price12Months').value = product.prices["12months"];
+
+            // Afficher l'image
+            document.getElementById('imagePreview').innerHTML = `<img src="${product.image}" class="image-preview" alt="Aperçu de l'image">`;
+
+            // Changer le texte du bouton
+            document.querySelector('#addProductForm button[type="submit"]').textContent = 'Modifier le Produit';
+
+            // Stocker l'ID du produit à modifier
+            document.getElementById('addProductForm').dataset.editingProductId = productId;
+
+            showAddProductModal();
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+                products = products.filter(product => product.id !== productId);
+                loadProducts();
+                updateAdminStats();
+                alert('Produit supprimé avec succès!');
+            }
+        }
+
+        // Fonctions pour la gestion des utilisateurs
+        function editUser(userId) {
+            alert(`Modification de l'utilisateur ${userId} - Fonctionnalité à implémenter`);
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+                users = users.filter(user => user.id !== userId);
+                loadUsersTable();
+                updateAdminStats();
+                alert('Utilisateur supprimé avec succès!');
+            }
+        }
+
+        // Fermer les panels au clic en dehors
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.user-menu')) {
+                document.getElementById('notificationsPanel').classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
