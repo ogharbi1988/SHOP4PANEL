@@ -782,7 +782,8 @@
         <div id="alert-container"></div>
 
         <!-- Login Form -->
-        <form id="loginForm" onsubmit="handleLogin(event)">
+        <form id="loginForm" onsubmit="handleLogin(event); return false;">
+
           <div class="mb-3">
             <label for="email" class="form-label">Email ou nom d'utilisateur</label>
             <div class="input-group">
@@ -2160,64 +2161,66 @@
 
       emptyClient.style.display = "none";
 
-      grid.innerHTML = products
-        .map((p) => {
-          const imgSrc = p.image || PRODUCT_PLACEHOLDER;
-          const prices = [p.price1, p.price3, p.price6, p.price12].filter(
-            (x) => typeof x === "number" && x > 0
-          );
-          const minPrice = prices.length
-            ? Math.min.apply(null, prices)
-            : 0;
+     grid.innerHTML = products
+  .map((p) => {
+    const imgSrc = p.image || PRODUCT_PLACEHOLDER;
+    const prices = [p.price1, p.price3, p.price6, p.price12].filter(
+      (x) => typeof x === "number" && x > 0
+    );
+    const minPrice = prices.length ? Math.min.apply(null, prices) : 0;
 
-          const stockBadgeClass =
-            p.stock > 0 ? "badge-success" : "badge-danger";
-          const stockText = p.stock > 0 ? `${p.stock} en stock` : "Rupture";
+    const stockBadgeClass = p.stock > 0 ? "badge-success" : "badge-danger";
+    const stockText = p.stock > 0 ? p.stock + " en stock" : "Rupture";
 
-          let btnDisabledAttr = "";
-          let btnText = "Commander";
+    let btnDisabledAttr = "";
+    let btnText = "Commander";
 
-          if (currentUser && currentUser.role === "user") {
-            if (currentUser.balance <= 0) {
-              btnDisabledAttr = "disabled";
-              btnText = "Solde insuffisant";
-            } else if (p.stock <= 0) {
-              btnDisabledAttr = "disabled";
-              btnText = "Rupture";
-            }
-          } else {
-            if (p.stock <= 0) {
-              btnDisabledAttr = "disabled";
-              btnText = "Rupture";
-            }
-          }
+    if (currentUser && currentUser.role === "user") {
+      if (!currentUser.balance || currentUser.balance <= 0) {
+        btnDisabledAttr = "disabled";
+        btnText = "Solde insuffisant";
+      } else if (p.stock <= 0) {
+        btnDisabledAttr = "disabled";
+        btnText = "Rupture";
+      }
+    } else {
+      if (p.stock <= 0) {
+        btnDisabledAttr = "disabled";
+        btnText = "Rupture";
+      }
+    }
 
-          return `
-            <div class="col-md-4 col-lg-3 mb-4">
-              <div class="product-card card h-100">
-                <img src="${imgSrc}" class="product-card-img" alt="${p.name}">
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mb-1">${p.name}</h5>
-                  <p class="text-muted mb-2 small">${p.description || ""}</p>
-                  <p class="mb-1 product-price">
-                    ${minPrice ? \`À partir de ${minPrice.toFixed(2)} DH\` : "Prix sur demande"}
-                  </p>
-                  <p class="mb-2">
-                    <span class="badge ${stockBadgeClass}">${stockText}</span>
-                  </p>
-                  <button
-                    class="btn btn-primary mt-auto"
-                    onclick="openOrderModal(${p.id})"
-                    ${btnDisabledAttr}
-                  >
-                    <i class="bx bx-cart-add me-1"></i>${btnText}
-                  </button>
-                </div>
-              </div>
-            </div>
-          `;
-        })
-        .join("");
+    return `
+      <div class="col-md-4 col-lg-3 mb-4">
+        <div class="product-card card h-100">
+          <img src="${imgSrc}" class="product-card-img" alt="${p.name}">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">${p.name}</h5>
+            <p class="text-muted mb-2 small">${p.description || ""}</p>
+            <p class="mb-1 product-price">
+              ${
+                minPrice
+                  ? "À partir de " + minPrice.toFixed(2) + " DH"
+                  : "Prix sur demande"
+              }
+            </p>
+            <p class="mb-2">
+              <span class="badge ${stockBadgeClass}">${stockText}</span>
+            </p>
+            <button
+              class="btn btn-primary mt-auto"
+              onclick="openOrderModal(${p.id})"
+              ${btnDisabledAttr}
+            >
+              <i class="bx bx-cart-add me-1"></i>${btnText}
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  })
+  .join("");
+
     }
 
     // ===== COMMANDES (CLIENT) =====
