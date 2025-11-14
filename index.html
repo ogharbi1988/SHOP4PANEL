@@ -2,53 +2,33 @@
 <html lang="fr" dir="ltr" class="light-style layout-menu-fixed">
 <head>
   <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
   <title>PANEL 4 PRO - Admin Panel</title>
   <meta name="description" content="Panneau d'administration PANEL 4 PRO" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet"
-  />
-
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Boxicons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" />
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     :root {
-      --light-blue: #87ceeb;
-      --light-green: #90ee90;
-      --turquoise-color: #40e0d0;
-      --coral-color: #ff7f50;
-      --white-color: #ffffff;
-      --dark-color: #2c3e50;
-      --light-color: #f8f9fa;
-      --success-color: #32cd32;
-      --danger-color: #ff6b6b;
-      --warning-color: #ffa500;
-      --info-color: #1e90ff;
-      --moderator-color: #9c27b0;
+      --light-blue: #87CEEB;
+      --light-green: #90EE90;
+      --turquoise-color: #40E0D0;
+      --coral-color: #FF7F50;
+      --white-color: #FFFFFF;
+      --dark-color: #2C3E50;
+      --light-color: #F8F9FA;
+      --success-color: #32CD32;
+      --danger-color: #FF6B6B;
+      --warning-color: #FFA500;
+      --info-color: #1E90FF;
+      --moderator-color: #9C27B0;
       --digital-blue: #00f5ff;
       --digital-purple: #9d4edd;
       --neon-pink: #ff00ff;
@@ -61,7 +41,7 @@
     }
 
     body {
-      font-family: "Public Sans", sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
       min-height: 100vh;
       display: flex;
@@ -74,7 +54,10 @@
     /* Effets digitaux */
     .digital-bg {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background:
         radial-gradient(circle at 20% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
@@ -83,18 +66,16 @@
     }
 
     @keyframes pulse {
-      0%,
-      100% {
-        opacity: 0.5;
-      }
-      50% {
-        opacity: 0.8;
-      }
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.8; }
     }
 
     .grid-lines {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background-image:
         linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
@@ -103,55 +84,8 @@
     }
 
     @keyframes gridMove {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(50px, 50px);
-      }
-    }
-
-    /* Banner */
-    .banner-container {
-      position: fixed;
-      top: 0;
-      left: 120px;
-      right: 0;
-      background: linear-gradient(90deg, var(--coral-color), var(--turquoise-color));
-      color: var(--white-color);
-      padding: 8px 0;
-      z-index: 10000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      display: none;
-    }
-
-    .banner-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-align: center;
-      animation: slideText 15s linear infinite;
-    }
-
-    @keyframes slideText {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    .banner-content .text-item {
-      white-space: nowrap;
-      margin: 0 30px;
-    }
-
-    .banner-icon {
-      margin: 0 10px;
-      font-size: 1rem;
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
     }
 
     .authentication-wrapper {
@@ -177,7 +111,7 @@
     }
 
     .card::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: -100%;
@@ -221,27 +155,19 @@
     }
 
     .app-brand-logo::before {
-      content: "";
+      content: '';
       position: absolute;
       top: -50%;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: conic-gradient(
-        transparent,
-        rgba(0, 245, 255, 0.5),
-        transparent 30%
-      );
+      background: conic-gradient(transparent, rgba(0, 245, 255, 0.5), transparent 30%);
       animation: rotate 4s linear infinite;
     }
 
     @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .app-brand-logo i {
@@ -255,12 +181,7 @@
     .app-brand-text {
       font-size: 2.5rem;
       font-weight: 800;
-      background: linear-gradient(
-        135deg,
-        var(--digital-blue),
-        var(--neon-pink),
-        var(--digital-purple)
-      );
+      background: linear-gradient(135deg, var(--digital-blue), var(--neon-pink), var(--digital-purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-decoration: none;
@@ -324,6 +245,10 @@
       border-radius: 0 0.75rem 0.75rem 0;
     }
 
+    .input-group .form-control:focus {
+      border-left: none;
+    }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--digital-blue), var(--digital-purple));
       border: none;
@@ -343,18 +268,13 @@
     }
 
     .btn-primary::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-      );
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: 0.5s;
     }
 
@@ -369,7 +289,7 @@
     }
 
     .divider::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: 0;
@@ -427,30 +347,59 @@
       display: none;
     }
 
-    .strength-weak {
-      background: var(--danger-color);
-      width: 33%;
-    }
-    .strength-medium {
-      background: var(--warning-color);
-      width: 66%;
-    }
-    .strength-strong {
-      background: var(--success-color);
-      width: 100%;
-    }
+    .strength-weak { background: var(--danger-color); width: 33%; }
+    .strength-medium { background: var(--warning-color); width: 66%; }
+    .strength-strong { background: var(--success-color); width: 100%; }
 
-    /* Dashboard */
+    /* Dashboard Styles */
     .dashboard-container {
       display: none;
       width: 100%;
       min-height: 100vh;
-      background: var(--light-color);
+      background: #f8f9fa;
+    }
+
+    .banner-container {
+      position: fixed;
+      top: 0;
+      left: 250px;
+      right: 0;
+      background: linear-gradient(90deg, var(--coral-color), var(--turquoise-color));
+      color: var(--white-color);
+      padding: 8px 0;
+      z-index: 10000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .banner-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      animation: slideText 15s linear infinite;
+    }
+
+    @keyframes slideText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .banner-content .text-item {
+      white-space: nowrap;
+      margin: 0 30px;
+    }
+
+    .banner-icon {
+      margin: 0 10px;
+      font-size: 1rem;
     }
 
     .sidebar {
       width: 250px;
-      background: linear-gradient(180deg, var(--white-color) 0%, #f8f9fa 100%);
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
       position: fixed;
       height: 100vh;
@@ -462,6 +411,8 @@
       margin-left: 250px;
       width: calc(100% - 250px);
       padding: 20px;
+      background: #f8f9fa;
+      min-height: 100vh;
     }
 
     .navbar {
@@ -512,7 +463,8 @@
 
     .sidebar-header {
       padding: 1.5rem 1rem 1rem;
-      border-bottom: 2px solid var(--light-color);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
     }
 
     .sidebar-menu {
@@ -520,7 +472,7 @@
     }
 
     .sidebar-menu .nav-link {
-      color: var(--dark-color);
+      color: rgba(255, 255, 255, 0.8);
       padding: 0.75rem 1rem;
       margin: 0.25rem 0.5rem;
       border-radius: 0.75rem;
@@ -539,8 +491,12 @@
 
     .sidebar-menu .nav-link:hover,
     .sidebar-menu .nav-link.active {
-      background: linear-gradient(135deg, var(--light-blue), var(--light-green));
-      color: var(--dark-color);
+      background: linear-gradient(135deg, var(--digital-blue), var(--digital-purple));
+      color: var(--white-color);
+    }
+
+    .content-section {
+      display: none;
     }
 
     .stats-card {
@@ -556,21 +512,11 @@
       transform: translateY(-5px);
     }
 
-    .stats-card.blue {
-      border-left-color: var(--light-blue);
-    }
-    .stats-card.green {
-      border-left-color: var(--light-green);
-    }
-    .stats-card.turquoise {
-      border-left-color: var(--turquoise-color);
-    }
-    .stats-card.coral {
-      border-left-color: var(--coral-color);
-    }
-    .stats-card.purple {
-      border-left-color: var(--moderator-color);
-    }
+    .stats-card.blue { border-left-color: var(--light-blue); }
+    .stats-card.green { border-left-color: var(--light-green); }
+    .stats-card.turquoise { border-left-color: var(--turquoise-color); }
+    .stats-card.coral { border-left-color: var(--coral-color); }
+    .stats-card.purple { border-left-color: var(--moderator-color); }
 
     .table {
       border-radius: 1rem;
@@ -588,66 +534,191 @@
 
     .table td {
       border-color: #e7e7e9;
-      padding: 0.75rem 1rem;
+      padding: 1rem;
       vertical-align: middle;
-      font-size: 0.9rem;
     }
 
     .user-avatar {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 2px solid var(--turquoise-color);
       object-fit: cover;
+      border: 2px solid var(--turquoise-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
     }
 
-    .badge-status {
-      border-radius: 999px;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
+    .badge-coral {
+      background: var(--coral-color);
+      color: var(--white-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
       font-weight: 600;
     }
 
-    .badge-open {
-      background: #e3f2fd;
-      color: #1565c0;
-    }
-    .badge-inprogress {
-      background: #fff3cd;
-      color: #8d6e00;
-    }
-    .badge-resolved {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-    .badge-closed {
-      background: #f5f5f5;
-      color: #616161;
+    .badge-turquoise {
+      background: var(--turquoise-color);
+      color: var(--white-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
     }
 
-    .badge-priority-low {
-      background: #e3f2fd;
-      color: #1976d2;
-    }
-    .badge-priority-normal {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-    .badge-priority-high {
-      background: #fff3e0;
-      color: #ef6c00;
-    }
-    .badge-priority-urgent {
-      background: #ffebee;
-      color: #c62828;
+    .badge-success {
+      background: var(--success-color);
+      color: var(--white-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
     }
 
-    .user-dashboard-stats {
-      background: linear-gradient(135deg, var(--light-blue), var(--light-green));
+    .badge-warning {
+      background: var(--warning-color);
+      color: var(--white-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-danger {
+      background: var(--danger-color);
+      color: var(--white-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-moderator {
+      background: var(--moderator-color);
+      color: var(--white-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+    }
+
+    .action-buttons .btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      margin: 0 2px;
+      font-size: 0.85rem;
+    }
+
+    .duration-badge {
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .duration-1 { background: #E3F2FD; color: #1976D2; }
+    .duration-3 { background: #E8F5E8; color: #2E7D32; }
+    .duration-6 { background: #FFF3E0; color: #EF6C00; }
+    .duration-12 { background: #FCE4EC; color: #C2185B; }
+
+    .product-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid var(--turquoise-color);
+    }
+
+    .product-card {
+      border: none;
       border-radius: 1rem;
-      padding: 2rem;
+      box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card-img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--coral-color);
+    }
+
+    .product-duration {
+      font-size: 0.9rem;
       color: var(--dark-color);
-      margin-bottom: 2rem;
+    }
+
+    .modal-content {
+      border-radius: 1rem;
+      border: none;
+      box-shadow: 0 1rem 3rem rgba(0,0,0,0.15);
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--light-blue), var(--light-green));
+      color: var(--dark-color);
+      border-radius: 1rem 1rem 0 0;
+      padding: 1.5rem;
+      border: none;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-footer {
+      border-radius: 0 0 1rem 1rem;
+      padding: 1rem 1.5rem;
+      border: none;
+    }
+
+    .form-select {
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e7e7e9;
+      font-size: 0.95rem;
+    }
+
+    .form-select:focus {
+      border-color: var(--turquoise-color);
+      box-shadow: 0 0 0 0.2rem rgba(64, 224, 208, 0.2);
+    }
+
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1055;
+    }
+
+    .order-status-badge {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .status-pending { background: #FFF3CD; color: #856404; }
+    .status-confirmed { background: #D1ECF1; color: #0C5460; }
+    .status-processing { background: #CCE5FF; color: #004085; }
+    .status-completed { background: #D4EDDA; color: #155724; }
+    .status-cancelled { background: #F8D7DA; color: #721C24; }
+
+    .delivery-info {
+      max-width: 150px;
+    }
+
+    .delivery-info a {
+      word-break: break-all;
+      font-size: 0.8rem;
     }
 
     .chart-container {
@@ -656,8 +727,12 @@
       width: 100%;
     }
 
-    .content-section {
-      /* permet de gérer showSection */
+    .user-dashboard-stats {
+      background: linear-gradient(135deg, var(--light-blue), var(--light-green));
+      border-radius: 1rem;
+      padding: 2rem;
+      color: var(--dark-color);
+      margin-bottom: 2rem;
     }
 
     @media (max-width: 768px) {
@@ -682,7 +757,7 @@
   </style>
 </head>
 <body>
-  <!-- Effets d'arrière-plan -->
+  <!-- Effets d'arrière-plan digitaux -->
   <div class="digital-bg"></div>
   <div class="grid-lines"></div>
 
@@ -693,7 +768,7 @@
         <!-- App Brand -->
         <div class="app-brand">
           <div class="app-brand-logo">
-            <i class="bx bxs-rocket"></i>
+            <i class='bx bxs-rocket'></i>
           </div>
           <a href="#" class="app-brand-text">PANEL 4 PRO</a>
           <div class="app-brand-subtitle">DIGITAL SOLUTIONS</div>
@@ -705,20 +780,12 @@
         <!-- Login Form -->
         <form id="loginForm" onsubmit="handleLogin(event)">
           <div class="mb-3">
-            <label for="email" class="form-label">Email ou nom d'utilisateur</label>
+            <label for="email" class="form-label">Email ou Nom d'utilisateur</label>
             <div class="input-group">
               <span class="input-group-text">
-                <i class="bx bx-user"></i>
+                <i class='bx bx-user'></i>
               </span>
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                name="email"
-                placeholder="Votre email ou nom d'utilisateur"
-                required
-                autocomplete="username"
-              />
+              <input type="text" class="form-control" id="email" name="email" placeholder="Votre email ou nom d'utilisateur" required autocomplete="username">
             </div>
           </div>
 
@@ -726,32 +793,19 @@
             <label for="password" class="form-label">Mot de passe</label>
             <div class="input-group">
               <span class="input-group-text">
-                <i class="bx bx-lock-alt"></i>
+                <i class='bx bx-lock-alt'></i>
               </span>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                placeholder="Votre mot de passe"
-                required
-                autocomplete="current-password"
-              />
-              <button
-                type="button"
-                class="password-toggle"
-                onclick="togglePassword()"
-                aria-label="Afficher / masquer le mot de passe"
-              >
-                <i class="bx bx-show" id="passwordToggleIcon"></i>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Votre mot de passe" required autocomplete="current-password">
+              <button type="button" class="password-toggle" onclick="togglePassword()">
+                <i class='bx bx-show' id="passwordToggleIcon"></i>
               </button>
             </div>
             <div id="passwordStrength" class="password-strength"></div>
           </div>
 
           <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe" />
-            <label class="form-check-label" for="rememberMe" style="color: var(--white-color)">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe" style="color: var(--white-color);">
               Se souvenir de moi
             </label>
           </div>
@@ -773,40 +827,39 @@
     </div>
   </div>
 
-  <!-- Tableau de bord -->
+  <!-- Tableau de bord - Gestion complète -->
   <div id="dashboardPage" class="dashboard-container">
     <!-- Bannière Défilante -->
     <div class="banner-container" id="dashboardBanner">
       <div class="banner-content">
-        <span class="text-item">
-          الحد الأدنى لإعادة الشحن: 500 درهم - الحد الأدنى للإيداع: 500 درهم
-        </span>
-        <i class="bx bx-credit-card banner-icon"></i>
+        <span class="text-item">الحد الأدنى لإعادة الشحن: 500 درهم - الحد الأدنى للإيداع: 500 درهم</span>
+        <i class='bx bx-credit-card banner-icon'></i>
         <span class="text-item">Recharge minimum: 500 DH - Dépôt minimum: 500 DH</span>
-        <i class="bx bx-credit-card banner-icon"></i>
-        <span class="text-item">
-          الحد الأدنى لإعادة الشحن: 500 درهم - الحد الأدنى للإيداع: 500 درهم
-        </span>
+        <i class='bx bx-credit-card banner-icon'></i>
+        <span class="text-item">الحد الأدنى لإعادة الشحن: 500 درهم - الحد الأدنى للإيداع: 500 درهم</span>
       </div>
     </div>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
-        <!-- Logo/infos si besoin -->
+        <div class="app-brand-logo" style="width: 60px; height: 60px; margin: 0 auto 0.5rem;">
+          <i class='bx bxs-rocket'></i>
+        </div>
+        <div class="app-brand-text" style="font-size: 1.2rem;">PANEL 4 PRO</div>
       </div>
       <div class="sidebar-menu" id="sidebarMenu">
-        <!-- Menu généré dynamiquement -->
+        <!-- Le menu sera généré dynamiquement selon le rôle -->
       </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Navbar -->
+      <!-- Navbar avec Logo -->
       <nav class="navbar">
         <div class="navbar-logo">
           <div class="navbar-logo-img">
-            <i class="bx bxs-dashboard"></i>
+            <i class='bx bxs-dashboard'></i>
           </div>
           <div class="navbar-logo-text">PANEL 4 PRO</div>
         </div>
@@ -814,12 +867,8 @@
         <div class="navbar-user">
           <div class="dropdown me-3">
             <a class="nav-link dropdown-toggle position-relative" href="#" data-bs-toggle="dropdown">
-              <i class="bx bx-bell" style="font-size: 1.5rem; color: var(--coral-color)"></i>
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                id="notificationCount"
-                >0</span
-              >
+              <i class='bx bx-bell' style="font-size: 1.5rem; color: var(--coral-color);"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notificationCount">0</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" id="notificationDropdown">
               <li><h6 class="dropdown-header">🔔 Notifications</h6></li>
@@ -828,40 +877,26 @@
           </div>
           <div class="dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-              <div
-                class="user-avatar d-flex align-items-center justify-content-center me-2"
-                id="userAvatar"
-                style="color: white; font-weight: bold"
-              >
-                A
-              </div>
-              <span style="font-weight: 600" id="userNameDisplay">Administrateur</span>
+              <div class="user-avatar d-flex align-items-center justify-content-center me-2" id="userAvatar">A</div>
+              <span style="font-weight: 600;" id="userNameDisplay">Administrateur</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="#"><i class="bx bx-user me-2"></i>Profil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="bx bx-cog me-2"></i>Paramètres</a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#" onclick="logout()"
-                  ><i class="bx bx-log-out me-2"></i>Déconnexion</a
-                >
-              </li>
+              <li><a class="dropdown-item" href="#"><i class='bx bx-user me-2'></i>Profil</a></li>
+              <li><a class="dropdown-item" href="#"><i class='bx bx-cog me-2'></i>Paramètres</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="logout()"><i class='bx bx-log-out me-2'></i>Déconnexion</a></li>
             </ul>
           </div>
         </div>
       </nav>
 
-      <!-- Alert Messages Dashboard -->
+      <!-- Alert Messages -->
       <div id="dashboard-alert-container"></div>
 
-      <!-- Section Dashboard principale -->
+      <!-- Section Dashboard -->
       <div id="dashboardSection" class="content-section">
         <!-- Vue Admin/Moderator -->
-        <div id="adminDashboard" style="display: none">
+        <div id="adminDashboard" style="display: none;">
           <!-- Stats Cards -->
           <div class="row mb-4">
             <div class="col-xl-3 col-md-6 mb-3">
@@ -872,7 +907,7 @@
                     <h3 class="mb-0" id="totalUsers">0</h3>
                     <small class="text-success">+12% ce mois</small>
                   </div>
-                  <i class="bx bx-group" style="font-size: 2.5rem; color: var(--light-blue)"></i>
+                  <i class='bx bx-group' style="font-size: 2.5rem; color: var(--light-blue);"></i>
                 </div>
               </div>
             </div>
@@ -884,7 +919,7 @@
                     <h3 class="mb-0" id="totalProducts">0</h3>
                     <small class="text-success">+5% ce mois</small>
                   </div>
-                  <i class="bx bx-package" style="font-size: 2.5rem; color: var(--light-green)"></i>
+                  <i class='bx bx-package' style="font-size: 2.5rem; color: var(--light-green);"></i>
                 </div>
               </div>
             </div>
@@ -896,7 +931,7 @@
                     <h3 class="mb-0" id="totalOrders">0</h3>
                     <small class="text-success">+18% ce mois</small>
                   </div>
-                  <i class="bx bx-cart" style="font-size: 2.5rem; color: var(--turquoise-color)"></i>
+                  <i class='bx bx-cart' style="font-size: 2.5rem; color: var(--turquoise-color);"></i>
                 </div>
               </div>
             </div>
@@ -908,14 +943,14 @@
                     <h3 class="mb-0" id="totalRevenue">0 DH</h3>
                     <small class="text-success">+22% ce mois</small>
                   </div>
-                  <i class="bx bx-line-chart" style="font-size: 2.5rem; color: var(--coral-color)"></i>
+                  <i class='bx bx-line-chart' style="font-size: 2.5rem; color: var(--coral-color);"></i>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Actions rapides admin -->
-          <div id="adminQuickActions" class="row mb-4" style="display: none">
+          <!-- Quick Actions (Admin seulement) -->
+          <div id="adminQuickActions" class="row mb-4" style="display: none;">
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
@@ -923,22 +958,22 @@
                   <div class="row">
                     <div class="col-md-3 mb-2">
                       <button class="btn btn-primary w-100" onclick="showSection('products')">
-                        <i class="bx bx-plus me-2"></i>Ajouter Produit
+                        <i class='bx bx-plus me-2'></i>Ajouter Produit
                       </button>
                     </div>
                     <div class="col-md-3 mb-2">
                       <button class="btn btn-primary w-100" onclick="showAddUserModal()">
-                        <i class="bx bx-user-plus me-2"></i>Nouvel Utilisateur
+                        <i class='bx bx-user-plus me-2'></i>Nouvel Utilisateur
                       </button>
                     </div>
                     <div class="col-md-3 mb-2">
                       <button class="btn btn-primary w-100" onclick="showSection('catalog')">
-                        <i class="bx bx-store me-2"></i>Catalogue Client
+                        <i class='bx bx-store me-2'></i>Catalogue Client
                       </button>
                     </div>
                     <div class="col-md-3 mb-2">
                       <button class="btn btn-primary w-100" onclick="showSection('orders')">
-                        <i class="bx bx-cart me-2"></i>Voir Commandes
+                        <i class='bx bx-cart me-2'></i>Voir Commandes
                       </button>
                     </div>
                   </div>
@@ -949,7 +984,7 @@
         </div>
 
         <!-- Vue Utilisateur -->
-        <div id="userDashboard" style="display: none">
+        <div id="userDashboard" style="display: none;">
           <div class="user-dashboard-stats">
             <div class="row">
               <div class="col-md-4 text-center">
@@ -999,7 +1034,7 @@
                         </tr>
                       </thead>
                       <tbody id="userOrdersTable">
-                        <!-- Lignes des commandes utilisateur -->
+                        <!-- Commandes utilisateur -->
                       </tbody>
                     </table>
                   </div>
@@ -1008,223 +1043,74 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!-- /dashboardSection -->
 
-      <!-- SECTION TICKETS -->
-      <div id="ticketsSection" class="content-section" style="display:none;">
-        <div class="row mb-3">
-          <div class="col-12 d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">
-              <i class="bx bx-support me-2"></i>
-              Tickets de support / réclamations
-            </h4>
-            <button
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#ticketModal"
-            >
-              <i class="bx bx-plus me-1"></i>Nouveau ticket
-            </button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5 class="card-title mb-0">Liste des tickets</h5>
-              <div class="d-flex gap-2">
-                <select id="ticketStatusFilter" class="form-select form-select-sm" style="width:auto;" onchange="loadTickets()">
-                  <option value="">Tous les statuts</option>
-                  <option value="Ouvert">Ouverts</option>
-                  <option value="En cours">En cours</option>
-                  <option value="Résolu">Résolus</option>
-                  <option value="Fermé">Fermés</option>
-                </select>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Sujet</th>
-                    <th>Type</th>
-                    <th>Priorité</th>
-                    <th>Statut</th>
-                    <th>Utilisateur</th>
-                    <th>Créé le</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="ticketsTable">
-                  <!-- Tickets -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MODAL TICKET -->
-      <div
-        class="modal fade"
-        id="ticketModal"
-        tabindex="-1"
-        aria-labelledby="ticketModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="ticketModalLabel">
-                <i class="bx bx-support me-2"></i>Nouveau ticket
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Fermer"
-              ></button>
-            </div>
-            <form id="ticketForm" onsubmit="handleTicketSubmit(event)">
-              <div class="modal-body">
-                <div class="row g-3">
-                  <div class="col-md-8">
-                    <label class="form-label" for="ticketSubject">Sujet</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="ticketSubject"
-                      required
-                      placeholder="Ex : Problème avec une ligne IPTV, modification de compte..."
-                    />
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label" for="ticketType">Type</label>
-                    <select class="form-select" id="ticketType" required>
-                      <option value="Support technique">Support technique</option>
-                      <option value="Réclamation produit">Réclamation produit</option>
-                      <option value="Facturation / Paiement">Facturation / Paiement</option>
-                      <option value="Autre">Autre</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label" for="ticketPriority">Priorité</label>
-                    <select class="form-select" id="ticketPriority" required>
-                      <option value="Basse">Basse</option>
-                      <option value="Normale" selected>Normale</option>
-                      <option value="Haute">Haute</option>
-                      <option value="Urgente">Urgente</option>
-                    </select>
-                  </div>
-                  <div class="col-md-8">
-                    <label class="form-label" for="ticketOrderId">Référence commande / produit (optionnel)</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="ticketOrderId"
-                      placeholder="ID commande, nom du produit ou code client"
-                    />
-                  </div>
-                  <div class="col-12">
-                    <label class="form-label" for="ticketMessage">Description du problème</label>
-                    <textarea
-                      id="ticketMessage"
-                      class="form-control"
-                      rows="4"
-                      required
-                      placeholder="Expliquez le problème, l'erreur, ou la demande de modification..."
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Annuler
-                </button>
-                <button type="submit" class="btn btn-primary">
-                  <i class="bx bx-send me-1"></i>Envoyer le ticket
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- FIN main-content -->
-    </div>
-  </div>
+      <!-- Les autres sections du tableau de bord (products, users, catalog, orders)
+           peuvent être ajoutées ici avec leurs IDs correspondants si besoin. -->
+    </div><!-- /main-content -->
+  </div><!-- /dashboardPage -->
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // ===== DONNÉES INITIALES =====
+    // ===== INITIALISATION DES DONNEES =====
     function initializeData() {
-      if (!localStorage.getItem("users")) {
+      if (!localStorage.getItem('users')) {
         const defaultUsers = [
           {
             id: 1,
-            username: "admin",
-            email: "admin@panel4pro.com",
-            password: "admin123",
-            role: "admin",
-            status: "active",
-            phone: "+212 612 345 678",
-            createdAt: "2024-01-15",
+            username: 'admin',
+            email: 'admin@panel4pro.com',
+            password: 'admin123',
+            role: 'admin',
+            status: 'active',
+            phone: '+212 612 345 678',
+            createdAt: '2024-01-15',
             balance: 0,
             totalPurchases: 0,
             totalSpent: 0
           },
           {
             id: 2,
-            username: "moderateur",
-            email: "mod@panel4pro.com",
-            password: "mod123",
-            role: "moderator",
-            status: "active",
-            phone: "+212 612 345 679",
-            createdAt: "2024-01-15",
+            username: 'moderateur',
+            email: 'mod@panel4pro.com',
+            password: 'mod123',
+            role: 'moderator',
+            status: 'active',
+            phone: '+212 612 345 679',
+            createdAt: '2024-01-15',
             balance: 0,
             totalPurchases: 0,
             totalSpent: 0
           },
           {
             id: 3,
-            username: "utilisateur",
-            email: "user@panel4pro.com",
-            password: "user123",
-            role: "user",
-            status: "active",
-            phone: "+212 612 345 680",
-            createdAt: "2024-01-15",
+            username: 'utilisateur',
+            email: 'user@panel4pro.com',
+            password: 'user123',
+            role: 'user',
+            status: 'active',
+            phone: '+212 612 345 680',
+            createdAt: '2024-01-15',
             balance: 1500,
             totalPurchases: 3,
             totalSpent: 450
           }
         ];
-        localStorage.setItem("users", JSON.stringify(defaultUsers));
+        localStorage.setItem('users', JSON.stringify(defaultUsers));
       }
 
-      if (!localStorage.getItem("products")) {
-        localStorage.setItem("products", JSON.stringify([]));
+      if (!localStorage.getItem('products')) {
+        localStorage.setItem('products', JSON.stringify([]));
       }
 
-      if (!localStorage.getItem("orders")) {
-        localStorage.setItem("orders", JSON.stringify([]));
+      if (!localStorage.getItem('orders')) {
+        localStorage.setItem('orders', JSON.stringify([]));
       }
 
-      if (!localStorage.getItem("notifications")) {
-        localStorage.setItem("notifications", JSON.stringify([]));
-      }
-
-      if (!localStorage.getItem("tickets")) {
-        const defaultTickets = [];
-        localStorage.setItem("tickets", JSON.stringify(defaultTickets));
+      if (!localStorage.getItem('notifications')) {
+        localStorage.setItem('notifications', JSON.stringify([]));
       }
     }
 
@@ -1233,19 +1119,17 @@
     let users = [];
     let orders = [];
     let notifications = [];
-    let tickets = [];
     let currentUser = null;
 
-    // ===== CHARGEMENT DES DONNÉES =====
+    // ===== CHARGEMENT DES DONNEES =====
     function loadData() {
       try {
-        users = JSON.parse(localStorage.getItem("users")) || [];
-        products = JSON.parse(localStorage.getItem("products")) || [];
-        orders = JSON.parse(localStorage.getItem("orders")) || [];
-        notifications = JSON.parse(localStorage.getItem("notifications")) || [];
-        tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+        users = JSON.parse(localStorage.getItem('users')) || [];
+        products = JSON.parse(localStorage.getItem('products')) || [];
+        orders = JSON.parse(localStorage.getItem('orders')) || [];
+        notifications = JSON.parse(localStorage.getItem('notifications')) || [];
       } catch (error) {
-        console.error("Erreur de chargement des données:", error);
+        console.error('Erreur lors du chargement des données:', error);
         localStorage.clear();
         initializeData();
         loadData();
@@ -1253,7 +1137,7 @@
     }
 
     // ===== ALERTES =====
-    function showAlert(message, type = "info", containerId = "alert-container") {
+    function showAlert(message, type = 'info', containerId = 'alert-container') {
       const container = document.getElementById(containerId);
       if (!container) return;
 
@@ -1266,9 +1150,9 @@
       container.innerHTML = alertHtml;
 
       setTimeout(() => {
-        const alert = container.querySelector(".alert");
+        const alert = container.querySelector('.alert');
         if (alert) {
-          alert.classList.remove("show");
+          alert.classList.remove('show');
           setTimeout(() => alert.remove(), 300);
         }
       }, 5000);
@@ -1276,42 +1160,42 @@
 
     // ===== LOADING LOGIN =====
     function showLoading() {
-      const loginBtn = document.getElementById("loginBtn");
+      const loginBtn = document.getElementById('loginBtn');
       if (!loginBtn) return;
-      const buttonText = loginBtn.querySelector(".button-text");
-      const loading = loginBtn.querySelector(".loading");
+      const buttonText = loginBtn.querySelector('.button-text');
+      const loading = loginBtn.querySelector('.loading');
 
       loginBtn.disabled = true;
-      buttonText.style.display = "none";
-      loading.style.display = "inline-block";
+      buttonText.style.display = 'none';
+      loading.style.display = 'inline-block';
     }
 
     function hideLoading() {
-      const loginBtn = document.getElementById("loginBtn");
+      const loginBtn = document.getElementById('loginBtn');
       if (!loginBtn) return;
-      const buttonText = loginBtn.querySelector(".button-text");
-      const loading = loginBtn.querySelector(".loading");
+      const buttonText = loginBtn.querySelector('.button-text');
+      const loading = loginBtn.querySelector('.loading');
 
       loginBtn.disabled = false;
-      buttonText.style.display = "inline";
-      loading.style.display = "none";
+      buttonText.style.display = 'inline';
+      loading.style.display = 'none';
     }
 
     // ===== MOT DE PASSE =====
     function togglePassword() {
-      const passwordInput = document.getElementById("password");
-      const toggleIcon = document.getElementById("passwordToggleIcon");
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('passwordToggleIcon');
 
       if (!passwordInput || !toggleIcon) return;
 
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleIcon.classList.remove("bx-show");
-        toggleIcon.classList.add("bx-hide");
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('bx-show');
+        toggleIcon.classList.add('bx-hide');
       } else {
-        passwordInput.type = "password";
-        toggleIcon.classList.remove("bx-hide");
-        toggleIcon.classList.add("bx-show");
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('bx-hide');
+        toggleIcon.classList.add('bx-show');
       }
     }
 
@@ -1319,15 +1203,15 @@
     function handleLogin(event) {
       event.preventDefault();
 
-      const emailInput = document.getElementById("email");
-      const passwordInput = document.getElementById("password");
-      const rememberMe = document.getElementById("rememberMe").checked;
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const rememberMe = document.getElementById('rememberMe').checked;
 
       const email = emailInput.value.trim();
       const password = passwordInput.value;
 
       if (!email || !password) {
-        showAlert("Veuillez remplir tous les champs.", "danger");
+        showAlert('Veuillez remplir tous les champs.', 'danger');
         return;
       }
 
@@ -1336,33 +1220,30 @@
 
       setTimeout(() => {
         const user = users.find(
-          (u) =>
+          u =>
             (u.email.toLowerCase() === email.toLowerCase() || u.username === email) &&
             u.password === password
         );
 
         if (user) {
           currentUser = user;
-          const token = "user_token_" + Date.now();
-          localStorage.setItem("admin_token", token);
+          const token = 'user_token_' + Date.now();
+          localStorage.setItem('admin_token', token);
 
           if (rememberMe) {
-            localStorage.setItem("remember_email", user.email);
+            localStorage.setItem('remember_email', user.email);
           } else {
-            localStorage.removeItem("remember_email");
+            localStorage.removeItem('remember_email');
           }
 
-          showAlert("Connexion réussie ! Redirection...", "success");
+          showAlert('Connexion réussie ! Redirection...', 'success');
           hideLoading();
 
           setTimeout(() => {
             showDashboard();
           }, 800);
         } else {
-          showAlert(
-            "Email / nom d'utilisateur ou mot de passe incorrect.",
-            "danger"
-          );
+          showAlert('Email / nom d\'utilisateur ou mot de passe incorrect.', 'danger');
           hideLoading();
         }
       }, 800);
@@ -1370,53 +1251,47 @@
 
     // ===== DASHBOARD =====
     function showDashboard() {
-      const loginPage = document.getElementById("loginPage");
-      const dashboardPage = document.getElementById("dashboardPage");
-      const banner = document.getElementById("dashboardBanner");
+      const loginPage = document.getElementById('loginPage');
+      const dashboardPage = document.getElementById('dashboardPage');
+      const banner = document.getElementById('dashboardBanner');
 
-      loginPage.style.display = "none";
-      dashboardPage.style.display = "flex";
-      banner.style.display = "block";
+      loginPage.style.display = 'none';
+      dashboardPage.style.display = 'flex';
+      banner.style.display = 'block';
 
       updateInterfaceByRole();
 
-      showAlert(
-        `Bienvenue ${currentUser.username} !`,
-        "success",
-        "dashboard-alert-container"
-      );
+      showAlert(`Bienvenue ${currentUser.username} !`, 'success', 'dashboard-alert-container');
 
-      // Appels sécurisés (si les fonctions existent dans un autre fichier)
-      if (typeof loadProducts === "function") loadProducts();
-      if (typeof loadUsers === "function") loadUsers();
-      if (typeof loadOrders === "function") loadOrders();
-      if (typeof loadCatalog === "function") loadCatalog();
-      if (typeof updateStats === "function") updateStats();
-      if (typeof loadNotifications === "function") loadNotifications();
+      // Appels stubs pour éviter les erreurs, les vraies fonctions peuvent être ajoutées plus tard
+      if (typeof loadProducts === 'function') loadProducts();
+      if (typeof loadUsers === 'function') loadUsers();
+      if (typeof loadOrders === 'function') loadOrders();
+      if (typeof loadCatalog === 'function') loadCatalog();
+      if (typeof updateStats === 'function') updateStats();
+      if (typeof loadNotifications === 'function') loadNotifications();
 
-      if (currentUser.role === "user" && typeof loadUserDashboard === "function") {
+      if (currentUser.role === 'user' && typeof loadUserDashboard === 'function') {
         loadUserDashboard();
       }
 
-      // Charger les tickets quand on arrive sur le dashboard (pour que ce soit prêt quand on ouvre la section)
-      loadTickets();
+      // Par défaut, on affiche la section dashboard
+      showSection('dashboard');
     }
 
     function updateInterfaceByRole() {
-      const sidebarMenu = document.getElementById("sidebarMenu");
-      const userAvatar = document.getElementById("userAvatar");
-      const userNameDisplay = document.getElementById("userNameDisplay");
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      const userAvatar = document.getElementById('userAvatar');
+      const userNameDisplay = document.getElementById('userNameDisplay');
 
       if (!currentUser) return;
 
       userNameDisplay.textContent = currentUser.username;
       userAvatar.textContent = currentUser.username.charAt(0).toUpperCase();
 
-      let avatarColor = "var(--turquoise-color)";
-      if (currentUser.role === "admin") avatarColor = "var(--coral-color)";
-      else if (currentUser.role === "moderator")
-        avatarColor = "var(--moderator-color)";
-
+      let avatarColor = 'var(--turquoise-color)';
+      if (currentUser.role === 'admin') avatarColor = 'var(--coral-color)';
+      else if (currentUser.role === 'moderator') avatarColor = 'var(--moderator-color)';
       userAvatar.style.background = avatarColor;
 
       let menuHTML = `
@@ -1429,7 +1304,7 @@
           </li>
       `;
 
-      if (currentUser.role === "admin") {
+      if (currentUser.role === 'admin') {
         menuHTML += `
           <li class="nav-item">
             <a class="nav-link" href="#" onclick="showSection('products')">
@@ -1446,17 +1321,17 @@
         `;
       }
 
-      // Tickets pour tout le monde
-      menuHTML += `
-        <li class="nav-item">
-          <a class="nav-link" href="#" onclick="showSection('tickets')">
-            <i class="bx bx-support"></i>
-            <span class="menu-text">Tickets</span>
-          </a>
-        </li>
-      `;
-
-      if (currentUser.role !== "user") {
+      // Catalogue & commandes
+      if (currentUser.role === 'user') {
+        menuHTML += `
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('catalog')">
+              <i class="bx bx-store"></i>
+              <span class="menu-text">Catalogue</span>
+            </a>
+          </li>
+        `;
+      } else {
         menuHTML += `
           <li class="nav-item">
             <a class="nav-link" href="#" onclick="showSection('catalog')">
@@ -1468,15 +1343,6 @@
             <a class="nav-link" href="#" onclick="showSection('orders')">
               <i class="bx bx-cart"></i>
               <span class="menu-text">Suivi Commandes</span>
-            </a>
-          </li>
-        `;
-      } else {
-        menuHTML += `
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="showSection('catalog')">
-              <i class="bx bx-store"></i>
-              <span class="menu-text">Catalogue</span>
             </a>
           </li>
         `;
@@ -1495,56 +1361,54 @@
       sidebarMenu.innerHTML = menuHTML;
 
       // Vue admin / user
-      const adminDashboard = document.getElementById("adminDashboard");
-      const userDashboard = document.getElementById("userDashboard");
-      const adminQuickActions = document.getElementById("adminQuickActions");
+      const adminDashboard = document.getElementById('adminDashboard');
+      const userDashboard = document.getElementById('userDashboard');
+      const adminQuickActions = document.getElementById('adminQuickActions');
 
-      if (currentUser.role === "user") {
-        adminDashboard.style.display = "none";
-        userDashboard.style.display = "block";
-        adminQuickActions.style.display = "none";
+      if (currentUser.role === 'user') {
+        adminDashboard.style.display = 'none';
+        userDashboard.style.display = 'block';
+        adminQuickActions.style.display = 'none';
       } else {
-        adminDashboard.style.display = "block";
-        userDashboard.style.display = "none";
-        adminQuickActions.style.display =
-          currentUser.role === "admin" ? "block" : "none";
+        adminDashboard.style.display = 'block';
+        userDashboard.style.display = 'none';
+        adminQuickActions.style.display = currentUser.role === 'admin' ? 'block' : 'none';
       }
     }
 
-    // ===== GESTION DES SECTIONS =====
+    // ===== GESTION DES SECTIONS (evite erreurs si sections manquantes) =====
     function showSection(sectionId) {
-      const sections = document.querySelectorAll(".content-section");
-      sections.forEach((sec) => (sec.style.display = "none"));
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.style.display = 'none');
 
-      if (sectionId === "dashboard") {
-        document.getElementById("dashboardSection").style.display = "block";
-      } else if (sectionId === "tickets") {
-        document.getElementById("ticketsSection").style.display = "block";
-        loadTickets();
+      if (sectionId === 'dashboard') {
+        const dash = document.getElementById('dashboardSection');
+        if (dash) dash.style.display = 'block';
       } else {
-        // sections futures : products, users, catalog, orders ...
-        console.warn("Section non implémentée:", sectionId);
+        // Pour l'instant on n'a que dashboardSection dans ce fichier.
+        // Les autres sections (products, users, catalog, orders) peuvent être ajoutées plus tard.
+        showAlert('Cette section n\'est pas encore disponible dans ce fichier.', 'info', 'dashboard-alert-container');
+        const dash = document.getElementById('dashboardSection');
+        if (dash) dash.style.display = 'block';
       }
 
-      // Active link dans la sidebar
-      const links = document.querySelectorAll("#sidebarMenu .nav-link");
-      links.forEach((link) => link.classList.remove("active"));
+      // Gestion de l'état "active" dans la sidebar
+      const links = document.querySelectorAll('#sidebarMenu .nav-link');
+      links.forEach(link => link.classList.remove('active'));
       const activeLink = Array.from(links).find(
-        (a) =>
-          a.getAttribute("onclick") &&
-          a.getAttribute("onclick").includes(`'${sectionId}'`)
+        a => a.getAttribute('onclick') && a.getAttribute('onclick').includes(`'${sectionId}'`)
       );
-      if (activeLink) activeLink.classList.add("active");
+      if (activeLink) activeLink.classList.add('active');
     }
 
     // ===== AUTH PERSISTANTE =====
     function checkAuth() {
-      const token = localStorage.getItem("admin_token");
+      const token = localStorage.getItem('admin_token');
       if (token) {
         loadData();
-        const rememberedEmail = localStorage.getItem("remember_email");
+        const rememberedEmail = localStorage.getItem('remember_email');
         if (rememberedEmail) {
-          currentUser = users.find((u) => u.email === rememberedEmail);
+          currentUser = users.find(u => u.email === rememberedEmail);
           if (currentUser) {
             showDashboard();
             return;
@@ -1552,290 +1416,69 @@
         }
       }
       // sinon, afficher connexion
-      document.getElementById("loginPage").style.display = "flex";
-      document.getElementById("dashboardPage").style.display = "none";
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('dashboardPage').style.display = 'none';
     }
 
     // ===== LOGOUT =====
     function logout() {
-      localStorage.removeItem("admin_token");
-      localStorage.removeItem("remember_email");
-      document.getElementById("dashboardPage").style.display = "none";
-      document.getElementById("dashboardBanner").style.display = "none";
-      document.getElementById("loginPage").style.display = "flex";
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('remember_email');
+      document.getElementById('dashboardPage').style.display = 'none';
+      document.getElementById('dashboardBanner').style.display = 'none';
+      document.getElementById('loginPage').style.display = 'flex';
       hideLoading();
-      showAlert("Vous avez été déconnecté avec succès.", "info");
+      showAlert('Vous avez été déconnecté avec succès.', 'info');
     }
 
-    // ===== TICKETS =====
-    function formatDateShort(iso) {
-      if (!iso) return "-";
-      const d = new Date(iso);
-      if (isNaN(d.getTime())) return "-";
-      const day = String(d.getDate()).padStart(2, "0");
-      const month = String(d.getMonth() + 1).padStart(2, "0");
-      const year = d.getFullYear();
-      const hours = String(d.getHours()).padStart(2, "0");
-      const mins = String(d.getMinutes()).padStart(2, "0");
-      return `${day}/${month}/${year} ${hours}:${mins}`;
-    }
-
-    function getStatusBadgeClass(status) {
-      switch (status) {
-        case "Ouvert":
-          return "badge-status badge-open";
-        case "En cours":
-          return "badge-status badge-inprogress";
-        case "Résolu":
-          return "badge-status badge-resolved";
-        case "Fermé":
-          return "badge-status badge-closed";
-        default:
-          return "badge-status";
-      }
-    }
-
-    function getPriorityBadgeClass(priority) {
-      switch (priority) {
-        case "Basse":
-          return "badge badge-priority-low";
-        case "Normale":
-          return "badge badge-priority-normal";
-        case "Haute":
-          return "badge badge-priority-high";
-        case "Urgente":
-          return "badge badge-priority-urgent";
-        default:
-          return "badge";
-      }
-    }
-
-    function handleTicketSubmit(event) {
-      event.preventDefault();
-      if (!currentUser) {
-        showAlert(
-          "Vous devez être connecté pour créer un ticket.",
-          "danger",
-          "dashboard-alert-container"
-        );
-        return;
-      }
-
-      const subject = document.getElementById("ticketSubject").value.trim();
-      const type = document.getElementById("ticketType").value;
-      const priority = document.getElementById("ticketPriority").value;
-      const orderId = document.getElementById("ticketOrderId").value.trim();
-      const message = document.getElementById("ticketMessage").value.trim();
-
-      if (!subject || !message) {
-        showAlert(
-          "Veuillez remplir le sujet et la description du problème.",
-          "danger",
-          "dashboard-alert-container"
-        );
-        return;
-      }
-
-      const now = new Date().toISOString();
-      const newTicket = {
-        id: Date.now(),
-        subject,
-        type,
-        priority,
-        status: "Ouvert",
-        orderId: orderId || null,
-        message,
-        userId: currentUser.id,
-        username: currentUser.username,
-        createdAt: now,
-        updatedAt: now
-      };
-
-      tickets.push(newTicket);
-      localStorage.setItem("tickets", JSON.stringify(tickets));
-
-      // Réinitialiser le formulaire
-      document.getElementById("ticketForm").reset();
-      document.getElementById("ticketPriority").value = "Normale";
-
-      // Fermer le modal
-      const modalElement = document.getElementById("ticketModal");
-      const modal = bootstrap.Modal.getInstance(modalElement);
-      if (modal) modal.hide();
-
-      showAlert(
-        "Ticket créé avec succès. Notre équipe va le traiter.",
-        "success",
-        "dashboard-alert-container"
-      );
-      loadTickets();
-    }
-
-    function changeTicketStatus(ticketId, newStatus) {
-      const ticket = tickets.find((t) => t.id === ticketId);
-      if (!ticket) return;
-
-      ticket.status = newStatus;
-      ticket.updatedAt = new Date().toISOString();
-      localStorage.setItem("tickets", JSON.stringify(tickets));
-
-      showAlert(
-        `Statut du ticket #${ticketId} mis à jour : ${newStatus}`,
-        "success",
-        "dashboard-alert-container"
-      );
-      loadTickets();
-    }
-
-    function loadTickets() {
-      if (!currentUser) return;
-
-      const tbody = document.getElementById("ticketsTable");
-      if (!tbody) return;
-
-      const statusFilter = document.getElementById("ticketStatusFilter")?.value || "";
-
-      let visibleTickets = tickets.slice();
-
-      if (currentUser.role === "user") {
-        visibleTickets = visibleTickets.filter((t) => t.userId === currentUser.id);
-      }
-
-      if (statusFilter) {
-        visibleTickets = visibleTickets.filter((t) => t.status === statusFilter);
-      }
-
-      if (!visibleTickets.length) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="8" class="text-center text-muted py-4">
-              Aucun ticket trouvé pour ce filtre.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      visibleTickets.sort((a, b) => b.id - a.id); // plus récents d'abord
-
-      const rows = visibleTickets
-        .map((t) => {
-          const statusClass = getStatusBadgeClass(t.status);
-          const priorityClass = getPriorityBadgeClass(t.priority);
-
-          // Admin / mod peuvent changer le statut via un select
-          let statusCell = "";
-          if (currentUser.role === "admin" || currentUser.role === "moderator") {
-            statusCell = `
-              <select class="form-select form-select-sm"
-                onchange="changeTicketStatus(${t.id}, this.value)">
-                <option value="Ouvert" ${t.status === "Ouvert" ? "selected" : ""}>Ouvert</option>
-                <option value="En cours" ${t.status === "En cours" ? "selected" : ""}>En cours</option>
-                <option value="Résolu" ${t.status === "Résolu" ? "selected" : ""}>Résolu</option>
-                <option value="Fermé" ${t.status === "Fermé" ? "selected" : ""}>Fermé</option>
-              </select>
-            `;
-          } else {
-            statusCell = `<span class="${statusClass}">${t.status}</span>`;
-          }
-
-          const orderInfo = t.orderId ? `<br><small class="text-muted">${t.orderId}</small>` : "";
-
-          return `
-            <tr>
-              <td>#${t.id}</td>
-              <td>
-                <strong>${t.subject}</strong>
-                ${orderInfo}
-              </td>
-              <td>${t.type}</td>
-              <td><span class="${priorityClass}">${t.priority}</span></td>
-              <td>${statusCell}</td>
-              <td>${t.username || "-"}</td>
-              <td>${formatDateShort(t.createdAt)}</td>
-              <td>
-                <button
-                  class="btn btn-sm btn-outline-secondary"
-                  type="button"
-                  onclick="viewTicket(${t.id})"
-                >
-                  <i class="bx bx-show-alt me-1"></i>Détails
-                </button>
-              </td>
-            </tr>
-          `;
-        })
-        .join("");
-
-      tbody.innerHTML = rows;
-    }
-
-    function viewTicket(ticketId) {
-      const ticket = tickets.find((t) => t.id === ticketId);
-      if (!ticket) return;
-
-      const details = `
-        <strong>Sujet :</strong> ${ticket.subject}<br>
-        <strong>Type :</strong> ${ticket.type}<br>
-        <strong>Priorité :</strong> ${ticket.priority}<br>
-        <strong>Statut :</strong> ${ticket.status}<br>
-        <strong>Utilisateur :</strong> ${ticket.username || "-"}<br>
-        <strong>Référence :</strong> ${ticket.orderId || "-"}<br>
-        <strong>Créé le :</strong> ${formatDateShort(ticket.createdAt)}<br>
-        <strong>Description :</strong><br>
-        <pre style="white-space:pre-wrap;font-family:inherit;margin-top:0.5rem;">${ticket.message}</pre>
-      `;
-
-      showAlert(details, "info", "dashboard-alert-container");
-    }
-
-    // ===== STUBS SÉCURITÉ (pour les autres sections si non définies) =====
-    if (typeof showAddUserModal !== "function") {
-      function showAddUserModal() {
-        console.warn("showAddUserModal() non implémentée.");
-        showAlert(
-          "La gestion avancée des utilisateurs n'est pas encore implémentée.",
-          "info",
-          "dashboard-alert-container"
-        );
-      }
-    }
-
-    if (typeof loadUserDashboard !== "function") {
-      function loadUserDashboard() {
-        console.warn("loadUserDashboard() non implémentée.");
-      }
+    // ===== STUBS POUR EVITER LES ERREURS (à remplacer par ta logique plus tard) =====
+    function loadProducts() { console.warn('loadProducts() non implémentée (stub).'); }
+    function loadUsers() { console.warn('loadUsers() non implémentée (stub).'); }
+    function loadOrders() { console.warn('loadOrders() non implémentée (stub).'); }
+    function loadCatalog() { console.warn('loadCatalog() non implémentée (stub).'); }
+    function updateStats() { console.warn('updateStats() non implémentée (stub).'); }
+    function loadNotifications() { console.warn('loadNotifications() non implémentée (stub).'); }
+    function loadUserDashboard() { console.warn('loadUserDashboard() non implémentée (stub).'); }
+    function showAddUserModal() {
+      console.warn('showAddUserModal() non implémentée (stub).');
+      showAlert('La gestion avancée des utilisateurs sera ajoutée plus tard.', 'info', 'dashboard-alert-container');
     }
 
     // ===== DOM READY =====
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener('DOMContentLoaded', function() {
       initializeData();
       loadData();
 
-      // Affichage par défaut : login
-      document.getElementById("loginPage").style.display = "flex";
-      document.getElementById("dashboardPage").style.display = "none";
+      // Forcer l'affichage de la page de login au départ
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('dashboardPage').style.display = 'none';
 
-      // Auth automatique si token + email mémorisé
+      // Vérifier si un utilisateur est déjà connecté
       checkAuth();
 
-      const rememberedEmail = localStorage.getItem("remember_email");
+      const rememberedEmail = localStorage.getItem('remember_email');
       if (rememberedEmail) {
-        const emailInput = document.getElementById("email");
-        const rememberCheckbox = document.getElementById("rememberMe");
+        const emailInput = document.getElementById('email');
+        const rememberCheckbox = document.getElementById('rememberMe');
         emailInput.value = rememberedEmail;
         rememberCheckbox.checked = true;
-        document.getElementById("password").focus();
+        document.getElementById('password').focus();
       }
+
+      // Soumission avec Enter
+      document.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          const loginForm = document.getElementById('loginForm');
+          if (loginForm && document.getElementById('loginPage').style.display !== 'none') {
+            loginForm.dispatchEvent(new Event('submit'));
+          }
+        }
+      });
 
       // Message de bienvenue sur la page de login
       setTimeout(() => {
-        if (document.getElementById("alert-container")) {
-          showAlert(
-            "Bienvenue sur PANEL 4 PRO - Digital Solutions",
-            "info",
-            "alert-container"
-          );
+        if (document.getElementById('alert-container')) {
+          showAlert('Bienvenue sur PANEL 4 PRO - Digital Solutions', 'info', 'alert-container');
         }
       }, 1000);
     });
