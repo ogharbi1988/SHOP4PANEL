@@ -1266,7 +1266,7 @@
               <i class="bx bx-cart me-2"></i>Mes commandes
             </h5>
             <small class="text-muted">
-              Suivi de toutes vos commandes et de leurs statuts.
+              Suivi de toutes vos commandes et de leurs statuts. Cliquez sur <strong>Ouvrir</strong> pour voir le lien/code.
             </small>
           </div>
         </div>
@@ -1283,6 +1283,7 @@
                     <th>Date</th>
                     <th>Statut</th>
                     <th>Livraison</th>
+                    <th>Détails</th>
                   </tr>
                 </thead>
                 <tbody id="userOrdersSectionTableBody">
@@ -1464,6 +1465,45 @@
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL DÉTAIL COMMANDE CLIENT (voir lien/code) -->
+      <div
+        class="modal fade"
+        id="viewUserOrderModal"
+        tabindex="-1"
+        aria-labelledby="viewUserOrderModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="viewUserOrderModalLabel">
+                <i class="bx bx-receipt me-2"></i>Détails de la commande
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fermer"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div id="viewUserOrderDetails">
+                <!-- Contenu rempli en JS -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -2160,7 +2200,7 @@
                   <h5 class="card-title mb-1">${p.name}</h5>
                   <p class="text-muted mb-2 small">${p.description || ""}</p>
                   <p class="mb-1 product-price">
-                    ${minPrice ? `À partir de ${minPrice.toFixed(2)} DH` : "Prix sur demande"}
+                    ${minPrice ? \`À partir de ${minPrice.toFixed(2)} DH\` : "Prix sur demande"}
                   </p>
                   <p class="mb-2">
                     <span class="badge ${stockBadgeClass}">${stockText}</span>
@@ -2399,7 +2439,6 @@
 
     // ===== COMMANDES (ADMIN & CLIENT) =====
     function loadOrders() {
-      // Selon le rôle, charger les vues appropriées
       if (!currentUser) return;
       if (currentUser.role === "admin" || currentUser.role === "moderator") {
         loadOrdersAdmin();
@@ -2507,6 +2546,11 @@
               <td>${dateStr}</td>
               <td><span class="order-status-badge ${statusClass}">${statusLabel}</span></td>
               <td class="delivery-info">${deliveryShort}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="openUserOrderModal(${o.id})">
+                  Ouvrir
+                </button>
+              </td>
             </tr>
           `;
         })
@@ -2621,6 +2665,77 @@
       if (currentUser.role === "user") {
         loadUserDashboard();
       }
+    }
+
+    // === NOUVEAU : ouverture d'une commande côté client (voir lien/code) ===
+    function openUserOrderModal(orderId) {
+      if (!currentUser || currentUser.role !== "user") {
+        showAlert(
+          "Vous devez être connecté en tant que client pour voir cette commande.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const order = orders.find((o) => o.id === orderId && o.userId === currentUser.id);
+      if (!order) {
+        showAlert(
+          "Commande introuvable.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const dateStr = formatDateShort(order.createdAt);
+      const durationLabel = order.durationMonths
+        ? `${order.durationMonths} mois`
+        : "-";
+      const statusClass = getStatusClass(order.status);
+      const statusLabel = getStatusLabel(order.status);
+
+      const commentBlock = order.comment
+        ? `<p class="mb-2"><strong>Votre commentaire :</strong><br>${order.comment}</p>`
+        : "";
+
+      const deliveryBlock = order.deliveryInfo
+        ? `
+          <div class="mb-2">
+            <strong>Lien / code d'abonnement :</strong>
+            <div class="mt-1 p-2 border rounded bg-light"
+                 style="word-break: break-all; font-family: monospace; font-size: 0.85rem;">
+              ${order.deliveryInfo.replace(/\n/g, "<br>")}
+            </div>
+          </div>
+        `
+        : `
+          <div class="alert alert-info mb-2">
+            La commande est en cours de traitement. Le lien ou le code sera affiché ici dès qu'il sera disponible.
+          </div>
+        `;
+
+      const container = document.getElementById("viewUserOrderDetails");
+      if (container) {
+        container.innerHTML = `
+          <p class="mb-1"><strong>Produit :</strong> ${order.productName}</p>
+          <p class="mb-1"><strong>Durée :</strong> ${durationLabel}</p>
+          <p class="mb-1"><strong>Prix :</strong> ${
+            order.price ? order.price.toFixed(2) + " DH" : "-"
+          }</p>
+          <p class="mb-1">
+            <strong>Statut :</strong>
+            <span class="order-status-badge ${statusClass}">${statusLabel}</span>
+          </p>
+          <p class="mb-3"><strong>Date :</strong> ${dateStr}</p>
+          ${commentBlock}
+          ${deliveryBlock}
+        `;
+      }
+
+      const modalEl = document.getElementById("viewUserOrderModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
     }
 
     // ===== DASHBOARD UTILISATEUR =====
