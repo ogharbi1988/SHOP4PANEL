@@ -1,4 +1,4 @@
-[14:50, 14/11/2025] ChatGPT: ```html
+```html
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
@@ -48,8 +48,7 @@
   section {
     background: white;
     border-radius: 10px;
-    padding: 1.3em 1.5em;
-[14:50, 14/11/2025] ChatGPT: #user-dashboard .balance {
+    padding: 1.3em 1.5em;#user-dashboard .balance {
     font-size: 1.6em;
     font-weight: 700;
     margin-bottom: 1em;
@@ -83,8 +82,24 @@
 </head>
 <body>
 
-<header><span class="logo">Panel 4 Pro</span> - IPTV Abonnements</heade…
-[14:50, 14/11/2025] ChatGPT: <script>
+<header><span class="logo">Panel 4 Pro</span> - IPTV Abonnements</header>
+
+<main>
+
+<!-- Section Admin -->
+<section id="admin-section">
+  <h2>Gestion Produits</h2>
+  <form id="productForm">
+    <label>Nom du produit :</label>
+    <input type="text" name="productName" required />
+
+    <label>Prix 1 mois (€) :</label>
+    <input type="number" name="price1" min="0" step="0.01" required />
+
+    <label>Prix 4 mois (€) :</label>
+    <input type="number" name="price4" min="0" step="0.01" required />
+
+    <label>Prix 6 mois (€) :</label><script>
   // Données simulées
   let products = [];
   let tickets = [];
@@ -110,8 +125,21 @@
     renderUserProducts();
   });
 
-  // Gestion création uti…
-[14:50, 14/11/2025] ChatGPT: <input type="number" name="price6" min="0" step="0.01" required />
+  // Gestion création utilisateur
+  const userForm = document.getElementById('userForm');
+  userForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert(Utilisateur "e.target.username.value" créé avec le rôle "{e.target.role.value}".);
+    e.target.reset();
+  });
+
+  // Affichage produits côté utilisateur
+  function renderUserProducts() {
+    const list = document.getElementById('productsListUser');
+    list.innerHTML = '';
+    if(products.length === 0) {
+      list.innerHTML = '<li>Aucun abonnement disponible</li>';
+      return;<input type="number" name="price6" min="0" step="0.01" required />
 
     <label>Prix 12 mois (€) :</label>
     <input type="number" name="price12" min="0" step="0.01" required />
@@ -133,8 +161,32 @@
       <option value="moderator">Modérateur</option>
       <option value="admin">Administrateur</option>
     </select>
-    <button type="submit">Créer Utilisateur</butt…
-[14:50, 14/11/2025] ChatGPT: }
+    <button type="submit">Créer Utilisateur</button>
+  </form>
+
+  <h2>Demandes en cours</h2>
+  <ul id="ticketsList">
+    <li>Aucune demande en cours</li>
+  </ul>
+</section>
+
+<!-- Section Utilisateur -->
+<section id="user-dashboard">
+  <h2>Tableau de bord utilisateur</h2>
+  <div class="balance">Solde actuel : 50.00 €</div>
+
+  <h3>Abonnements disponibles</h3>
+  <ul class="products-list" id="productsListUser">
+    <!-- Produits ajoutés ici -->
+  </ul>
+
+  <h3>Tickets ouverts</h3>
+  <ul id="userTicketsList">
+    <li>Aucun ticket ouvert</li>
+  </ul>
+</section>
+
+</main>}
     products.forEach(p => {
       const li = document.createElement('li');
       li.textContent = p.name - 1 mois:{p.prices['1']}€ | 4 mois: p.prices['4']€ | 6 mois:{p.prices['6']}€ | 12 mois: ${p.prices['12']}€;
@@ -148,3 +200,5 @@
 </body>
 </html>
 ```
+
+---
