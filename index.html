@@ -1778,4 +1778,67 @@
         <strong>Sujet :</strong> ${ticket.subject}<br>
         <strong>Type :</strong> ${ticket.type}<br>
         <strong>Priorité :</strong> ${ticket.priority}<br>
-        <strong>Statut :<
+        <strong>Statut :</strong> ${ticket.status}<br>
+        <strong>Utilisateur :</strong> ${ticket.username || "-"}<br>
+        <strong>Référence :</strong> ${ticket.orderId || "-"}<br>
+        <strong>Créé le :</strong> ${formatDateShort(ticket.createdAt)}<br>
+        <strong>Description :</strong><br>
+        <pre style="white-space:pre-wrap;font-family:inherit;margin-top:0.5rem;">${ticket.message}</pre>
+      `;
+
+      showAlert(details, "info", "dashboard-alert-container");
+    }
+
+    // ===== STUBS SÉCURITÉ (pour les autres sections si non définies) =====
+    if (typeof showAddUserModal !== "function") {
+      function showAddUserModal() {
+        console.warn("showAddUserModal() non implémentée.");
+        showAlert(
+          "La gestion avancée des utilisateurs n'est pas encore implémentée.",
+          "info",
+          "dashboard-alert-container"
+        );
+      }
+    }
+
+    if (typeof loadUserDashboard !== "function") {
+      function loadUserDashboard() {
+        console.warn("loadUserDashboard() non implémentée.");
+      }
+    }
+
+    // ===== DOM READY =====
+    document.addEventListener("DOMContentLoaded", () => {
+      initializeData();
+      loadData();
+
+      // Affichage par défaut : login
+      document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("dashboardPage").style.display = "none";
+
+      // Auth automatique si token + email mémorisé
+      checkAuth();
+
+      const rememberedEmail = localStorage.getItem("remember_email");
+      if (rememberedEmail) {
+        const emailInput = document.getElementById("email");
+        const rememberCheckbox = document.getElementById("rememberMe");
+        emailInput.value = rememberedEmail;
+        rememberCheckbox.checked = true;
+        document.getElementById("password").focus();
+      }
+
+      // Message de bienvenue sur la page de login
+      setTimeout(() => {
+        if (document.getElementById("alert-container")) {
+          showAlert(
+            "Bienvenue sur PANEL 4 PRO - Digital Solutions",
+            "info",
+            "alert-container"
+          );
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
