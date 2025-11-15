@@ -49,10 +49,11 @@
       box-sizing: border-box;
     }
 
-    /* Fond global clair, moderne */
+    /* Fond global clair, moderne nouvelle génération */
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f9ff 0%, #fdfdff 40%, #f2fbff 100%);
+      background:
+        radial-gradient(circle at 0% 0%, #fdfbff 0%, #f3f7ff 35%, #edfafe 70%, #ffffff 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -66,19 +67,20 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.10) 0%, transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 55%),
-        radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.05) 0%, transparent 55%);
+        radial-gradient(circle at 10% 90%, rgba(14, 165, 233, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 90% 15%, rgba(99, 102, 241, 0.10) 0%, transparent 55%),
+        radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.06) 0%, transparent 60%);
+      opacity: 0.9;
       animation: pulse 4s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%,
       100% {
-        opacity: 0.5;
+        opacity: 0.6;
       }
       50% {
-        opacity: 0.8;
+        opacity: 1;
       }
     }
 
@@ -86,10 +88,11 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(14, 165, 233, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(14, 165, 233, 0.06) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
+        linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.10) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 22s linear infinite;
+      mix-blend-mode: soft-light;
     }
 
     @keyframes gridMove {
@@ -97,7 +100,7 @@
         transform: translate(0, 0);
       }
       100% {
-        transform: translate(50px, 50px);
+        transform: translate(40px, 40px);
       }
     }
 
@@ -125,15 +128,15 @@
       content: "";
       position: absolute;
       top: 0;
-      left: -100%;
+      left: -120%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
       transition: 0.5s;
     }
 
     .card:hover::before {
-      left: 100%;
+      left: 120%;
     }
 
     .card-body {
@@ -149,17 +152,17 @@
 
     .app-brand-logo {
       background: linear-gradient(135deg, var(--digital-blue), var(--digital-purple));
-      width: 100px;
-      height: 100px;
-      border-radius: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 1.2rem;
       box-shadow:
-        0 0 30px rgba(14, 165, 233, 0.25),
-        0 0 60px rgba(99, 102, 241, 0.18),
-        inset 0 0 20px rgba(255, 255, 255, 0.2);
+        0 0 26px rgba(14, 165, 233, 0.24),
+        0 0 40px rgba(99, 102, 241, 0.16),
+        inset 0 0 18px rgba(255, 255, 255, 0.22);
       position: relative;
       overflow: hidden;
       border: 2px solid rgba(14, 165, 233, 0.4);
@@ -174,7 +177,7 @@
       height: 200%;
       background: conic-gradient(
         transparent,
-        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.9),
         transparent 30%
       );
       animation: rotate 4s linear infinite;
@@ -190,7 +193,7 @@
     }
 
     .app-brand-logo i {
-      font-size: 3rem;
+      font-size: 2rem; /* Réduction icône logo */
       color: #ffffff;
       position: relative;
       z-index: 2;
@@ -198,7 +201,7 @@
     }
 
     .app-brand-text {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 800;
       background: linear-gradient(
         135deg,
@@ -214,26 +217,20 @@
       letter-spacing: 1px;
     }
 
-    .app-brand-subtitle {
-      font-size: 1rem;
-      color: #64748b;
-      margin-top: 0.5rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+    /* .app-brand-subtitle supprimé (DIGITAL SOLUTIONS) */
 
     .form-label {
       font-weight: 600;
       color: #0f172a;
       margin-bottom: 0.5rem;
+      font-size: 0.9rem;
     }
 
     .form-control {
       border: 1px solid rgba(148, 163, 184, 0.6);
       border-radius: 0.75rem;
-      padding: 0.75rem 1rem;
-      font-size: 0.95rem;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
       background: #ffffff;
       color: #0f172a;
@@ -259,7 +256,8 @@
       border-right: none;
       border-radius: 0.75rem 0 0 0.75rem;
       color: #ffffff;
-      padding: 0.75rem 1rem;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.85rem;
     }
 
     .input-group .form-control {
@@ -267,26 +265,23 @@
       border-radius: 0 0.75rem 0.75rem 0;
     }
 
-    .input-group .form-control:focus {
-      border-left: none;
-    }
-
     .btn-primary {
       background: linear-gradient(135deg, var(--digital-blue), var(--digital-purple));
       border: none;
       border-radius: 0.75rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.7rem 1.4rem;
       font-weight: 600;
       transition: all 0.2s ease;
       color: #ffffff;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+      font-size: 0.9rem;
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 16px 28px rgba(37, 99, 235, 0.4);
     }
 
     .btn-primary::before {
@@ -329,7 +324,7 @@
       background: transparent;
       padding: 0 1rem;
       color: #64748b;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: 600;
@@ -353,7 +348,7 @@
       background: #eff6ff;
       border: 1px solid rgba(59, 130, 246, 0.3);
       color: #1e293b;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .password-toggle {
@@ -366,6 +361,7 @@
       color: #64748b;
       cursor: pointer;
       z-index: 10;
+      font-size: 1rem;
     }
 
     .password-strength {
@@ -391,6 +387,7 @@
 
     .form-check-label {
       color: #4b5563;
+      font-size: 0.85rem;
     }
 
     /* Dashboard clair */
@@ -408,10 +405,11 @@
       right: 0;
       background: linear-gradient(90deg, var(--coral-color), var(--turquoise-color));
       color: #ffffff;
-      padding: 8px 0;
+      padding: 6px 0;
       z-index: 10000;
       box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
       display: none;
+      font-size: 0.8rem;
     }
 
     .banner-content {
@@ -419,7 +417,6 @@
       justify-content: center;
       align-items: center;
       font-weight: 600;
-      font-size: 0.9rem;
       text-align: center;
       animation: slideText 15s linear infinite;
     }
@@ -440,7 +437,7 @@
 
     .banner-icon {
       margin: 0 10px;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     /* Sidebar claire */
@@ -465,9 +462,9 @@
     .navbar {
       background: #ffffff;
       box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
-      padding: 1rem 1.5rem;
+      padding: 0.8rem 1.3rem;
       border-radius: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -481,22 +478,22 @@
 
     .navbar-logo-img {
       background: linear-gradient(135deg, var(--coral-color), var(--turquoise-color));
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 15px;
+      margin-right: 12px;
       color: #ffffff;
     }
 
     .navbar-logo-img i {
-      font-size: 1.5rem;
+      font-size: 1.2rem; /* icône navbar réduite */
     }
 
     .navbar-logo-text {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
       background: linear-gradient(135deg, var(--coral-color), var(--turquoise-color));
       -webkit-background-clip: text;
@@ -509,30 +506,45 @@
     }
 
     .sidebar-header {
-      padding: 1.5rem 1rem 1rem;
+      padding: 1.1rem 1rem 0.8rem;
       border-bottom: 1px solid rgba(209, 213, 219, 0.6);
       text-align: center;
     }
 
+    .sidebar-header .app-brand-logo {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 0.4rem;
+    }
+
+    .sidebar-header .app-brand-logo i {
+      font-size: 1.4rem;
+    }
+
+    .sidebar-header .app-brand-text {
+      font-size: 1.2rem;
+    }
+
     .sidebar-menu {
-      padding: 1rem 0;
+      padding: 0.6rem 0;
     }
 
     .sidebar-menu .nav-link {
       color: #4b5563;
-      padding: 0.75rem 1rem;
-      margin: 0.25rem 0.5rem;
+      padding: 0.6rem 0.9rem;
+      margin: 0.2rem 0.6rem;
       border-radius: 0.75rem;
       display: flex;
       align-items: center;
       transition: all 0.2s ease;
       font-weight: 500;
+      font-size: 0.9rem;
     }
 
     .sidebar-menu .nav-link i {
-      margin-right: 0.75rem;
-      font-size: 1.25rem;
-      width: 24px;
+      margin-right: 0.5rem;
+      font-size: 1rem; /* icônes sidebar réduites */
+      width: 20px;
       text-align: center;
     }
 
@@ -549,14 +561,15 @@
     .stats-card {
       background: #ffffff;
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.1rem 1.2rem;
       box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.06);
       border-left: 4px solid var(--turquoise-color);
       transition: all 0.2s ease;
+      font-size: 0.9rem;
     }
 
     .stats-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
     .stats-card.blue {
@@ -575,11 +588,24 @@
       border-left-color: var(--moderator-color);
     }
 
+    .stats-card h5 {
+      font-size: 0.85rem;
+    }
+
+    .stats-card h3 {
+      font-size: 1.4rem;
+    }
+
+    .stats-card i {
+      font-size: 1.8rem !important; /* icônes stats réduites */
+    }
+
     .table {
-      border-radius: 1rem;
+      border-radius: 0.9rem;
       overflow: hidden;
       box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.06);
       background: #ffffff;
+      font-size: 0.85rem;
     }
 
     .table th {
@@ -587,19 +613,20 @@
       color: #111827;
       border: none;
       font-weight: 600;
-      padding: 1rem;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.8rem;
     }
 
     .table td {
       border-color: #e5e7eb;
-      padding: 0.75rem 1rem;
+      padding: 0.65rem 0.9rem;
       vertical-align: middle;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .user-avatar {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: 2px solid var(--turquoise-color);
       object-fit: cover;
@@ -609,75 +636,71 @@
       font-weight: bold;
       color: #ffffff;
       background: var(--turquoise-color);
+      font-size: 0.9rem;
+    }
+
+    .badge-coral,
+    .badge-turquoise,
+    .badge-success,
+    .badge-warning,
+    .badge-danger,
+    .badge-moderator {
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.75rem;
     }
 
     .badge-coral {
       background: var(--coral-color);
       color: #ffffff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      font-weight: 600;
     }
-
     .badge-turquoise {
       background: var(--turquoise-color);
       color: #ffffff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      font-weight: 600;
     }
-
     .badge-success {
       background: var(--success-color);
       color: #ffffff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      font-weight: 600;
     }
-
     .badge-warning {
       background: var(--warning-color);
       color: #ffffff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      font-weight: 600;
     }
-
     .badge-danger {
       background: var(--danger-color);
       color: #ffffff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      font-weight: 600;
     }
-
     .badge-moderator {
       background: var(--moderator-color);
       color: #ffffff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      font-weight: 600;
     }
 
     .user-dashboard-stats {
       background: linear-gradient(135deg, #e0f2fe, #d1fae5);
       border-radius: 1rem;
-      padding: 2rem;
+      padding: 1.6rem 1.4rem;
       color: #111827;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
       box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.08);
+      font-size: 0.9rem;
+    }
+
+    .user-dashboard-stats h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
     }
 
     .chart-container {
       position: relative;
-      height: 300px;
+      height: 260px;
       width: 100%;
     }
 
     /* PRODUITS */
     .product-image {
-      width: 50px;
-      height: 50px;
+      width: 46px;
+      height: 46px;
       border-radius: 8px;
       object-fit: cover;
       border: 2px solid var(--turquoise-color);
@@ -690,31 +713,32 @@
       transition: all 0.2s ease;
       overflow: hidden;
       background: #ffffff;
+      font-size: 0.9rem;
     }
 
     .product-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0.5rem 1.8rem rgba(15, 23, 42, 0.13);
+      transform: translateY(-2px);
+      box-shadow: 0 0.4rem 1.4rem rgba(15, 23, 42, 0.13);
     }
 
     .product-card-img {
-      height: 180px;
+      height: 160px;
       object-fit: cover;
       width: 100%;
     }
 
     .product-price {
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--coral-color);
     }
 
     /* Statut commandes */
     .order-status-badge {
-      padding: 0.35rem 0.7rem;
+      padding: 0.3rem 0.6rem;
       border-radius: 999px;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
     }
     .status-pending {
       background: #fef3c7;
@@ -735,27 +759,86 @@
 
     .delivery-info {
       max-width: 220px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       word-break: break-all;
     }
 
     @media (max-width: 768px) {
+      body {
+        align-items: flex-start;
+        padding-top: 1rem;
+      }
+      .authentication-wrapper {
+        max-width: 100%;
+        padding: 1.2rem;
+      }
+      .card-body {
+        padding: 1.25rem;
+      }
       .sidebar {
-        width: 70px;
+        width: 72px;
       }
       .sidebar .menu-text {
         display: none;
       }
       .main-content {
-        margin-left: 70px;
-        width: calc(100% - 70px);
-        padding: 15px;
+        margin-left: 72px;
+        width: calc(100% - 72px);
+        padding: 12px;
       }
       .banner-container {
-        left: 70px;
-      }
-      .banner-content {
+        left: 72px;
         font-size: 0.7rem;
+      }
+      .navbar {
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.8rem;
+      }
+      .navbar-logo-img {
+        width: 38px;
+        height: 38px;
+        margin-right: 8px;
+      }
+      .navbar-logo-text {
+        font-size: 1.05rem;
+      }
+      .user-dashboard-stats {
+        padding: 1.2rem 1rem;
+      }
+      .user-dashboard-stats h2 {
+        font-size: 1.2rem;
+      }
+      .stats-card {
+        padding: 0.9rem 1rem;
+      }
+      .stats-card h3 {
+        font-size: 1.2rem;
+      }
+      .stats-card i {
+        font-size: 1.5rem !important;
+      }
+      .product-card-img {
+        height: 140px;
+      }
+      .product-card .card-body {
+        padding: 0.9rem;
+      }
+      .product-card h5 {
+        font-size: 0.95rem;
+      }
+      .product-price {
+        font-size: 0.95rem;
+      }
+      .table th,
+      .table td {
+        padding: 0.45rem 0.55rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .chart-container {
+        height: 220px;
       }
     }
   </style>
@@ -775,7 +858,6 @@
             <i class="bx bxs-rocket"></i>
           </div>
           <a href="#" class="app-brand-text">PANEL 4 PRO</a>
-          <div class="app-brand-subtitle">DIGITAL SOLUTIONS</div>
         </div>
 
         <!-- Alert Messages -->
@@ -873,10 +955,10 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
-        <div class="app-brand-logo" style="width: 60px; height: 60px; margin: 0 auto 0.5rem;">
+        <div class="app-brand-logo">
           <i class="bx bxs-rocket"></i>
         </div>
-        <div class="app-brand-text" style="font-size: 1.2rem;">PANEL 4 PRO</div>
+        <div class="app-brand-text">PANEL 4 PRO</div>
       </div>
       <div class="sidebar-menu" id="sidebarMenu">
         <!-- Menu généré dynamiquement -->
@@ -902,10 +984,11 @@
               data-bs-toggle="dropdown"
               onclick="markNotificationsRead()"
             >
-              <i class="bx bx-bell" style="font-size: 1.5rem; color: var(--coral-color)"></i>
+              <i class="bx bx-bell" style="font-size: 1.2rem; color: var(--coral-color)"></i>
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                 id="notificationCount"
+                style="font-size: 0.65rem;"
               >0</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" id="notificationDropdown">
@@ -921,7 +1004,7 @@
               >
                 A
               </div>
-              <span style="font-weight: 600; margin-left: 8px;" id="userNameDisplay">Administrateur</span>
+              <span style="font-weight: 600; margin-left: 8px; font-size: 0.9rem;" id="userNameDisplay">Administrateur</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
@@ -949,16 +1032,16 @@
         <!-- Vue Admin/Moderator -->
         <div id="adminDashboard" style="display: none">
           <!-- Stats Cards -->
-          <div class="row mb-4">
+          <div class="row mb-3">
             <div class="col-xl-3 col-md-6 mb-3">
               <div class="stats-card blue">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h5 class="card-title text-muted">Utilisateurs Totaux</h5>
+                    <h5 class="card-title text-muted mb-1">Utilisateurs Totaux</h5>
                     <h3 class="mb-0" id="totalUsers">0</h3>
-                    <small class="text-success">+12% ce mois</small>
+                    <small class="text-success" style="font-size:0.75rem;">+12% ce mois</small>
                   </div>
-                  <i class="bx bx-group" style="font-size: 2.5rem; color: var(--light-blue)"></i>
+                  <i class="bx bx-group" style="color: var(--light-blue)"></i>
                 </div>
               </div>
             </div>
@@ -966,11 +1049,11 @@
               <div class="stats-card green">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h5 class="card-title text-muted">Produits Actifs</h5>
+                    <h5 class="card-title text-muted mb-1">Produits Actifs</h5>
                     <h3 class="mb-0" id="totalProducts">0</h3>
-                    <small class="text-success">+5% ce mois</small>
+                    <small class="text-success" style="font-size:0.75rem;">+5% ce mois</small>
                   </div>
-                  <i class="bx bx-package" style="font-size: 2.5rem; color: var(--light-green)"></i>
+                  <i class="bx bx-package" style="color: var(--light-green)"></i>
                 </div>
               </div>
             </div>
@@ -978,11 +1061,11 @@
               <div class="stats-card turquoise">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h5 class="card-title text-muted">Commandes</h5>
+                    <h5 class="card-title text-muted mb-1">Commandes</h5>
                     <h3 class="mb-0" id="totalOrders">0</h3>
-                    <small class="text-success">+18% ce mois</small>
+                    <small class="text-success" style="font-size:0.75rem;">+18% ce mois</small>
                   </div>
-                  <i class="bx bx-cart" style="font-size: 2.5rem; color: var(--turquoise-color)"></i>
+                  <i class="bx bx-cart" style="color: var(--turquoise-color)"></i>
                 </div>
               </div>
             </div>
@@ -990,41 +1073,41 @@
               <div class="stats-card coral">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h5 class="card-title text-muted">Revenus</h5>
+                    <h5 class="card-title text-muted mb-1">Revenus</h5>
                     <h3 class="mb-0" id="totalRevenue">0 DH</h3>
-                    <small class="text-success">+22% ce mois</small>
+                    <small class="text-success" style="font-size:0.75rem;">+22% ce mois</small>
                   </div>
-                  <i class="bx bx-line-chart" style="font-size: 2.5rem; color: var(--coral-color)"></i>
+                  <i class="bx bx-line-chart" style="color: var(--coral-color)"></i>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Actions rapides admin -->
-          <div id="adminQuickActions" class="row mb-4" style="display: none">
+          <div id="adminQuickActions" class="row mb-3" style="display: none">
             <div class="col-12">
               <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-3">⚡ Actions Rapides</h5>
-                  <div class="row">
-                    <div class="col-md-3 mb-2">
+                <div class="card-body py-3">
+                  <h5 class="card-title mb-3" style="font-size:0.95rem;">⚡ Actions Rapides</h5>
+                  <div class="row g-2">
+                    <div class="col-md-3 col-6">
                       <button class="btn btn-primary w-100" onclick="showSection('products')">
-                        <i class="bx bx-plus me-2"></i>Ajouter Produit
+                        <i class="bx bx-plus me-1"></i>Produit
                       </button>
                     </div>
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-3 col-6">
                       <button class="btn btn-primary w-100" onclick="showAddUserModal()">
-                        <i class="bx bx-user-plus me-2"></i>Nouvel Utilisateur
+                        <i class="bx bx-user-plus me-1"></i>Utilisateur
                       </button>
                     </div>
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-3 col-6">
                       <button class="btn btn-primary w-100" onclick="showSection('products')">
-                        <i class="bx bx-store me-2"></i>Catalogue Client
+                        <i class="bx bx-store me-1"></i>Catalogue
                       </button>
                     </div>
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-3 col-6">
                       <button class="btn btn-primary w-100" onclick="showSection('orders')">
-                        <i class="bx bx-cart me-2"></i>Commandes
+                        <i class="bx bx-cart me-1"></i>Commandes
                       </button>
                     </div>
                   </div>
@@ -1038,11 +1121,11 @@
         <div id="userDashboard" style="display: none">
           <div class="user-dashboard-stats">
             <div class="row">
-              <div class="col-md-4 text-center">
+              <div class="col-md-4 text-center mb-3 mb-md-0">
                 <h2 id="userBalance">0 DH</h2>
                 <p class="mb-0">Solde Actuel</p>
               </div>
-              <div class="col-md-4 text-center">
+              <div class="col-md-4 text-center mb-3 mb-md-0">
                 <h2 id="userPurchases">0</h2>
                 <p class="mb-0">Achats Effectués</p>
               </div>
@@ -1053,12 +1136,12 @@
             </div>
           </div>
 
-          <!-- Graphique des recharges (optionnel, à implémenter plus tard) -->
-          <div class="row mb-4">
+          <!-- Graphique des recharges (à intégrer plus tard si tu veux) -->
+          <div class="row mb-3">
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">📊 Historique des Recharges</h5>
+                  <h5 class="card-title" style="font-size:0.95rem;">📊 Historique des Recharges</h5>
                   <div class="chart-container">
                     <canvas id="rechargeChart"></canvas>
                   </div>
@@ -1072,7 +1155,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">🛒 Mes Dernières Commandes</h5>
+                  <h5 class="card-title" style="font-size:0.95rem;">🛒 Mes Dernières Commandes</h5>
                   <div class="table-responsive">
                     <table class="table table-hover mb-0">
                       <thead>
@@ -1105,7 +1188,7 @@
       <div id="productsSection" class="content-section">
         <div class="row mb-3">
           <div class="col-12 d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">
+            <h4 class="mb-0" style="font-size:1.05rem;">
               <i class="bx bx-package me-2"></i>Gestion des produits / Catalogue
             </h4>
           </div>
@@ -1115,14 +1198,14 @@
         <div id="adminProductsView" style="display:none;">
           <div class="row">
             <!-- Formulaire ajout produit -->
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4 mb-3">
               <div class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title mb-3">
+                  <h5 class="card-title mb-3" style="font-size:0.95rem;">
                     <i class="bx bx-plus-circle me-2"></i>Ajouter un produit
                   </h5>
                   <form id="addProductForm" onsubmit="handleAddProduct(event)">
-                    <div class="mb-3">
+                    <div class="mb-2">
                       <label class="form-label" for="productName">Nom du produit</label>
                       <input
                         type="text"
@@ -1132,7 +1215,7 @@
                         required
                       />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                       <label class="form-label" for="productDescription">Description</label>
                       <textarea
                         id="productDescription"
@@ -1141,7 +1224,7 @@
                         placeholder="Courte description du produit (optionnel)"
                       ></textarea>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                       <label class="form-label">Prix par durée (DH)</label>
                       <div class="row g-2">
                         <div class="col-6">
@@ -1169,11 +1252,11 @@
                           </div>
                         </div>
                       </div>
-                      <small class="text-muted d-block mt-1">
+                      <small class="text-muted d-block mt-1" style="font-size:0.75rem;">
                         Vous pouvez laisser vide les durées non utilisées.
                       </small>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                       <label class="form-label" for="productStock">Stock disponible</label>
                       <input
                         type="number"
@@ -1192,11 +1275,11 @@
                         class="form-control"
                         accept="image/*"
                       />
-                      <small class="text-muted">Optionnel, JPG/PNG recommandé.</small>
+                      <small class="text-muted" style="font-size:0.75rem;">Optionnel, JPG/PNG recommandé.</small>
                     </div>
                     <div class="d-grid">
                       <button type="submit" class="btn btn-primary">
-                        <i class="bx bx-save me-1"></i>Enregistrer le produit
+                        <i class="bx bx-save me-1"></i>Enregistrer
                       </button>
                     </div>
                   </form>
@@ -1205,10 +1288,10 @@
             </div>
 
             <!-- Tableau produits -->
-            <div class="col-lg-8 mb-4">
+            <div class="col-lg-8 mb-3">
               <div class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title mb-3">
+                  <h5 class="card-title mb-3" style="font-size:0.95rem;">
                     <i class="bx bx-list-ul me-2"></i>Liste des produits
                   </h5>
                   <div class="table-responsive">
@@ -1228,7 +1311,7 @@
                       </tbody>
                     </table>
                   </div>
-                  <div id="adminProductsEmpty" class="text-center text-muted py-3" style="display:none;">
+                  <div id="adminProductsEmpty" class="text-center text-muted py-3" style="display:none; font-size:0.8rem;">
                     Aucun produit enregistré pour le moment.
                   </div>
                 </div>
@@ -1240,11 +1323,11 @@
         <!-- Vue CLIENT : cartes produits -->
         <div id="userProductsView">
           <div class="card mb-3">
-            <div class="card-body d-flex justify-content-between align-items-center">
-              <h5 class="card-title mb-0">
+            <div class="card-body d-flex justify-content-between align-items-center py-2">
+              <h5 class="card-title mb-0" style="font-size:0.95rem;">
                 <i class="bx bx-store me-2"></i>Catalogue produits
               </h5>
-              <small class="text-muted">
+              <small class="text-muted" style="font-size:0.75rem;">
                 Cliquez sur <strong>Commander</strong> pour voir le détail et ajouter un commentaire.
               </small>
             </div>
@@ -1253,7 +1336,7 @@
           <div class="row" id="userProductsGrid">
             <!-- Cartes produits côté client -->
           </div>
-          <div id="userProductsEmpty" class="text-center text-muted py-4" style="display:none;">
+          <div id="userProductsEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.85rem;">
             Aucun produit disponible pour le moment.
           </div>
         </div>
@@ -1263,11 +1346,11 @@
       <!-- SECTION MES COMMANDES (client) -->
       <div id="userOrdersSection" class="content-section">
         <div class="card mb-3">
-          <div class="card-body d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">
+          <div class="card-body d-flex justify-content-between align-items-center py-2">
+            <h5 class="card-title mb-0" style="font-size:0.95rem;">
               <i class="bx bx-cart me-2"></i>Mes commandes
             </h5>
-            <small class="text-muted">
+            <small class="text-muted" style="font-size:0.75rem;">
               Suivi de toutes vos commandes et de leurs statuts. Cliquez sur <strong>Ouvrir</strong> pour voir le lien/code.
             </small>
           </div>
@@ -1293,7 +1376,7 @@
                 </tbody>
               </table>
             </div>
-            <div id="userOrdersEmpty" class="text-center text-muted py-4" style="display:none;">
+            <div id="userOrdersEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.8rem;">
               Vous n'avez encore effectué aucune commande.
             </div>
           </div>
@@ -1303,11 +1386,11 @@
       <!-- SECTION COMMANDES ADMIN -->
       <div id="ordersSection" class="content-section">
         <div class="card mb-3">
-          <div class="card-body d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">
+          <div class="card-body d-flex justify-content-between align-items-center py-2">
+            <h5 class="card-title mb-0" style="font-size:0.95rem;">
               <i class="bx bx-cart-alt me-2"></i>Commandes clients
             </h5>
-            <small class="text-muted">
+            <small class="text-muted" style="font-size:0.75rem;">
               Gestion des commandes : statut, livraison de lien/code, suivi.
             </small>
           </div>
@@ -1334,7 +1417,7 @@
                 </tbody>
               </table>
             </div>
-            <div id="adminOrdersEmpty" class="text-center text-muted py-4" style="display:none;">
+            <div id="adminOrdersEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.8rem;">
               Aucune commande enregistrée pour le moment.
             </div>
           </div>
@@ -1449,7 +1532,7 @@
                     rows="3"
                     placeholder="Ex : Lien M3U, code d'activation, identifiants, etc."
                   ></textarea>
-                  <small class="text-muted">
+                  <small class="text-muted" style="font-size:0.75rem;">
                     Cette information sera visible par le client dans sa rubrique "Mes commandes".
                   </small>
                 </div>
@@ -1534,15 +1617,24 @@
             <form id="editProductForm" onsubmit="handleEditProductSubmit(event)">
               <div class="modal-body">
                 <input type="hidden" id="editProductId" />
-                <div class="mb-3">
+                <div class="mb-2">
                   <label class="form-label" for="editProductName">Nom du produit</label>
-                  <input type="text" id="editProductName" class="form-control" required />
+                  <input
+                    type="text"
+                    id="editProductName"
+                    class="form-control"
+                    required
+                  />
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                   <label class="form-label" for="editProductDescription">Description</label>
-                  <textarea id="editProductDescription" class="form-control" rows="2"></textarea>
+                  <textarea
+                    id="editProductDescription"
+                    class="form-control"
+                    rows="2"
+                  ></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                   <label class="form-label">Prix par durée (DH)</label>
                   <div class="row g-2">
                     <div class="col-6">
@@ -1570,11 +1662,8 @@
                       </div>
                     </div>
                   </div>
-                  <small class="text-muted d-block mt-1">
-                    Laissez vide les durées non utilisées.
-                  </small>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                   <label class="form-label" for="editProductStock">Stock disponible</label>
                   <input
                     type="number"
@@ -1585,18 +1674,18 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label" for="editProductImage">Photo du produit</label>
+                  <label class="form-label" for="editProductImage">Photo du produit (remplacer)</label>
                   <input
                     type="file"
                     id="editProductImage"
                     class="form-control"
                     accept="image/*"
                   />
-                  <small class="text-muted d-block">
-                    Laissez vide pour conserver l'image actuelle.
+                  <small class="text-muted" style="font-size:0.75rem;">
+                    Laissez vide pour garder la photo actuelle.
                   </small>
                   <div class="mt-2">
-                    <img id="editProductImagePreview" src="" alt="Aperçu" class="product-image" />
+                    <img id="editProductPreview" src="" alt="" style="max-width:120px; border-radius:8px; border:1px solid #e5e7eb;">
                   </div>
                 </div>
               </div>
@@ -1819,7 +1908,7 @@
             <li>
               <div class="dropdown-item small">
                 <div>${n.message}</div>
-                <div class="text-muted" style="font-size: 0.75rem;">${dateStr}</div>
+                <div class="text-muted" style="font-size: 0.7rem;">${dateStr}</div>
               </div>
             </li>
           `;
@@ -1845,6 +1934,31 @@
         saveNotifications();
         updateNotificationUI();
       }
+    }
+
+    // ===== STATISTIQUES DASHBOARD ADMIN =====
+    function updateStats() {
+      const totalUsersEl = document.getElementById("totalUsers");
+      const totalProductsEl = document.getElementById("totalProducts");
+      const totalOrdersEl = document.getElementById("totalOrders");
+      const totalRevenueEl = document.getElementById("totalRevenue");
+
+      const usersCount = Array.isArray(users) ? users.length : 0;
+      const productsCount = Array.isArray(products) ? products.length : 0;
+      const ordersList = Array.isArray(orders) ? orders : [];
+
+      let revenue = 0;
+      ordersList.forEach((o) => {
+        if (!o || typeof o.price !== "number") return;
+        if (o.status === "cancelled") return;
+        revenue += o.price;
+      });
+
+      if (totalUsersEl) totalUsersEl.textContent = usersCount;
+      if (totalProductsEl) totalProductsEl.textContent = productsCount;
+      if (totalOrdersEl) totalOrdersEl.textContent = ordersList.length;
+      if (totalRevenueEl)
+        totalRevenueEl.textContent = revenue.toFixed(2) + " DH";
     }
 
     // ===== CONNEXION =====
@@ -1921,6 +2035,7 @@
       loadProducts();
       loadOrders();
       loadNotifications();
+      updateStats();
 
       showSection("dashboard");
     }
@@ -2031,6 +2146,8 @@
         adminQuickActions.style.display =
           currentUser.role === "admin" ? "block" : "none";
       }
+
+      updateStats();
     }
 
     // ===== SECTIONS =====
@@ -2111,10 +2228,7 @@
     // ===== GESTION PRODUITS =====
     function saveProducts() {
       localStorage.setItem("products", JSON.stringify(products));
-      const totalProductsEl = document.getElementById("totalProducts");
-      if (totalProductsEl) {
-        totalProductsEl.textContent = products.length;
-      }
+      updateStats();
     }
 
     function handleAddProduct(event) {
@@ -2147,10 +2261,10 @@
         return;
       }
 
-      const pricesOk = [price1, price3, price6, price12].some(
+      const prices = [price1, price3, price6, price12].filter(
         (p) => !isNaN(p) && p > 0
       );
-      if (!pricesOk) {
+      if (prices.length === 0) {
         showAlert(
           "Veuillez renseigner au moins un prix (1, 3, 6 ou 12 mois).",
           "danger",
@@ -2199,123 +2313,6 @@
       }
     }
 
-    function openEditProductModal(productId) {
-      if (!currentUser || (currentUser.role !== "admin" && currentUser.role !== "moderator")) {
-        showAlert(
-          "Vous n'avez pas les droits pour modifier un produit.",
-          "danger",
-          "dashboard-alert-container"
-        );
-        return;
-      }
-
-      const product = products.find((p) => p.id === productId);
-      if (!product) return;
-
-      document.getElementById("editProductId").value = product.id;
-      document.getElementById("editProductName").value = product.name || "";
-      document.getElementById("editProductDescription").value = product.description || "";
-      document.getElementById("editPrice1").value = product.price1 || "";
-      document.getElementById("editPrice3").value = product.price3 || "";
-      document.getElementById("editPrice6").value = product.price6 || "";
-      document.getElementById("editPrice12").value = product.price12 || "";
-      document.getElementById("editProductStock").value = product.stock || 0;
-      const preview = document.getElementById("editProductImagePreview");
-      if (preview) {
-        preview.src = product.image || PRODUCT_PLACEHOLDER;
-      }
-      const fileInput = document.getElementById("editProductImage");
-      if (fileInput) fileInput.value = "";
-
-      const modalEl = document.getElementById("editProductModal");
-      const modal = new bootstrap.Modal(modalEl);
-      modal.show();
-    }
-
-    function handleEditProductSubmit(event) {
-      event.preventDefault();
-      if (!currentUser || (currentUser.role !== "admin" && currentUser.role !== "moderator")) {
-        showAlert(
-          "Vous n'avez pas les droits pour modifier un produit.",
-          "danger",
-          "dashboard-alert-container"
-        );
-        return;
-      }
-
-      const id = parseInt(document.getElementById("editProductId").value, 10);
-      const productIndex = products.findIndex((p) => p.id === id);
-      if (productIndex === -1) return;
-
-      const name = document.getElementById("editProductName").value.trim();
-      const description = document.getElementById("editProductDescription").value.trim();
-      const price1 = parseFloat(document.getElementById("editPrice1").value);
-      const price3 = parseFloat(document.getElementById("editPrice3").value);
-      const price6 = parseFloat(document.getElementById("editPrice6").value);
-      const price12 = parseFloat(document.getElementById("editPrice12").value);
-      let stock = parseInt(document.getElementById("editProductStock").value || "0", 10);
-      const imageInput = document.getElementById("editProductImage");
-      const file = imageInput.files[0];
-
-      if (!name) {
-        showAlert(
-          "Le nom du produit est obligatoire.",
-          "danger",
-          "dashboard-alert-container"
-        );
-        return;
-      }
-
-      const pricesOk = [price1, price3, price6, price12].some(
-        (p) => !isNaN(p) && p > 0
-      );
-      if (!pricesOk) {
-        showAlert(
-          "Veuillez renseigner au moins un prix (1, 3, 6 ou 12 mois).",
-          "danger",
-          "dashboard-alert-container"
-        );
-        return;
-      }
-
-      if (isNaN(stock) || stock < 0) stock = 0;
-
-      function applyChanges(imageDataUrl) {
-        const p = products[productIndex];
-        p.name = name;
-        p.description = description;
-        p.price1 = isNaN(price1) ? 0 : price1;
-        p.price3 = isNaN(price3) ? 0 : price3;
-        p.price6 = isNaN(price6) ? 0 : price6;
-        p.price12 = isNaN(price12) ? 0 : price12;
-        p.stock = stock;
-        if (imageDataUrl) {
-          p.image = imageDataUrl;
-        }
-        saveProducts();
-        showAlert(
-          "Produit modifié avec succès.",
-          "success",
-          "dashboard-alert-container"
-        );
-        loadProducts();
-
-        const modalEl = document.getElementById("editProductModal");
-        const modal = bootstrap.Modal.getInstance(modalEl);
-        if (modal) modal.hide();
-      }
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          applyChanges(e.target.result);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        applyChanges(null);
-      }
-    }
-
     function loadProducts() {
       products = JSON.parse(localStorage.getItem("products")) || [];
 
@@ -2357,8 +2354,8 @@
                     <td><img src="${imgSrc}" alt="${p.name}" class="product-image" /></td>
                     <td>${created}</td>
                     <td>
-                      <button class="btn btn-sm btn-outline-primary" onclick="openEditProductModal(${p.id})">
-                        Modifier
+                      <button class="btn btn-sm btn-outline-primary" onclick="openEditProductModal(${p.id})" title="Modifier">
+                        <i class="bx bx-edit-alt"></i>
                       </button>
                     </td>
                   </tr>
@@ -2413,11 +2410,11 @@
           }
 
           return `
-            <div class="col-md-4 col-lg-3 mb-4">
+            <div class="col-md-4 col-lg-3 col-sm-6 mb-3">
               <div class="product-card card h-100">
                 <img src="${imgSrc}" class="product-card-img" alt="${p.name}">
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mb-1">${p.name}</h5>
+                  <h5 class="card-title mb-1" style="font-size:0.95rem;">${p.name}</h5>
                   <p class="text-muted mb-2 small">${p.description || ""}</p>
                   <p class="mb-1 product-price">
                     ${
@@ -2442,6 +2439,125 @@
           `;
         })
         .join("");
+
+      updateStats();
+    }
+
+    // ===== ÉDITION PRODUIT =====
+    function openEditProductModal(productId) {
+      if (!currentUser || (currentUser.role !== "admin" && currentUser.role !== "moderator")) {
+        showAlert(
+          "Vous n'avez pas les droits pour modifier un produit.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const product = products.find((p) => p.id === productId);
+      if (!product) return;
+
+      document.getElementById("editProductId").value = product.id;
+      document.getElementById("editProductName").value = product.name;
+      document.getElementById("editProductDescription").value = product.description || "";
+      document.getElementById("editPrice1").value = product.price1 || "";
+      document.getElementById("editPrice3").value = product.price3 || "";
+      document.getElementById("editPrice6").value = product.price6 || "";
+      document.getElementById("editPrice12").value = product.price12 || "";
+      document.getElementById("editProductStock").value = product.stock || 0;
+      document.getElementById("editProductImage").value = "";
+      const preview = document.getElementById("editProductPreview");
+      preview.src = product.image || PRODUCT_PLACEHOLDER;
+
+      const modalEl = document.getElementById("editProductModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function handleEditProductSubmit(event) {
+      event.preventDefault();
+      if (!currentUser || (currentUser.role !== "admin" && currentUser.role !== "moderator")) {
+        showAlert(
+          "Vous n'avez pas les droits pour modifier un produit.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const id = parseInt(document.getElementById("editProductId").value, 10);
+      const name = document.getElementById("editProductName").value.trim();
+      const description = document.getElementById("editProductDescription").value.trim();
+      const price1 = parseFloat(document.getElementById("editPrice1").value);
+      const price3 = parseFloat(document.getElementById("editPrice3").value);
+      const price6 = parseFloat(document.getElementById("editPrice6").value);
+      const price12 = parseFloat(document.getElementById("editPrice12").value);
+      let stock = parseInt(document.getElementById("editProductStock").value || "0", 10);
+      const fileInput = document.getElementById("editProductImage");
+      const file = fileInput.files[0];
+
+      if (!name) {
+        showAlert(
+          "Le nom du produit est obligatoire.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const prices = [price1, price3, price6, price12].filter(
+        (p) => !isNaN(p) && p > 0
+      );
+      if (prices.length === 0) {
+        showAlert(
+          "Veuillez renseigner au moins un prix (1, 3, 6 ou 12 mois).",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      if (isNaN(stock) || stock < 0) stock = 0;
+
+      const index = products.findIndex((p) => p.id === id);
+      if (index === -1) return;
+
+      function finalizeUpdate(imageDataUrl) {
+        products[index].name = name;
+        products[index].description = description;
+        products[index].price1 = isNaN(price1) ? 0 : price1;
+        products[index].price3 = isNaN(price3) ? 0 : price3;
+        products[index].price6 = isNaN(price6) ? 0 : price6;
+        products[index].price12 = isNaN(price12) ? 0 : price12;
+        products[index].stock = stock;
+        if (imageDataUrl !== null) {
+          products[index].image = imageDataUrl;
+        }
+
+        saveProducts();
+        loadProducts();
+        updateStats();
+
+        const modalEl = document.getElementById("editProductModal");
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+        showAlert(
+          "Produit modifié avec succès.",
+          "success",
+          "dashboard-alert-container"
+        );
+      }
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          finalizeUpdate(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        finalizeUpdate(null);
+      }
     }
 
     // ===== COMMANDES (CLIENT) =====
@@ -2588,9 +2704,8 @@
         document.getElementById("orderProductId").value,
         10
       );
-      const productIndex = products.findIndex((p) => p.id === productId);
-      if (productIndex === -1) return;
-      const product = products[productIndex];
+      const product = products.find((p) => p.id === productId);
+      if (!product) return;
 
       if (product.stock <= 0) {
         showAlert(
@@ -2624,7 +2739,7 @@
 
       if (!price || price <= 0) {
         showAlert(
-          "Prix invalide pour cette durée. Veuillez contacter l'administration.",
+          "Le prix de ce produit est invalide. Veuillez contacter l'administration.",
           "danger",
           "dashboard-alert-container"
         );
@@ -2638,6 +2753,21 @@
           "dashboard-alert-container"
         );
         return;
+      }
+
+      // Déduire le stock (1 unité par commande)
+      if (product.stock && product.stock > 0) {
+        product.stock -= 1;
+        saveProducts();
+      }
+
+      // Déduire le solde utilisateur
+      const userIndex = users.findIndex((u) => u.id === currentUser.id);
+      if (userIndex !== -1) {
+        const newBalance = (users[userIndex].balance || 0) - price;
+        users[userIndex].balance = Math.max(0, newBalance);
+        currentUser.balance = users[userIndex].balance;
+        localStorage.setItem("users", JSON.stringify(users));
       }
 
       const newOrder = {
@@ -2656,24 +2786,6 @@
 
       orders.push(newOrder);
       localStorage.setItem("orders", JSON.stringify(orders));
-
-      // Décrémenter le stock produit
-      products[productIndex].stock = (products[productIndex].stock || 0) - 1;
-      if (products[productIndex].stock < 0) products[productIndex].stock = 0;
-      saveProducts();
-
-      // Déduire le solde utilisateur + MAJ stats utilisateur
-      const userIndex = users.findIndex((u) => u.id === currentUser.id);
-      if (userIndex !== -1) {
-        const u = users[userIndex];
-        u.balance = (u.balance || 0) - price;
-        if (u.balance < 0) u.balance = 0;
-        u.totalPurchases = (u.totalPurchases || 0) + 1;
-        u.totalSpent = (u.totalSpent || 0) + price;
-        users[userIndex] = u;
-        currentUser = u;
-        localStorage.setItem("users", JSON.stringify(users));
-      }
 
       // Notification pour les admins/modérateurs
       users
@@ -2697,17 +2809,19 @@
 
       loadUserDashboard();
       loadProducts();
-      loadUserOrdersSection();
+      updateStats();
     }
 
     // ===== COMMANDES (ADMIN & CLIENT) =====
     function loadOrders() {
       if (!currentUser) return;
+      orders = JSON.parse(localStorage.getItem("orders")) || [];
       if (currentUser.role === "admin" || currentUser.role === "moderator") {
         loadOrdersAdmin();
       } else if (currentUser.role === "user") {
         loadUserDashboard();
       }
+      updateStats();
     }
 
     function loadOrdersAdmin() {
@@ -2768,6 +2882,8 @@
           `;
         })
         .join("");
+
+      updateStats();
     }
 
     function loadUserOrdersSection() {
@@ -2775,8 +2891,6 @@
 
       const body = document.getElementById("userOrdersSectionTableBody");
       const empty = document.getElementById("userOrdersEmpty");
-
-      orders = JSON.parse(localStorage.getItem("orders")) || [];
 
       const userOrders = orders
         .filter((o) => o.userId === currentUser.id)
@@ -2893,8 +3007,6 @@
       const orderIndex = orders.findIndex((o) => o.id === orderId);
       if (orderIndex === -1) return;
 
-      const oldStatus = orders[orderIndex].status;
-
       orders[orderIndex].status = status;
       orders[orderIndex].deliveryInfo = delivery;
       localStorage.setItem("orders", JSON.stringify(orders));
@@ -2929,6 +3041,7 @@
       if (currentUser.role === "user") {
         loadUserDashboard();
       }
+      updateStats();
     }
 
     // === OUVERTURE COMMANDE CÔTÉ CLIENT (voir lien/code) ===
@@ -2968,7 +3081,7 @@
           <div class="mb-2">
             <strong>Lien / code d'abonnement :</strong>
             <div class="mt-1 p-2 border rounded bg-light"
-                 style="word-break: break-all; font-family: monospace; font-size: 0.85rem;">
+                 style="word-break: break-all; font-family: monospace; font-size: 0.8rem;">
               ${order.deliveryInfo.replace(/\n/g, "<br>")}
             </div>
           </div>
@@ -2991,7 +3104,7 @@
             <strong>Statut :</strong>
             <span class="order-status-badge ${statusClass}">${statusLabel}</span>
           </p>
-          <p class="mb-3"><strong>Date :</strong> ${dateStr}</p>
+          <p class="mb-2"><strong>Date :</strong> ${dateStr}</p>
           ${commentBlock}
           ${deliveryBlock}
         `;
@@ -3010,8 +3123,6 @@
       const purchasesEl = document.getElementById("userPurchases");
       const spentEl = document.getElementById("userTotalSpent");
       const tableBody = document.getElementById("userOrdersTable");
-
-      orders = JSON.parse(localStorage.getItem("orders")) || [];
 
       const userOrders = orders
         .filter((o) => o.userId === currentUser.id)
@@ -3061,6 +3172,8 @@
             .join("");
         }
       }
+
+      updateStats();
     }
 
     // ===== UTIL =====
@@ -3102,15 +3215,12 @@
       }
     }
 
-    // ===== STUBS pour d'autres fonctionnalités (à compléter plus tard) =====
+    // ===== STUBS (pour plus tard) =====
     function loadUsers() {
       console.warn("loadUsers() non implémentée (stub).");
     }
     function loadCatalog() {
       console.warn("loadCatalog() non implémentée (stub).");
-    }
-    function updateStats() {
-      console.warn("updateStats() non implémentée (stub).");
     }
     function showAddUserModal() {
       console.warn("showAddUserModal() non implémentée (stub).");
@@ -3125,6 +3235,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       initializeData();
       loadData();
+      updateStats();
 
       document.getElementById("loginPage").style.display = "flex";
       document.getElementById("dashboardPage").style.display = "none";
@@ -3143,12 +3254,12 @@
       setTimeout(() => {
         if (document.getElementById("alert-container")) {
           showAlert(
-            "Bienvenue sur PANEL 4 PRO - Digital Solutions",
+            "Bienvenue sur PANEL 4 PRO",
             "info",
             "alert-container"
           );
         }
-      }, 1000);
+      }, 800);
     });
   </script>
 </body>
