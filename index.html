@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum=1.0"
   />
   <title>PANEL 4 PRO - Admin Panel</title>
   <meta name="description" content="Panneau d'administration PANEL 4 PRO" />
@@ -49,21 +49,22 @@
       box-sizing: border-box;
     }
 
-    /* Fond global clair, moderne nouvelle génération */
+    /* Fond global clair, scroll normal */
     body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background:
-    radial-gradient(circle at 0% 0%, #fdfbff 0%, #f3f7ff 35%, #edfafe 70%, #ffffff 100%);
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  /* on enlève le display:flex + align-items/justify-content */
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, #fdfbff 0%, #f3f7ff 35%, #edfafe 70%, #ffffff 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
     /* Effets digitaux adaptés au clair */
     .digital-bg {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background:
         radial-gradient(circle at 10% 90%, rgba(14, 165, 233, 0.12) 0%, transparent 55%),
@@ -71,20 +72,17 @@
         radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.06) 0%, transparent 60%);
       opacity: 0.9;
       animation: pulse 4s ease-in-out infinite;
+      z-index: 0;
+      pointer-events: none;
     }
 
     @keyframes pulse {
-      0%,
-      100% {
-        opacity: 0.6;
-      }
-      50% {
-        opacity: 1;
-      }
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
 
     .grid-lines {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background-image:
         linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
@@ -92,27 +90,24 @@
       background-size: 60px 60px;
       animation: gridMove 22s linear infinite;
       mix-blend-mode: soft-light;
+      z-index: 0;
+      pointer-events: none;
     }
 
     @keyframes gridMove {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(40px, 40px);
-      }
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(40px, 40px); }
     }
 
-   .authentication-wrapper {
-  width: 100%;
-  max-width: 450px;
-  padding: 2rem;
-  position: relative;
-  z-index: 10;
-  margin: 3rem auto; /* centre sur la page */
-}
+    .authentication-wrapper {
+      width: 100%;
+      max-width: 380px;
+      padding: 1.5rem;
+      position: relative;
+      z-index: 10;
+      margin: 2.5rem auto;
+    }
 
-    /* Cartes plus lumineuses */
     .card {
       border: none;
       border-radius: 1rem;
@@ -140,14 +135,14 @@
     }
 
     .card-body {
-      padding: 2rem;
+      padding: 1.3rem;
       position: relative;
       z-index: 2;
     }
 
     .app-brand {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.7rem;
     }
 
     .app-brand-logo {
@@ -158,7 +153,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1.2rem;
+      margin: 0 auto 1.1rem;
       box-shadow:
         0 0 26px rgba(14, 165, 233, 0.24),
         0 0 40px rgba(99, 102, 241, 0.16),
@@ -184,16 +179,12 @@
     }
 
     @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .app-brand-logo i {
-      font-size: 2rem; /* Réduction icône logo */
+      font-size: 2rem;
       color: #ffffff;
       position: relative;
       z-index: 2;
@@ -201,7 +192,7 @@
     }
 
     .app-brand-text {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       background: linear-gradient(
         135deg,
@@ -217,19 +208,17 @@
       letter-spacing: 1px;
     }
 
-    /* .app-brand-subtitle supprimé (DIGITAL SOLUTIONS) */
-
     .form-label {
       font-weight: 600;
       color: #0f172a;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
       font-size: 0.9rem;
     }
 
     .form-control {
       border: 1px solid rgba(148, 163, 184, 0.6);
       border-radius: 0.75rem;
-      padding: 0.65rem 0.9rem;
+      padding: 0.6rem 0.9rem;
       font-size: 0.9rem;
       transition: all 0.2s ease;
       background: #ffffff;
@@ -246,17 +235,13 @@
       background: #ffffff;
     }
 
-    .input-group {
-      position: relative;
-    }
-
     .input-group-text {
       background: linear-gradient(135deg, var(--digital-blue), var(--digital-purple));
       border: 1px solid rgba(148, 163, 184, 0.6);
       border-right: none;
       border-radius: 0.75rem 0 0 0.75rem;
       color: #ffffff;
-      padding: 0.55rem 0.9rem;
+      padding: 0.5rem 0.9rem;
       font-size: 0.85rem;
     }
 
@@ -306,7 +291,7 @@
 
     .divider {
       text-align: center;
-      margin: 1.5rem 0;
+      margin: 1.2rem 0;
       position: relative;
     }
 
@@ -344,7 +329,7 @@
       border-radius: 0.75rem;
       border: none;
       padding: 0.9rem 1.1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       background: #eff6ff;
       border: 1px solid rgba(59, 130, 246, 0.3);
       color: #1e293b;
@@ -372,44 +357,37 @@
       display: none;
     }
 
-    .strength-weak {
-      background: var(--danger-color);
-      width: 33%;
-    }
-    .strength-medium {
-      background: var(--warning-color);
-      width: 66%;
-    }
-    .strength-strong {
-      background: var(--success-color);
-      width: 100%;
-    }
+    .strength-weak { background: var(--danger-color); width: 33%; }
+    .strength-medium { background: var(--warning-color); width: 66%; }
+    .strength-strong { background: var(--success-color); width: 100%; }
 
     .form-check-label {
       color: #4b5563;
       font-size: 0.85rem;
     }
 
-    /* Dashboard clair */
+    /* Dashboard clair et compact */
     .dashboard-container {
       display: none;
       width: 100%;
       min-height: 100vh;
       background: #f5f7fb;
+      position: relative;
+      z-index: 5;
     }
 
     .banner-container {
       position: fixed;
       top: 0;
-      left: 250px;
+      left: 210px;
       right: 0;
       background: linear-gradient(90deg, var(--coral-color), var(--turquoise-color));
       color: #ffffff;
-      padding: 6px 0;
+      padding: 4px 0;
       z-index: 10000;
       box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
       display: none;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
 
     .banner-content {
@@ -422,12 +400,8 @@
     }
 
     @keyframes slideText {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     .banner-content .text-item {
@@ -440,11 +414,10 @@
       font-size: 0.9rem;
     }
 
-    /* Sidebar claire */
     .sidebar {
-      width: 250px;
+      width: 210px;
       background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 100%);
-      box-shadow: 2px 0 10px rgba(15, 23, 42, 0.08);
+      box-shadow: 2px 0 8px rgba(15, 23, 42, 0.06);
       position: fixed;
       height: 100vh;
       overflow-y: auto;
@@ -452,19 +425,19 @@
     }
 
     .main-content {
-      margin-left: 250px;
-      width: calc(100% - 250px);
-      padding: 20px;
+      margin-left: 210px;
+      width: calc(100% - 210px);
+      padding: 14px;
       background: #f5f7fb;
       min-height: 100vh;
     }
 
     .navbar {
       background: #ffffff;
-      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
-      padding: 0.8rem 1.3rem;
-      border-radius: 1rem;
-      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.8rem;
+      margin-bottom: 0.9rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -478,22 +451,22 @@
 
     .navbar-logo-img {
       background: linear-gradient(135deg, var(--coral-color), var(--turquoise-color));
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 12px;
+      margin-right: 8px;
       color: #ffffff;
     }
 
     .navbar-logo-img i {
-      font-size: 1.2rem; /* icône navbar réduite */
+      font-size: 1.1rem;
     }
 
     .navbar-logo-text {
-      font-size: 1.3rem;
+      font-size: 1.05rem;
       font-weight: 700;
       background: linear-gradient(135deg, var(--coral-color), var(--turquoise-color));
       -webkit-background-clip: text;
@@ -506,7 +479,7 @@
     }
 
     .sidebar-header {
-      padding: 1.1rem 1rem 0.8rem;
+      padding: 1rem 1rem 0.7rem;
       border-bottom: 1px solid rgba(209, 213, 219, 0.6);
       text-align: center;
     }
@@ -526,24 +499,24 @@
     }
 
     .sidebar-menu {
-      padding: 0.6rem 0;
+      padding: 0.45rem 0;
     }
 
     .sidebar-menu .nav-link {
       color: #4b5563;
-      padding: 0.6rem 0.9rem;
-      margin: 0.2rem 0.6rem;
+      padding: 0.55rem 0.8rem;
+      margin: 0.18rem 0.6rem;
       border-radius: 0.75rem;
       display: flex;
       align-items: center;
       transition: all 0.2s ease;
       font-weight: 500;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .sidebar-menu .nav-link i {
-      margin-right: 0.5rem;
-      font-size: 1rem; /* icônes sidebar réduites */
+      margin-right: 0.45rem;
+      font-size: 1rem;
       width: 20px;
       text-align: center;
     }
@@ -560,44 +533,34 @@
 
     .stats-card {
       background: #ffffff;
-      border-radius: 1rem;
-      padding: 1.1rem 1.2rem;
-      box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.06);
-      border-left: 4px solid var(--turquoise-color);
+      border-radius: 0.8rem;
+      padding: 0.8rem 0.9rem;
+      box-shadow: 0 0.2rem 0.7rem rgba(15, 23, 42, 0.05);
+      border-left: 3px solid var(--turquoise-color);
       transition: all 0.2s ease;
-      font-size: 0.9rem;
-    }
-
-    .stats-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .stats-card.blue {
-      border-left-color: var(--light-blue);
-    }
-    .stats-card.green {
-      border-left-color: var(--light-green);
-    }
-    .stats-card.turquoise {
-      border-left-color: var(--turquoise-color);
-    }
-    .stats-card.coral {
-      border-left-color: var(--coral-color);
-    }
-    .stats-card.purple {
-      border-left-color: var(--moderator-color);
-    }
-
-    .stats-card h5 {
       font-size: 0.85rem;
     }
 
+    .stats-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .stats-card.blue { border-left-color: var(--light-blue); }
+    .stats-card.green { border-left-color: var(--light-green); }
+    .stats-card.turquoise { border-left-color: var(--turquoise-color); }
+    .stats-card.coral { border-left-color: var(--coral-color); }
+    .stats-card.purple { border-left-color: var(--moderator-color); }
+
+    .stats-card h5 {
+      font-size: 0.8rem;
+    }
+
     .stats-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.15rem;
     }
 
     .stats-card i {
-      font-size: 1.8rem !important; /* icônes stats réduites */
+      font-size: 1.5rem !important;
     }
 
     .table {
@@ -605,7 +568,7 @@
       overflow: hidden;
       box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.06);
       background: #ffffff;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
 
     .table th {
@@ -613,20 +576,20 @@
       color: #111827;
       border: none;
       font-weight: 600;
-      padding: 0.8rem 0.9rem;
-      font-size: 0.8rem;
+      padding: 0.7rem 0.8rem;
+      font-size: 0.78rem;
     }
 
     .table td {
       border-color: #e5e7eb;
-      padding: 0.65rem 0.9rem;
+      padding: 0.55rem 0.75rem;
       vertical-align: middle;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
 
     .user-avatar {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       border: 2px solid var(--turquoise-color);
       object-fit: cover;
@@ -645,55 +608,37 @@
     .badge-warning,
     .badge-danger,
     .badge-moderator {
-      padding: 0.3rem 0.6rem;
+      padding: 0.26rem 0.55rem;
       border-radius: 999px;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: 0.73rem;
     }
 
-    .badge-coral {
-      background: var(--coral-color);
-      color: #ffffff;
-    }
-    .badge-turquoise {
-      background: var(--turquoise-color);
-      color: #ffffff;
-    }
-    .badge-success {
-      background: var(--success-color);
-      color: #ffffff;
-    }
-    .badge-warning {
-      background: var(--warning-color);
-      color: #ffffff;
-    }
-    .badge-danger {
-      background: var(--danger-color);
-      color: #ffffff;
-    }
-    .badge-moderator {
-      background: var(--moderator-color);
-      color: #ffffff;
-    }
+    .badge-coral { background: var(--coral-color); color: #ffffff; }
+    .badge-turquoise { background: var(--turquoise-color); color: #ffffff; }
+    .badge-success { background: var(--success-color); color: #ffffff; }
+    .badge-warning { background: var(--warning-color); color: #ffffff; }
+    .badge-danger { background: var(--danger-color); color: #ffffff; }
+    .badge-moderator { background: var(--moderator-color); color: #ffffff; }
 
     .user-dashboard-stats {
       background: linear-gradient(135deg, #e0f2fe, #d1fae5);
-      border-radius: 1rem;
-      padding: 1.6rem 1.4rem;
+      border-radius: 0.9rem;
+      padding: 1.1rem 1rem;
       color: #111827;
-      margin-bottom: 1.8rem;
-      box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.08);
-      font-size: 0.9rem;
+      margin-bottom: 1.3rem;
+      box-shadow: 0 0.2rem 0.8rem rgba(15, 23, 42, 0.06);
+      font-size: 0.85rem;
     }
 
     .user-dashboard-stats h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
     }
 
     .chart-container {
       position: relative;
-      height: 260px;
+      height: 230px;
       width: 100%;
     }
 
@@ -708,55 +653,42 @@
 
     .product-card {
       border: none;
-      border-radius: 1rem;
-      box-shadow: 0 0.25rem 1rem rgba(15, 23, 42, 0.08);
+      border-radius: 0.9rem;
+      box-shadow: 0 0.2rem 0.8rem rgba(15, 23, 42, 0.06);
       transition: all 0.2s ease;
       overflow: hidden;
       background: #ffffff;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .product-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0.4rem 1.4rem rgba(15, 23, 42, 0.13);
+      box-shadow: 0 0.4rem 1.2rem rgba(15, 23, 42, 0.12);
     }
 
-   .product-card-img {
-  height: 220px;        /* au lieu de 160px */
-  object-fit: cover;
-  width: 100%;
-}
-
+    .product-card-img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
 
     .product-price {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--coral-color);
     }
 
-    /* Statut commandes */
     .order-status-badge {
-      padding: 0.3rem 0.6rem;
+      padding: 0.28rem 0.55rem;
       border-radius: 999px;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: 0.73rem;
     }
-    .status-pending {
-      background: #fef3c7;
-      color: #92400e;
-    }
-    .status-confirmed {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-    .status-completed {
-      background: #dcfce7;
-      color: #166534;
-    }
-    .status-cancelled {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
+
+    .status-pending   { background: #fef3c7; color: #92400e; }
+    .status-confirmed { background: #dbeafe; color: #1d4ed8; }
+    .status-completed { background: #dcfce7; color: #166534; }
+    .status-cancelled { background: #fee2e2; color: #b91c1c; }
 
     .delivery-info {
       max-width: 220px;
@@ -765,16 +697,10 @@
     }
 
     @media (max-width: 768px) {
-      body {
-        align-items: flex-start;
-        padding-top: 1rem;
-      }
       .authentication-wrapper {
         max-width: 100%;
         padding: 1.2rem;
-      }
-      .card-body {
-        padding: 1.25rem;
+        margin: 1.8rem auto;
       }
       .sidebar {
         width: 72px;
@@ -785,61 +711,50 @@
       .main-content {
         margin-left: 72px;
         width: calc(100% - 72px);
-        padding: 12px;
+        padding: 10px;
       }
       .banner-container {
         left: 72px;
         font-size: 0.7rem;
       }
       .navbar {
-        padding: 0.6rem 0.8rem;
-        border-radius: 0.8rem;
+        padding: 0.45rem 0.7rem;
+        border-radius: 0.7rem;
       }
       .navbar-logo-img {
-        width: 38px;
-        height: 38px;
-        margin-right: 8px;
+        width: 34px;
+        height: 34px;
+        margin-right: 6px;
       }
       .navbar-logo-text {
-        font-size: 1.05rem;
+        font-size: 0.98rem;
       }
       .user-dashboard-stats {
-        padding: 1.2rem 1rem;
+        padding: 1rem 0.9rem;
       }
       .user-dashboard-stats h2 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
       .stats-card {
-        padding: 0.9rem 1rem;
+        padding: 0.75rem 0.85rem;
       }
       .stats-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.05rem;
       }
       .stats-card i {
-        font-size: 1.5rem !important;
+        font-size: 1.3rem !important;
       }
       .product-card-img {
-        height: 180px;  /* un peu plus grand aussi sur mobile */
+        height: 170px;
       }
       .product-card .card-body {
-        padding: 0.9rem;
-      }
-      .product-card h5 {
-        font-size: 0.95rem;
-      }
-      .product-price {
-        font-size: 0.95rem;
-      }
-      .table th,
-      .table td {
-        padding: 0.45rem 0.55rem;
-        font-size: 0.75rem;
+        padding: 0.8rem;
       }
     }
 
     @media (max-width: 576px) {
       .chart-container {
-        height: 220px;
+        height: 210px;
       }
     }
   </style>
@@ -853,7 +768,6 @@
   <div id="loginPage" class="authentication-wrapper">
     <div class="card">
       <div class="card-body">
-        <!-- App Brand -->
         <div class="app-brand">
           <div class="app-brand-logo">
             <i class="bx bxs-rocket"></i>
@@ -861,12 +775,9 @@
           <a href="#" class="app-brand-text">PANEL 4 PRO</a>
         </div>
 
-        <!-- Alert Messages -->
         <div id="alert-container"></div>
 
-        <!-- Login Form -->
         <form id="loginForm" onsubmit="handleLogin(event); return false;">
-
           <div class="mb-3">
             <label for="email" class="form-label">Email ou nom d'utilisateur</label>
             <div class="input-group">
@@ -938,7 +849,6 @@
 
   <!-- Tableau de bord -->
   <div id="dashboardPage" class="dashboard-container">
-    <!-- Bannière Défilante -->
     <div class="banner-container" id="dashboardBanner">
       <div class="banner-content">
         <span class="text-item">
@@ -953,7 +863,6 @@
       </div>
     </div>
 
-    <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
         <div class="app-brand-logo">
@@ -961,14 +870,10 @@
         </div>
         <div class="app-brand-text">PANEL 4 PRO</div>
       </div>
-      <div class="sidebar-menu" id="sidebarMenu">
-        <!-- Menu généré dynamiquement -->
-      </div>
+      <div class="sidebar-menu" id="sidebarMenu"></div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-      <!-- Navbar -->
       <nav class="navbar">
         <div class="navbar-logo">
           <div class="navbar-logo-img">
@@ -999,40 +904,25 @@
           </div>
           <div class="dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-              <div
-                class="user-avatar"
-                id="userAvatar"
-              >
-                A
-              </div>
+              <div class="user-avatar" id="userAvatar">A</div>
               <span style="font-weight: 600; margin-left: 8px; font-size: 0.9rem;" id="userNameDisplay">Administrateur</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="#"><i class="bx bx-user me-2"></i>Profil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="bx bx-cog me-2"></i>Paramètres</a>
-              </li>
+              <li><a class="dropdown-item" href="#"><i class="bx bx-user me-2"></i>Profil</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bx bx-cog me-2"></i>Paramètres</a></li>
               <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#" onclick="logout()"
-                  ><i class="bx bx-log-out me-2"></i>Déconnexion</a
-                >
-              </li>
+              <li><a class="dropdown-item" href="#" onclick="logout()"><i class="bx bx-log-out me-2"></i>Déconnexion</a></li>
             </ul>
           </div>
         </div>
       </nav>
 
-      <!-- Alert Messages Dashboard -->
       <div id="dashboard-alert-container"></div>
 
       <!-- Section Dashboard principale -->
       <div id="dashboardSection" class="content-section">
         <!-- Vue Admin/Moderator -->
         <div id="adminDashboard" style="display: none">
-          <!-- Stats Cards -->
           <div class="row mb-3">
             <div class="col-xl-3 col-md-6 mb-3">
               <div class="stats-card blue">
@@ -1137,7 +1027,6 @@
             </div>
           </div>
 
-          <!-- Graphique des recharges (à intégrer plus tard si tu veux) -->
           <div class="row mb-3">
             <div class="col-12">
               <div class="card">
@@ -1168,9 +1057,7 @@
                           <th>Statut</th>
                         </tr>
                       </thead>
-                      <tbody id="userOrdersTable">
-                        <!-- Commandes utilisateur -->
-                      </tbody>
+                      <tbody id="userOrdersTable"></tbody>
                     </table>
                   </div>
                   <div class="text-end mt-2">
@@ -1307,9 +1194,7 @@
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody id="adminProductsTableBody">
-                        <!-- Lignes produits admin -->
-                      </tbody>
+                      <tbody id="adminProductsTableBody"></tbody>
                     </table>
                   </div>
                   <div id="adminProductsEmpty" class="text-center text-muted py-3" style="display:none; font-size:0.8rem;">
@@ -1334,9 +1219,7 @@
             </div>
           </div>
 
-          <div class="row" id="userProductsGrid">
-            <!-- Cartes produits côté client -->
-          </div>
+          <div class="row" id="userProductsGrid"></div>
           <div id="userProductsEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.85rem;">
             Aucun produit disponible pour le moment.
           </div>
@@ -1372,9 +1255,7 @@
                     <th>Détails</th>
                   </tr>
                 </thead>
-                <tbody id="userOrdersSectionTableBody">
-                  <!-- Commandes client -->
-                </tbody>
+                <tbody id="userOrdersSectionTableBody"></tbody>
               </table>
             </div>
             <div id="userOrdersEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.8rem;">
@@ -1413,9 +1294,7 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody id="adminOrdersTableBody">
-                  <!-- Lignes commandes -->
-                </tbody>
+                <tbody id="adminOrdersTableBody"></tbody>
               </table>
             </div>
             <div id="adminOrdersEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.8rem;">
@@ -1425,38 +1304,25 @@
         </div>
       </div>
 
+      <!-- MODALS (inchangés, juste recopiés) -->
+
       <!-- MODAL COMMANDE PRODUIT (Vue client) -->
-      <div
-        class="modal fade"
-        id="orderProductModal"
-        tabindex="-1"
-        aria-labelledby="orderProductModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="orderProductModal" tabindex="-1" aria-labelledby="orderProductModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="orderProductModalLabel">
                 <i class="bx bx-cart-add me-2"></i>Commander le produit
               </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Fermer"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <form id="orderProductForm" onsubmit="handleOrderSubmit(event)">
               <div class="modal-body">
                 <input type="hidden" id="orderProductId" />
-                <div id="orderProductDetails" class="mb-3">
-                  <!-- Rempli dynamiquement -->
-                </div>
+                <div id="orderProductDetails" class="mb-3"></div>
                 <div class="mb-3">
                   <label class="form-label">Durée d'abonnement</label>
-                  <div id="orderDurationsContainer" class="row g-2">
-                    <!-- Radios de durée -->
-                  </div>
+                  <div id="orderDurationsContainer" class="row g-2"></div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="orderComment">
@@ -1471,13 +1337,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Annuler
-                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
                 <button type="submit" class="btn btn-primary">
                   <i class="bx bx-check-circle me-1"></i>Confirmer la commande
                 </button>
@@ -1488,32 +1348,19 @@
       </div>
 
       <!-- MODAL GESTION COMMANDE (Admin) -->
-      <div
-        class="modal fade"
-        id="manageOrderModal"
-        tabindex="-1"
-        aria-labelledby="manageOrderModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="manageOrderModal" tabindex="-1" aria-labelledby="manageOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="manageOrderModalLabel">
                 <i class="bx bx-cart me-2"></i>Gérer la commande
               </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Fermer"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <form id="manageOrderForm" onsubmit="handleManageOrderSubmit(event)">
               <div class="modal-body">
                 <input type="hidden" id="manageOrderId" />
-                <div id="manageOrderDetails" class="mb-3">
-                  <!-- Infos commande -->
-                </div>
+                <div id="manageOrderDetails" class="mb-3"></div>
                 <div class="mb-3">
                   <label for="manageOrderStatus" class="form-label">Statut de la commande</label>
                   <select id="manageOrderStatus" class="form-select">
@@ -1539,13 +1386,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Fermer
-                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">
                   <i class="bx bx-save me-1"></i>Enregistrer les modifications
                 </button>
@@ -1556,84 +1397,45 @@
       </div>
 
       <!-- MODAL DÉTAIL COMMANDE CLIENT (voir lien/code) -->
-      <div
-        class="modal fade"
-        id="viewUserOrderModal"
-        tabindex="-1"
-        aria-labelledby="viewUserOrderModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="viewUserOrderModal" tabindex="-1" aria-labelledby="viewUserOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="viewUserOrderModalLabel">
                 <i class="bx bx-receipt me-2"></i>Détails de la commande
               </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Fermer"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body">
-              <div id="viewUserOrderDetails">
-                <!-- Contenu rempli en JS -->
-              </div>
+              <div id="viewUserOrderDetails"></div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-outline-secondary"
-                data-bs-dismiss="modal"
-              >
-                Fermer
-              </button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
             </div>
           </div>
         </div>
       </div>
 
       <!-- MODAL ÉDITION PRODUIT (Admin) -->
-      <div
-        class="modal fade"
-        id="editProductModal"
-        tabindex="-1"
-        aria-labelledby="editProductModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="editProductModalLabel">
                 <i class="bx bx-edit-alt me-2"></i>Modifier le produit
               </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Fermer"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <form id="editProductForm" onsubmit="handleEditProductSubmit(event)">
               <div class="modal-body">
                 <input type="hidden" id="editProductId" />
                 <div class="mb-2">
                   <label class="form-label" for="editProductName">Nom du produit</label>
-                  <input
-                    type="text"
-                    id="editProductName"
-                    class="form-control"
-                    required
-                  />
+                  <input type="text" id="editProductName" class="form-control" required />
                 </div>
                 <div class="mb-2">
                   <label class="form-label" for="editProductDescription">Description</label>
-                  <textarea
-                    id="editProductDescription"
-                    class="form-control"
-                    rows="2"
-                  ></textarea>
+                  <textarea id="editProductDescription" class="form-control" rows="2"></textarea>
                 </div>
                 <div class="mb-2">
                   <label class="form-label">Prix par durée (DH)</label>
@@ -1666,22 +1468,11 @@
                 </div>
                 <div class="mb-2">
                   <label class="form-label" for="editProductStock">Stock disponible</label>
-                  <input
-                    type="number"
-                    min="0"
-                    id="editProductStock"
-                    class="form-control"
-                    required
-                  />
+                  <input type="number" min="0" id="editProductStock" class="form-control" required />
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="editProductImage">Photo du produit (remplacer)</label>
-                  <input
-                    type="file"
-                    id="editProductImage"
-                    class="form-control"
-                    accept="image/*"
-                  />
+                  <input type="file" id="editProductImage" class="form-control" accept="image/*" />
                   <small class="text-muted" style="font-size:0.75rem;">
                     Laissez vide pour garder la photo actuelle.
                   </small>
@@ -1691,13 +1482,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Annuler
-                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
                 <button type="submit" class="btn btn-primary">
                   <i class="bx bx-save me-1"></i>Enregistrer
                 </button>
@@ -1707,9 +1492,8 @@
         </div>
       </div>
 
-      <!-- FIN main-content -->
-    </div>
-  </div>
+    </div><!-- /main-content -->
+  </div><!-- /dashboardPage -->
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1787,7 +1571,6 @@
     const PRODUCT_PLACEHOLDER =
       "https://via.placeholder.com/400x300.png?text=Produit";
 
-    // ===== CHARGEMENT DES DONNÉES =====
     function loadData() {
       try {
         users = JSON.parse(localStorage.getItem("users")) || [];
@@ -1802,7 +1585,6 @@
       }
     }
 
-    // ===== ALERTES =====
     function showAlert(message, type = "info", containerId = "alert-container") {
       const container = document.getElementById(containerId);
       if (!container) return;
@@ -1824,7 +1606,6 @@
       }, 5000);
     }
 
-    // ===== LOADING LOGIN =====
     function showLoading() {
       const loginBtn = document.getElementById("loginBtn");
       if (!loginBtn) return;
@@ -1847,7 +1628,6 @@
       loading.style.display = "none";
     }
 
-    // ===== MOT DE PASSE =====
     function togglePassword() {
       const passwordInput = document.getElementById("password");
       const toggleIcon = document.getElementById("passwordToggleIcon");
@@ -1865,7 +1645,6 @@
       }
     }
 
-    // ===== NOTIFICATIONS =====
     function saveNotifications() {
       localStorage.setItem("notifications", JSON.stringify(notifications));
     }
@@ -1937,7 +1716,6 @@
       }
     }
 
-    // ===== STATISTIQUES DASHBOARD ADMIN =====
     function updateStats() {
       const totalUsersEl = document.getElementById("totalUsers");
       const totalProductsEl = document.getElementById("totalProducts");
@@ -1962,8 +1740,8 @@
         totalRevenueEl.textContent = revenue.toFixed(2) + " DH";
     }
 
-    // ===== CONNEXION =====
-    function handleLogin(event) {
+    // ===== CONNEXION (fix : fonction globale via window) =====
+    window.handleLogin = function (event) {
       event.preventDefault();
 
       const emailInput = document.getElementById("email");
@@ -2013,9 +1791,8 @@
           hideLoading();
         }
       }, 800);
-    }
+    };
 
-    // ===== DASHBOARD =====
     function showDashboard() {
       const loginPage = document.getElementById("loginPage");
       const dashboardPage = document.getElementById("dashboardPage");
@@ -2151,7 +1928,6 @@
       updateStats();
     }
 
-    // ===== SECTIONS =====
     function showSection(sectionId) {
       const sections = document.querySelectorAll(".content-section");
       sections.forEach((sec) => (sec.style.display = "none"));
@@ -2197,7 +1973,6 @@
       if (activeLink) activeLink.classList.add("active");
     }
 
-    // ===== AUTH PERSISTANTE =====
     function checkAuth() {
       const token = localStorage.getItem("admin_token");
       if (token) {
@@ -2211,22 +1986,20 @@
           }
         }
       }
-      document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("loginPage").style.display = "block";
       document.getElementById("dashboardPage").style.display = "none";
     }
 
-    // ===== LOGOUT =====
     function logout() {
       localStorage.removeItem("admin_token");
       localStorage.removeItem("remember_email");
       document.getElementById("dashboardPage").style.display = "none";
       document.getElementById("dashboardBanner").style.display = "none";
-      document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("loginPage").style.display = "block";
       hideLoading();
       showAlert("Vous avez été déconnecté avec succès.", "info");
     }
 
-    // ===== GESTION PRODUITS =====
     function saveProducts() {
       localStorage.setItem("products", JSON.stringify(products));
       updateStats();
@@ -2381,80 +2154,80 @@
 
       emptyClient.style.display = "none";
 
-     grid.innerHTML = products
-  .map((p) => {
-    const imgSrc = p.image || PRODUCT_PLACEHOLDER;
+      grid.innerHTML = products
+        .map((p) => {
+          const imgSrc = p.image || PRODUCT_PLACEHOLDER;
+          const prices = [p.price1, p.price3, p.price6, p.price12].filter(
+            (x) => typeof x === "number" && x > 0
+          );
+          const minPrice = prices.length ? Math.min.apply(null, prices) : 0;
+          const hasPrice12 = typeof p.price12 === "number" && p.price12 > 0;
+          const annualPrice = hasPrice12 ? p.price12 : (minPrice || 0);
 
-    const prices = [p.price1, p.price3, p.price6, p.price12].filter(
-      (x) => typeof x === "number" && x > 0
-    );
-    const minPrice = prices.length ? Math.min.apply(null, prices) : 0;
-    const yearlyPrice =
-      typeof p.price12 === "number" && p.price12 > 0 ? p.price12 : null;
+          const stockBadgeClass = p.stock > 0 ? "badge-success" : "badge-danger";
+          const stockText = p.stock > 0 ? p.stock + " en stock" : "Rupture";
 
-    const stockBadgeClass = p.stock > 0 ? "badge-success" : "badge-danger";
-    const stockText = p.stock > 0 ? p.stock + " en stock" : "Rupture";
+          let btnDisabledAttr = "";
+          let btnText = "Commander";
 
-    let btnDisabledAttr = "";
-    let btnText = "Commander";
+          if (currentUser && currentUser.role === "user") {
+            if (!currentUser.balance || currentUser.balance <= 0) {
+              btnDisabledAttr = "disabled";
+              btnText = "Solde insuffisant";
+            } else if (p.stock <= 0) {
+              btnDisabledAttr = "disabled";
+              btnText = "Rupture";
+            }
+          } else {
+            if (p.stock <= 0) {
+              btnDisabledAttr = "disabled";
+              btnText = "Rupture";
+            }
+          }
 
-    if (currentUser && currentUser.role === "user") {
-      if (!currentUser.balance || currentUser.balance <= 0) {
-        btnDisabledAttr = "disabled";
-        btnText = "Solde insuffisant";
-      } else if (p.stock <= 0) {
-        btnDisabledAttr = "disabled";
-        btnText = "Rupture";
-      }
-    } else {
-      if (p.stock <= 0) {
-        btnDisabledAttr = "disabled";
-        btnText = "Rupture";
-      }
-    }
-
-    // Texte du prix à afficher : priorité au prix 12 mois
-    let priceText = "Prix sur demande";
-    if (yearlyPrice) {
-      priceText = `12 mois : ${yearlyPrice.toFixed(2)} DH`;
-      if (minPrice && minPrice !== yearlyPrice) {
-        priceText += ` (à partir de ${minPrice.toFixed(2)} DH)`;
-      }
-    } else if (minPrice) {
-      priceText = "À partir de " + minPrice.toFixed(2) + " DH";
-    }
-
-    return `
-      <div class="col-md-4 col-lg-3 col-sm-6 mb-3">
-        <div class="product-card card h-100">
-          <img src="${imgSrc}" class="product-card-img" alt="${p.name}">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title mb-1" style="font-size:0.95rem;">${p.name}</h5>
-            <p class="text-muted mb-2 small">${p.description || ""}</p>
-            <p class="mb-1 product-price">${priceText}</p>
-            <p class="mb-2">
-              <span class="badge ${stockBadgeClass}">${stockText}</span>
-            </p>
-            <button
-              class="btn btn-primary mt-auto"
-              onclick="openOrderModal(${p.id})"
-              ${btnDisabledAttr}
-            >
-              <i class="bx bx-cart-add me-1"></i>${btnText}
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-  })
-  .join("");
-
+          return `
+            <div class="col-md-4 col-lg-4 col-sm-6 mb-3">
+              <div class="product-card card h-100">
+                <img src="${imgSrc}" class="product-card-img" alt="${p.name}">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mb-1" style="font-size:0.95rem;">${p.name}</h5>
+                  <p class="text-muted mb-2 small">${p.description || ""}</p>
+                  <p class="mb-1 product-price">
+                    ${
+                      annualPrice
+                        ? (
+                            hasPrice12
+                              ? "12 mois : " + annualPrice.toFixed(2) + " DH/an"
+                              : "À partir de " + annualPrice.toFixed(2) + " DH"
+                          )
+                        : "Prix sur demande"
+                    }
+                  </p>
+                  ${
+                    hasPrice12 && prices.length > 1
+                      ? `<p class="mb-2 small text-muted">Autres durées disponibles</p>`
+                      : ""
+                  }
+                  <p class="mb-2">
+                    <span class="badge ${stockBadgeClass}">${stockText}</span>
+                  </p>
+                  <button
+                    class="btn btn-primary mt-auto"
+                    onclick="openOrderModal(${p.id})"
+                    ${btnDisabledAttr}
+                  >
+                    <i class="bx bx-cart-add me-1"></i>${btnText}
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        })
         .join("");
 
       updateStats();
     }
 
-    // ===== ÉDITION PRODUIT =====
     function openEditProductModal(productId) {
       if (!currentUser || (currentUser.role !== "admin" && currentUser.role !== "moderator")) {
         showAlert(
@@ -2571,7 +2344,6 @@
       }
     }
 
-    // ===== COMMANDES (CLIENT) =====
     function openOrderModal(productId) {
       if (!currentUser || currentUser.role !== "user") {
         showAlert(
@@ -2766,13 +2538,11 @@
         return;
       }
 
-      // Déduire le stock (1 unité par commande)
       if (product.stock && product.stock > 0) {
         product.stock -= 1;
         saveProducts();
       }
 
-      // Déduire le solde utilisateur
       const userIndex = users.findIndex((u) => u.id === currentUser.id);
       if (userIndex !== -1) {
         const newBalance = (users[userIndex].balance || 0) - price;
@@ -2798,7 +2568,6 @@
       orders.push(newOrder);
       localStorage.setItem("orders", JSON.stringify(orders));
 
-      // Notification pour les admins/modérateurs
       users
         .filter((u) => u.role === "admin" || u.role === "moderator")
         .forEach((u) => {
@@ -2823,7 +2592,6 @@
       updateStats();
     }
 
-    // ===== COMMANDES (ADMIN & CLIENT) =====
     function loadOrders() {
       if (!currentUser) return;
       orders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -3055,7 +2823,6 @@
       updateStats();
     }
 
-    // === OUVERTURE COMMANDE CÔTÉ CLIENT (voir lien/code) ===
     function openUserOrderModal(orderId) {
       if (!currentUser || currentUser.role !== "user") {
         showAlert(
@@ -3126,7 +2893,6 @@
       modal.show();
     }
 
-    // ===== DASHBOARD UTILISATEUR =====
     function loadUserDashboard() {
       if (!currentUser || currentUser.role !== "user") return;
 
@@ -3187,7 +2953,6 @@
       updateStats();
     }
 
-    // ===== UTIL =====
     function formatDateShort(iso) {
       if (!iso) return "-";
       const d = new Date(iso);
@@ -3200,39 +2965,32 @@
 
     function getStatusClass(status) {
       switch (status) {
-        case "confirmed":
-          return "status-confirmed";
-        case "completed":
-          return "status-completed";
-        case "cancelled":
-          return "status-cancelled";
+        case "confirmed": return "status-confirmed";
+        case "completed": return "status-completed";
+        case "cancelled": return "status-cancelled";
         case "pending":
-        default:
-          return "status-pending";
+        default: return "status-pending";
       }
     }
 
     function getStatusLabel(status) {
       switch (status) {
-        case "confirmed":
-          return "Confirmée";
-        case "completed":
-          return "Livrée";
-        case "cancelled":
-          return "Annulée";
+        case "confirmed": return "Confirmée";
+        case "completed": return "Livrée";
+        case "cancelled": return "Annulée";
         case "pending":
-        default:
-          return "En attente";
+        default: return "En attente";
       }
     }
 
-    // ===== STUBS (pour plus tard) =====
     function loadUsers() {
       console.warn("loadUsers() non implémentée (stub).");
     }
+
     function loadCatalog() {
       console.warn("loadCatalog() non implémentée (stub).");
     }
+
     function showAddUserModal() {
       console.warn("showAddUserModal() non implémentée (stub).");
       showAlert(
@@ -3242,13 +3000,12 @@
       );
     }
 
-    // ===== DOM READY =====
     document.addEventListener("DOMContentLoaded", () => {
       initializeData();
       loadData();
       updateStats();
 
-      document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("loginPage").style.display = "block";
       document.getElementById("dashboardPage").style.display = "none";
 
       checkAuth();
