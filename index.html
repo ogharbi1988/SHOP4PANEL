@@ -696,6 +696,21 @@
       word-break: break-all;
     }
 
+    /* Correction pour les modales Bootstrap - IMPORTANT */
+    .modal {
+      z-index: 1060 !important;
+    }
+    
+    .modal-backdrop {
+      z-index: 1050 !important;
+    }
+
+    /* S'assurer que le contenu principal n'interfère pas */
+    .main-content {
+      position: relative;
+      z-index: 1;
+    }
+
     @media (max-width: 768px) {
       .authentication-wrapper {
         max-width: 100%;
@@ -847,6 +862,299 @@
     </div>
   </div>
 
+  <!-- MODALES DOIVENT ÊTRE PLACÉES ICI, AVANT LE DASHBOARD -->
+  
+  <!-- MODAL AJOUT UTILISATEUR -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModalLabel">
+            <i class="bx bx-user-plus me-2"></i>Ajouter un utilisateur
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <form id="addUserForm" onsubmit="handleAddUserSubmit(event)">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label" for="newUserName">Nom d'utilisateur</label>
+              <input type="text" id="newUserName" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="newUserEmail">Email</label>
+              <input type="email" id="newUserEmail" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="newUserPassword">Mot de passe</label>
+              <input type="password" id="newUserPassword" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="newUserRole">Rôle</label>
+              <select id="newUserRole" class="form-select">
+                <option value="admin">Administrateur</option>
+                <option value="moderator">Modérateur</option>
+                <option value="user" selected>Utilisateur</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="newUserBalance">Solde initial (DH)</label>
+              <input type="number" step="0.01" min="0" id="newUserBalance" class="form-control" value="0" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bx-save me-1"></i>Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ÉDITION UTILISATEUR -->
+  <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editUserModalLabel">
+            <i class="bx bx-edit-alt me-2"></i>Modifier l'utilisateur
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <form id="editUserForm" onsubmit="handleEditUserSubmit(event)">
+          <div class="modal-body">
+            <input type="hidden" id="editUserId" />
+            <div class="mb-3">
+              <label class="form-label" for="editUserName">Nom d'utilisateur</label>
+              <input type="text" id="editUserName" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="editUserEmail">Email</label>
+              <input type="email" id="editUserEmail" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="editUserPassword">Nouveau mot de passe</label>
+              <input type="password" id="editUserPassword" class="form-control" placeholder="Laisser vide pour ne pas changer" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="editUserRole">Rôle</label>
+              <select id="editUserRole" class="form-select">
+                <option value="admin">Administrateur</option>
+                <option value="moderator">Modérateur</option>
+                <option value="user">Utilisateur</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="editUserBalance">Solde (DH)</label>
+              <input type="number" step="0.01" min="0" id="editUserBalance" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="editUserStatus">Statut</label>
+              <select id="editUserStatus" class="form-select">
+                <option value="active">Actif</option>
+                <option value="inactive">Inactif</option>
+                <option value="suspended">Suspendu</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bx-save me-1"></i>Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ÉDITION PRODUIT (Admin) -->
+  <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProductModalLabel">
+            <i class="bx bx-edit-alt me-2"></i>Modifier le produit
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <form id="editProductForm" onsubmit="handleEditProductSubmit(event)">
+          <div class="modal-body">
+            <input type="hidden" id="editProductId" />
+            <div class="mb-2">
+              <label class="form-label" for="editProductName">Nom du produit</label>
+              <input type="text" id="editProductName" class="form-control" required />
+            </div>
+            <div class="mb-2">
+              <label class="form-label" for="editProductDescription">Description</label>
+              <textarea id="editProductDescription" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Prix par durée (DH)</label>
+              <div class="row g-2">
+                <div class="col-6">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">1 mois</span>
+                    <input type="number" step="0.01" min="0" id="editPrice1" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">3 mois</span>
+                    <input type="number" step="0.01" min="0" id="editPrice3" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-6 mt-2">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">6 mois</span>
+                    <input type="number" step="0.01" min="0" id="editPrice6" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-6 mt-2">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">12 mois</span>
+                    <input type="number" step="0.01" min="0" id="editPrice12" class="form-control" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label" for="editProductStock">Stock disponible</label>
+              <input type="number" min="0" id="editProductStock" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="editProductImage">Photo du produit (remplacer)</label>
+              <input type="file" id="editProductImage" class="form-control" accept="image/*" />
+              <small class="text-muted" style="font-size:0.75rem;">
+                Laissez vide pour garder la photo actuelle.
+              </small>
+              <div class="mt-2">
+                <img id="editProductPreview" src="" alt="" style="max-width:120px; border-radius:8px; border:1px solid #e5e7eb;">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bx-save me-1"></i>Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL COMMANDE PRODUIT (Vue client) -->
+  <div class="modal fade" id="orderProductModal" tabindex="-1" aria-labelledby="orderProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderProductModalLabel">
+            <i class="bx bx-cart-add me-2"></i>Commander le produit
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <form id="orderProductForm" onsubmit="handleOrderSubmit(event)">
+          <div class="modal-body">
+            <input type="hidden" id="orderProductId" />
+            <div id="orderProductDetails" class="mb-3"></div>
+            <div class="mb-3">
+              <label class="form-label">Durée d'abonnement</label>
+              <div id="orderDurationsContainer" class="row g-2"></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="orderComment">
+                Commentaire (demandes spécifiques)
+              </label>
+              <textarea
+                id="orderComment"
+                class="form-control"
+                rows="3"
+                placeholder="Ex : Activer sur tel appareil, changement de ligne, remarque spéciale..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bx-check-circle me-1"></i>Confirmer la commande
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL GESTION COMMANDE (Admin) -->
+  <div class="modal fade" id="manageOrderModal" tabindex="-1" aria-labelledby="manageOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="manageOrderModalLabel">
+            <i class="bx bx-cart me-2"></i>Gérer la commande
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <form id="manageOrderForm" onsubmit="handleManageOrderSubmit(event)">
+          <div class="modal-body">
+            <input type="hidden" id="manageOrderId" />
+            <div id="manageOrderDetails" class="mb-3"></div>
+            <div class="mb-3">
+              <label for="manageOrderStatus" class="form-label">Statut de la commande</label>
+              <select id="manageOrderStatus" class="form-select">
+                <option value="pending">En attente</option>
+                <option value="confirmed">Confirmée</option>
+                <option value="completed">Livrée</option>
+                <option value="cancelled">Annulée</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="manageOrderDelivery" class="form-label">
+                Lien / code d'abonnement (livraison)
+              </label>
+              <textarea
+                id="manageOrderDelivery"
+                class="form-control"
+                rows="3"
+                placeholder="Ex : Lien M3U, code d'activation, identifiants, etc."
+              ></textarea>
+              <small class="text-muted" style="font-size:0.75rem;">
+                Cette information sera visible par le client dans sa rubrique "Mes commandes".
+              </small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bx bx-save me-1"></i>Enregistrer les modifications
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DÉTAIL COMMANDE CLIENT (voir lien/code) -->
+  <div class="modal fade" id="viewUserOrderModal" tabindex="-1" aria-labelledby="viewUserOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewUserOrderModalLabel">
+            <i class="bx bx-receipt me-2"></i>Détails de la commande
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div id="viewUserOrderDetails"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Tableau de bord -->
   <div id="dashboardPage" class="dashboard-container">
     <div class="banner-container" id="dashboardBanner">
@@ -987,7 +1295,7 @@
                       </button>
                     </div>
                     <div class="col-md-3 col-6">
-                      <button class="btn btn-primary w-100" onclick="showAddUserModal()">
+                      <button class="btn btn-primary w-100" onclick="showSection('users')">
                         <i class="bx bx-user-plus me-1"></i>Utilisateur
                       </button>
                     </div>
@@ -1304,190 +1612,40 @@
         </div>
       </div>
 
-      <!-- MODALS (inchangés, juste recopiés) -->
-
-      <!-- MODAL COMMANDE PRODUIT (Vue client) -->
-      <div class="modal fade" id="orderProductModal" tabindex="-1" aria-labelledby="orderProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="orderProductModalLabel">
-                <i class="bx bx-cart-add me-2"></i>Commander le produit
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-            </div>
-            <form id="orderProductForm" onsubmit="handleOrderSubmit(event)">
-              <div class="modal-body">
-                <input type="hidden" id="orderProductId" />
-                <div id="orderProductDetails" class="mb-3"></div>
-                <div class="mb-3">
-                  <label class="form-label">Durée d'abonnement</label>
-                  <div id="orderDurationsContainer" class="row g-2"></div>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label" for="orderComment">
-                    Commentaire (demandes spécifiques)
-                  </label>
-                  <textarea
-                    id="orderComment"
-                    class="form-control"
-                    rows="3"
-                    placeholder="Ex : Activer sur tel appareil, changement de ligne, remarque spéciale..."
-                  ></textarea>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="submit" class="btn btn-primary">
-                  <i class="bx bx-check-circle me-1"></i>Confirmer la commande
-                </button>
-              </div>
-            </form>
+      <!-- SECTION GESTION UTILISATEURS (Admin) -->
+      <div id="usersSection" class="content-section">
+        <div class="row mb-3">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <h4 class="mb-0" style="font-size:1.05rem;">
+              <i class="bx bx-group me-2"></i>Gestion des utilisateurs
+            </h4>
+            <button class="btn btn-primary" onclick="openAddUserModal()">
+              <i class="bx bx-user-plus me-1"></i>Ajouter un utilisateur
+            </button>
           </div>
         </div>
-      </div>
 
-      <!-- MODAL GESTION COMMANDE (Admin) -->
-      <div class="modal fade" id="manageOrderModal" tabindex="-1" aria-labelledby="manageOrderModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="manageOrderModalLabel">
-                <i class="bx bx-cart me-2"></i>Gérer la commande
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Utilisateur</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                    <th>Statut</th>
+                    <th>Solde</th>
+                    <th>Date d'inscription</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminUsersTableBody"></tbody>
+              </table>
             </div>
-            <form id="manageOrderForm" onsubmit="handleManageOrderSubmit(event)">
-              <div class="modal-body">
-                <input type="hidden" id="manageOrderId" />
-                <div id="manageOrderDetails" class="mb-3"></div>
-                <div class="mb-3">
-                  <label for="manageOrderStatus" class="form-label">Statut de la commande</label>
-                  <select id="manageOrderStatus" class="form-select">
-                    <option value="pending">En attente</option>
-                    <option value="confirmed">Confirmée</option>
-                    <option value="completed">Livrée</option>
-                    <option value="cancelled">Annulée</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="manageOrderDelivery" class="form-label">
-                    Lien / code d'abonnement (livraison)
-                  </label>
-                  <textarea
-                    id="manageOrderDelivery"
-                    class="form-control"
-                    rows="3"
-                    placeholder="Ex : Lien M3U, code d'activation, identifiants, etc."
-                  ></textarea>
-                  <small class="text-muted" style="font-size:0.75rem;">
-                    Cette information sera visible par le client dans sa rubrique "Mes commandes".
-                  </small>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">
-                  <i class="bx bx-save me-1"></i>Enregistrer les modifications
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- MODAL DÉTAIL COMMANDE CLIENT (voir lien/code) -->
-      <div class="modal fade" id="viewUserOrderModal" tabindex="-1" aria-labelledby="viewUserOrderModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="viewUserOrderModalLabel">
-                <i class="bx bx-receipt me-2"></i>Détails de la commande
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            <div id="adminUsersEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.8rem;">
+              Aucun utilisateur enregistré pour le moment.
             </div>
-            <div class="modal-body">
-              <div id="viewUserOrderDetails"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MODAL ÉDITION PRODUIT (Admin) -->
-      <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editProductModalLabel">
-                <i class="bx bx-edit-alt me-2"></i>Modifier le produit
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-            </div>
-            <form id="editProductForm" onsubmit="handleEditProductSubmit(event)">
-              <div class="modal-body">
-                <input type="hidden" id="editProductId" />
-                <div class="mb-2">
-                  <label class="form-label" for="editProductName">Nom du produit</label>
-                  <input type="text" id="editProductName" class="form-control" required />
-                </div>
-                <div class="mb-2">
-                  <label class="form-label" for="editProductDescription">Description</label>
-                  <textarea id="editProductDescription" class="form-control" rows="2"></textarea>
-                </div>
-                <div class="mb-2">
-                  <label class="form-label">Prix par durée (DH)</label>
-                  <div class="row g-2">
-                    <div class="col-6">
-                      <div class="input-group input-group-sm">
-                        <span class="input-group-text">1 mois</span>
-                        <input type="number" step="0.01" min="0" id="editPrice1" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="input-group input-group-sm">
-                        <span class="input-group-text">3 mois</span>
-                        <input type="number" step="0.01" min="0" id="editPrice3" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="col-6 mt-2">
-                      <div class="input-group input-group-sm">
-                        <span class="input-group-text">6 mois</span>
-                        <input type="number" step="0.01" min="0" id="editPrice6" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="col-6 mt-2">
-                      <div class="input-group input-group-sm">
-                        <span class="input-group-text">12 mois</span>
-                        <input type="number" step="0.01" min="0" id="editPrice12" class="form-control" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mb-2">
-                  <label class="form-label" for="editProductStock">Stock disponible</label>
-                  <input type="number" min="0" id="editProductStock" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                  <label class="form-label" for="editProductImage">Photo du produit (remplacer)</label>
-                  <input type="file" id="editProductImage" class="form-control" accept="image/*" />
-                  <small class="text-muted" style="font-size:0.75rem;">
-                    Laissez vide pour garder la photo actuelle.
-                  </small>
-                  <div class="mt-2">
-                    <img id="editProductPreview" src="" alt="" style="max-width:120px; border-radius:8px; border:1px solid #e5e7eb;">
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="submit" class="btn btn-primary">
-                  <i class="bx bx-save me-1"></i>Enregistrer
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
@@ -1499,6 +1657,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // Le reste du code JavaScript reste exactement le même que précédemment
     // ===== DONNÉES INITIALES =====
     function initializeData() {
       if (!localStorage.getItem("users")) {
@@ -1952,6 +2111,12 @@
         if (os) {
           os.style.display = "block";
           loadOrdersAdmin();
+        }
+      } else if (sectionId === "users") {
+        const us = document.getElementById("usersSection");
+        if (us) {
+          us.style.display = "block";
+          loadUsers();
         }
       } else {
         showAlert(
@@ -2953,6 +3118,340 @@
       updateStats();
     }
 
+    // ===== GESTION DES UTILISATEURS =====
+    function loadUsers() {
+      if (!currentUser || currentUser.role !== "admin") {
+        showAlert(
+          "Vous n'avez pas les droits pour accéder à cette section.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const adminBody = document.getElementById("adminUsersTableBody");
+      const adminEmpty = document.getElementById("adminUsersEmpty");
+
+      if (!adminBody || !adminEmpty) return;
+
+      if (!users.length) {
+        adminBody.innerHTML = "";
+        adminEmpty.style.display = "block";
+        return;
+      }
+
+      adminEmpty.style.display = "none";
+
+      adminBody.innerHTML = users
+        .map((u) => {
+          const roleLabel = getRoleLabel(u.role);
+          const roleBadgeClass = getRoleBadgeClass(u.role);
+          const statusLabel = getStatusLabelUser(u.status);
+          const statusBadgeClass = getStatusBadgeClass(u.status);
+          const dateStr = formatDateShort(u.createdAt);
+
+          return `
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar me-2" style="background: ${getRoleColor(u.role)}">${u.username.charAt(0).toUpperCase()}</div>
+                  <div>
+                    <strong>${u.username}</strong>
+                    <br><small class="text-muted">${u.phone || "Non renseigné"}</small>
+                  </div>
+                </div>
+              </td>
+              <td>${u.email}</td>
+              <td><span class="badge ${roleBadgeClass}">${roleLabel}</span></td>
+              <td><span class="badge ${statusBadgeClass}">${statusLabel}</span></td>
+              <td>${(u.balance || 0).toFixed(2)} DH</td>
+              <td>${dateStr}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-1" onclick="openEditUserModal(${u.id})" title="Modifier">
+                  <i class="bx bx-edit-alt"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(${u.id})" title="Supprimer">
+                  <i class="bx bx-trash"></i>
+                </button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function getRoleLabel(role) {
+      switch (role) {
+        case "admin": return "Administrateur";
+        case "moderator": return "Modérateur";
+        case "user": return "Utilisateur";
+        default: return role;
+      }
+    }
+
+    function getRoleBadgeClass(role) {
+      switch (role) {
+        case "admin": return "badge-coral";
+        case "moderator": return "badge-moderator";
+        case "user": return "badge-turquoise";
+        default: return "badge-secondary";
+      }
+    }
+
+    function getRoleColor(role) {
+      switch (role) {
+        case "admin": return "var(--coral-color)";
+        case "moderator": return "var(--moderator-color)";
+        case "user": return "var(--turquoise-color)";
+        default: return "#6c757d";
+      }
+    }
+
+    function getStatusLabelUser(status) {
+      switch (status) {
+        case "active": return "Actif";
+        case "inactive": return "Inactif";
+        case "suspended": return "Suspendu";
+        default: return status;
+      }
+    }
+
+    function getStatusBadgeClass(status) {
+      switch (status) {
+        case "active": return "badge-success";
+        case "inactive": return "badge-warning";
+        case "suspended": return "badge-danger";
+        default: return "badge-secondary";
+      }
+    }
+
+    function openAddUserModal() {
+      if (!currentUser || currentUser.role !== "admin") {
+        showAlert(
+          "Vous n'avez pas les droits pour ajouter un utilisateur.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      document.getElementById("addUserForm").reset();
+      document.getElementById("newUserRole").value = "user";
+      document.getElementById("newUserBalance").value = "0";
+
+      const modalEl = document.getElementById("addUserModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function handleAddUserSubmit(event) {
+      event.preventDefault();
+      if (!currentUser || currentUser.role !== "admin") {
+        showAlert(
+          "Vous n'avez pas les droits pour ajouter un utilisateur.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const username = document.getElementById("newUserName").value.trim();
+      const email = document.getElementById("newUserEmail").value.trim();
+      const password = document.getElementById("newUserPassword").value;
+      const role = document.getElementById("newUserRole").value;
+      const balance = parseFloat(document.getElementById("newUserBalance").value) || 0;
+
+      if (!username || !email || !password) {
+        showAlert(
+          "Veuillez remplir tous les champs obligatoires.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      // Vérifier si l'email ou le nom d'utilisateur existe déjà
+      const existingUser = users.find(u => u.email === email || u.username === username);
+      if (existingUser) {
+        showAlert(
+          "Un utilisateur avec cet email ou ce nom d'utilisateur existe déjà.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const newUser = {
+        id: Date.now(),
+        username,
+        email,
+        password,
+        role,
+        status: "active",
+        phone: "",
+        createdAt: new Date().toISOString(),
+        balance,
+        totalPurchases: 0,
+        totalSpent: 0
+      };
+
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      const modalEl = document.getElementById("addUserModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      showAlert(
+        "Utilisateur ajouté avec succès.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      loadUsers();
+      updateStats();
+    }
+
+    function openEditUserModal(userId) {
+      if (!currentUser || currentUser.role !== "admin") {
+        showAlert(
+          "Vous n'avez pas les droits pour modifier un utilisateur.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const user = users.find(u => u.id === userId);
+      if (!user) return;
+
+      document.getElementById("editUserId").value = user.id;
+      document.getElementById("editUserName").value = user.username;
+      document.getElementById("editUserEmail").value = user.email;
+      document.getElementById("editUserPassword").value = "";
+      document.getElementById("editUserRole").value = user.role;
+      document.getElementById("editUserBalance").value = user.balance || 0;
+      document.getElementById("editUserStatus").value = user.status || "active";
+
+      const modalEl = document.getElementById("editUserModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function handleEditUserSubmit(event) {
+      event.preventDefault();
+      if (!currentUser || currentUser.role !== "admin") {
+        showAlert(
+          "Vous n'avez pas les droits pour modifier un utilisateur.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const id = parseInt(document.getElementById("editUserId").value, 10);
+      const username = document.getElementById("editUserName").value.trim();
+      const email = document.getElementById("editUserEmail").value.trim();
+      const password = document.getElementById("editUserPassword").value;
+      const role = document.getElementById("editUserRole").value;
+      const balance = parseFloat(document.getElementById("editUserBalance").value) || 0;
+      const status = document.getElementById("editUserStatus").value;
+
+      if (!username || !email) {
+        showAlert(
+          "Veuillez remplir tous les champs obligatoires.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const userIndex = users.findIndex(u => u.id === id);
+      if (userIndex === -1) return;
+
+      // Vérifier si l'email ou le nom d'utilisateur existe déjà pour un autre utilisateur
+      const existingUser = users.find(u => (u.email === email || u.username === username) && u.id !== id);
+      if (existingUser) {
+        showAlert(
+          "Un utilisateur avec cet email ou ce nom d'utilisateur existe déjà.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      users[userIndex].username = username;
+      users[userIndex].email = email;
+      users[userIndex].role = role;
+      users[userIndex].balance = balance;
+      users[userIndex].status = status;
+
+      // Mettre à jour le mot de passe seulement si un nouveau a été fourni
+      if (password) {
+        users[userIndex].password = password;
+      }
+
+      localStorage.setItem("users", JSON.stringify(users));
+
+      const modalEl = document.getElementById("editUserModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      showAlert(
+        "Utilisateur modifié avec succès.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      loadUsers();
+      updateStats();
+    }
+
+    function deleteUser(userId) {
+      if (!currentUser || currentUser.role !== "admin") {
+        showAlert(
+          "Vous n'avez pas les droits pour supprimer un utilisateur.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      // Empêcher la suppression de l'utilisateur actuel
+      if (userId === currentUser.id) {
+        showAlert(
+          "Vous ne pouvez pas supprimer votre propre compte.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      if (!confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.")) {
+        return;
+      }
+
+      const userIndex = users.findIndex(u => u.id === userId);
+      if (userIndex === -1) return;
+
+      // Supprimer les commandes associées à cet utilisateur
+      orders = orders.filter(o => o.userId !== userId);
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      // Supprimer l'utilisateur
+      users.splice(userIndex, 1);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      showAlert(
+        "Utilisateur supprimé avec succès.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      loadUsers();
+      updateStats();
+    }
+
     function formatDateShort(iso) {
       if (!iso) return "-";
       const d = new Date(iso);
@@ -2981,23 +3480,6 @@
         case "pending":
         default: return "En attente";
       }
-    }
-
-    function loadUsers() {
-      console.warn("loadUsers() non implémentée (stub).");
-    }
-
-    function loadCatalog() {
-      console.warn("loadCatalog() non implémentée (stub).");
-    }
-
-    function showAddUserModal() {
-      console.warn("showAddUserModal() non implémentée (stub).");
-      showAlert(
-        "La gestion avancée des utilisateurs sera ajoutée plus tard.",
-        "info",
-        "dashboard-alert-container"
-      );
     }
 
     document.addEventListener("DOMContentLoaded", () => {
