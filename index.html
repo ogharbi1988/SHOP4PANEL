@@ -2565,6 +2565,538 @@
       updateStats();
     }
 
+    // ===== GESTION DES PRODUITS =====
+    function loadProducts() {
+      const adminProductsView = document.getElementById("adminProductsView");
+      const userProductsView = document.getElementById("userProductsView");
+      
+      if (currentUser.role === "admin" || currentUser.role === "moderator") {
+        adminProductsView.style.display = "block";
+        userProductsView.style.display = "none";
+        loadAdminProducts();
+      } else {
+        adminProductsView.style.display = "none";
+        userProductsView.style.display = "block";
+        loadUserProducts();
+      }
+    }
+
+    function loadAdminProducts() {
+      const adminBody = document.getElementById("adminProductsTableBody");
+      const adminEmpty = document.getElementById("adminProductsEmpty");
+
+      if (!adminBody || !adminEmpty) return;
+
+      products = JSON.parse(localStorage.getItem("products")) || [];
+
+      if (!products.length) {
+        adminBody.innerHTML = "";
+        adminEmpty.style.display = "block";
+        return;
+      }
+
+      adminEmpty.style.display = "none";
+
+      adminBody.innerHTML = products
+        .map((p) => {
+          const price1 = p.prices && p.prices["1"] ? `${p.prices["1"].toFixed(2)} DH` : "-";
+          const price3 = p.prices && p.prices["3"] ? `${p.prices["3"].toFixed(2)} DH` : "-";
+          const price6 = p.prices && p.prices["6"] ? `${p.prices["6"].toFixed(2)} DH` : "-";
+          const price12 = p.prices && p.prices["12"] ? `${p.prices["12"].toFixed(2)} DH` : "-";
+          
+          const dateStr = formatDateShort(p.createdAt);
+          const imageSrc = p.image || PRODUCT_PLACEHOLDER;
+
+          return `
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="${imageSrc}" alt="${p.name}" class="product-image me-2">
+                  <div>
+                    <strong>${p.name}</strong>
+                    ${p.description ? `<br><small class="text-muted">${p.description}</small>` : ''}
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-turquoise">${p.category}</span></td>
+              <td>
+                <div style="font-size:0.75rem;">
+                  <div>1 mois: ${price1}</div>
+                  <div>3 mois: ${price3}</div>
+                  <div>6 mois: ${price6}</div>
+                  <div>12 mois: ${price12}</div>
+                </div>
+              </td>
+              <td>${p.stock}</td>
+              <td>
+                <img src="${imageSrc}" alt="${p.name}" style="width:40px; height:40px; object-fit:cover; border-radius:6px;">
+              </td>
+              <td>${dateStr}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-1" onclick="openEditProductModal(${p.id})" title="Modifier">
+                  <i class="bx bx-edit-alt"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${p.id})" title="Supprimer">
+                  <i class="bx bx-trash"></i>
+                </button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function loadUserProducts() {
+      const userGrid = document.getElementById("userProductsGrid");
+      const userEmpty = document.getElementById("userProductsEmpty");
+
+      if (!userGrid || !userEmpty) return;
+
+      products = JSON.parse(localStorage.getItem("products")) || [];
+      
+      // Filtrer les produits selon la catégorie sélectionnée
+      let filteredProducts = products;
+      if (currentCategoryFilter !== 'all') {
+        filteredProducts = products.filter(p => p.category === currentCategoryFilter);
+      }
+
+      if (!filteredProducts.length) {
+        userGrid.innerHTML = "";
+        userEmpty.style.display = "block";
+        return;
+      }
+
+      userEmpty.style.display = "none";
+
+      userGrid.innerHTML = filteredProducts
+        .map((p) => {
+          const imageSrc = p.image || PRODUCT_PLACEHOLDER;
+          const hasPrices = p.prices && Object.keys(p.prices).length > 0;
+          const minPrice = hasPrices ? Math.min(...Object.values(p.prices)) : 0;
+          const maxPrice = hasPrices ? Math.max(...Object.values(p.prices)) : 0;
+          const priceRange = minPrice === maxPrice ? `${minPrice.toFixed(2)} DH` : `${minPrice.toFixed(2)} - ${maxPrice.toFixed(2)} DH`;
+
+          return `
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+              <div class="product-card h-100">
+                <img src="${imageSrc}" class="product-card-img" alt="${p.name}">
+                <div class="card-body">
+                  <h6 class="card-title">${p.name}</h6>
+                  ${p.description ? `<p class="card-text small text-muted">${p.description}</p>` : ''}
+                  <div class="mb-2">
+                    <span class="badge badge-turquoise">${p.category}</span>
+                    <span class="badge ${p.stock > 0 ? 'badge-success' : 'badge-danger'} ms-1">
+                      ${p.stock > 0 ? 'En stock' : 'Rupture'}
+                    </span>
+                  </div>
+                  <div class="product-price mb-2">${priceRange}</div>
+                  <button 
+                    class="btn btn-primary w-100" 
+                    onclick="openOrderProductModal(${p.id})"
+                    ${p.stock <= 0 ? 'disabled' : ''}
+                  >
+                    <i class="bx bx-cart me-1"></i>Commander
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function filterProducts(category) {
+      currentCategoryFilter = category;
+      
+      // Mettre à jour les boutons de filtre
+      document.querySelectorAll('#userProductsView .btn-outline-primary').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      loadUserProducts();
+    }
+
+    function handleAddProduct(event) {
+      event.preventDefault();
+      
+      if (currentUser.role !== "admin" && currentUser.role !== "moderator") {
+        showAlert(
+          "Vous n'avez pas les droits pour ajouter un produit.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const name = document.getElementById("productName").value.trim();
+      const description = document.getElementById("productDescription").value.trim();
+      const category = document.getElementById("productCategory").value;
+      const stock = parseInt(document.getElementById("productStock").value, 10);
+      const imageFile = document.getElementById("productImage").files[0];
+
+      if (!name || !category || isNaN(stock)) {
+        showAlert(
+          "Veuillez remplir tous les champs obligatoires.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      // Récupérer les prix
+      const prices = {};
+      const price1 = parseFloat(document.getElementById("price1").value);
+      const price3 = parseFloat(document.getElementById("price3").value);
+      const price6 = parseFloat(document.getElementById("price6").value);
+      const price12 = parseFloat(document.getElementById("price12").value);
+
+      if (price1 > 0) prices["1"] = price1;
+      if (price3 > 0) prices["3"] = price3;
+      if (price6 > 0) prices["6"] = price6;
+      if (price12 > 0) prices["12"] = price12;
+
+      if (Object.keys(prices).length === 0) {
+        showAlert(
+          "Veuillez saisir au moins un prix valide.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const newProduct = {
+        id: Date.now(),
+        name,
+        description,
+        category,
+        prices,
+        stock,
+        image: PRODUCT_PLACEHOLDER,
+        createdAt: new Date().toISOString()
+      };
+
+      // Gérer l'upload d'image
+      if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          newProduct.image = e.target.result;
+          saveProduct(newProduct);
+        };
+        reader.readAsDataURL(imageFile);
+      } else {
+        saveProduct(newProduct);
+      }
+    }
+
+    function saveProduct(product) {
+      products.push(product);
+      localStorage.setItem("products", JSON.stringify(products));
+
+      document.getElementById("addProductForm").reset();
+      
+      showAlert(
+        "Produit ajouté avec succès.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      loadProducts();
+      updateStats();
+    }
+
+    function openEditProductModal(productId) {
+      if (currentUser.role !== "admin" && currentUser.role !== "moderator") {
+        showAlert(
+          "Vous n'avez pas les droits pour modifier un produit.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      document.getElementById("editProductId").value = product.id;
+      document.getElementById("editProductName").value = product.name;
+      document.getElementById("editProductDescription").value = product.description || "";
+      document.getElementById("editProductCategory").value = product.category;
+      document.getElementById("editProductStock").value = product.stock;
+      
+      // Remplir les prix
+      document.getElementById("editPrice1").value = product.prices && product.prices["1"] ? product.prices["1"] : "";
+      document.getElementById("editPrice3").value = product.prices && product.prices["3"] ? product.prices["3"] : "";
+      document.getElementById("editPrice6").value = product.prices && product.prices["6"] ? product.prices["6"] : "";
+      document.getElementById("editPrice12").value = product.prices && product.prices["12"] ? product.prices["12"] : "";
+      
+      // Afficher l'image actuelle
+      document.getElementById("editProductPreview").src = product.image || PRODUCT_PLACEHOLDER;
+
+      const modalEl = document.getElementById("editProductModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function handleEditProductSubmit(event) {
+      event.preventDefault();
+      
+      if (currentUser.role !== "admin" && currentUser.role !== "moderator") {
+        showAlert(
+          "Vous n'avez pas les droits pour modifier un produit.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const id = parseInt(document.getElementById("editProductId").value, 10);
+      const name = document.getElementById("editProductName").value.trim();
+      const description = document.getElementById("editProductDescription").value.trim();
+      const category = document.getElementById("editProductCategory").value;
+      const stock = parseInt(document.getElementById("editProductStock").value, 10);
+      const imageFile = document.getElementById("editProductImage").files[0];
+
+      if (!name || !category || isNaN(stock)) {
+        showAlert(
+          "Veuillez remplir tous les champs obligatoires.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      const productIndex = products.findIndex(p => p.id === id);
+      if (productIndex === -1) return;
+
+      // Récupérer les prix
+      const prices = {};
+      const price1 = parseFloat(document.getElementById("editPrice1").value);
+      const price3 = parseFloat(document.getElementById("editPrice3").value);
+      const price6 = parseFloat(document.getElementById("editPrice6").value);
+      const price12 = parseFloat(document.getElementById("editPrice12").value);
+
+      if (price1 > 0) prices["1"] = price1;
+      if (price3 > 0) prices["3"] = price3;
+      if (price6 > 0) prices["6"] = price6;
+      if (price12 > 0) prices["12"] = price12;
+
+      if (Object.keys(prices).length === 0) {
+        showAlert(
+          "Veuillez saisir au moins un prix valide.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      products[productIndex].name = name;
+      products[productIndex].description = description;
+      products[productIndex].category = category;
+      products[productIndex].prices = prices;
+      products[productIndex].stock = stock;
+
+      // Gérer le changement d'image
+      if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          products[productIndex].image = e.target.result;
+          saveProductsAndCloseModal();
+        };
+        reader.readAsDataURL(imageFile);
+      } else {
+        saveProductsAndCloseModal();
+      }
+
+      function saveProductsAndCloseModal() {
+        localStorage.setItem("products", JSON.stringify(products));
+
+        const modalEl = document.getElementById("editProductModal");
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+        showAlert(
+          "Produit modifié avec succès.",
+          "success",
+          "dashboard-alert-container"
+        );
+
+        loadProducts();
+      }
+    }
+
+    function deleteProduct(productId) {
+      if (currentUser.role !== "admin" && currentUser.role !== "moderator") {
+        showAlert(
+          "Vous n'avez pas les droits pour supprimer un produit.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      if (!confirm("Êtes-vous sûr de vouloir supprimer ce produit ? Cette action est irréversible.")) {
+        return;
+      }
+
+      const productIndex = products.findIndex(p => p.id === productId);
+      if (productIndex === -1) return;
+
+      // Vérifier si le produit est utilisé dans des commandes
+      const productOrders = orders.filter(o => o.productId === productId);
+      if (productOrders.length > 0) {
+        showAlert(
+          "Impossible de supprimer ce produit car il est utilisé dans des commandes.",
+          "danger",
+          "dashboard-alert-container"
+        );
+        return;
+      }
+
+      products.splice(productIndex, 1);
+      localStorage.setItem("products", JSON.stringify(products));
+
+      showAlert(
+        "Produit supprimé avec succès.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      loadProducts();
+      updateStats();
+    }
+
+    // ===== GESTION DES COMMANDES =====
+    function loadOrders() {
+      // Cette fonction sera appelée lors du chargement du dashboard
+    }
+
+    function loadOrdersAdmin() {
+      const adminBody = document.getElementById("adminOrdersTableBody");
+      const adminEmpty = document.getElementById("adminOrdersEmpty");
+
+      if (!adminBody || !adminEmpty) return;
+
+      orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+      if (!orders.length) {
+        adminBody.innerHTML = "";
+        adminEmpty.style.display = "block";
+        return;
+      }
+
+      adminEmpty.style.display = "none";
+
+      adminBody.innerHTML = orders
+        .map((o) => {
+          const user = users.find(u => u.id === o.userId);
+          const product = products.find(p => p.id === o.productId);
+          const dateStr = formatDateShort(o.createdAt);
+          const statusClass = getStatusClass(o.status);
+          const statusLabel = getStatusLabel(o.status);
+
+          return `
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="user-avatar me-2" style="background: ${getRoleColor(user?.role || 'user')}">
+                    ${user?.username?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <div>
+                    <strong>${user?.username || 'Utilisateur inconnu'}</strong>
+                    <br><small class="text-muted">${user?.email || ''}</small>
+                  </div>
+                </div>
+              </td>
+              <td>${product?.name || 'Produit supprimé'}</td>
+              <td><span class="badge badge-turquoise">${product?.category || 'N/A'}</span></td>
+              <td>${o.duration} mois</td>
+              <td>${o.price.toFixed(2)} DH</td>
+              <td>${dateStr}</td>
+              <td><span class="order-status-badge ${statusClass}">${statusLabel}</span></td>
+              <td class="delivery-info">${o.deliveryInfo || 'Non livré'}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="openManageOrderModal(${o.id})">
+                  <i class="bx bx-cog"></i> Gérer
+                </button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function openManageOrderModal(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (!order) return;
+
+      selectedOrderForManage = order;
+
+      const user = users.find(u => u.id === order.userId);
+      const product = products.find(p => p.id === order.productId);
+
+      document.getElementById("manageOrderId").value = order.id;
+      document.getElementById("manageOrderStatus").value = order.status;
+      document.getElementById("manageOrderDelivery").value = order.deliveryInfo || "";
+
+      const detailsHtml = `
+        <div class="border rounded p-3 bg-light">
+          <h6>Détails de la commande</h6>
+          <div class="row small">
+            <div class="col-6"><strong>Client:</strong> ${user?.username || 'Inconnu'}</div>
+            <div class="col-6"><strong>Email:</strong> ${user?.email || 'Inconnu'}</div>
+            <div class="col-6"><strong>Produit:</strong> ${product?.name || 'Produit supprimé'}</div>
+            <div class="col-6"><strong>Catégorie:</strong> ${product?.category || 'N/A'}</div>
+            <div class="col-6"><strong>Durée:</strong> ${order.duration} mois</div>
+            <div class="col-6"><strong>Prix:</strong> ${order.price.toFixed(2)} DH</div>
+            <div class="col-12"><strong>Commentaire:</strong> ${order.comment || 'Aucun'}</div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("manageOrderDetails").innerHTML = detailsHtml;
+
+      const modalEl = document.getElementById("manageOrderModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function handleManageOrderSubmit(event) {
+      event.preventDefault();
+
+      const orderId = parseInt(document.getElementById("manageOrderId").value, 10);
+      const status = document.getElementById("manageOrderStatus").value;
+      const deliveryInfo = document.getElementById("manageOrderDelivery").value.trim();
+
+      const orderIndex = orders.findIndex(o => o.id === orderId);
+      if (orderIndex === -1) return;
+
+      orders[orderIndex].status = status;
+      orders[orderIndex].deliveryInfo = deliveryInfo;
+
+      // Si la commande est marquée comme livrée, envoyer une notification
+      if (status === "completed" && deliveryInfo) {
+        addNotification(
+          orders[orderIndex].userId,
+          `Votre commande "${products.find(p => p.id === orders[orderIndex].productId)?.name}" a été livrée.`
+        );
+      }
+
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      const modalEl = document.getElementById("manageOrderModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      showAlert(
+        "Commande mise à jour avec succès.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      loadOrdersAdmin();
+    }
+
     // ===== FONCTIONS UTILITAIRES =====
     function formatDateShort(iso) {
       if (!iso) return "-";
@@ -2595,10 +3127,6 @@
         default: return "En attente";
       }
     }
-
-    // ===== FONCTIONS EXISTANTES (produits, commandes, etc.) =====
-    // [Toutes les fonctions existantes pour les produits, commandes, etc. restent ici]
-    // Pour des raisons de longueur, je les ai omises mais elles doivent être conservées
 
     // Initialisation
     document.addEventListener("DOMContentLoaded", () => {
@@ -2640,6 +3168,11 @@
     window.loadUsers = loadUsers;
     window.showSection = showSection;
     window.updateInterfaceByRole = updateInterfaceByRole;
+    window.handleAddProduct = handleAddProduct;
+    window.openEditProductModal = openEditProductModal;
+    window.handleEditProductSubmit = handleEditProductSubmit;
+    window.deleteProduct = deleteProduct;
+    window.filterProducts = filterProducts;
 
   </script>
 </body>
