@@ -705,6 +705,25 @@
       z-index: 1;
     }
 
+    /* Styles pour les notifications */
+    .notification-danger {
+      color: #dc3545 !important;
+      font-weight: 600;
+    }
+
+    .notification-success {
+      color: #198754 !important;
+      font-weight: 600;
+    }
+
+    .text-danger {
+      color: #dc3545 !important;
+    }
+
+    .text-success {
+      color: #198754 !important;
+    }
+
     @media (max-width: 768px) {
       .authentication-wrapper {
         max-width: 100%;
@@ -1776,7 +1795,25 @@
       }
 
       if (!localStorage.getItem("notifications")) {
-        localStorage.setItem("notifications", JSON.stringify([]));
+        const defaultNotifications = [
+          {
+            id: 1,
+            userId: 3, // ID de l'utilisateur
+            message: "🚨 Nouvelle commande passée - Vérifiez vos emails pour les détails",
+            type: "order_placed",
+            read: false,
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 2,
+            userId: 3,
+            message: "✅ Commande livrée - Votre abonnement est maintenant actif",
+            type: "order_delivered", 
+            read: false,
+            createdAt: new Date().toISOString()
+          }
+        ];
+        localStorage.setItem("notifications", JSON.stringify(defaultNotifications));
       }
     }
 
@@ -1870,11 +1907,12 @@
       localStorage.setItem("notifications", JSON.stringify(notifications));
     }
 
-    function addNotification(userId, message) {
+    function addNotification(userId, message, type = "info") {
       const notif = {
         id: Date.now() + Math.random(),
         userId,
         message,
+        type,
         createdAt: new Date().toISOString(),
         read: false
       };
@@ -1905,9 +1943,18 @@
         userNotifs.forEach((n) => {
           const d = new Date(n.createdAt);
           const dateStr = d.toLocaleString();
+          
+          // Ajouter des couleurs selon le type de notification
+          let textColor = "";
+          if (n.type === "order_placed") {
+            textColor = "text-danger"; // Rouge pour les nouvelles commandes
+          } else if (n.type === "order_delivered") {
+            textColor = "text-success"; // Vert pour les livraisons
+          }
+          
           html += `
             <li>
-              <div class="dropdown-item small">
+              <div class="dropdown-item small ${textColor}">
                 <div>${n.message}</div>
                 <div class="text-muted" style="font-size: 0.7rem;">${dateStr}</div>
               </div>
@@ -3100,7 +3147,8 @@
       if (status === "completed" && deliveryInfo) {
         addNotification(
           orders[orderIndex].userId,
-          `Votre commande "${products.find(p => p.id === orders[orderIndex].productId)?.name}" a été livrée.`
+          "✅ Commande livrée - Votre abonnement est maintenant actif",
+          "order_delivered"
         );
       }
 
@@ -3255,6 +3303,13 @@
       localStorage.setItem("orders", JSON.stringify(orders));
       localStorage.setItem("products", JSON.stringify(products));
       localStorage.setItem("users", JSON.stringify(users));
+
+      // Ajouter une notification pour le client
+      addNotification(
+        currentUser.id,
+        "🚨 Nouvelle commande passée - Vérifiez vos emails pour les détails",
+        "order_placed"
+      );
 
       // Ajouter une notification pour l'admin
       const adminUser = users.find(u => u.role === "admin");
