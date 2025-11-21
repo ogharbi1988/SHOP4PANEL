@@ -1746,7 +1746,29 @@
       }
 
       if (!localStorage.getItem("products")) {
-        localStorage.setItem("products", JSON.stringify([]));
+        const defaultProducts = [
+          {
+            id: 1,
+            name: "Abonnement IPTV PREMIUM",
+            description: "Accès à plus de 10 000 chaînes internationales",
+            category: "M3U",
+            prices: { "1": 50, "3": 120, "6": 200, "12": 350 },
+            stock: 100,
+            image: "https://via.placeholder.com/400x300.png?text=IPTV+PREMIUM",
+            createdAt: "2024-01-15"
+          },
+          {
+            id: 2,
+            name: "Code BEIN SPORT",
+            description: "Accès complet aux chaînes BEIN SPORT",
+            category: "CODE",
+            prices: { "1": 80, "3": 200, "6": 350 },
+            stock: 50,
+            image: "https://via.placeholder.com/400x300.png?text=BEIN+SPORT",
+            createdAt: "2024-01-15"
+          }
+        ];
+        localStorage.setItem("products", JSON.stringify(defaultProducts));
       }
 
       if (!localStorage.getItem("orders")) {
@@ -3097,6 +3119,315 @@
       loadOrdersAdmin();
     }
 
+    // ===== FONCTIONS POUR LA COMMANDE DES PRODUITS =====
+    function openOrderProductModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      selectedProductForOrder = product;
+
+      document.getElementById("orderProductId").value = product.id;
+
+      // Afficher les détails du produit
+      const detailsHtml = `
+        <div class="border rounded p-3 bg-light">
+          <div class="row align-items-center">
+            <div class="col-md-3">
+              <img src="${product.image || PRODUCT_PLACEHOLDER}" alt="${product.name}" 
+                   style="width:100%; max-width:120px; border-radius:8px;">
+            </div>
+            <div class="col-md-9">
+              <h6 class="mb-1">${product.name}</h6>
+              ${product.description ? `<p class="small text-muted mb-2">${product.description}</p>` : ''}
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge badge-turquoise">${product.category}</span>
+                <span class="badge ${product.stock > 0 ? 'badge-success' : 'badge-danger'}">
+                  ${product.stock > 0 ? 'En stock' : 'Rupture'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("orderProductDetails").innerHTML = detailsHtml;
+
+      // Afficher les options de durée
+      const durationsContainer = document.getElementById("orderDurationsContainer");
+      durationsContainer.innerHTML = '';
+
+      if (product.prices) {
+        Object.keys(product.prices).forEach(duration => {
+          const price = product.prices[duration];
+          const durationHtml = `
+            <div class="col-md-6">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="orderDuration" 
+                       id="duration${duration}" value="${duration}" required>
+                <label class="form-check-label w-100" for="duration${duration}">
+                  <div class="d-flex justify-content-between">
+                    <span>${duration} mois</span>
+                    <span class="fw-bold text-primary">${price.toFixed(2)} DH</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          `;
+          durationsContainer.innerHTML += durationHtml;
+        });
+      }
+
+      const modalEl = document.getElementById("orderProductModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function handleOrderSubmit(event) {
+      event.preventDefault();
+
+      if (!currentUser) {
+        showAlert("Vous devez être connecté pour passer une commande.", "danger");
+        return;
+      }
+
+      const productId = parseInt(document.getElementById("orderProductId").value, 10);
+      const duration = document.querySelector('input[name="orderDuration"]:checked')?.value;
+      const comment = document.getElementById("orderComment").value.trim();
+
+      if (!duration) {
+        showAlert("Veuillez sélectionner une durée d'abonnement.", "danger");
+        return;
+      }
+
+      const product = products.find(p => p.id === productId);
+      if (!product) {
+        showAlert("Produit non trouvé.", "danger");
+        return;
+      }
+
+      const price = product.prices[duration];
+      if (!price) {
+        showAlert("Prix non disponible pour cette durée.", "danger");
+        return;
+      }
+
+      // Vérifier le stock
+      if (product.stock <= 0) {
+        showAlert("Ce produit est en rupture de stock.", "danger");
+        return;
+      }
+
+      // Vérifier le solde de l'utilisateur
+      if (currentUser.balance < price) {
+        showAlert("Solde insuffisant. Veuillez recharger votre compte.", "danger");
+        return;
+      }
+
+      // Créer la commande
+      const newOrder = {
+        id: Date.now(),
+        userId: currentUser.id,
+        productId: product.id,
+        productName: product.name,
+        productCategory: product.category,
+        duration: parseInt(duration, 10),
+        price: price,
+        comment: comment,
+        status: "pending",
+        deliveryInfo: "",
+        createdAt: new Date().toISOString()
+      };
+
+      // Mettre à jour le stock
+      product.stock -= 1;
+
+      // Déduire le prix du solde de l'utilisateur
+      const userIndex = users.findIndex(u => u.id === currentUser.id);
+      if (userIndex !== -1) {
+        users[userIndex].balance -= price;
+        users[userIndex].totalPurchases += 1;
+        users[userIndex].totalSpent += price;
+        currentUser = users[userIndex];
+      }
+
+      // Sauvegarder les données
+      orders.push(newOrder);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.setItem("products", JSON.stringify(products));
+      localStorage.setItem("users", JSON.stringify(users));
+
+      // Ajouter une notification pour l'admin
+      const adminUser = users.find(u => u.role === "admin");
+      if (adminUser) {
+        addNotification(
+          adminUser.id,
+          `Nouvelle commande de ${currentUser.username}: ${product.name} (${duration} mois)`
+        );
+      }
+
+      // Fermer le modal
+      const modalEl = document.getElementById("orderProductModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      showAlert(
+        "Commande passée avec succès ! Votre solde a été débité.",
+        "success",
+        "dashboard-alert-container"
+      );
+
+      // Recharger les données
+      loadProducts();
+      loadUserDashboard();
+      updateStats();
+    }
+
+    // ===== GESTION DU TABLEAU DE BORD UTILISATEUR =====
+    function loadUserDashboard() {
+      if (!currentUser || currentUser.role !== "user") return;
+
+      // Mettre à jour les statistiques
+      document.getElementById("userBalance").textContent = currentUser.balance.toFixed(2) + " DH";
+      document.getElementById("userPurchases").textContent = currentUser.totalPurchases || 0;
+      document.getElementById("userTotalSpent").textContent = (currentUser.totalSpent || 0).toFixed(2) + " DH";
+
+      // Charger les dernières commandes
+      loadUserOrders();
+    }
+
+    function loadUserOrders() {
+      const userOrdersTable = document.getElementById("userOrdersTable");
+      if (!userOrdersTable) return;
+
+      const userOrders = orders
+        .filter(o => o.userId === currentUser.id)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 5);
+
+      if (!userOrders.length) {
+        userOrdersTable.innerHTML = `
+          <tr>
+            <td colspan="5" class="text-center text-muted py-3">
+              Aucune commande récente
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      userOrdersTable.innerHTML = userOrders
+        .map(order => {
+          const statusClass = getStatusClass(order.status);
+          const statusLabel = getStatusLabel(order.status);
+          const dateStr = formatDateShort(order.createdAt);
+
+          return `
+            <tr>
+              <td>${order.productName}</td>
+              <td>${order.duration} mois</td>
+              <td>${order.price.toFixed(2)} DH</td>
+              <td>${dateStr}</td>
+              <td><span class="order-status-badge ${statusClass}">${statusLabel}</span></td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function loadUserOrdersSection() {
+      const tableBody = document.getElementById("userOrdersSectionTableBody");
+      const emptyMsg = document.getElementById("userOrdersEmpty");
+
+      if (!tableBody || !emptyMsg) return;
+
+      const userOrders = orders
+        .filter(o => o.userId === currentUser.id)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      if (!userOrders.length) {
+        tableBody.innerHTML = "";
+        emptyMsg.style.display = "block";
+        return;
+      }
+
+      emptyMsg.style.display = "none";
+
+      tableBody.innerHTML = userOrders
+        .map(order => {
+          const statusClass = getStatusClass(order.status);
+          const statusLabel = getStatusLabel(order.status);
+          const dateStr = formatDateShort(order.createdAt);
+
+          return `
+            <tr>
+              <td>${order.productName}</td>
+              <td><span class="badge badge-turquoise">${order.productCategory}</span></td>
+              <td>${order.duration} mois</td>
+              <td>${order.price.toFixed(2)} DH</td>
+              <td>${dateStr}</td>
+              <td><span class="order-status-badge ${statusClass}">${statusLabel}</span></td>
+              <td class="delivery-info">${order.deliveryInfo || 'En attente de livraison'}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="viewUserOrderDetails(${order.id})">
+                  <i class="bx bx-show"></i> Ouvrir
+                </button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function viewUserOrderDetails(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (!order) return;
+
+      const product = products.find(p => p.id === order.productId);
+      const statusClass = getStatusClass(order.status);
+      const statusLabel = getStatusLabel(order.status);
+      const dateStr = new Date(order.createdAt).toLocaleString();
+
+      const detailsHtml = `
+        <div class="border rounded p-3 bg-light">
+          <h6>Détails de la commande #${order.id}</h6>
+          <div class="row small mb-3">
+            <div class="col-6"><strong>Produit:</strong> ${order.productName}</div>
+            <div class="col-6"><strong>Catégorie:</strong> ${order.productCategory}</div>
+            <div class="col-6"><strong>Durée:</strong> ${order.duration} mois</div>
+            <div class="col-6"><strong>Prix:</strong> ${order.price.toFixed(2)} DH</div>
+            <div class="col-6"><strong>Date:</strong> ${dateStr}</div>
+            <div class="col-6"><strong>Statut:</strong> <span class="order-status-badge ${statusClass}">${statusLabel}</span></div>
+          </div>
+          ${order.comment ? `
+            <div class="mb-3">
+              <strong>Votre commentaire:</strong>
+              <div class="border rounded p-2 bg-white mt-1">${order.comment}</div>
+            </div>
+          ` : ''}
+          ${order.deliveryInfo ? `
+            <div class="mb-3">
+              <strong>Lien / Code d'abonnement:</strong>
+              <div class="border rounded p-2 bg-white mt-1">
+                <pre class="mb-0" style="white-space: pre-wrap; font-size: 0.8rem;">${order.deliveryInfo}</pre>
+              </div>
+              <small class="text-muted">Ces informations sont confidentielles. Ne les partagez pas.</small>
+            </div>
+          ` : `
+            <div class="alert alert-info mb-0">
+              <i class="bx bx-info-circle"></i> Votre commande est en cours de traitement. 
+              Vous recevrez vos informations d'abonnement ici une fois la commande livrée.
+            </div>
+          `}
+        </div>
+      `;
+
+      document.getElementById("viewUserOrderDetails").innerHTML = detailsHtml;
+
+      const modalEl = document.getElementById("viewUserOrderModal");
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
     // ===== FONCTIONS UTILITAIRES =====
     function formatDateShort(iso) {
       if (!iso) return "-";
@@ -3173,6 +3504,12 @@
     window.handleEditProductSubmit = handleEditProductSubmit;
     window.deleteProduct = deleteProduct;
     window.filterProducts = filterProducts;
+    window.openOrderProductModal = openOrderProductModal;
+    window.handleOrderSubmit = handleOrderSubmit;
+    window.openManageOrderModal = openManageOrderModal;
+    window.handleManageOrderSubmit = handleManageOrderSubmit;
+    window.viewUserOrderDetails = viewUserOrderDetails;
+    window.loadUserOrdersSection = loadUserOrdersSection;
 
   </script>
 </body>
