@@ -1799,7 +1799,7 @@
           {
             id: 1,
             userId: 3, // ID de l'utilisateur
-            message: "🚨 Nouvelle commande passée - Vérifiez "Mes commandes",
+            message: "🚨 Nouvelle commande passée - Vérifiez vos emails pour les détails",
             type: "order_placed",
             read: false,
             createdAt: new Date().toISOString()
@@ -3307,7 +3307,7 @@
       // Ajouter une notification pour le client
       addNotification(
         currentUser.id,
-        "🚨 Nouvelle commande passée - Vérifiez vos emails pour les détails",
+        "🚨 Nouvelle commande passée - Vérifiez vos commandes",
         "order_placed"
       );
 
