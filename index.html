@@ -1933,56 +1933,60 @@
     }
 
     // ===== CONNEXION =====
-    window.handleLogin = function (event) {
-      event.preventDefault();
+   window.handleLogin = function (event) {
+  event.preventDefault();
 
-      const emailInput = document.getElementById("email");
-      const passwordInput = document.getElementById("password");
-      const rememberMe = document.getElementById("rememberMe").checked;
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const rememberMe = document.getElementById("rememberMe").checked;
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
-      if (!email || !password) {
-        showAlert("Veuillez remplir tous les champs.", "danger");
-        return;
+  if (!email || !password) {
+    showAlert("Veuillez remplir tous les champs.", "danger");
+    return;
+  }
+
+  showLoading();
+  
+  // Recharger les données à chaque tentative de connexion
+  loadData();
+
+  setTimeout(() => {
+    // Recherche d'utilisateur avec email OU username
+    const user = users.find(
+      (u) =>
+        (u.email.toLowerCase() === email.toLowerCase() || 
+         u.username.toLowerCase() === email.toLowerCase()) &&
+        u.password === password
+    );
+
+    if (user) {
+      currentUser = user;
+      const token = "user_token_" + Date.now();
+      localStorage.setItem("admin_token", token);
+
+      if (rememberMe) {
+        localStorage.setItem("remember_email", user.email);
+      } else {
+        localStorage.removeItem("remember_email");
       }
 
-      showLoading();
-      loadData();
+      showAlert("Connexion réussie ! Redirection...", "success");
+      hideLoading();
 
       setTimeout(() => {
-        const user = users.find(
-          (u) =>
-            (u.email.toLowerCase() === email.toLowerCase() || u.username === email) &&
-            u.password === password
-        );
-
-        if (user) {
-          currentUser = user;
-          const token = "user_token_" + Date.now();
-          localStorage.setItem("admin_token", token);
-
-          if (rememberMe) {
-            localStorage.setItem("remember_email", user.email);
-          } else {
-            localStorage.removeItem("remember_email");
-          }
-
-          showAlert("Connexion réussie ! Redirection...", "success");
-          hideLoading();
-
-          setTimeout(() => {
-            showDashboard();
-          }, 800);
-        } else {
-          showAlert(
-            "Email / nom d'utilisateur ou mot de passe incorrect.",
-            "danger"
-          );
-          hideLoading();
-        }
+        showDashboard();
       }, 800);
+    } else {
+      showAlert(
+        "Email / nom d'utilisateur ou mot de passe incorrect.",
+        "danger"
+      );
+      hideLoading();
+    }
+  }, 800);
     };
 
     function showDashboard() {
@@ -2194,21 +2198,21 @@
     }
 
     function checkAuth() {
-      const token = localStorage.getItem("admin_token");
-      if (token) {
-        loadData();
-        const rememberedEmail = localStorage.getItem("remember_email");
-        if (rememberedEmail) {
-          currentUser = users.find((u) => u.email === rememberedEmail);
-          if (currentUser) {
-            showDashboard();
-            return;
-          }
-        }
+  const token = localStorage.getItem("admin_token");
+  if (token) {
+    loadData();
+    const rememberedEmail = localStorage.getItem("remember_email");
+    if (remembermedEmail) {
+      currentUser = users.find((u) => u.email === rememberedEmail);
+      if (currentUser) {
+        showDashboard();
+        return;
       }
-      document.getElementById("loginPage").style.display = "block";
-      document.getElementById("dashboardPage").style.display = "none";
     }
+  }
+  document.getElementById("loginPage").style.display = "block";
+  document.getElementById("dashboardPage").style.display = "none";
+}
 
     function logout() {
       localStorage.removeItem("admin_token");
