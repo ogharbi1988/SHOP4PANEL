@@ -723,49 +723,7 @@
     .text-success {
       color: #198754 !important;
     }
-    /* Styles pour l'alignement des boutons Commander */
-    .product-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
 
-    .product-card .card-body {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      padding: 1rem;
-    }
-
-    .product-card .card-body .btn {
-      margin-top: auto;
-      align-self: flex-start;
-      width: 100%;
-    }
-
-    /* Assurer une hauteur cohérente pour les images */
-    .product-card-img {
-      height: 200px;
-      object-fit: cover;
-      width: 100%;
-    }
-
-    /* Limiter la description à 2 lignes */
-    .product-card .card-text {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-
-    /* Espacement cohérent entre les cartes */
-    .row.g-3 {
-      --bs-gutter-x: 1rem;
-      --bs-gutter-y: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      /* Vos styles media queries existants... */
     @media (max-width: 768px) {
       .authentication-wrapper {
         max-width: 100%;
@@ -1445,28 +1403,146 @@
       </div><!-- /dashboardSection -->
 
       <!-- SECTION GESTION PRODUITS -->
-      <!-- SECTION GESTION PRODUITS -->
-<div id="productsSection" class="content-section">
-  <!-- ... contenu existant ... -->
-  
-  <!-- Vue CLIENT : cartes produits -->
-  <div id="userProductsView">
-    <!-- Filtres par catégorie -->
-    <div class="card mb-3">
-      <!-- ... contenu existant des filtres ... -->
-    </div>
+      <div id="productsSection" class="content-section">
+        <div class="row mb-3">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <h4 class="mb-0" style="font-size:1.05rem;">
+              <i class="bx bx-package me-2"></i>Gestion des produits / Catalogue
+            </h4>
+          </div>
+        </div>
 
-    <div class="card mb-3">
-      <!-- ... contenu existant du titre ... -->
-    </div>
+        <!-- Vue ADMIN : ajout + tableau -->
+        <div id="adminProductsView" style="display:none;">
+          <div class="row">
+            <!-- Formulaire ajout produit -->
+            <div class="col-lg-4 mb-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title mb-3" style="font-size:0.95rem;">
+                    <i class="bx bx-plus-circle me-2"></i>Ajouter un produit
+                  </h5>
+                  <form id="addProductForm" onsubmit="handleAddProduct(event)">
+                    <div class="mb-2">
+                      <label class="form-label" for="productName">Nom du produit</label>
+                      <input
+                        type="text"
+                        id="productName"
+                        class="form-control"
+                        placeholder="Ex : Abonnement IPTV PREMIUM"
+                        required
+                      />
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label" for="productDescription">Description</label>
+                      <textarea
+                        id="productDescription"
+                        class="form-control"
+                        rows="2"
+                        placeholder="Courte description du produit (optionnel)"
+                      ></textarea>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label" for="productCategory">Catégorie</label>
+                      <select id="productCategory" class="form-select" required>
+                        <option value="">-- Sélectionner une catégorie --</option>
+                        <option value="M3U">M3U</option>
+                        <option value="CODE">CODE</option>
+                        <option value="BEINSPORT">BEINSPORT</option>
+                        <option value="SHARING">SHARING</option>
+                      </select>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Prix par durée (DH)</label>
+                      <div class="row g-2">
+                        <div class="col-6">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-text">1 mois</span>
+                            <input type="number" step="0.01" min="0" id="price1" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-text">3 mois</span>
+                            <input type="number" step="0.01" min="0" id="price3" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-6 mt-2">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-text">6 mois</span>
+                            <input type="number" step="0.01" min="0" id="price6" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="col-6 mt-2">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-text">12 mois</span>
+                            <input type="number" step="0.01" min="0" id="price12" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <small class="text-muted d-block mt-1" style="font-size:0.75rem;">
+                        Vous pouvez laisser vide les durées non utilisées.
+                      </small>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label" for="productStock">Stock disponible</label>
+                      <input
+                        type="number"
+                        min="0"
+                        id="productStock"
+                        class="form-control"
+                        placeholder="Quantité en stock"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="productImage">Photo du produit</label>
+                      <input
+                        type="file"
+                        id="productImage"
+                        class="form-control"
+                        accept="image/*"
+                      />
+                      <small class="text-muted" style="font-size:0.75rem;">Optionnel, JPG/PNG recommandé.</small>
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="bx bx-save me-1"></i>Enregistrer
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
 
-    <!-- MODIFICATION ICI : Ajouter g-3 à la classe row -->
-    <div class="row g-3" id="userProductsGrid"></div>
-    <div id="userProductsEmpty" class="text-center text-muted py-4" style="display:none; font-size:0.85rem;">
-      Aucun produit disponible pour le moment.
-    </div>
-  </div>
-</div>
+            <!-- Tableau produits -->
+            <div class="col-lg-8 mb-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title mb-3" style="font-size:0.95rem;">
+                    <i class="bx bx-list-ul me-2"></i>Liste des produits
+                  </h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                      <thead>
+                        <tr>
+                          <th>Produit</th>
+                          <th>Catégorie</th>
+                          <th>Prix (1/3/6/12 mois)</th>
+                          <th>Stock</th>
+                          <th>Photo</th>
+                          <th>Créé le</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="adminProductsTableBody"></tbody>
+                    </table>
+                  </div>
+                  <div id="adminProductsEmpty" class="text-center text-muted py-3" style="display:none; font-size:0.8rem;">
+                    Aucun produit enregistré pour le moment.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1933,60 +2009,56 @@
     }
 
     // ===== CONNEXION =====
-   window.handleLogin = function (event) {
-  event.preventDefault();
+    window.handleLogin = function (event) {
+      event.preventDefault();
 
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-  const rememberMe = document.getElementById("rememberMe").checked;
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const rememberMe = document.getElementById("rememberMe").checked;
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
 
-  if (!email || !password) {
-    showAlert("Veuillez remplir tous les champs.", "danger");
-    return;
-  }
-
-  showLoading();
-  
-  // Recharger les données à chaque tentative de connexion
-  loadData();
-
-  setTimeout(() => {
-    // Recherche d'utilisateur avec email OU username
-    const user = users.find(
-      (u) =>
-        (u.email.toLowerCase() === email.toLowerCase() || 
-         u.username.toLowerCase() === email.toLowerCase()) &&
-        u.password === password
-    );
-
-    if (user) {
-      currentUser = user;
-      const token = "user_token_" + Date.now();
-      localStorage.setItem("admin_token", token);
-
-      if (rememberMe) {
-        localStorage.setItem("remember_email", user.email);
-      } else {
-        localStorage.removeItem("remember_email");
+      if (!email || !password) {
+        showAlert("Veuillez remplir tous les champs.", "danger");
+        return;
       }
 
-      showAlert("Connexion réussie ! Redirection...", "success");
-      hideLoading();
+      showLoading();
+      loadData();
 
       setTimeout(() => {
-        showDashboard();
+        const user = users.find(
+          (u) =>
+            (u.email.toLowerCase() === email.toLowerCase() || u.username === email) &&
+            u.password === password
+        );
+
+        if (user) {
+          currentUser = user;
+          const token = "user_token_" + Date.now();
+          localStorage.setItem("admin_token", token);
+
+          if (rememberMe) {
+            localStorage.setItem("remember_email", user.email);
+          } else {
+            localStorage.removeItem("remember_email");
+          }
+
+          showAlert("Connexion réussie ! Redirection...", "success");
+          hideLoading();
+
+          setTimeout(() => {
+            showDashboard();
+          }, 800);
+        } else {
+          showAlert(
+            "Email / nom d'utilisateur ou mot de passe incorrect.",
+            "danger"
+          );
+          hideLoading();
+        }
       }, 800);
-    } else {
-      showAlert(
-        "Email / nom d'utilisateur ou mot de passe incorrect.",
-        "danger"
-      );
-      hideLoading();
-    }
-  }, 800);
     };
 
     function showDashboard() {
@@ -2198,21 +2270,21 @@
     }
 
     function checkAuth() {
-  const token = localStorage.getItem("admin_token");
-  if (token) {
-    loadData();
-    const rememberedEmail = localStorage.getItem("remember_email");
-    if (remembermedEmail) {
-      currentUser = users.find((u) => u.email === rememberedEmail);
-      if (currentUser) {
-        showDashboard();
-        return;
+      const token = localStorage.getItem("admin_token");
+      if (token) {
+        loadData();
+        const rememberedEmail = localStorage.getItem("remember_email");
+        if (rememberedEmail) {
+          currentUser = users.find((u) => u.email === rememberedEmail);
+          if (currentUser) {
+            showDashboard();
+            return;
+          }
+        }
       }
+      document.getElementById("loginPage").style.display = "block";
+      document.getElementById("dashboardPage").style.display = "none";
     }
-  }
-  document.getElementById("loginPage").style.display = "block";
-  document.getElementById("dashboardPage").style.display = "none";
-}
 
     function logout() {
       localStorage.removeItem("admin_token");
@@ -2644,63 +2716,62 @@
     }
 
     function loadUserProducts() {
-  const userGrid = document.getElementById("userProductsGrid");
-  const userEmpty = document.getElementById("userProductsEmpty");
+      const userGrid = document.getElementById("userProductsGrid");
+      const userEmpty = document.getElementById("userProductsEmpty");
 
-  if (!userGrid || !userEmpty) return;
+      if (!userGrid || !userEmpty) return;
 
-  products = JSON.parse(localStorage.getItem("products")) || [];
-  
-  // Filtrer les produits selon la catégorie sélectionnée
-  let filteredProducts = products;
-  if (currentCategoryFilter !== 'all') {
-    filteredProducts = products.filter(p => p.category === currentCategoryFilter);
-  }
+      products = JSON.parse(localStorage.getItem("products")) || [];
+      
+      // Filtrer les produits selon la catégorie sélectionnée
+      let filteredProducts = products;
+      if (currentCategoryFilter !== 'all') {
+        filteredProducts = products.filter(p => p.category === currentCategoryFilter);
+      }
 
-  if (!filteredProducts.length) {
-    userGrid.innerHTML = "";
-    userEmpty.style.display = "block";
-    return;
-  }
+      if (!filteredProducts.length) {
+        userGrid.innerHTML = "";
+        userEmpty.style.display = "block";
+        return;
+      }
 
-  userEmpty.style.display = "none";
+      userEmpty.style.display = "none";
 
-  userGrid.innerHTML = filteredProducts
-    .map((p) => {
-      const imageSrc = p.image || PRODUCT_PLACEHOLDER;
-      const hasPrices = p.prices && Object.keys(p.prices).length > 0;
-      const minPrice = hasPrices ? Math.min(...Object.values(p.prices)) : 0;
-      const maxPrice = hasPrices ? Math.max(...Object.values(p.prices)) : 0;
-      const priceRange = minPrice === maxPrice ? `${minPrice.toFixed(2)} DH` : `${minPrice.toFixed(2)} - ${maxPrice.toFixed(2)} DH`;
+      userGrid.innerHTML = filteredProducts
+        .map((p) => {
+          const imageSrc = p.image || PRODUCT_PLACEHOLDER;
+          const hasPrices = p.prices && Object.keys(p.prices).length > 0;
+          const minPrice = hasPrices ? Math.min(...Object.values(p.prices)) : 0;
+          const maxPrice = hasPrices ? Math.max(...Object.values(p.prices)) : 0;
+          const priceRange = minPrice === maxPrice ? `${minPrice.toFixed(2)} DH` : `${minPrice.toFixed(2)} - ${maxPrice.toFixed(2)} DH`;
 
-      return `
-        <div class="col-xl-3 col-lg-4 col-md-6">
-          <div class="product-card h-100">
-            <img src="${imageSrc}" class="product-card-img" alt="${p.name}">
-            <div class="card-body">
-              <h6 class="card-title">${p.name}</h6>
-              ${p.description ? `<p class="card-text small text-muted mb-2">${p.description}</p>` : ''}
-              <div class="mb-2">
-                <span class="badge badge-turquoise">${p.category}</span>
-                <span class="badge ${p.stock > 0 ? 'badge-success' : 'badge-danger'} ms-1">
-                  ${p.stock > 0 ? 'En stock' : 'Rupture'}
-                </span>
+          return `
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+              <div class="product-card h-100">
+                <img src="${imageSrc}" class="product-card-img" alt="${p.name}">
+                <div class="card-body">
+                  <h6 class="card-title">${p.name}</h6>
+                  ${p.description ? `<p class="card-text small text-muted">${p.description}</p>` : ''}
+                  <div class="mb-2">
+                    <span class="badge badge-turquoise">${p.category}</span>
+                    <span class="badge ${p.stock > 0 ? 'badge-success' : 'badge-danger'} ms-1">
+                      ${p.stock > 0 ? 'En stock' : 'Rupture'}
+                    </span>
+                  </div>
+                  <div class="product-price mb-2">${priceRange}</div>
+                  <button 
+                    class="btn btn-primary w-100" 
+                    onclick="openOrderProductModal(${p.id})"
+                    ${p.stock <= 0 ? 'disabled' : ''}
+                  >
+                    <i class="bx bx-cart me-1"></i>Commander
+                  </button>
+                </div>
               </div>
-              <div class="product-price mb-3">${priceRange}</div>
-              <button 
-                class="btn btn-primary mt-auto" 
-                onclick="openOrderProductModal(${p.id})"
-                ${p.stock <= 0 ? 'disabled' : ''}
-              >
-                <i class="bx bx-cart me-1"></i>Commander
-              </button>
             </div>
-          </div>
-        </div>
-      `;
-    })
-    .join("");
-}
+          `;
+        })
+        .join("");
     }
 
     function filterProducts(category) {
